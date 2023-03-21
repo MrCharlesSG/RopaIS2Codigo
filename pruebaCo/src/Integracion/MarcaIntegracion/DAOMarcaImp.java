@@ -52,10 +52,6 @@ public class DAOMarcaImp implements DAOMarca {
 				w.write(buffer.toString());
 				return id;//mm no me convence lo del writer
 			}
-			catch (IOException e) {
-				//cosas
-				return id;
-			}
 		}
 		catch (IOException e) {
 			//cosas
@@ -77,8 +73,11 @@ public class DAOMarcaImp implements DAOMarca {
 		try(Scanner sacanner=new Scanner(file)){
 			while(sacanner.hasNextLine()){
 				datos=sacanner.nextLine().split(": ");
-				marca=new TMarca(datos[1],Integer.parseInt(datos[0]),Integer.parseInt(datos[2]));
-				marcas.add(marca);
+				if(datos[2].equalsIgnoreCase("1")){
+					marca=new TMarca(datos[1],Integer.parseInt(datos[0]),Integer.parseInt(datos[2]));
+					marcas.add(marca);
+				}
+				
 			}
 			return marcas;
 		}catch (IOException e) {
@@ -103,7 +102,7 @@ public class DAOMarcaImp implements DAOMarca {
 				
 				String tokens[]=scanner.nextLine().split(": ");
 				
-			if (Integer.parseInt(tokens[1])==id) {
+			if (Integer.parseInt(tokens[1])==id&&tokens[2].equalsIgnoreCase("1"))) {
 				 marca=new TMarca(tokens[1],Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]));
 				 encontrado=true;
 				}
@@ -122,18 +121,35 @@ public class DAOMarcaImp implements DAOMarca {
 	*/
 	public int update(TMarca marca) {
 		StringBuilder buffer=new StringBuilder();
-		File file=new File(String.valueOf(marca.getID()));
-		buffer.append(marca.getID()+": "+marca.getNombre()+": 1")
-		
-			try(Writer w=new BufferedWriter(
-										new OutputStreamWriter(
-										new FileOutputStream(String.valueOf(marca.getID()))))){
+		File file=new File(ARCHIVO);
+		String datos[];
+		int id=-1;
+		boolean encontrado=false;
+		try(Scanner scanner=new Scanner(file)) {//bufferreader
+			while(scanner.hasNext()) {
+				datos=scanner.nextLine().split(":");
+			
+				if (datos[1].equalsIgnoreCase(marca.getNombre())) {
 				
-			w.write(buffer.toString());
+					
+					id=Integer.parseInt(datos[0]);
+					buffer.append(id+": "+marca.getNombre()+": "+marca.getActivo()).append(System.lineSeparator());
+				}
+				else
+					buffer.append(datos[0]+": "+datos[1]+": "+datos[2]).append(System.lineSeparator());
 			}
-		catch (IOException e) {
-			throw new Exception(e.getMessage());
+			try(Writer w=new BufferedWriter(
+									new OutputStreamWriter(
+									new FileOutputStream(ARCHIVO)))){
+				w.write(buffer.toString());
+				return id;//mm no me convence lo del writer
+			}
 		}
+		catch (IOException e) {
+			//cosas
+			return id;
+		}
+		
 	}
 
 	/** 
@@ -158,14 +174,13 @@ public class DAOMarcaImp implements DAOMarca {
 				}
 				buffer.append(datos[0]+": "+datos[1]+": "+datos[2]).append(System.lineSeparator());
 			}
-			Writer w=new BufferedWriter(
-										new OutputStreamWriter(
-										new FileOutputStream(ARCHIVO)));
-			w.write(buffer.toString());
-			w.close();
-			return id;//mm no me convence lo del writer
+			try(Writer w=new BufferedWriter(
+									new OutputStreamWriter(
+									new FileOutputStream(ARCHIVO)))){
+				w.write(buffer.toString());
+				return id;//mm no me convence lo del writer
 			}
-		
+		}
 		catch (IOException e) {
 			//cosas
 			return id;
@@ -188,7 +203,7 @@ public class DAOMarcaImp implements DAOMarca {
 				
 				String tokens[]=scanner.nextLine().split(": ");
 				
-				if (tokens[1].equalsIgnoreCase(nombre)) {
+				if (tokens[1].equalsIgnoreCase(nombre)&&tokens[2].equalsIgnoreCase("1")) {
 					 marca=new TMarca(nombre,Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]));
 					encontrado=true;
 				}

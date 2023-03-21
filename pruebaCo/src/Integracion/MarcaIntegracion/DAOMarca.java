@@ -21,7 +21,7 @@ public interface DAOMarca {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int create(TMarca marca, Boolean found);
+	public int create(TMarca marca);
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -29,7 +29,7 @@ public interface DAOMarca {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Collection readAll();
+	public Collection<TMarca> readAll();
 
 	/** 
 	* <!-- begin-UML-doc -->
