@@ -27,11 +27,17 @@ public class TMarca {
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
+	 * @param Activo 
+	 * @param ID 
 	 * @param nombre2 
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public TMarca(String nombre) {
+	public TMarca(String nombre, int ID, int activo) {
 		this.Nombre=nombre;
+		this.IDMarca=ID;
+		this.activo=false;
+		if(activo==1)
+			this.activo=true;
 	}
 
 	/** 
@@ -41,10 +47,7 @@ public class TMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public String getNombre() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		return Nombre;
-		// end-user-code
 	}
 
 	/** 
@@ -54,10 +57,8 @@ public class TMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public int getID() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		return this.IDMarca;
-		// end-user-code
+	
 	}
 
 	/** 
@@ -77,7 +78,6 @@ public class TMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void setID(int ID) {
-
 		this.IDMarca=ID;
 	}
 

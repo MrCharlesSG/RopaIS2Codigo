@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -29,23 +30,39 @@ public class DAOMarcaImp implements DAOMarca {
 	* @see DAOMarca#create(TMarca marca, Boolean found)
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int create(TMarca marca, Boolean found) {
+	static final String ARCHIVO="Marcas.txt";
+	
+	public int create(TMarca marca) {
+		StringBuilder buffer=new StringBuilder();
+		File file=new File(ARCHIVO);
+		String datos[];
 		int id=-1;
-		 try (Writer w=new BufferedWriter(new OutputStreamWriter(new FileOutputStream("outputfile.txt")))){
-			 StringBuilder str=new StringBuilder();
-			 id=marca.getID();
-			 str.append(marca.getNombre()+": "+id+": 1").append(System.lineSeparator());
-			 return id;
-		 }
-	        catch (IOException e) {
-	 
-	            System.out.println(e);
-	            return id;
-	     }
-	 
+		boolean encontrado=false;
+		try(Scanner scanner=new Scanner(file)) {//bufferreader
+			while(scanner.hasNext()) {
+				datos=scanner.nextLine().split(":");
+				buffer.append(datos[0]+": "+datos[1]+": "+datos[2]).append(System.lineSeparator());
+				id=Integer.parseInt(datos[0])+1;//no me deja ponerlo fuera pero bueno
+			}
+			
+			buffer.append((id)+": "+marca.getNombre()+": "+marca.getActivo()).append(System.lineSeparator());
+			try(	Writer w=new BufferedWriter(
+										new OutputStreamWriter(
+										new FileOutputStream(ARCHIVO)))){
+				w.write(buffer.toString());
+				return id;//mm no me convence lo del writer
+			}
+			catch (IOException e) {
+				//cosas
+				return id;
+			}
+		}
+		catch (IOException e) {
+			//cosas
+			return id;
+		}
 		
-		
-	}
+	}//esto esta feo pero bueno 
 
 	/** 
 	* (non-Javadoc)
@@ -54,8 +71,20 @@ public class DAOMarcaImp implements DAOMarca {
 	*/
 	public Collection<TMarca> readAll() {
 		Collection<TMarca> marcas=new ArrayList<TMarca>();
-		//usando un bucle con read(id) pero no hay forma de saber cuales id valen
-		return null;
+		File file=new File(ARCHIVO);
+		String datos[];
+		TMarca marca=null;
+		try(Scanner sacanner=new Scanner(file)){
+			while(sacanner.hasNextLine()){
+				datos=sacanner.nextLine().split(": ");
+				marca=new TMarca(datos[1],Integer.parseInt(datos[0]),Integer.parseInt(datos[2]));
+				marcas.add(marca);
+			}
+			return marcas;
+		}catch (IOException e) {
+			return null;	//ns si esto se hace asi
+		}
+	}
 		// end-user-code
 	}
 
@@ -65,21 +94,27 @@ public class DAOMarcaImp implements DAOMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public TMarca read(int id) {//no me convence para nada
-		File file=new File(String.valueOf(id));
-		String datos[];
+		File file=new File(ARCHIVO);
+		boolean encontrado=false;
 		TMarca marca=null;
-		try(Scanner sacanner=new Scanner(file)){
-			datos=sacanner.nextLine().split(": ");
-			marca=new TMarca(datos[1]);
-			marca.setID(Integer.parseInt(datos[0]));
-			return marca;	
-		}catch (IOException e) {
-			return null;	//ns si esto se hace asi
-		}
+		try(Scanner scanner= new Scanner(file)){
+			
+			while(scanner.hasNext() &&!encontrado) {
+				
+				String tokens[]=scanner.nextLine().split(": ");
+				
+			if (Integer.parseInt(tokens[1])==id) {
+				 marca=new TMarca(tokens[1],Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]));
+				 encontrado=true;
+				}
+			}
 		
-		// end-user-code
+			return marca;
+		}catch(IOException e){
+			//cosas
+			return marca;
+		}
 	}
-
 	/** 
 	* (non-Javadoc)
 	* @see DAOMarca#update(TMarca marca)
@@ -107,8 +142,34 @@ public class DAOMarcaImp implements DAOMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public int delete(TMarca marca) {
+		StringBuilder buffer=new StringBuilder();
+		File file=new File(ARCHIVO);
+		String datos[];
+		int id=-1;
+		boolean encontrado=false;
+		try(Scanner scanner=new Scanner(file)) {//bufferreader
+			while(scanner.hasNext()) {
+				datos=scanner.nextLine().split(":");
+			
+				if (datos[1].equalsIgnoreCase(marca.getNombre())) {
+				// si la encuentro la desactivo
+					datos[2]="0";
+					id=Integer.parseInt(datos[0]);
+				}
+				buffer.append(datos[0]+": "+datos[1]+": "+datos[2]).append(System.lineSeparator());
+			}
+			Writer w=new BufferedWriter(
+										new OutputStreamWriter(
+										new FileOutputStream(ARCHIVO)));
+			w.write(buffer.toString());
+			w.close();
+			return id;//mm no me convence lo del writer
+			}
 		
-		return 0;
+		catch (IOException e) {
+			//cosas
+			return id;
+		}
 		
 	}
 
@@ -118,9 +179,25 @@ public class DAOMarcaImp implements DAOMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public TMarca readByName(String nombre) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		File file=new File(ARCHIVO);
+		boolean encontrado=false;
+		TMarca marca=null;
+		try(Scanner scanner= new Scanner(file)){
+			
+			while(scanner.hasNext() &&!encontrado) {
+				
+				String tokens[]=scanner.nextLine().split(": ");
+				
+				if (tokens[1].equalsIgnoreCase(nombre)) {
+					 marca=new TMarca(nombre,Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]));
+					encontrado=true;
+				}
+			}
+		
+			return marca;
+		}catch(IOException e){
+			//cosas
+			return marca;
+		}
 	}
 }
