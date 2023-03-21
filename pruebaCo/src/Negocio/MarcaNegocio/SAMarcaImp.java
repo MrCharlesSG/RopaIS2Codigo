@@ -20,11 +20,12 @@ public class SAMarcaImp implements SAMarca {
 	* @see SAMarca#create(TMarca marca)
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int create(TMarca marca) {
+	public int create(TMarca marca) {//reglas de negocio
 		int id=-1;
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
+		//comprobador sin
 		if(marca!=null){
-			TMarca leido=daoMarca.read(marca.getID());	
+			TMarca leido=daoMarca.read(marca.getID());	//lo he hecho siguiendo las diapositivas pero nuestra marca tiene id=null
 			
 			if(leido==null)
 				id=daoMarca.create(marca,true)//hay que quitar el boolean

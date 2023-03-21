@@ -11,12 +11,13 @@ import Presentacion.MarcaPresentacion.IGUIMarca;
 public class GUIBiblioteca extends JFrame implements GUI{
 	private static GUIBiblioteca guiBiblioteca;
     private IGUIMarca guiMarca;
-//	private IGUIPublicacion guiPublicacion;
-//	private IGUIPrestamo guiPrestamo;
+//	private IGUIProducto guiProducto;
+//	private IGUIVenta guiVenta;
 	private Controlador controlador;
 	
 	private GUIBiblioteca(){
 		controlador=Controlador.getInstancia();
+		//igual este es el menu principal donde eliges o marca o producto o etc..
 	}	
 	public static GUIBiblioteca getInstancia(){
 		if(guiBiblioteca==null){
