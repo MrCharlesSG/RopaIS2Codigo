@@ -1,9 +1,11 @@
 package Marca;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,66 +19,100 @@ import Negocio.MarcaNegocio.TMarca;
 @RunWith(JUnit4.class)
 public class SAMarcaTest {
 	private SAMarca saMarca = FactoriaNegocioImp.getInstance().generaSAMarca();
-	private TMarca tMarca = new TMarca("Julian", 2, 1);
+	private TMarca tMJuli = new TMarca("Julian", 2, 1);
+	private TMarca tMAlmd = new TMarca("Almendra", 3, 1);
+	private Collection<TMarca> mockCollec = new ArrayList<TMarca>();
 	
 	@Test
-	public void create_Test(){
-		int a =saMarca.create(tMarca);
-		assertEquals(a,2);
+	public void basicBehaviour_Test(){
+		int aux1, aux2, aux3;
+
+		//crear una marca y leerla por id y por nombre
+		aux1=saMarca.create(tMJuli);
+		assertEquals("No se ha creado la marca correctamente",aux1,1);
+		this.mockCollec.add(tMJuli);
+		assertEquals("No se ha leido correctamente por id de marca", this.saMarca.read(1), this.tMJuli);
+		TMarca tMAux = this.saMarca.readByName("Julian");
+		assertEquals("No se ha leido correctamente por nombre de marca", this.tMJuli, tMAux);
 		
-		a= saMarca.create(tMarca);
-		assertEquals(a,-1);
+		//crear una marca con el mismo nombre
+		tMAux= new TMarca("Julian", 2, 1);
+		aux3 = saMarca.create(tMAux);
+		assertEquals("Se ha creado una marca con el mismo nombre", aux3, -1);
 		
-		a= saMarca.create(tMarca);
-		assertEquals(a,-1);
-	}
-	
-	@Test
-	public void read_Test(){
-		//lectura de la primera marca
-		int a = saMarca.create(tMarca);
-		assertEquals(a, 2);
-		TMarca aux = saMarca.read(2);
-		assertEquals(aux,tMarca);
-		//lectura de una marca inexistente
-		aux = saMarca.read(3);
-		assertEquals(aux, null);
-		//lectura de un sa recien eliminado
-		a= saMarca.delete(2);
-		assertEquals(a, 2);
-		aux = saMarca.read(2);
-		assertEquals(aux, null);
-	}
-	
-	@Test
-	public void readAll_Test(){
-		int a = saMarca.create(tMarca);
-		TMarca almendra=new TMarca("Almendra", 3, 1);
-		int b = saMarca.create(almendra);
-		assertEquals(a, 2);
-		assertEquals(b, 3);
-		Collection<TMarca> todos = saMarca.readAll();
-		Collection<TMarca> real = new ArrayList<TMarca>();
-		real.add(tMarca);
-		real.add(almendra);
-		for (TMarca tMarca : real) {
-			
+		//crear una marca existente
+		aux1=saMarca.create(tMJuli);
+		assertEquals("Se ha creado una marca ya existente",aux1 ,-1);
+		
+		//crear una segunda marca y leerla por id y por nombre
+		aux2=saMarca.create(tMAlmd);
+		assertEquals("No se ha podido crear una segunda marca", aux2, 2);
+		assertEquals("No se ha leido correctamente la 2da marca", this.saMarca.read(2), this.tMAlmd);
+		tMAux = this.saMarca.readByName("Almendra");
+		assertEquals("No se ha leido correctamente por nombre de marca", this.tMAlmd, tMAux);
+		
+		//Comprobamos el read all de las dos marcas añadidas
+		this.mockCollec.add(tMAlmd);
+		Collection<TMarca> readAllCollec = saMarca.readAll();
+		if(this.equalsCollection(readAllCollec, mockCollec)){
+			fail("El readAll no funciona correctamente para 2 marcas");
 		}
 		
-	}
-	
-	@Test
-	public void update_Test(){
+		//eliminar las dos marcas creadas
+		aux1= saMarca.delete(1);
+		assertEquals("No se ha eliminado correctamente",aux1, 1);
+		aux2 = saMarca.delete(2);
+		assertEquals("No se ha eliminado correctamente", aux2, 2);
+		
+		//readAll de 0 marcas
+		assertEquals("Read all no funciona para 0 marcas", this.saMarca.readAll().size(), 0);
+		
+		//Añadir 5 marcas
+		String nombre= "Manolo";
+		this.mockCollec.clear();
+		int i=1;
+		while(i<6){
+			TMarca abe, man= new TMarca(nombre, i, 1);
+			aux1= saMarca.create(man);
+			assertEquals("Ha fallado la creacion de la marca "+ i+ " .",aux1, i);
+			abe = saMarca.read(i);
+			assertEquals("No se ha podido leer la marca "+i, abe, man);
+			this.mockCollec.add(man);
+			nombre+="a";	
+		}
+		readAllCollec = saMarca.readAll();
+		if(this.equalsCollection(readAllCollec, mockCollec)){
+			fail("El readAll no funciona correctamente para 5 marcas");
+		}
+
+		//crear marca sin nombre
+		assertEquals("Se ha creado una marca sin nombre", this.saMarca.create(new TMarca("", 2, 1)), -1);
+		
+		//read de un id nulo
+		assertEquals("Se ha leido un id invalido", this.saMarca.read(100), null);
 		
 	}
 	
-	@Test
-	public void delete_Test(){
+	private boolean equalsCollection(Collection<TMarca> a, Collection<TMarca> b){
+
+		if (a.size() != b.size()) {
+			return false;
+		} else {
+		    Iterator<TMarca> it1 = a.iterator();
+		    Iterator<TMarca> it2 = b.iterator();
+		    boolean iguales = true;
 		
-	}
-	
-	@Test
-	public void readByName_Test(){
+		    while (it1.hasNext() && iguales) {
+		        TMarca elem1 = it1.next();
+		        TMarca elem2 = it2.next();
+		
+		        if (elem1!=elem2) {
+		            iguales = false;
+		        }
+		    }
+		    return iguales;
+		}
+		
 		
 	}
 
