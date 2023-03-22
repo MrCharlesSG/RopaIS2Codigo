@@ -32,7 +32,7 @@ public class Controlador {
 	}
 	public static Controlador getInstancia() {
 		if(controlador==null){
-			controlador= new Controlador(FactoriaNegocio.getInstance().generaSAMarca(), GUIBiblioteca.getInstance());
+			controlador= new Controlador(FactoriaNegocio.getInstance().generaSAMarca(), GUIBiblioteca.getInstancia());
 		}
 		return controlador;
 	}
