@@ -23,18 +23,14 @@ public class SAMarcaImp implements SAMarca {
 	public int create(TMarca marca) {//reglas de negocio
 		int id=-1;
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
-		//comprobador sin
 		if(marca!=null){
-			TMarca leido=daoMarca.read(marca.getID());	//lo he hecho siguiendo las diapositivas pero nuestra marca tiene id=null
+			TMarca leido=daoMarca.readByName(marca.getNombre());
 			
 			if(leido==null)
-				id=daoMarca.create(marca,true)//hay que quitar el boolean
+				id=daoMarca.create(marca);//hay que quitar el boolean
 			
 			}
-		
-	
 		return id;
-		
 	}
 
 	/** 
@@ -43,10 +39,8 @@ public class SAMarcaImp implements SAMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public Collection<TMarca> readAll() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
+		return daoMarca.readAll();
 	}
 
 	/** 
@@ -65,16 +59,14 @@ public class SAMarcaImp implements SAMarca {
 	* @see SAMarca#update(TMarca marca)
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int update(TMarca marca) {
+	public int update( int ID) {
 		int id=-1;
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();//yo lo dejaria como atributo de sa
-		if(marca!=null){
-			TMarca leido=daoMarca.read(marca.getID());	
-			
+		if(ID>0){
+			TMarca leido=daoMarca.read(id);	
 			if(leido!=null)
-			id=daoMarca.update(marca);
+				id=daoMarca.update(leido);
 			}
-		
 		return id;
 		// end-user-code
 	}

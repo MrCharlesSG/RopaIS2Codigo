@@ -45,7 +45,7 @@ public interface SAMarca {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int update(TMarca marca);
+	public int update(int ID);
 
 	/** 
 	* <!-- begin-UML-doc -->
