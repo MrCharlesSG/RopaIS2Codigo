@@ -45,7 +45,7 @@ public class GUIModificarMarca extends JFrame {
 				{		
 					setVisible(false);
 					String nombre= tNombre.getText();
-					TMarca tM= new TMarca (nombre);
+					TMarca tM= new TMarca(nombre);
 					Controlador.getInstancia().accion(Evento.MODIFICAR_MARCA, tM);
 				}
 		});

@@ -87,7 +87,7 @@ public class DAOMarcaImp implements DAOMarca {
 		}
 	}
 		// end-user-code
-	}
+	
 
 	/** 
 	* (non-Javadoc)
@@ -104,7 +104,7 @@ public class DAOMarcaImp implements DAOMarca {
 				
 				String tokens[]=scanner.nextLine().split(": ");
 				
-			if (Integer.parseInt(tokens[1])==id&&tokens[2].equalsIgnoreCase("1"))) {
+			if (Integer.parseInt(tokens[1])==id&&tokens[2].equalsIgnoreCase("1")) {
 				 marca=new TMarca(tokens[1],Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]));
 				 encontrado=true;
 				}

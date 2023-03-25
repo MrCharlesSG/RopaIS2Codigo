@@ -99,4 +99,10 @@ public class SAMarcaImp implements SAMarca {
 		return null;
 		// end-user-code
 	}
+
+	@Override
+	public int update(TMarca datos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
