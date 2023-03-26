@@ -54,7 +54,7 @@ public class DAOMarcaTest{
 
         assertEquals(marcas.toString(),"coca-cola 15 activo \n pepsi 16 activo \n cola 17 activo");
 
-        TMarca tmarca3 = new TMarca("pepsicambio",16,true);
+     //   TMarca tmarca3 = new TMarca("pepsicambio",16,true);
 
         int updateee=dmarca.update(tmarca3);
 

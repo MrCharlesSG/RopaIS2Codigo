@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.MarcaIntegracion.DAOMarca;
+import Negocio.ComprobadorSintactico;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -23,7 +24,7 @@ public class SAMarcaImp implements SAMarca {
 	public int create(TMarca marca) {//reglas de negocio
 		int id=-1;
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
-		if(marca!=null){
+		if(marca!=null&&ComprobadorSintactico.isName(marca.getNombre())){
 			TMarca leido=daoMarca.readByName(marca.getNombre());
 			
 			if(leido==null)
@@ -50,7 +51,10 @@ public class SAMarcaImp implements SAMarca {
 	*/
 	public TMarca read(int id) {
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
-		TMarca marca=daoMarca.read(id);
+		
+		TMarca marca=null;
+		if(ComprobadorSintactico.isPositive(id))
+			marca=daoMarca.read(id);
 		return marca;
 	}
 
@@ -62,7 +66,7 @@ public class SAMarcaImp implements SAMarca {
 	public int update( int ID) {
 		int id=-1;
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();//yo lo dejaria como atributo de sa
-		if(ID>0){
+		if(ComprobadorSintactico.isPositive(ID)){
 			TMarca leido=daoMarca.read(id);	
 			if(leido!=null)
 				id=daoMarca.update(leido);
@@ -79,7 +83,7 @@ public class SAMarcaImp implements SAMarca {
 	public int delete(int ID) {
 		int id=-1;
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();//yo lo dejaria como atributo de sa
-		if(ID>0){
+		if(ComprobadorSintactico.isPositive(ID)){
 			TMarca leido=daoMarca.read(ID);	
 			
 			if(leido!=null)
@@ -95,14 +99,12 @@ public class SAMarcaImp implements SAMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public TMarca readByName(String nombre) {//no entiendo esta funcion
-	//	DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();	
-		return null;
+		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();	
+		TMarca marca=null;
+		if(ComprobadorSintactico.isName(nombre))
+			marca=daoMarca.readByName(nombre);
+		return marca;
 		// end-user-code
 	}
 
-	@Override
-	public int update(TMarca datos) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }
