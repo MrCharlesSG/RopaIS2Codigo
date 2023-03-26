@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 
@@ -58,6 +57,5 @@ public class GUIBajaMarca extends JFrame {
 			}
 		});
 		
-	}
-	}
+		}
 }

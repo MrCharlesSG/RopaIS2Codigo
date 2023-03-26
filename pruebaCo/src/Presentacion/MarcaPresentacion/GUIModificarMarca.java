@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-import Negocio.MarcaNegocio.TMarca;
+
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 
@@ -28,9 +28,9 @@ public class GUIModificarMarca extends JFrame {
 	public GUIModificarMarca() {
 		setTitle("Alta Marca");
 		JPanel panel=new JPanel();
-		JLabel lNombre=new JLabel("Nombre:");
+		JLabel lNombre=new JLabel("Identificador:");
 		final JTextField tNombre= new JTextField(20);
-		JButton aceptar=new JButton("Aceptar");
+		JButton aceptar=new JButton("Aceptar:");
 		JButton cancelar=new JButton("Cancelar");
 		
 		panel.add(lNombre);
@@ -45,8 +45,8 @@ public class GUIModificarMarca extends JFrame {
 				{		
 					setVisible(false);
 					String nombre= tNombre.getText();
-					TMarca tM= new TMarca(nombre);
-					Controlador.getInstancia().accion(Evento.MODIFICAR_MARCA, tM);
+					int id=Integer.parseInt(nombre);
+					Controlador.getInstancia().accion(Evento.MODIFICAR_MARCA, new Integer(id));
 				}
 		});
 		cancelar.addActionListener(new ActionListener()

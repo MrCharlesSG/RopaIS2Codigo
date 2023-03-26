@@ -1,7 +1,6 @@
 package Presentacion.Controlador;
 
 import java.util.Collection;
-import java.util.List;
 
 import Negocio.FactoriaNegocio.FactoriaNegocio;
 import Negocio.MarcaNegocio.SAMarca;
@@ -75,7 +74,7 @@ public class Controlador {
 				break;
 			}
 			case Evento.MODIFICAR_MARCA:{
-				int res=saMarca.update((TMarca) datos);
+				int res=saMarca.update((int) datos);
 				
 				if(res>0)
 					gui.update(Evento.RES_MODIFICAR_MARCA_OK, new Integer(res));
