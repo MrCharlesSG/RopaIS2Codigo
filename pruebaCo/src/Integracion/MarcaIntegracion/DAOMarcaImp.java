@@ -97,7 +97,7 @@ public class DAOMarcaImp implements DAOMarca {
 	* @see DAOMarca#read(int id)
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public TMarca read(int id) {//no me convence para nada
+	public TMarca read(int id) {
 		File file=new File(ARCHIVO);
 		boolean encontrado=false;
 		TMarca marca=null;

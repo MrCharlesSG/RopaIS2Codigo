@@ -89,7 +89,7 @@ public class SAMarcaTest {
 		assertEquals("Se ha creado una marca sin nombre", this.saMarca.create(new TMarca("", 2, 1)), -1);
 		
 		//read de un id nulo
-		assertEquals("Se ha leido un id invalido", this.saMarca.read(100), null);
+		assertEquals("Se ha leido un id invalido", this.saMarca.read(100), -1);
 		
 	}
 	
