@@ -11,17 +11,14 @@ import Negocio.ComprobadorSintactico;
 
 public class SAProductoIMP implements SAProducto{
 	
-	private ComprobadorSintactico _CS;
-	
 	public SAProductoIMP(){
-		this._CS = new ComprobadorSintactico();
 	}
 	
 
 	@Override
 	public int create(TProducto Tprod) {
 		//TODO
-		if(_CS.isName(Tprod.getNombre()) && _CS.isPositive(Tprod.getTalla()) && _CS.isName(Tprod.getCategoria())){
+		if(ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria())){
 			//call dao Tprod = ReadByName(Tprod)
 			if(Tprod.getIdProducto() == -1){
 				//dao create()
@@ -37,7 +34,7 @@ public class SAProductoIMP implements SAProducto{
 	@Override
 	public int delete(TProducto Tprod) {
 		//TODO
-		if(_CS.isPositive(Tprod.getIdProducto())){
+		if(ComprobadorSintactico.isPositive(Tprod.getIdProducto())){
 			//new TProd tprod = read(idProd)
 			if(!Tprod.getNombre().equals(null)){
 				//dao delete()
@@ -53,7 +50,7 @@ public class SAProductoIMP implements SAProducto{
 	@Override
 	public TProducto read(TProducto Tprod) {
 		//TODO
-		if(_CS.isPositive(Tprod.getIdProducto())){
+		if(ComprobadorSintactico.isPositive(Tprod.getIdProducto())){
 			//new TProd tprod = read(idProd)
 		}
 		return Tprod;
@@ -69,7 +66,7 @@ public class SAProductoIMP implements SAProducto{
 	@Override
 	public TProducto readByName(TProducto Tprod) {
 		// TODO
-		if(_CS.isName(Tprod.getNombre())){
+		if(ComprobadorSintactico.isName(Tprod.getNombre())){
 			//Tprod = dao read
 			//TProd
 		}
@@ -79,7 +76,7 @@ public class SAProductoIMP implements SAProducto{
 	@Override
 	public int update(TProducto Tprod) {
 		// TODO Auto-generated method stub
-		if(_CS.isName(Tprod.getNombre())){
+		if(ComprobadorSintactico.isName(Tprod.getNombre())){
 			// dao readByName
 			//if() exist then dao update()
 			//else -1

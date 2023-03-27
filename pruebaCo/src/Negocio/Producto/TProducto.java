@@ -11,7 +11,7 @@ public class TProducto {
 	private String nombre;
 	private int talla;
 	
-	public TProducto(int cantidad, String categoria, int idMarca, int idProducto, String nombre, int talla){
+	public TProducto(String nombre, int cantidad, int talla, int idProducto, String categoria, int idMarca){
 		this.cantidad = cantidad;
 		this.categoria =categoria;
 		this.idMarca = idMarca;
