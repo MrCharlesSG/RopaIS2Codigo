@@ -20,7 +20,7 @@ import Negocio.Producto.TProducto;
 	@RunWith(JUnit4.class)
 	public class TestSAProductos {
 
-		private SAProducto saProducto = FactoriaNegocioImp.getInstance().generaSAProducto();
+		private SAProducto saProducto = FactoriaNegocioImp.getInstance().generaSAProducto();//teneis que creaar este metodo 
 		private TProducto tPant = new TProducto("Pantalones azules", 1, 1,0,"M",0);
 		private TProducto tCami = new TProducto("Camiseta blanca", 2, 1,1,"M",0);
 		
@@ -34,7 +34,7 @@ import Negocio.Producto.TProducto;
 			aux1=saProducto.create(tPant);
 			assertEquals("No se ha creado un producto correctamente",aux1,1);
 			this.mockCollec.add(tPant);
-			TProducto h=this.saProducto.read(1);
+			TProducto h=this.saProducto.read(1); // siguiendo las diapositivas yo creo que read y readByName no se les pasa un TProducto por eso lo he dejado asi
 			assertEquals("No se ha leido correctamente por id de marca", h.getNombre(), this.tPant.getNombre());
 			assertEquals("No se ha leido correctamente por id de marca", h.getIdProducto(), this.tPant.getIdProducto());
 			TProducto tPAux = this.saProducto.readByName("Pantalones azules");
@@ -124,7 +124,7 @@ import Negocio.Producto.TProducto;
 			        TProducto elem1 = it1.next();
 			        TProducto elem2 = it2.next();
 			
-			        if (elem1!=elem2) {
+			        if (elem1.getIdMarca()!=elem2.getIdMarca()||elem1.getIdProducto()!=elem1.getIdProducto()||elem1.getNombre()!=elem2.getNombre()) {
 			            iguales = false;
 			        }
 			    }
