@@ -7,6 +7,9 @@ import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
 import Presentacion.GUIBiblioteca;
 import Presentacion.GUI.GUI;
+import Presentacion.Controlador.Evento;
+import Negocio.Producto.TProducto;
+import Negocio.Producto.SAProducto;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -23,11 +26,13 @@ public class Controlador {
 	*/
 	private static Controlador controlador;
 	private SAMarca saMarca; 
+	private SAProducto saProducto;
 	private GUI gui;
 	
 	private Controlador(SAMarca saMarca,GUI gui){
 		this.gui=gui;
 		this.saMarca=saMarca;
+		this.saProducto=saProducto;
 	}
 	public static Controlador getInstancia() {
 		if(controlador==null){
@@ -81,6 +86,56 @@ public class Controlador {
 				else
 					gui.update(Evento.RES_MODIFICAR_MARCA_KO, null);
 			
+				break;
+			}
+			case Evento.ALTA_PRODUCTO:{
+				int res=saProducto.create((TProducto) datos);
+				if(res>0){
+					gui.update(Evento.RES_ALTA_PRODUCTO_OK, new Integer(res));
+				}
+				else{
+					gui.update(Evento.RES_ALTA_PRODUCTO_KO, null);
+				}
+				break;
+			}
+			case Evento.BAJA_PRODUCTO:{
+				int res=saProducto.delete((TProducto) datos);
+				if(res>0){
+					gui.update(Evento.RES_BAJA_PRODUCTO_OK, new Integer(res));
+				}
+				else{
+					gui.update(Evento.RES_BAJA_PRODUCTO_KO, null);
+				}
+				break;
+			}
+			case Evento.LISTAR_PRODUCTOS:{
+				Collection<TProducto>productos=saProducto.readAll();
+				gui.update(Evento.PRODUCTO_POR_ID, productos);
+				break;
+			}
+			case Evento.MARCA_POR_PRODUCTO:{
+				TProducto producto=saProducto.read((TProducto)datos);
+				gui.update(Evento.MARCA_POR_PRODUCTO, producto);
+				break;
+			}
+			case Evento.MODIFICAR_PRODUCTO:{
+				int res=saProducto.update((TProducto)datos);
+				if(res>0){
+					gui.update(Evento.RES_MODIFICAR_PRODUCTO_OK, new Integer(res));
+				}
+				else{
+					gui.update(Evento.RES_MODIFICAR_PRODUCTO_KO, null);
+				}
+				break;
+			}
+			case Evento.PRODUCTO_POR_ID:{
+				TProducto producto=saProducto.read((TProducto)datos);
+				gui.update(Evento.PRODUCTO_POR_ID, producto);
+				break;
+			}
+			case Evento.VENTA_POR_PRODUCTO:{
+				TProducto producto=saProducto.read((TProducto)datos);
+				gui.update(Evento.VENTA_POR_PRODUCTO, producto);
 				break;
 			}
 			

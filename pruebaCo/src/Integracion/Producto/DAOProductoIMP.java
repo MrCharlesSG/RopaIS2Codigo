@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.lang.StringBuilder;
 
@@ -125,6 +126,34 @@ public class DAOProductoIMP implements DAOProducto{
 
 		File f = new File("productos.txt");
 		TProducto Tprod = null;
+		ArrayList<TProducto> list = new ArrayList<TProducto>();
+		try(BufferedReader br = new BufferedReader(new FileReader(f))){
+			
+			String line;
+			String[] splitArray;
+			boolean found = false;
+			
+			while((line = br.readLine()) !=null){
+				splitArray = line.split(": ", 6);
+				Tprod.setNombre(splitArray[0]);
+				Tprod.setIdProducto(Integer.parseInt(splitArray[1]));
+				Tprod.setCantidad(Integer.parseInt(splitArray[2]));
+				Tprod.setTalla(Integer.parseInt(splitArray[3]));
+				Tprod.setCategoria(splitArray[4]);
+				Tprod.setIdMarca(Integer.parseInt(splitArray[5]));
+				list.add(Tprod);	
+			}
+			br.close();
+		}catch(Exception e){
+			return null;
+		}
+		return list;
+	}
+
+	@Override
+	public TProducto readByName(String name) {
+		File f = new File("productos.txt");
+		TProducto Tprod = null;
 		try(BufferedReader br = new BufferedReader(new FileReader(f))){
 			
 			String line;
@@ -133,7 +162,7 @@ public class DAOProductoIMP implements DAOProducto{
 			
 			while((line = br.readLine()) !=null && !found){
 				splitArray = line.split(": ", 6);
-				if(!splitArray[1].equals(Integer.toString(null))){
+				if(!splitArray[0].equals(name)){
 					//nombre: id: cantidad: talla: categoria: idMarca:
 					Tprod = new TProducto(splitArray[0], Integer.parseInt(splitArray[1]), Integer.parseInt(splitArray[2]), Integer.parseInt(splitArray[3]), splitArray[4], Integer.parseInt(splitArray[5]));
 					found = true;
@@ -144,13 +173,7 @@ public class DAOProductoIMP implements DAOProducto{
 		}catch(Exception e){
 			return null;
 		}
-		return null;
-	}
-
-	@Override
-	public TProducto readByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return Tprod;
 	}
 
 	@Override
