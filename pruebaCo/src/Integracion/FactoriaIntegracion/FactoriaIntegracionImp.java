@@ -5,6 +5,8 @@ package Integracion.FactoriaIntegracion;
 
 import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.MarcaIntegracion.DAOMarcaImp;
+import Integracion.Producto.DAOProducto;
+import Integracion.Producto.DAOProductoIMP;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -20,5 +22,10 @@ public class FactoriaIntegracionImp extends FactoriaIntegracion {
 	*/
 	public DAOMarca generaDAOMarca() {
 		return new DAOMarcaImp();
+	}
+
+	@Override
+	public DAOProducto generaDaoProducto() {
+		return new DAOProductoIMP();
 	}
 }

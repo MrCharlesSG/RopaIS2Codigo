@@ -7,21 +7,27 @@ import Negocio.Producto.TProducto;
 
 import java.util.Collection;
 
+import Integracion.FactoriaIntegracion.FactoriaIntegracion;
+import Integracion.MarcaIntegracion.DAOMarca;
+import Integracion.Producto.DAOProducto;
 import Negocio.ComprobadorSintactico;
+import Negocio.MarcaNegocio.TMarca;
 
 public class SAProductoIMP implements SAProducto{
 	
+	DAOProducto dao;
+	
 	public SAProductoIMP(){
+	 dao = FactoriaIntegracion.getInstance().generaDaoProducto();
 	}
 	
 
 	@Override
 	public int create(TProducto Tprod) {
-		//TODO
 		if(ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria())){
-			//call dao Tprod = ReadByName(Tprod)
+			Tprod = dao.readByName(Tprod.getNombre());
 			if(Tprod.getIdProducto() == -1){
-				//dao create()
+				dao.create(Tprod);
 			}else{
 				return -1;
 			}
@@ -35,9 +41,13 @@ public class SAProductoIMP implements SAProducto{
 	public int delete(TProducto Tprod) {
 		//TODO
 		if(ComprobadorSintactico.isPositive(Tprod.getIdProducto())){
-			//new TProd tprod = read(idProd)
-			if(!Tprod.getNombre().equals(null)){
-				//dao delete()
+			Tprod = read(Tprod);
+			if(!Tprod.getNombre().equals(null) && Tprod.getCantidad() == 0){
+				dao.delete(Tprod.getIdProducto());
+				DAOMarca daoM = FactoriaIntegracion.getInstance().generaDAOMarca();
+				TMarca tMarca = daoM.read(Tprod.getIdMarca());
+				//if(tMarca.getCant !=  0)
+				// daoM.update
 			}else{
 				return -1;
 			}
@@ -51,15 +61,14 @@ public class SAProductoIMP implements SAProducto{
 	public TProducto read(TProducto Tprod) {
 		//TODO
 		if(ComprobadorSintactico.isPositive(Tprod.getIdProducto())){
-			//new TProd tprod = read(idProd)
+			Tprod = dao.read(Tprod.getIdProducto());
 		}
 		return Tprod;
 	}
 
 	@Override
 	public Collection<TProducto> readAll() {
-		//TODO
-		//dao readAll
+		dao.readAll();
 		return null;
 	}
 

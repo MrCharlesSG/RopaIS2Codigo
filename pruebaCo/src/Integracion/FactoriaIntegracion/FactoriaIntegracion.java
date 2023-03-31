@@ -4,6 +4,7 @@
 package Integracion.FactoriaIntegracion;
 
 import Integracion.MarcaIntegracion.DAOMarca;
+import Integracion.Producto.DAOProducto;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -39,4 +40,5 @@ public abstract class FactoriaIntegracion {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public abstract DAOMarca generaDAOMarca();
+	public abstract DAOProducto generaDaoProducto();
 }
