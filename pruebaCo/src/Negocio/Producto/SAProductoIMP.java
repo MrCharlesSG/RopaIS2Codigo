@@ -26,8 +26,11 @@ public class SAProductoIMP implements SAProducto{
 	public int create(TProducto Tprod) {
 		if(ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria())){
 			Tprod = dao.readByName(Tprod.getNombre());
-			if(Tprod.getIdProducto() == -1){
+			DAOMarca daoM = FactoriaIntegracion.getInstance().generaDAOMarca();
+			TMarca tMarca = daoM.read(Tprod.getIdMarca());
+			if(Tprod.getIdProducto() == -1 && tMarca.getNombre() != null){
 				dao.create(Tprod);
+				daoM.update(new TMarca(null, Tprod.getIdMarca(), -1, 1));
 			}else{
 				return -1;
 			}
@@ -46,8 +49,8 @@ public class SAProductoIMP implements SAProducto{
 				dao.delete(Tprod.getIdProducto());
 				DAOMarca daoM = FactoriaIntegracion.getInstance().generaDAOMarca();
 				TMarca tMarca = daoM.read(Tprod.getIdMarca());
-				//if(tMarca.getCant !=  0)
-				// daoM.update
+				if(tMarca.getCantidad() !=  0)
+				 daoM.update(new TMarca(null, Tprod.getIdMarca(), -1, -1));
 			}else{
 				return -1;
 			}
@@ -74,21 +77,22 @@ public class SAProductoIMP implements SAProducto{
 
 	@Override
 	public TProducto readByName(TProducto Tprod) {
-		// TODO
 		if(ComprobadorSintactico.isName(Tprod.getNombre())){
-			//Tprod = dao read
-			//TProd
+			Tprod = dao.readByName(Tprod.getNombre());
 		}
 		return Tprod;
 	}
 
 	@Override
 	public int update(TProducto Tprod) {
-		// TODO Auto-generated method stub
 		if(ComprobadorSintactico.isName(Tprod.getNombre())){
-			// dao readByName
-			//if() exist then dao update()
-			//else -1
+			TProducto Tprod2;
+			Tprod2 = dao.readByName(Tprod.getNombre());
+			if(Tprod.getIdProducto() == -1){
+				dao.update(new TProducto(Tprod2.getNombre(), Tprod.getCantidad(), Tprod.getTalla(), Tprod.getIdProducto(), Tprod.getCategoria(), Tprod.getIdMarca()));
+			}else{
+				return -1;
+			}
 		}
 		return 0;
 	}

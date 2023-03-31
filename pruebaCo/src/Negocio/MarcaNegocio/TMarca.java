@@ -22,6 +22,7 @@ public class TMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private String Nombre;
+	private int cantidad;
 
 	private boolean activo;
 	/** 
@@ -32,10 +33,11 @@ public class TMarca {
 	 * @param nombre2 
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public TMarca(String nombre, int ID, int activo) {
+	public TMarca(String nombre, int ID, int activo, int cantidad) {
 		this.Nombre=nombre;
 		this.IDMarca=ID;
 		this.activo=false;
+		this.cantidad = cantidad;
 		if(activo==1)
 			this.activo=true;
 	}
@@ -99,5 +101,9 @@ public class TMarca {
 	*/
 	public Boolean getActivo() {
 		return activo;
+	}
+	
+	public int getCantidad(){
+		return this.cantidad;
 	}
 }

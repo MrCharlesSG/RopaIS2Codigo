@@ -80,9 +80,9 @@ public class DAOMarcaImp implements DAOMarca {
 		TMarca marca=null;
 		try(Scanner sacanner=new Scanner(file)){
 			while(sacanner.hasNextLine()){
-				datos=sacanner.nextLine().split(":");
+				datos=sacanner.nextLine().split(":", 4);
 				if(datos[2].equalsIgnoreCase("1")){
-					marca=new TMarca(datos[1],Integer.parseInt(datos[0]),Integer.parseInt(datos[2]));
+					marca=new TMarca(datos[1],Integer.parseInt(datos[0]),Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
 					marcas.add(marca);
 				}
 				
@@ -106,10 +106,10 @@ public class DAOMarcaImp implements DAOMarca {
 			
 			while(scanner.hasNext() &&!encontrado) {
 				
-				String tokens[]=scanner.nextLine().split(":");
+				String tokens[]=scanner.nextLine().split(":", 4);
 				int ID=Integer.parseInt(tokens[0]);
 			if (ID==id&&tokens[2].equalsIgnoreCase("1")) {
-				 marca=new TMarca(tokens[1],Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]));
+				 marca=new TMarca(tokens[1],Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
 				 encontrado=true;
 				}
 			}
@@ -205,10 +205,10 @@ public class DAOMarcaImp implements DAOMarca {
 			
 			while(scanner.hasNext() &&!encontrado) {
 				
-				String tokens[]=scanner.nextLine().split(":");
+				String tokens[]=scanner.nextLine().split(":", 4);
 				
 				if (tokens[1].equalsIgnoreCase(nombre)&&tokens[2].equalsIgnoreCase("1")) {
-					 marca=new TMarca(nombre,Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]));
+					 marca=new TMarca(nombre,Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
 					encontrado=true;
 				}
 			}
