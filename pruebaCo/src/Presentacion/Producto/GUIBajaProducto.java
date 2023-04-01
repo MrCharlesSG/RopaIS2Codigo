@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Negocio.MarcaNegocio.TMarca;
+import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 
@@ -26,7 +26,7 @@ public class GUIBajaProducto extends JFrame{
 	public GUIBajaProducto(){
 		this.setTitle("Baja Producto");
 		JPanel jpanel=new JPanel();
-		JLabel jlabel=new JLabel("Nombre: ");
+		JLabel jlabel=new JLabel("IDProducto: ");
 		final JTextField jTextField=new JTextField(20);
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
@@ -40,13 +40,12 @@ public class GUIBajaProducto extends JFrame{
 		this.pack();
 		
 		aceptar.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				String nombre=jTextField.getName();
-				TMarca tmarca=new TMarca(nombre, 0, 0);
-				Controlador.getInstancia().accion(Evento.BAJA_PRODUCTO, tmarca);
+				String id=jTextField.getName();
+				TProducto tprod =new TProducto(null, Integer.parseInt(id), -1, -1, null, -1);
+				Controlador.getInstancia().accion(Evento.BAJA_PRODUCTO, tprod);
 				
 			}
 			

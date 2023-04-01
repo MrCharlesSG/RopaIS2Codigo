@@ -24,40 +24,28 @@ import Presentacion.Controlador.Evento;
 public class GUIListarProductos extends JFrame{
 	
 	public GUIListarProductos(){
-		this.setTitle("Listar Productos");
-		JPanel jpanel=new JPanel();
-		JLabel jlabel=new JLabel("Nombre: ");
-		final JTextField jTextField=new JTextField(20);
+		setTitle("Listar Prodcutos");
+		JPanel panel=new JPanel();
+		
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		
-		jpanel.add(jlabel);
-		jpanel.add(jTextField);
-		jpanel.add(aceptar);
-		jpanel.add(cancelar);
+		panel.add(aceptar);
+		panel.add(cancelar);
+		getContentPane().add(panel);
+		pack();
 		
-		this.getContentPane().add(jpanel);
-		this.pack();
-		
-		aceptar.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				String nombre=jTextField.getName();
-				TMarca tmarca=new TMarca(nombre, 0, 0);
-				Controlador.getInstancia().accion(Evento.LISTAR_PRODUCTOS, tmarca);
-				
-			}
-			
+		aceptar.addActionListener(new ActionListener()
+			{ public void actionPerformed(ActionEvent e)
+				{		
+					setVisible(false);
+					Controlador.getInstancia().accion(Evento.LISTAR_MARCAS,null);
+				}
 		});
-		
-		cancelar.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				
+		cancelar.addActionListener(new ActionListener()
+			{ public void actionPerformed(ActionEvent e)
+				{		
+					setVisible(false);
 			}
 			
 		});
