@@ -6,6 +6,8 @@ package Negocio.FactoriaNegocio;
 import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.SAMarcaImp;
 import Negocio.MarcaNegocio.TMarca;
+import Negocio.Producto.SAProducto;
+import Negocio.Producto.SAProductoIMP;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -33,5 +35,10 @@ public class FactoriaNegocioImp extends FactoriaNegocio {
 		// TODO Auto-generated method stub
 		return null;
 		// end-user-code
+	}
+
+	@Override
+	public SAProducto generaSAProducto() {
+		return new SAProductoIMP();
 	}
 }

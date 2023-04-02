@@ -32,7 +32,7 @@ public class ComprobadorSintactico {
 	*/
 	public static boolean isName(String name) {
 		
-		return !name.contains(":")&&!name.contains(" ")&&!(name.length()==0);
+		return !name.contains(":")&&!(name.length()==0);
 	
 	}
 }

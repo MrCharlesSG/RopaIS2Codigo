@@ -5,6 +5,7 @@ package Negocio.FactoriaNegocio;
 
 import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
+import Negocio.Producto.SAProducto;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -48,4 +49,6 @@ public abstract class FactoriaNegocio {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public abstract TMarca generaTMarca();
+
+	public abstract SAProducto generaSAProducto();
 }

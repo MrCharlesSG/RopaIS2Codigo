@@ -24,13 +24,16 @@ public class SAProductoIMP implements SAProducto{
 
 	@Override
 	public int create(TProducto Tprod) {
+		TProducto TprodAux;
 		if(ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria())){
-			Tprod = dao.readByName(Tprod.getNombre());
+			TprodAux = dao.readByName(Tprod.getNombre());
 			DAOMarca daoM = FactoriaIntegracion.getInstance().generaDAOMarca();
 			TMarca tMarca = daoM.read(Tprod.getIdMarca());
-			if(Tprod.getIdProducto() == -1 && tMarca.getNombre() != null){
+			if(TprodAux.getIdProducto() == -1 && (tMarca != null || tMarca.getNombre() != null)){
+				if(TprodAux.getNombre().equals(Tprod.getNombre()) && TprodAux.getIdMarca() == Tprod.getIdMarca()){
 				dao.create(Tprod);
 				daoM.update(new TMarca(null, Tprod.getIdMarca(), -1, 1));
+				}
 			}else{
 				return -1;
 			}
@@ -41,10 +44,9 @@ public class SAProductoIMP implements SAProducto{
 	}
 
 	@Override
-	public int delete(TProducto Tprod) {
-		//TODO
-		if(ComprobadorSintactico.isPositive(Tprod.getIdProducto())){
-			Tprod = read(Tprod);
+	public int delete(int id) {
+		if(ComprobadorSintactico.isPositive(id)){
+			TProducto Tprod = read(id);
 			if(!Tprod.getNombre().equals(null) && Tprod.getCantidad() == 0){
 				dao.delete(Tprod.getIdProducto());
 				DAOMarca daoM = FactoriaIntegracion.getInstance().generaDAOMarca();
@@ -61,10 +63,10 @@ public class SAProductoIMP implements SAProducto{
 	}
 
 	@Override
-	public TProducto read(TProducto Tprod) {
-		//TODO
-		if(ComprobadorSintactico.isPositive(Tprod.getIdProducto())){
-			Tprod = dao.read(Tprod.getIdProducto());
+	public TProducto read(int id) {
+		TProducto Tprod = null;
+		if(ComprobadorSintactico.isPositive(id)){
+			Tprod = dao.read(id);
 		}
 		return Tprod;
 	}
@@ -76,9 +78,10 @@ public class SAProductoIMP implements SAProducto{
 	}
 
 	@Override
-	public TProducto readByName(TProducto Tprod) {
-		if(ComprobadorSintactico.isName(Tprod.getNombre())){
-			Tprod = dao.readByName(Tprod.getNombre());
+	public TProducto readByName(String name) {
+		TProducto Tprod = null;
+		if(ComprobadorSintactico.isName(name)){
+			Tprod = dao.readByName(name);
 		}
 		return Tprod;
 	}

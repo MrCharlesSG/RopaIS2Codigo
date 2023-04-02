@@ -99,7 +99,7 @@ public class Controlador {
 				break;
 			}
 			case Evento.BAJA_PRODUCTO:{
-				int res=saProducto.delete((TProducto) datos);
+				int res=saProducto.delete((int) datos);
 				if(res>0){
 					gui.update(Evento.RES_BAJA_PRODUCTO_OK, new Integer(res));
 				}
@@ -114,7 +114,7 @@ public class Controlador {
 				break;
 			}
 			case Evento.MARCA_POR_PRODUCTO:{
-				TProducto producto=saProducto.read((TProducto)datos);
+				TProducto producto=saProducto.read((int) datos);
 				gui.update(Evento.MARCA_POR_PRODUCTO, producto);
 				break;
 			}
@@ -129,12 +129,12 @@ public class Controlador {
 				break;
 			}
 			case Evento.PRODUCTO_POR_ID:{
-				TProducto producto=saProducto.read((TProducto)datos);
+				TProducto producto=saProducto.read((int) datos);
 				gui.update(Evento.PRODUCTO_POR_ID, producto);
 				break;
 			}
 			case Evento.VENTA_POR_PRODUCTO:{
-				TProducto producto=saProducto.read((TProducto)datos);
+				TProducto producto=saProducto.read((int) datos);
 				gui.update(Evento.VENTA_POR_PRODUCTO, producto);
 				break;
 			}

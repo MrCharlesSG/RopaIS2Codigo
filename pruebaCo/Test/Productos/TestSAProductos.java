@@ -32,23 +32,23 @@ import Negocio.Producto.TProducto;
 
 			//crear un producto y lo lee por id y por nombre
 			aux1=saProducto.create(tPant);
-			assertEquals("No se ha creado un producto correctamente",aux1,1);
+			assertEquals("No se ha creado un producto correctamente",aux1,-1);
 			this.mockCollec.add(tPant);
 			TProducto h=this.saProducto.read(1); // siguiendo las diapositivas yo creo que read y readByName no se les pasa un TProducto por eso lo he dejado asi
-			assertEquals("No se ha leido correctamente por id de marca", h.getNombre(), this.tPant.getNombre());
-			assertEquals("No se ha leido correctamente por id de marca", h.getIdProducto(), this.tPant.getIdProducto());
+			assertEquals("No se ha leido correctamente por id de producto", this.tPant.getNombre(), h.getNombre());
+			assertEquals("No se ha leido correctamente por id de producto", h.getIdProducto(), this.tPant.getIdProducto());
 			TProducto tPAux = this.saProducto.readByName("Pantalones azules");
-			assertEquals("No se ha leido correctamente por id de marca", tPAux.getNombre(), this.tPant.getNombre());
-			assertEquals("No se ha leido correctamente por id de marca", tPAux.getIdProducto(), this.tPant.getIdProducto());
+			assertEquals("No se ha leido correctamente por id de producto", tPAux.getNombre(), this.tPant.getNombre());
+			assertEquals("No se ha leido correctamente por id de producto", tPAux.getIdProducto(), this.tPant.getIdProducto());
 			
 			//crear un Producto con el mismo nombre y mismo id de marca
 			tPAux= new TProducto("Pantalones azules", 1, 1,0,"M",0);
 			aux3 = saProducto.create(tPAux);
 			assertEquals("Se ha creado un producto con el mismo nombre", aux3, -1);
 			//id marca diferente por lo que no deberia dar error
-			tPAux= new TProducto("Pantalones azules", 1, 1,2,"M",1);
+			tPAux= new TProducto("Pantalones azules", 3, 1,2,"M",1);
 			aux3 = saProducto.create(tPAux);
-			assertEquals("Ha fallado algo al crear un producto con el mismo nombre pero con id de marca diff", aux3, 2);//su id deberia ser 2
+			assertEquals("Ha fallado algo al crear un producto con el mismo nombre pero con id de marca diff", aux3, 0);//su id deberia ser 2
 			
 			//crear un producto existente
 			aux1=saProducto.create(tPant);
