@@ -138,6 +138,21 @@ public class Controlador {
 				gui.update(Evento.VENTA_POR_PRODUCTO, producto);
 				break;
 			}
+			case Evento.ALTA_PROVEEDOR:{
+				break;
+			}
+			case Evento.BAJA_PROVEEDOR:{
+				break;
+			}
+			case Evento.LISTAR_PROVEEDORES:{
+				break;
+			}
+			case Evento.MARCAS_PROVEEDOR: {
+				break;
+			}
+			case Evento.PROVEEDOR_POR_ID:{
+				break;
+			}
 			
 		}
 	}
