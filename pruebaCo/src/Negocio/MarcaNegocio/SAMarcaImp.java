@@ -27,7 +27,7 @@ public class SAMarcaImp implements SAMarca {
 		if(marca!=null&&ComprobadorSintactico.isName(marca.getNombre())){
 			TMarca leido=daoMarca.readByName(marca.getNombre());
 			
-			if(leido==null)
+			if(leido==null||!leido.getActivo())
 				id=daoMarca.create(marca);//hay que quitar el boolean
 			
 			}
