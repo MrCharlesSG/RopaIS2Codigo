@@ -36,6 +36,7 @@ public class DAOMarcaImp implements DAOMarca {
 		StringBuilder buffer=new StringBuilder();
 		File file=new File(ARCHIVO);
 		String datos[];
+		boolean encontrado=false;
 		int id=-1;
 		if(file.length()==0){
 			buffer.append((1)+":"+marca.getNombre()+":1");
@@ -44,11 +45,18 @@ public class DAOMarcaImp implements DAOMarca {
 		else{
 			try(Scanner scanner=new Scanner(file)) {//bufferreader
 				while(scanner.hasNext()) {
+					
+				
 					datos=scanner.nextLine().split(":");
-					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]).append(System.lineSeparator());
+					if(datos[1]==marca.getNombre()){
+						encontrado=true;
+						datos[3]="1";
+					}
+					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
 					id=Integer.parseInt(datos[0])+1;//no me deja ponerlo fuera pero bueno
 				}
-				buffer.append((id)+":"+marca.getNombre()+":1");
+				if(!encontrado)
+					buffer.append((id)+":"+marca.getNombre()+":0:1");
 			}catch (IOException e) {
 				//cosas
 				return id;
@@ -80,8 +88,8 @@ public class DAOMarcaImp implements DAOMarca {
 		TMarca marca=null;
 		try(Scanner sacanner=new Scanner(file)){
 			while(sacanner.hasNextLine()){
-				datos=sacanner.nextLine().split(":", 4);
-				if(datos[2].equalsIgnoreCase("1")){
+				datos=sacanner.nextLine().split(":");
+				if(datos[3].equalsIgnoreCase("1")){
 					marca=new TMarca(datos[1],Integer.parseInt(datos[0]),Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
 					marcas.add(marca);
 				}
@@ -106,7 +114,7 @@ public class DAOMarcaImp implements DAOMarca {
 			
 			while(scanner.hasNext() &&!encontrado) {
 				
-				String tokens[]=scanner.nextLine().split(":", 4);
+				String tokens[]=scanner.nextLine().split(":");
 				int ID=Integer.parseInt(tokens[0]);
 			if (ID==id&&tokens[2].equalsIgnoreCase("1")) {
 				 marca=new TMarca(tokens[1],Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
@@ -140,7 +148,7 @@ public class DAOMarcaImp implements DAOMarca {
 					buffer.append(id+":"+marca.getNombre()+":"+marca.getActivo()).append(System.lineSeparator());
 				}
 				else
-					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]).append(System.lineSeparator());
+					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
 			}
 			try(Writer w=new BufferedWriter(
 									new OutputStreamWriter(
@@ -171,12 +179,12 @@ public class DAOMarcaImp implements DAOMarca {
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
 			
-				if (datos[1].equalsIgnoreCase(marca.getNombre())&&Integer.parseInt(datos[2])==1) {
+				if (datos[1].equalsIgnoreCase(marca.getNombre())&&Integer.parseInt(datos[3])==1) {
 				
-					datos[2]="0";
+					datos[3]="0";
 					id=Integer.parseInt(datos[0]);
 				}
-				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]).append(System.lineSeparator());
+				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":+"+datos[3]).append(System.lineSeparator());
 			}
 			try(Writer w=new BufferedWriter(
 									new OutputStreamWriter(
@@ -205,9 +213,9 @@ public class DAOMarcaImp implements DAOMarca {
 			
 			while(scanner.hasNext() &&!encontrado) {
 				
-				String tokens[]=scanner.nextLine().split(":", 4);
+				String tokens[]=scanner.nextLine().split(":");
 				
-				if (tokens[1].equalsIgnoreCase(nombre)&&tokens[2].equalsIgnoreCase("1")) {
+				if (tokens[1].equalsIgnoreCase(nombre)&&tokens[3].equalsIgnoreCase("1")) {
 					 marca=new TMarca(nombre,Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
 					encontrado=true;
 				}
@@ -219,4 +227,39 @@ public class DAOMarcaImp implements DAOMarca {
 			return marca;
 		}
 	}
+
+	@Override
+	public int actualizarCantidad(int ID, boolean aumento) {
+		StringBuilder buffer=new StringBuilder();
+		File file=new File(ARCHIVO);
+		String datos[];
+		int id=-1;
+		int aum=-1;
+		if(aumento)
+			aum=1;
+		try(Scanner scanner=new Scanner(file)) {//bufferreader
+		
+			while(scanner.hasNext()) {
+				datos=scanner.nextLine().split(":");
+				if (Integer.parseInt(datos[0])==ID&&datos[3]=="1") {	
+					id=Integer.parseInt(datos[0]);
+					aum+=Integer.parseInt(datos[2]);
+					buffer.append(id+":"+datos[1]+":"+aum+":"+datos[3]).append(System.lineSeparator());
+				}
+				else
+					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
+			}
+			try(Writer w=new BufferedWriter(
+									new OutputStreamWriter(
+									new FileOutputStream(ARCHIVO)))){
+				w.write(buffer.toString());
+				return id;
+				
+			}
+		}
+		catch (IOException e) {
+			//cosas
+			return id;
+		}
+		
 }

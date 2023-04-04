@@ -45,7 +45,7 @@ public interface SAMarca {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int update(int ID);
+	public int update(TMarca marca);
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -54,7 +54,7 @@ public interface SAMarca {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int delete(int id);
+	public int delete(int ID);
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -64,4 +64,5 @@ public interface SAMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public TMarca readByName(String nombre);
+	public int actualizarCantidad(int ID,boolean aumento);
 }

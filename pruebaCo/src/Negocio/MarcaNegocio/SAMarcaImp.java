@@ -63,13 +63,13 @@ public class SAMarcaImp implements SAMarca {
 	* @see SAMarca#update(TMarca marca)
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int update( int ID) {
+	public int update( TMarca marca) {
 		int id=-1;
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();//yo lo dejaria como atributo de sa
-		if(ComprobadorSintactico.isPositive(ID)){
-			TMarca leido=daoMarca.read(id);	
+		if(ComprobadorSintactico.isPositive(marca.getID())){
+			TMarca leido=daoMarca.read(marca.getID());	
 			if(leido!=null)
-				id=daoMarca.update(leido);
+				id=daoMarca.update(marca);
 			}
 		return id;
 		// end-user-code
@@ -98,13 +98,22 @@ public class SAMarcaImp implements SAMarca {
 	* @see SAMarca#readByName(String nombre)
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public TMarca readByName(String nombre) {//no entiendo esta funcion
+	public TMarca readByName(String nombre) {
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();	
 		TMarca marca=null;
 		if(ComprobadorSintactico.isName(nombre))
 			marca=daoMarca.readByName(nombre);
 		return marca;
 		// end-user-code
+	}
+	public int actualizarCantidad(int ID,boolean aumento){
+		int id=-1;
+		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();	
+		if(ComprobadorSintactico.isPositive(ID)){
+			id=daoMarca.actualizarCantidad(ID,aumento);
+		}
+			
+		return id;
 	}
 
 }
