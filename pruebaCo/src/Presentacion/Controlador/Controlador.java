@@ -9,6 +9,8 @@ import Presentacion.GUIBiblioteca;
 import Presentacion.GUI.GUI;
 import Presentacion.Controlador.Evento;
 import Negocio.Producto.TProducto;
+import Negocio.Proveedor.SAProveedores;
+import Negocio.Proveedor.TProveedor;
 import Negocio.Producto.SAProducto;
 
 /** 
@@ -27,6 +29,7 @@ public class Controlador {
 	private static Controlador controlador;
 	private SAMarca saMarca; 
 	private SAProducto saProducto;
+	private SAProveedores saProveedor;
 	private GUI gui;
 	
 	private Controlador(SAMarca saMarca,GUI gui){
@@ -79,7 +82,7 @@ public class Controlador {
 				break;
 			}
 			case Evento.MODIFICAR_MARCA:{
-				int res=saMarca.update((int) datos);
+				int res=saMarca.update((TMarca) datos);
 				
 				if(res>0)
 					gui.update(Evento.RES_MODIFICAR_MARCA_OK, new Integer(res));
@@ -139,21 +142,44 @@ public class Controlador {
 				break;
 			}
 			case Evento.ALTA_PROVEEDOR:{
-				break;
-			}
-			case Evento.BAJA_PROVEEDOR:{
-				break;
-			}
-			case Evento.LISTAR_PROVEEDORES:{
-				break;
-			}
-			case Evento.MARCAS_PROVEEDOR: {
-				break;
-			}
-			case Evento.PROVEEDOR_POR_ID:{
-				break;
-			}
-			
+                TProveedor tProveedor=(TProveedor)datos;
+                int res = saProveedor.create(tProveedor);
+
+                if(res>0)
+                    gui.update(Evento.RES_ALTA_PROVEEDOR_OK, new Integer(res));
+                else
+                    gui.update(Evento.RES_ALTA_PROVEEDOR_KO, null);
+                break;
+            }
+            case Evento.BAJA_PROVEEDOR:{
+                int idProveedor=(int) datos;
+                int res = saProveedor.delete(idProveedor);
+
+                if(res > 0)
+                    gui.update(Evento.RES_BAJA_PROVEEDOR_OK, new Integer(res));
+                else
+                    gui.update(Evento.RES_BAJA_PROVEEDOR_KO, null);
+                break;
+            }
+            case Evento.LISTAR_PROVEEDORES:{
+                Collection<TProveedor>proveedores = saProveedor.readAll();
+                gui.update(Evento.LISTAR_PROVEEDORES, proveedores);
+                break;
+            }
+            case Evento.MARCAS_PROVEEDOR: {
+                //TODO 
+                break;
+            }
+            case Evento.PROVEEDOR_POR_ID:{
+                TProveedor proveedor = saProveedor.read((int)datos);
+                gui.update(Evento.PROVEEDOR_POR_ID, proveedor);
+                break;
+            }
+            case Evento.MODIFICAR_PROVEEDOR:{
+                //TODO
+
+                break;
+            }
 		}
 	}
 }
