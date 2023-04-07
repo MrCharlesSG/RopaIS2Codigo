@@ -1,5 +1,6 @@
 package Presentacion.Producto;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,10 +15,11 @@ import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 
-public class GUIAltaProducto extends JFrame{
+public class GUIAltaProducto extends JPanel{
 	
 	public GUIAltaProducto() {
-		setTitle("Alta Producto");
+		this.setLayout(new BorderLayout());
+		this.add(new JLabel("Alta Producto"), BorderLayout.PAGE_START);
 		JPanel panel=new JPanel();
 		JLabel lNombre=new JLabel("Nombre:");
 		final JTextField tNombre= new JTextField(20);
@@ -49,8 +51,7 @@ public class GUIAltaProducto extends JFrame{
 		panel.add(tIDMarca);
 		panel.add(aceptar);
 		panel.add(cancelar);
-		getContentPane().add(panel);
-		pack();
+		this.add(panel, BorderLayout.CENTER);
 		
 		aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
@@ -63,7 +64,7 @@ public class GUIAltaProducto extends JFrame{
 					String IDMarca = tIDMarca.getText();
 					//nombre: id: cantidad: talla: categoria: idMarca:
 					TProducto tP= new TProducto (nombre,-1, Integer.parseInt(cant), Integer.parseInt(talla), cat, Integer.parseInt(IDMarca));;
-					Controlador.getInstancia().accion(Evento.ALTA_MARCA, tP);
+					Controlador.getInstancia().accion(Evento.ALTA_PRODUCTO, tP);
 				}
 		});
 		cancelar.addActionListener(new ActionListener()

@@ -2,6 +2,8 @@ package Main;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JToolBar;
 import javax.swing.Box;
@@ -14,6 +16,9 @@ public class ControlPanel extends JPanel {
 
 	private JToolBar _toolBar;
 	private JButton quit;
+	private JButton marca;
+	private JButton producto;
+	private JButton proveedor;
 	
 	public ControlPanel() {
 		initGui();
@@ -23,7 +28,34 @@ public class ControlPanel extends JPanel {
 		setLayout(new BorderLayout());
 		_toolBar = new JToolBar();
 		add(_toolBar, BorderLayout.PAGE_START);
-		_toolBar.setPreferredSize(new Dimension(200, 50));
+		_toolBar.setPreferredSize(new Dimension(200, 58));
+		
+		//boton abrir menu mrcas
+		marca = new JButton();
+		marca.setToolTipText("abrir menú marcas");
+		marca.setText("Marcas");
+		marca.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.openView(0);
+			}
+			
+		});
+		_toolBar.add(marca);
+		
+		producto = new JButton();
+		producto.setToolTipText("abrir menú productos");
+		producto.setText("Productos");
+		producto.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.openView(1);
+			}
+			
+		});
+		_toolBar.add(producto);
 		
 		_toolBar.add(Box.createGlue()); // this aligns the button to the right
 		_toolBar.addSeparator();
