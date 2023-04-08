@@ -28,12 +28,12 @@ public class GUIModificarMarca extends JFrame {
 	public GUIModificarMarca() {
 		setTitle("Alta Marca");
 		JPanel panel=new JPanel();
-		JLabel lNombre=new JLabel("Identificador:");
+		JLabel id=new JLabel("Identificador:");
 		final JTextField tNombre= new JTextField(20);
 		JButton aceptar=new JButton("Aceptar:");
 		JButton cancelar=new JButton("Cancelar");
 		
-		panel.add(lNombre);
+		panel.add(id);
 		panel.add(tNombre);
 		panel.add(aceptar);
 		panel.add(cancelar);

@@ -19,8 +19,8 @@ import Negocio.MarcaNegocio.TMarca;
 @RunWith(JUnit4.class)
 public class SAMarcaTest {
 	private SAMarca saMarca = FactoriaNegocioImp.getInstance().generaSAMarca();
-	private TMarca tMJuli = new TMarca("Julian", 1, 1);
-	private TMarca tMAlmd = new TMarca("Almendra", 2, 1);
+	private TMarca tMJuli = new TMarca("Julian", 1, 1,1);
+	private TMarca tMAlmd = new TMarca("Almendra", 2, 1,1);
 	private Collection<TMarca> mockCollec = new ArrayList<TMarca>();
 	
 	@Test

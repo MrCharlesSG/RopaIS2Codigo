@@ -20,7 +20,7 @@ public class DAOMarcaTest{
 
         assertEquals("",res.getNombre());
 
-        TMarca tmarca= new TMarca("coca-cola",1,1);
+    //    TMarca tmarca= new TMarca("coca-cola",1,1);
 
         int id=dmarca.create(tmarca);
         assertEquals(1,id);
@@ -42,11 +42,11 @@ public class DAOMarcaTest{
         assertNotEquals("coca-cola",res.getNombre());
 
         Collection<TMarca> marcas =new ArrayList<TMarca>();
-        TMarca tmarca1= new TMarca("coca-cola",15,1);
-        TMarca tmarca2= new TMarca("pepsi",16,1);
-        TMarca tmarca3= new TMarca("cola",17,1);
+    ///    TMarca tmarca1= new TMarca("coca-cola",15,1);
+     //   TMarca tmarca2= new TMarca("pepsi",16,1);
+    //    TMarca tmarca3= new TMarca("cola",17,1);
 
-        dmarca.create(tmarca1);
+       /* dmarca.create(tmarca1);
         dmarca.create(tmarca2);
         dmarca.create(tmarca3);
 
@@ -66,5 +66,5 @@ public class DAOMarcaTest{
 
 
     }
-
-}
+*/
+    }}

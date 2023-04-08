@@ -32,7 +32,7 @@ public class SAProductoIMP implements SAProducto{
 			if(TprodAux.getIdProducto() == -1 && (tMarca != null || tMarca.getNombre() != null)){
 				if(TprodAux.getNombre().equals(Tprod.getNombre()) && TprodAux.getIdMarca() == Tprod.getIdMarca()){
 				dao.create(Tprod);
-				daoM.update(new TMarca(null, Tprod.getIdMarca(), -1, 1));
+				daoM.actualizarCantidad(Tprod.getIdMarca(),true);
 				}
 			}else{
 				return -1;
@@ -52,7 +52,7 @@ public class SAProductoIMP implements SAProducto{
 				DAOMarca daoM = FactoriaIntegracion.getInstance().generaDAOMarca();
 				TMarca tMarca = daoM.read(Tprod.getIdMarca());
 				if(tMarca.getCantidad() !=  0)
-				 daoM.update(new TMarca(null, Tprod.getIdMarca(), -1, -1));
+					daoM.actualizarCantidad(Tprod.getIdMarca(),false);
 			}else{
 				return -1;
 			}
