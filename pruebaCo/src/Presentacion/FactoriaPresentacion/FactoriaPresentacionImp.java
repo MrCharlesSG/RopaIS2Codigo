@@ -66,12 +66,10 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	}
 	@Override
 	public GUIProductoPorID generaGUIProductoPorID() {
-		// TODO Auto-generated method stub
-		return null;
+		return new GUIProductoPorID();
 	}
 	@Override
 	public GUIModificarProducto generaGUIModificarProducto() {
-		// TODO Auto-generated method stub
-		return null;
+		return new GUIModificarProducto();
 	}
 }
