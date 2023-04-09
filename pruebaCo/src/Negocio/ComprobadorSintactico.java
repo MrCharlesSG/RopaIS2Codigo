@@ -19,7 +19,7 @@ public class ComprobadorSintactico {
 	*/
 	public static boolean isPositive(int id) {
 	
-		return id>0;
+		return id>=0;
 		// end-user-code
 	}
 

@@ -43,7 +43,7 @@ public class GUIBajaProducto extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				String id=jTextField.getName();
+				String id=jTextField.getText();
 				TProducto tprod =new TProducto(null, Integer.parseInt(id), -1, -1, null, -1);
 				Controlador.getInstancia().accion(Evento.BAJA_PRODUCTO, tprod);
 				

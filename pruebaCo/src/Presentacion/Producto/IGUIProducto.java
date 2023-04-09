@@ -14,6 +14,9 @@ import Main.MainWindow;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 
 	public class IGUIProducto extends JPanel {//probablemente sea mejor hacerlo singleton o algo
+		
+		private JPanel j;
+		
 		public IGUIProducto(){
 			
 			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -32,10 +35,9 @@ import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 			
 			altaProducto.addActionListener(new ActionListener()
 				{ 
-				@Override
 				public void actionPerformed(ActionEvent e)
 					{		
-						MainWindow.updateInfoPanel(FactoriaPresentacion.getInstance().generaGUIAltaProducto());
+						j = FactoriaPresentacion.getInstance().generaGUIAltaProducto();
 					}
 			});
 			

@@ -29,10 +29,12 @@ public class SAProductoIMP implements SAProducto{
 			TprodAux = dao.readByName(Tprod.getNombre());
 			DAOMarca daoM = FactoriaIntegracion.getInstance().generaDAOMarca();
 			TMarca tMarca = daoM.read(Tprod.getIdMarca());
-			if(TprodAux.getIdProducto() == -1 && (tMarca != null || tMarca.getNombre() != null)){
-				if(TprodAux.getNombre().equals(Tprod.getNombre()) && TprodAux.getIdMarca() == Tprod.getIdMarca()){
+			if(TprodAux != null && tMarca != null){
+				if(TprodAux.getIdMarca() != Tprod.getIdMarca()){
 				dao.create(Tprod);
 				daoM.actualizarCantidad(Tprod.getIdMarca(),true);
+				}else{
+					return -1;
 				}
 			}else{
 				return -1;
@@ -73,8 +75,7 @@ public class SAProductoIMP implements SAProducto{
 
 	@Override
 	public Collection<TProducto> readAll() {
-		dao.readAll();
-		return null;
+		return dao.readAll();
 	}
 
 	@Override

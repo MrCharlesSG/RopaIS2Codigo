@@ -114,7 +114,7 @@ public class DAOMarcaImp implements DAOMarca {
 			
 			while(scanner.hasNext() &&!encontrado) {
 				
-				String tokens[]=scanner.nextLine().split(":");
+				String tokens[]=scanner.nextLine().split(":", 4);
 				int ID=Integer.parseInt(tokens[0]);
 			if (ID==id&&tokens[2].equalsIgnoreCase("1")) {
 				 marca=new TMarca(tokens[1],Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));

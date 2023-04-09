@@ -1,2 +1,3 @@
-1:Julian:1
-2:Almendra:0
+1:Julian:1:0
+2:Almendra:0:0
+0:Juana:1:0

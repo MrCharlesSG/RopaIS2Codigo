@@ -21,8 +21,8 @@ import Negocio.Producto.TProducto;
 	public class TestSAProductos {
 
 		private SAProducto saProducto = FactoriaNegocioImp.getInstance().generaSAProducto();//teneis que creaar este metodo 
-		private TProducto tPant = new TProducto("Pantalones azules", 1, 1,0,"M",0);
-		private TProducto tCami = new TProducto("Camiseta blanca", 2, 1,1,"M",0);
+		private TProducto tPant = new TProducto("Pantalones azules", 10, 1,0,"M",0);
+		private TProducto tCami = new TProducto("Camiseta blanca", 0, 1,2,"M",0);
 		
 		private Collection<TProducto> mockCollec = new ArrayList<TProducto>();
 		
@@ -32,11 +32,11 @@ import Negocio.Producto.TProducto;
 
 			//crear un producto y lo lee por id y por nombre
 			aux1=saProducto.create(tPant);
-			assertEquals("No se ha creado un producto correctamente",aux1,-1);
+			assertEquals("No se ha creado un producto correctamente",0, aux1);
 			this.mockCollec.add(tPant);
-			TProducto h=this.saProducto.read(1); // siguiendo las diapositivas yo creo que read y readByName no se les pasa un TProducto por eso lo he dejado asi
+			TProducto h=this.saProducto.read(0); // siguiendo las diapositivas yo creo que read y readByName no se les pasa un TProducto por eso lo he dejado asi
 			assertEquals("No se ha leido correctamente por id de producto", this.tPant.getNombre(), h.getNombre());
-			assertEquals("No se ha leido correctamente por id de producto", h.getIdProducto(), this.tPant.getIdProducto());
+			assertEquals("No se ha leido correctamente por id de producto", this.tPant.getIdProducto(), h.getIdProducto());
 			TProducto tPAux = this.saProducto.readByName("Pantalones azules");
 			assertEquals("No se ha leido correctamente por id de producto", tPAux.getNombre(), this.tPant.getNombre());
 			assertEquals("No se ha leido correctamente por id de producto", tPAux.getIdProducto(), this.tPant.getIdProducto());
@@ -44,9 +44,9 @@ import Negocio.Producto.TProducto;
 			//crear un Producto con el mismo nombre y mismo id de marca
 			tPAux= new TProducto("Pantalones azules", 1, 1,0,"M",0);
 			aux3 = saProducto.create(tPAux);
-			assertEquals("Se ha creado un producto con el mismo nombre", aux3, -1);
+			assertEquals("Se ha creado un producto con el mismo nombre", -1, aux3);
 			//id marca diferente por lo que no deberia dar error
-			tPAux= new TProducto("Pantalones azules", 3, 1,2,"M",1);
+			tPAux= new TProducto("Pantalones azules", 0, 1,2,"M",1);
 			aux3 = saProducto.create(tPAux);
 			assertEquals("Ha fallado algo al crear un producto con el mismo nombre pero con id de marca diff", aux3, 0);//su id deberia ser 2
 			
@@ -56,13 +56,13 @@ import Negocio.Producto.TProducto;
 			
 			//crear un segunda producto y lo leer por id y por nombre
 			aux2=saProducto.create(tCami);
-			assertEquals("No se ha podido crear una segunda marca", aux2, 2);
+			assertEquals("No se ha podido crear una segunda marca", 0, aux2);
 			h= this.saProducto.read(2);
-			assertEquals("No se ha leido correctamente el 2do producto",h.getNombre(), this.tCami.getIdProducto());
+			assertEquals("No se ha leido correctamente el 2do producto",h.getNombre(), this.tCami.getNombre());
 			assertEquals("No se ha leido correctamente el 2do producto",h.getIdProducto(), this.tCami.getIdProducto());
 		
-			h= this.saProducto.readByName("Almendra");
-			assertEquals("No se ha leido correctamente el 2do producto",h.getNombre(), this.tCami.getIdProducto());
+			h= this.saProducto.readByName("Camiseta blanca");
+			assertEquals("No se ha leido correctamente el 2do producto",h.getNombre(), this.tCami.getNombre());
 			assertEquals("No se ha leido correctamente el 2do producto",h.getIdProducto(), this.tCami.getIdProducto());
 			
 			//Comprobamos el read all de los dos productos añadidos
@@ -74,12 +74,12 @@ import Negocio.Producto.TProducto;
 			
 			//eliminar las dos marcas creadas
 			aux1= saProducto.delete(1);
-			assertEquals("No se ha eliminado correctamente",aux1, 1);
-			aux2 = saProducto.delete(3);
-			assertEquals("No se ha eliminado correctamente", aux2, 3);
+			assertEquals("No se ha eliminado correctamente",0, aux1);
+			aux2 = saProducto.delete(2);
+			assertEquals("No se ha eliminado correctamente", 0, aux2);
 			
 			//readAll de 0 marcas
-			assertEquals("Read all no funciona para 0 productos", this.saProducto.readAll().size(), 0);
+			assertEquals("Read all no funciona para 1 productos", this.saProducto.readAll().size(), 1);
 			
 			//Añadir 5 marcas
 		/*	String nombre= "Manolo";
@@ -107,7 +107,7 @@ import Negocio.Producto.TProducto;
 			assertEquals("Se ha creado una marca sin nombre", this.saProducto.create(new TProducto("sudadera", 2, 1,4,"M",50)), -1);
 			
 			//read de un id nulo
-			assertEquals("Se ha leido un id invalido", this.saProducto.read(100), null);
+			assertEquals("Se ha leido un id invalido",null, this.saProducto.read(100).getNombre());
 			
 		}
 		
