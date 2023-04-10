@@ -1,9 +1,12 @@
 package Presentacion;
 
+import java.util.Collection;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import Presentacion.Controlador.Controlador;
+import Negocio.MarcaNegocio.TMarca;
+//import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 import Presentacion.MarcaPresentacion.IGUIMarca;
@@ -13,10 +16,10 @@ public class GUIBiblioteca extends JFrame implements GUI{
     private IGUIMarca guiMarca;
 //	private IGUIProducto guiProducto;
 //	private IGUIVenta guiVenta;
-	private Controlador controlador;
+//	private Controlador controlador;
 	
 	private GUIBiblioteca(){
-		controlador=Controlador.getInstancia();
+	//	controlador=Controlador.getInstancia();
 		//igual este es el menu principal donde eliges o marca o producto o etc..
 	}	
 	public static GUIBiblioteca getInstancia(){
@@ -72,6 +75,16 @@ public class GUIBiblioteca extends JFrame implements GUI{
 			JOptionPane.showMessageDialog(null, "No se pudo dar de baja la marca");
 			setVisible(true);
 			break; 
+		}
+		case Evento.LISTAR_MARCAS:
+		{
+			Collection<TMarca>marcas=(Collection<TMarca>) datos;
+			StringBuilder str=new StringBuilder();
+			for(TMarca m: marcas){
+				str.append(m.getID()+":"+m.getNombre()+":"+m.getCantidad()+":"+m.getActivo()).append(System.lineSeparator());
+			}
+			JOptionPane.showMessageDialog(null, str.toString());
+			setVisible(true);
 		}
 	}
 

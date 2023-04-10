@@ -39,7 +39,7 @@ public class DAOMarcaImp implements DAOMarca {
 		boolean encontrado=false;
 		int id=-1;
 		if(file.length()==0){
-			buffer.append((1)+":"+marca.getNombre()+":1");
+			buffer.append((1)+":"+marca.getNombre()+":0:1");
 			id=1;
 		}
 		else{
@@ -50,10 +50,11 @@ public class DAOMarcaImp implements DAOMarca {
 					datos=scanner.nextLine().split(":");
 					if(datos[1]==marca.getNombre()){
 						encontrado=true;
+						id=Integer.parseInt(datos[0]);
 						datos[3]="1";
 					}
 					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
-					id=Integer.parseInt(datos[0])+1;//no me deja ponerlo fuera pero bueno
+					if(!encontrado)id=Integer.parseInt(datos[0])+1;//no me deja ponerlo fuera pero bueno
 				}
 				if(!encontrado)
 					buffer.append((id)+":"+marca.getNombre()+":0:1");
@@ -75,7 +76,6 @@ public class DAOMarcaImp implements DAOMarca {
 		}
 		
 	}//esto esta feo pero bueno 
-
 	/** 
 	* (non-Javadoc)
 	* @see DAOMarca#readAll()
