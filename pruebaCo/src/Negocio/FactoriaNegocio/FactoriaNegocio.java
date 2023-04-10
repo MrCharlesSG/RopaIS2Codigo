@@ -6,6 +6,8 @@ package Negocio.FactoriaNegocio;
 import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.SAProducto;
+import Negocio.Proveedor.SAProveedores;
+import Negocio.Proveedor.TProveedor;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -51,4 +53,9 @@ public abstract class FactoriaNegocio {
 	public abstract TMarca generaTMarca();
 
 	public abstract SAProducto generaSAProducto();
+	
+	public abstract SAProveedores generaSAProveedor();
+	
+	public abstract TProveedor generaTProveedor(String[] datos);
+
 }

@@ -22,12 +22,16 @@ public class Utils {
 		return w;
 	}
 
-	static void showErrorMsg(String msg) {
+	public static void showErrorMsg(String msg) {
 		showErrorMsg(null, msg);
 	}
 
 	static void showErrorMsg(Component c, String msg) {
 		JOptionPane.showMessageDialog(getWindow(c), msg, "ERROR", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public static void showCorrectMsg(String msg){
+		JOptionPane.showMessageDialog(null, msg, "CORRECT", JOptionPane.ERROR_MESSAGE);
 	}
 
 	static void quit(Component c) {

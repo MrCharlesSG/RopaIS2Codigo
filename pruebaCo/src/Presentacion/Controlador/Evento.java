@@ -40,18 +40,22 @@ public class Evento {
 	public static final int RES_BAJA_PRODUCTO_OK = 805;
 	public static final int RES_BAJA_PRODUCTO_KO = 806;
 	
-	public static final int ALTA_PROVEEDOR = 901;
-	public static final int BAJA_PROVEEDOR = 902;
-	public static final int MARCAS_PROVEEDOR = 903;
-	public static final int MODIFICAR_PROVEEDOR = 904;
-	public static final int PROVEEDOR_POR_ID = 905;
-	public static final int LISTAR_PROVEEDORES = 906;
-	
-	public static final int RES_ALTA_PROVEEDOR_OK = 907;
-	public static final int RES_ALTA_PROVEEDOR_KO = 908;
-	public static final int RES_BAJA_PROVEEDOR_OK = 909;
-	public static final int RES_BAJA_PROVEEDOR_KO = 910;
-	public static final int RES_MODIFICAR_PROVEEDOR_OK = 911;
-	public static final int RES_MODIFICAR_PROVEEDOR_KO = 912;
+		//Proveedor
+		public static final int ALTA_PROVEEDOR = 901;
+		public static final int BAJA_PROVEEDOR = 902;
+		public static final int MODIFICAR_PROVEEDOR = 904;
+		public static final int PROVEEDOR_POR_ID = 905;
+		public static final int LISTAR_PROVEEDORES = 906;
+		//respuestas Proveedor
+		public static final int RES_ALTA_PROVEEDOR_OK = 907;
+		public static final int RES_ALTA_PROVEEDOR_KO = 908;
+		public static final int RES_BAJA_PROVEEDOR_OK = 909;
+		public static final int RES_BAJA_PROVEEDOR_KO = 910;
+		public static final int RES_MODIFICAR_PROVEEDOR_OK = 911;
+		public static final int RES_MODIFICAR_PROVEEDOR_KO = 912;
+		public static final int RES_LISTAR_PROVEEDOR_OK = 913;
+		public static final int RES_LISTAR_PROVEEDOR_KO = 914;
+		public static final int RES_PROVEEDOR_POR_ID_OK = 911;
+		public static final int RES_PROVEEDOR_POR_ID_KO = 912;
 
 }

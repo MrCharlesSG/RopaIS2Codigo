@@ -15,6 +15,11 @@ import Presentacion.Producto.GUIBajaProducto;
 import Presentacion.Producto.GUIListarProductos;
 import Presentacion.Producto.GUIModificarProducto;
 import Presentacion.Producto.GUIProductoPorID;
+import ProveedorPresentacion.GUIAltaProv;
+import ProveedorPresentacion.GUIBajaProv;
+import ProveedorPresentacion.GUIListarProv;
+import ProveedorPresentacion.GUIModificarProv;
+import ProveedorPresentacion.GUIProvPorID;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -27,6 +32,10 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	* (non-Javadoc)
 	* @see FactoriaPresentacion#generaGUI()
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	
+	/*
+	 * GUI MARCA 
 	*/
 	//lo más probable es que no sea así pero bueno lo dejo hecho
 	public GUIAltaMarca generaGUIAltaMarca() {
@@ -51,7 +60,9 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 		
 	}
 	
-	
+	/*
+	 * GUI PRODUCTOS
+	*/
 	@Override
 	public GUIAltaProducto generaGUIAltaProducto() {
 		return new GUIAltaProducto();
@@ -71,5 +82,33 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	@Override
 	public GUIModificarProducto generaGUIModificarProducto() {
 		return new GUIModificarProducto();
+	}
+	
+	/*
+	 * PROVEEDOR
+	 */
+	@Override
+	public GUIAltaProv generaGUIAltaProveedor() {
+		return new GUIAltaProv();
+	}
+
+	@Override
+	public GUIBajaProv generaGUIBajaProveedor() {
+		return new GUIBajaProv();
+	}
+
+	@Override
+	public GUIListarProv generaGUIListarProveedor() {
+		return new GUIListarProv();
+	}
+
+	@Override
+	public GUIProvPorID generaGUIProveedorPorID() {
+		return new GUIProvPorID();
+	}
+
+	@Override
+	public GUIModificarProv generaGUIModificarProveedor() {
+		return new GUIModificarProv();
 	}
 }

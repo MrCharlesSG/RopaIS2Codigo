@@ -1,5 +1,6 @@
 package Presentacion.Controlador;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import Negocio.FactoriaNegocio.FactoriaNegocio;
@@ -12,7 +13,6 @@ import Negocio.Producto.TProducto;
 import Negocio.Proveedor.SAProveedores;
 import Negocio.Proveedor.TProveedor;
 import Negocio.Producto.SAProducto;
-
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
@@ -32,14 +32,15 @@ public class Controlador {
 	private SAProveedores saProveedor;
 	private GUI gui;
 	
-	private Controlador(SAMarca saMarca,GUI gui){
+	private Controlador(GUI gui){
 		this.gui=gui;
-		this.saMarca=saMarca;
-		this.saProducto=saProducto;
+		this.saMarca=FactoriaNegocio.getInstance().generaSAMarca();
+		this.saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
+		this.saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 	}
 	public static Controlador getInstancia() {
 		if(controlador==null){
-			controlador= new Controlador(FactoriaNegocio.getInstance().generaSAMarca(), GUIBiblioteca.getInstancia());
+			controlador= new Controlador(GUIBiblioteca.getInstancia());
 		}
 		return controlador;
 	}
@@ -51,6 +52,9 @@ public class Controlador {
 	*/
 	public void accion(int evento,Object datos) {
 		switch(evento){
+			/*
+			 * MARCA
+			 */
 			case Evento.ALTA_MARCA:{
 				TMarca tMarca=(TMarca)datos;
 				int res=saMarca.create(tMarca);
@@ -97,6 +101,10 @@ public class Controlador {
 			
 				break;
 			}
+			
+			/*
+			 * PRODUCTO
+			 */
 			case Evento.ALTA_PRODUCTO:{
 				int res=saProducto.create((TProducto) datos);
 				if(res>0){
@@ -147,15 +155,19 @@ public class Controlador {
 				gui.update(Evento.VENTA_POR_PRODUCTO, producto);
 				break;
 			}
+			
+			/*
+			 * PROVEEDORES
+			 */
 			case Evento.ALTA_PROVEEDOR:{
-                TProveedor tProveedor=(TProveedor)datos;
-                int res = saProveedor.create(tProveedor);
-
-                if(res>0)
-                    gui.update(Evento.RES_ALTA_PROVEEDOR_OK, new Integer(res));
-                else
-                    gui.update(Evento.RES_ALTA_PROVEEDOR_KO, null);
-                break;
+				int res=this.saProveedor.create((TProveedor)datos);
+				if(res>0){
+					gui.update(Evento.RES_ALTA_PROVEEDOR_OK, new Integer(res));
+				}
+				else{
+					gui.update(Evento.RES_ALTA_PROVEEDOR_KO, null);
+				}
+				break;
             }
             case Evento.BAJA_PROVEEDOR:{
                 int idProveedor=(int) datos;
@@ -169,21 +181,26 @@ public class Controlador {
             }
             case Evento.LISTAR_PROVEEDORES:{
                 Collection<TProveedor>proveedores = saProveedor.readAll();
-                gui.update(Evento.LISTAR_PROVEEDORES, proveedores);
-                break;
-            }
-            case Evento.MARCAS_PROVEEDOR: {
-                //TODO 
+                if(proveedores!= null && proveedores instanceof ArrayList){
+                	gui.update(Evento.RES_LISTAR_PROVEEDOR_OK, datos);
+                }else{
+                	gui.update(Evento.RES_LISTAR_PROVEEDOR_KO, null);
+                }
                 break;
             }
             case Evento.PROVEEDOR_POR_ID:{
-                TProveedor proveedor = saProveedor.read((int)datos);
-                gui.update(Evento.PROVEEDOR_POR_ID, proveedor);
+            	    TProveedor proveedor = saProveedor.read((int)datos);
+            	    int res= proveedor==null ? Evento.RES_PROVEEDOR_POR_ID_KO : Evento.RES_PROVEEDOR_POR_ID_OK;
+            	    gui.update(res, proveedor);
                 break;
             }
             case Evento.MODIFICAR_PROVEEDOR:{
-                //TODO
-
+                	TProveedor proveedor = FactoriaNegocio.getInstance().generaTProveedor((String[])datos);
+                	if(proveedor!=null && saProveedor.update(proveedor)>0){
+                		gui.update(Evento.RES_MODIFICAR_PRODUCTO_OK, proveedor);
+                	}else{
+                		gui.update(Evento.RES_MODIFICAR_PROVEEDOR_KO, null);
+                	}
                 break;
             }
 		}

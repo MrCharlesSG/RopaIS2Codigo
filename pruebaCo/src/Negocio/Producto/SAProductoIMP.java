@@ -18,7 +18,7 @@ public class SAProductoIMP implements SAProducto{
 	DAOProducto dao;
 	
 	public SAProductoIMP(){
-	 dao = FactoriaIntegracion.getInstance().generaDaoProducto();
+	 dao = FactoriaIntegracion.getInstance().generaDAOProducto();
 	}
 	
 

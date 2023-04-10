@@ -17,6 +17,11 @@ import Presentacion.Producto.GUIBajaProducto;
 import Presentacion.Producto.GUIListarProductos;
 import Presentacion.Producto.GUIModificarProducto;
 import Presentacion.Producto.GUIProductoPorID;
+import ProveedorPresentacion.GUIAltaProv;
+import ProveedorPresentacion.GUIBajaProv;
+import ProveedorPresentacion.GUIListarProv;
+import ProveedorPresentacion.GUIModificarProv;
+import ProveedorPresentacion.GUIProvPorID;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -51,16 +56,32 @@ public abstract class FactoriaPresentacion {
 		
 		return instance;
 	}
+	
+	/*
+	 * MARCAS
+	 */
 	public abstract GUIAltaMarca generaGUIAltaMarca();
 	public abstract GUIBajaMarca generaGUIBajaMarca() ;
 	public  abstract GUIListarMarcas generaGUIListarMarcas();
 	public abstract GUIMarcaPorID generaGUIMarcaPorID();
 	public abstract GUIModificarMarca generaGUIModificarMarca();
 
+	/*
+	 * PROVEEDORES
+	 */
+	public abstract GUIAltaProv generaGUIAltaProveedor();
+	public abstract GUIBajaProv generaGUIBajaProveedor();
+	public  abstract GUIListarProv generaGUIListarProveedor();
+	public abstract GUIProvPorID generaGUIProveedorPorID();
+	public abstract GUIModificarProv generaGUIModificarProveedor();
+	
+	
+	/*
+	 * PRODUCTO
+	 */
 	public abstract GUIAltaProducto generaGUIAltaProducto();
 	public abstract GUIBajaProducto generaGUIBajaProducto();
 	public  abstract GUIListarProductos generaGUIListarProducto();
 	public abstract GUIProductoPorID generaGUIProductoPorID();
 	public abstract GUIModificarProducto generaGUIModificarProducto();
-
 }

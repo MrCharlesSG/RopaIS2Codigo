@@ -7,25 +7,24 @@ import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.MarcaIntegracion.DAOMarcaImp;
 import Integracion.Producto.DAOProducto;
 import Integracion.Producto.DAOProductoIMP;
+import Integracion.Proveedores.DAOProveedores;
+import Integracion.Proveedores.DAOProveedoresIMP;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author sagog
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
+
 public class FactoriaIntegracionImp extends FactoriaIntegracion {
-	/** 
-	* (non-Javadoc)
-	* @see FactoriaIntegracion#generaDAOMarca()
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
+	@Override
 	public DAOMarca generaDAOMarca() {
 		return new DAOMarcaImp();
 	}
 
 	@Override
-	public DAOProducto generaDaoProducto() {
+	public DAOProducto generaDAOProducto() {
 		return new DAOProductoIMP();
+	}
+
+	@Override
+	public DAOProveedores generaDAOProveedor() {
+		return new DAOProveedoresIMP();
 	}
 }

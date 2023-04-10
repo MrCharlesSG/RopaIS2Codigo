@@ -1,10 +1,11 @@
 package Negocio.Proveedor;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
-
+import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.Proveedores.DAOProveedores;
 import Negocio.ComprobadorSintactico;
 
@@ -29,10 +30,27 @@ public class SAProveedoresIMP implements SAProveedores{
 	public int delete(int id){
 		int res = -1;
 		DAOProveedores daoProveedor = FactoriaIntegracion.getInstance().generaDAOProveedor();
+		DAOMarca daoMarca= FactoriaIntegracion.getInstance().generaDAOMarca();
+		boolean resB=true;
+		
 		if(ComprobadorSintactico.isPositive(id)){
 			TProveedor prov = daoProveedor.read(id);	
 			
-			if(prov!=null)
+			if(prov!=null){
+				//alomejor la marca tiene otro prov
+				ArrayList<Integer> lista= prov.getMarca();
+				for(Integer i: lista){
+					if(resB&&daoMarca.delete(daoMarca.read(i))==-1){
+						resB=false;
+					}
+				}
+				if(resB){
+					res=daoProveedor.delete(id);
+					//como se desactiva
+				}else{
+					res=-1;
+				}
+			}
 				/* TODO llamar a delete para borrar las marcas y poner el activo
 					a false
 				  id=daoProveedor.delete(prov);
@@ -58,9 +76,7 @@ public class SAProveedoresIMP implements SAProveedores{
 		
 	};
 	public int update(TProveedor tProv){
-		
-		//TODO mirar los parametros
-		return 0;
+		return FactoriaIntegracion.getInstance().generaDAOProveedor().update(tProv);
 	};
 	
 	public TProveedor readByName(String nombre){

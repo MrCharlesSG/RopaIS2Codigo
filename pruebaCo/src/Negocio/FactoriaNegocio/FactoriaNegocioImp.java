@@ -8,6 +8,9 @@ import Negocio.MarcaNegocio.SAMarcaImp;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.SAProducto;
 import Negocio.Producto.SAProductoIMP;
+import Negocio.Proveedor.SAProveedores;
+import Negocio.Proveedor.SAProveedoresIMP;
+import Negocio.Proveedor.TProveedor;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -40,5 +43,22 @@ public class FactoriaNegocioImp extends FactoriaNegocio {
 	@Override
 	public SAProducto generaSAProducto() {
 		return new SAProductoIMP();
+	}
+	
+	@Override
+	public SAProveedores generaSAProveedor() {
+		return new SAProveedoresIMP();
+	}
+
+	@Override
+	public TProveedor generaTProveedor(String[] datos) {
+		if(datos.length==2){
+			try{
+				return new TProveedor(datos[1], Integer.parseInt(datos[0]), null, true);
+			}catch(NumberFormatException e1){
+				return null;
+			}
+		}
+		return null;
 	}
 }
