@@ -86,17 +86,23 @@ public class GUIBiblioteca extends JFrame implements GUI{
 			}
 			JOptionPane.showMessageDialog(null, str.toString());
 			setVisible(true);
+			break;
 		}
-	case Evento.MARCA_PORID:
+	case Evento.RES_MARCA_PORID_OK:
 	{
 	TMarca m=(TMarca) datos;
 		StringBuilder str=new StringBuilder();
 		str.append("ID: NOMBRE: CANTIDAD: ACTIVO").append(System.lineSeparator());
-		
-			str.append(m.getID()+":      "+m.getNombre()+":      "+m.getCantidad()+":      "+m.getActivo()).append(System.lineSeparator());
-		
+		str.append(m.getID()+":      "+m.getNombre()+":      "+m.getCantidad()+":      "+m.getActivo()).append(System.lineSeparator());
 		JOptionPane.showMessageDialog(null, str.toString());
 		setVisible(true);
+		break;
+	}
+	case Evento.RES_MARCA_PORID_KO:
+	{
+		JOptionPane.showMessageDialog(null, "No se pudo encontrar la marca con ese ID");
+		setVisible(true);
+		break; 
 	}
 	}
 }

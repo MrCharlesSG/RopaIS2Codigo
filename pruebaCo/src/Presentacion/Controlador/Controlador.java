@@ -78,7 +78,13 @@ public class Controlador {
 			}
 			case Evento.MARCA_PORID:{
 				TMarca marca=saMarca.read((int)datos);
-				gui.update(Evento.MARCA_PORID, marca);
+				if(marca==null){
+					gui.update(Evento.RES_MARCA_PORID_KO, null);
+				}
+				else{
+					gui.update(Evento.RES_MARCA_PORID_OK, marca);
+				}
+			
 				break;
 			}
 			case Evento.MODIFICAR_MARCA:{

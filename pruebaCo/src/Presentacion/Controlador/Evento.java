@@ -22,7 +22,8 @@ public class Evento {
 	public static final int RES_MODIFICAR_MARCA_KO = 404;
 	public static final int RES_BAJA_MARCA_OK = 405;
 	public static final int RES_BAJA_MARCA_KO = 406;
-
+	public static final int RES_MARCA_PORID_OK = 407;
+	public static final int RES_MARCA_PORID_KO = 408;
 	//Producto
 	public static final int ALTA_PRODUCTO = 701;
 	public static final int BAJA_PRODUCTO = 702;
@@ -52,4 +53,5 @@ public class Evento {
 	public static final int RES_BAJA_PROVEEDOR_KO = 910;
 	public static final int RES_MODIFICAR_PROVEEDOR_OK = 911;
 	public static final int RES_MODIFICAR_PROVEEDOR_KO = 912;
+
 }

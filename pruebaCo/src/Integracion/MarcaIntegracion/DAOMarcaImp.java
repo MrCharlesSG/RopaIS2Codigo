@@ -115,8 +115,9 @@ public class DAOMarcaImp implements DAOMarca {
 			while(scanner.hasNext() &&!encontrado) {
 				
 				String tokens[]=scanner.nextLine().split(":", 4);
+
 				int ID=Integer.parseInt(tokens[0]);
-			if (ID==id&&tokens[2].equalsIgnoreCase("1")) {
+			if (ID==id&&tokens[3].equalsIgnoreCase("1")) {
 				 marca=new TMarca(tokens[1],Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
 				 encontrado=true;
 				}
@@ -179,12 +180,12 @@ public class DAOMarcaImp implements DAOMarca {
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
 			
-				if (datos[1].equalsIgnoreCase(marca.getNombre())&&Integer.parseInt(datos[3])==1) {
+				if (Integer.parseInt(datos[0])==marca.getID()&&Integer.parseInt(datos[3])==1&&Integer.parseInt(datos[2])==0) {
 				
 					datos[3]="0";
 					id=Integer.parseInt(datos[0]);
 				}
-				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":+"+datos[3]).append(System.lineSeparator());
+				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
 			}
 			try(Writer w=new BufferedWriter(
 									new OutputStreamWriter(
