@@ -33,7 +33,7 @@ public class TMarca {
 	 * @param nombre2 
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public TMarca(String nombre, int ID, int activo, int cantidad) {
+	public TMarca(String nombre, int ID, int cantidad, int activo) {
 		this.Nombre=nombre;
 		this.IDMarca=ID;
 		this.activo=false;

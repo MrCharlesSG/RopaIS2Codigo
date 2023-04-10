@@ -80,13 +80,24 @@ public class GUIBiblioteca extends JFrame implements GUI{
 		{
 			Collection<TMarca>marcas=(Collection<TMarca>) datos;
 			StringBuilder str=new StringBuilder();
+			str.append("ID: NOMBRE: CANTIDAD: ACTIVO").append(System.lineSeparator());
 			for(TMarca m: marcas){
-				str.append(m.getID()+":"+m.getNombre()+":"+m.getCantidad()+":"+m.getActivo()).append(System.lineSeparator());
+				str.append(m.getID()+":      "+m.getNombre()+":      "+m.getCantidad()+":      "+m.getActivo()).append(System.lineSeparator());
 			}
 			JOptionPane.showMessageDialog(null, str.toString());
 			setVisible(true);
 		}
+	case Evento.MARCA_PORID:
+	{
+	TMarca m=(TMarca) datos;
+		StringBuilder str=new StringBuilder();
+		str.append("ID: NOMBRE: CANTIDAD: ACTIVO").append(System.lineSeparator());
+		
+			str.append(m.getID()+":      "+m.getNombre()+":      "+m.getCantidad()+":      "+m.getActivo()).append(System.lineSeparator());
+		
+		JOptionPane.showMessageDialog(null, str.toString());
+		setVisible(true);
 	}
-
+	}
 }
 }
