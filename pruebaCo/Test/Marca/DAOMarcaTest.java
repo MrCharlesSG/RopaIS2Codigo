@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.junit.Test;
 
@@ -24,9 +25,9 @@ public class DAOMarcaTest{
         DAOMarcaImp dmarca =new DAOMarcaImp();
         TMarca res = dmarca.read(15);
 
-        assertEquals("",res.getNombre());
+        assertEquals(null,res);
 
-       TMarca tmarca= new TMarca("coca-cola",1,1,1);
+       TMarca tmarca= new TMarca("coca-cola",1,0,1);
 
         int id=dmarca.create(tmarca);
         assertEquals(1,id);
@@ -41,37 +42,36 @@ public class DAOMarcaTest{
         Collection<TMarca> marcas2 =new ArrayList<TMarca>();
         marcas2 = dmarca.readAll();
 
-        assertEquals(marcas2.toString(),"");
+        assertEquals(marcas2.size(),0);
 
         Collection<TMarca> marcas =new ArrayList<TMarca>();
-        TMarca tmarca1= new TMarca("coca-cola",1,1,0);
-        TMarca tmarca2= new TMarca("pepsi",16,1,0);
-        TMarca tmarca3= new TMarca("cola",17,1,0);
+        TMarca tmarca1= new TMarca("coca-cola",1,0,1);
+        TMarca tmarca2= new TMarca("pepsi",2,0,1);
+        TMarca tmarca3= new TMarca("cola",3,0,1);
 
-       dmarca.create(tmarca1);
+        dmarca.create(tmarca1);
         dmarca.create(tmarca2);
         dmarca.create(tmarca3);
-
+        Collection<TMarca> aux=new ArrayList<TMarca>();
+        aux.add(tmarca1);
+        aux.add(tmarca2);
+        aux.add(tmarca3);
         marcas = dmarca.readAll();
        
-        assertEquals(marcas.toString(),"1:      coca-cola:      0:      true\n"
-        		+"2:      pepsi:      0:      true\n" 
-        		+"3:      cola:      0:      true\n");
+        assertEquals(true,equalsCollection(marcas,aux));
 
-      TMarca tmarca3 = new TMarca("pepsicambio",2,1,0);
+      TMarca tmarca4 = new TMarca("pepsicambio",4,1,0);
 
-        int updateee=dmarca.update(tmarca3);
+        int updateee=dmarca.update(tmarca4);
 
-        assertNotEquals(-1,updateee);
-
+        assertEquals(-1,updateee);
         marcas = dmarca.readAll();
-
-        assertEquals(marcas.toString(),"coca-cola 15 activo \n pepsicambio 16 activo \n cola 17 activo");
-
-
+        
+        assertEquals(true,equalsCollection(marcas,aux));
+        vaciarBaseDatos();
+      
     }
 
-    }
 	private void vaciarBaseDatos() {
 		try(Writer w=new BufferedWriter(
 				new OutputStreamWriter(
@@ -82,4 +82,24 @@ public class DAOMarcaTest{
 		
 	}
 	}
+	private boolean equalsCollection(Collection<TMarca> a, Collection<TMarca> b){
+
+		if (a.size() != b.size()) {
+			return false;
+		} else {
+		    Iterator<TMarca> it1 = a.iterator();
+		    Iterator<TMarca> it2 = b.iterator();
+		    boolean iguales = true;
+		
+		    while (it1.hasNext() && iguales) {
+		        TMarca elem1 = it1.next();
+		        TMarca elem2 = it2.next();
+		
+		        if (elem1!=elem2) {
+		            iguales = false;
+		        }
+		    }
+		    return iguales;
+		}
     }
+}

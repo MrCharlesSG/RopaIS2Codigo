@@ -103,7 +103,7 @@ public class SAMarcaTest {
 		
 		//read de un id nulo
 		assertEquals("Se ha leido un id invalido", this.saMarca.read(100), null);
-		
+		vaciarBaseDatos();
 	}
 	
 	private void vaciarBaseDatos() {
@@ -114,6 +114,7 @@ public class SAMarcaTest {
 		
 	}catch (IOException e) {
 		
+	}
 	}
 
 	private boolean equalsCollection(Collection<TMarca> a, Collection<TMarca> b){

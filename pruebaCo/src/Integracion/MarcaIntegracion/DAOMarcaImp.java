@@ -48,7 +48,7 @@ public class DAOMarcaImp implements DAOMarca {
 					
 				
 					datos=scanner.nextLine().split(":");
-					if(datos[1]==marca.getNombre()){
+					if(datos[1].equalsIgnoreCase(marca.getNombre())){
 						encontrado=true;
 						id=Integer.parseInt(datos[0]);
 						datos[3]="1";
@@ -144,7 +144,7 @@ public class DAOMarcaImp implements DAOMarca {
 		
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
-				if (datos[1].equalsIgnoreCase(marca.getNombre())) {	
+				if (marca.getID()==Integer.parseInt(datos[0])) {	
 					id=Integer.parseInt(datos[0]);
 					buffer.append(id+":"+marca.getNombre()+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
 				}
