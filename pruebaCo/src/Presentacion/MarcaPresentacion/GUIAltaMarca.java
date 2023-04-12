@@ -11,6 +11,7 @@ import javax.swing.*;
 import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.GUI.GUI;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -18,7 +19,7 @@ import Presentacion.Controlador.Evento;
 * @author sagog
 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
-public class GUIAltaMarca extends JFrame {
+public class GUIAltaMarca extends JFrame implements GUI{
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -45,6 +46,7 @@ public class GUIAltaMarca extends JFrame {
 					setVisible(false);
 					String nombre= tNombre.getText();
 					TMarca tM= new TMarca (nombre,-1,1, 0);
+					Controlador.getInstancia().setGUI(GUIAltaMarca.this);
 					Controlador.getInstancia().accion(Evento.ALTA_MARCA, tM);
 				}
 		});
@@ -54,6 +56,19 @@ public class GUIAltaMarca extends JFrame {
 					setVisible(false);
 			}
 		});
+		this.setVisible(true);
+	}
+
+	@Override
+	public void update(int evento, Object datos) {
+		if(Evento.RES_ALTA_MARCA_OK==evento){
+		Integer id= (Integer) datos;
+		JOptionPane.showMessageDialog(null,"Alta de marca con ID: "+id.intValue());
+		}
+		else if( Evento.RES_ALTA_MARCA_KO==evento)
+		{ 
+		JOptionPane.showMessageDialog(null, "No se pudo dar de alta la marca"); 
+		}
 		
 	}
 }

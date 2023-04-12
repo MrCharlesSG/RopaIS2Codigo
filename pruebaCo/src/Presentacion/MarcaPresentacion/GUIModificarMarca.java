@@ -12,6 +12,7 @@ import javax.swing.*;
 
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.GUI.GUI;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -19,7 +20,7 @@ import Presentacion.Controlador.Evento;
 * @author sagog
 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
-public class GUIModificarMarca extends JFrame {
+public class GUIModificarMarca extends JFrame implements GUI {
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -55,6 +56,12 @@ public class GUIModificarMarca extends JFrame {
 					setVisible(false);
 			}
 		});
+		
+	}
+
+	@Override
+	public void update(int evento, Object datos) {
+		// TODO Auto-generated method stub
 		
 	}
 }

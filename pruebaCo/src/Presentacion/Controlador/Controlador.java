@@ -205,4 +205,8 @@ public class Controlador {
             }
 		}
 	}
-}
+	
+	public void setGUI(GUI gui){
+		this.gui=gui;
+	}
+	}

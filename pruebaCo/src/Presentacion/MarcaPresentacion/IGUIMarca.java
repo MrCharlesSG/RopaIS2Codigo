@@ -32,31 +32,32 @@ public class IGUIMarca extends JPanel {//probablemente sea mejor hacerlo singlet
 		altaMarca.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					FactoriaPresentacion.getInstance().generaGUIAltaMarca().setVisible(true);
+					
+					FactoriaPresentacion.getInstance().generaGUIAltaMarca();
 				}
 		});
 		bajaMarca.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					FactoriaPresentacion.getInstance().generaGUIBajaMarca().setVisible(true);
+					FactoriaPresentacion.getInstance().generaGUIBajaMarca();
 			}
 		});
 		listarMarca.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUIListarMarcas().setVisible(true);
+				FactoriaPresentacion.getInstance().generaGUIListarMarcas();
 		}
 		});
 		modificarMarca.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUIModificarMarca().setVisible(true);
+				FactoriaPresentacion.getInstance().generaGUIModificarMarca();
 		}
 		});
 		marcaPorID.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUIMarcaPorID().setVisible(true);
+				FactoriaPresentacion.getInstance().generaGUIMarcaPorID();
 		}
 		});
 		

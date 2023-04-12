@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.GUI.GUI;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -21,7 +22,7 @@ import Presentacion.Controlador.Evento;
 * @author sagog
 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
-public class GUIBajaMarca extends JFrame {
+public class GUIBajaMarca extends JFrame implements GUI{
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -58,4 +59,10 @@ public class GUIBajaMarca extends JFrame {
 		});
 		
 		}
+
+	@Override
+	public void update(int evento, Object datos) {
+		// TODO Auto-generated method stub
+		
+	}
 }
