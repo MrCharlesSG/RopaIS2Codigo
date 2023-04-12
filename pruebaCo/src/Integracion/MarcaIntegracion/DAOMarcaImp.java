@@ -146,7 +146,7 @@ public class DAOMarcaImp implements DAOMarca {
 				datos=scanner.nextLine().split(":");
 				if (datos[1].equalsIgnoreCase(marca.getNombre())) {	
 					id=Integer.parseInt(datos[0]);
-					buffer.append(id+":"+marca.getNombre()+":"+marca.getActivo()).append(System.lineSeparator());
+					buffer.append(id+":"+marca.getNombre()+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
 				}
 				else
 					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());

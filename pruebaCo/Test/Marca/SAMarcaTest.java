@@ -3,6 +3,11 @@ package Marca;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -18,6 +23,7 @@ import Negocio.MarcaNegocio.TMarca;
 
 @RunWith(JUnit4.class)
 public class SAMarcaTest {
+		
 	private SAMarca saMarca = FactoriaNegocioImp.getInstance().generaSAMarca();
 	private TMarca tMJuli = new TMarca("Julian", 1, 1,1);
 	private TMarca tMAlmd = new TMarca("Almendra", 2, 1,1);
@@ -26,7 +32,7 @@ public class SAMarcaTest {
 	@Test
 	public void basicBehaviour_Test(){
 		int aux1, aux2, aux3;
-
+		this.vaciarBaseDatos();
 		//crear una marca y leerla por id y por nombre
 		aux1=saMarca.create(tMJuli);
 		assertEquals("No se ha creado la marca correctamente",aux1,1);
@@ -100,6 +106,16 @@ public class SAMarcaTest {
 		
 	}
 	
+	private void vaciarBaseDatos() {
+		try(Writer w=new BufferedWriter(
+				new OutputStreamWriter(
+				new FileOutputStream("Marcas.txt")))){
+			w.write("");
+		
+	}catch (IOException e) {
+		
+	}
+
 	private boolean equalsCollection(Collection<TMarca> a, Collection<TMarca> b){
 
 		if (a.size() != b.size()) {

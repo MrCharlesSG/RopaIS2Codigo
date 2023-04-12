@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -48,6 +49,7 @@ public class GUIBajaMarca extends JFrame implements GUI{
 				{		
 					setVisible(false);
 					int id=Integer.parseInt(tID.getText());
+					Controlador.getInstancia().setGUI(GUIBajaMarca.this);
 					Controlador.getInstancia().accion(Evento.BAJA_MARCA, new Integer(id));
 				}
 		});
@@ -57,12 +59,19 @@ public class GUIBajaMarca extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
+		setVisible(true);
 		
 		}
 
 	@Override
 	public void update(int evento, Object datos) {
-		// TODO Auto-generated method stub
+	if( Evento.RES_BAJA_MARCA_OK==evento) {
+		Integer id= (Integer) datos;
+		JOptionPane.showMessageDialog(null,"Se ha dado de baja correctamente la marca con ID: "+id.intValue());
+	}
+	else if( Evento.RES_BAJA_MARCA_KO==evento) { 
+		JOptionPane.showMessageDialog(null, "No se pudo dar de baja la marca");	
+	}
 		
 	}
 }
