@@ -6,6 +6,10 @@ import java.util.Collection;
 import Negocio.Proveedor.TProveedor;
 
 public interface DAOProveedores {
+	
+
+	static final String ARCHIVO="Proveedores.txt";
+	
     public int create(TProveedor tProv);
     public int delete(int id);
     public TProveedor read(int id);

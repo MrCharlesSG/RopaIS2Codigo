@@ -6,22 +6,30 @@ package Presentacion.FactoriaPresentacion;
 
 import javax.swing.JComponent;
 
+import Presentacion.Clientes.GUIAltaCliente;
+import Presentacion.Clientes.GUIBajaCliente;
+import Presentacion.Clientes.GUIClientePorID;
+import Presentacion.Clientes.GUIListarClientes;
+import Presentacion.Clientes.GUIModificarCliente;
+import Presentacion.Clientes.IGUICliente;
 import Presentacion.MarcaPresentacion.GUIAltaMarca;
 import Presentacion.MarcaPresentacion.GUIBajaMarca;
 import Presentacion.MarcaPresentacion.GUIListarMarcas;
 import Presentacion.MarcaPresentacion.GUIMarcaPorID;
 import Presentacion.MarcaPresentacion.GUIModificarMarca;
-
+import Presentacion.MarcaPresentacion.IGUIMarca;
 import Presentacion.Producto.GUIAltaProducto;
 import Presentacion.Producto.GUIBajaProducto;
 import Presentacion.Producto.GUIListarProductos;
 import Presentacion.Producto.GUIModificarProducto;
 import Presentacion.Producto.GUIProductoPorID;
-import ProveedorPresentacion.GUIAltaProv;
-import ProveedorPresentacion.GUIBajaProv;
-import ProveedorPresentacion.GUIListarProv;
-import ProveedorPresentacion.GUIModificarProv;
-import ProveedorPresentacion.GUIProvPorID;
+import Presentacion.Producto.IGUIProducto;
+import Presentacion.ProveedorPresentacion.GUIAltaProv;
+import Presentacion.ProveedorPresentacion.GUIBajaProv;
+import Presentacion.ProveedorPresentacion.GUIListarProv;
+import Presentacion.ProveedorPresentacion.GUIModificarProv;
+import Presentacion.ProveedorPresentacion.GUIProvPorID;
+import Presentacion.ProveedorPresentacion.IGUIProv;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -60,6 +68,7 @@ public abstract class FactoriaPresentacion {
 	/*
 	 * MARCAS
 	 */
+	public abstract IGUIMarca generaIGUIMarca();
 	public abstract GUIAltaMarca generaGUIAltaMarca();
 	public abstract GUIBajaMarca generaGUIBajaMarca() ;
 	public  abstract GUIListarMarcas generaGUIListarMarcas();
@@ -69,6 +78,7 @@ public abstract class FactoriaPresentacion {
 	/*
 	 * PROVEEDORES
 	 */
+	public abstract IGUIProv generaIGUIProveedores();
 	public abstract GUIAltaProv generaGUIAltaProveedor();
 	public abstract GUIBajaProv generaGUIBajaProveedor();
 	public  abstract GUIListarProv generaGUIListarProveedor();
@@ -79,6 +89,7 @@ public abstract class FactoriaPresentacion {
 	/*
 	 * PRODUCTO
 	 */
+	public abstract IGUIProducto generaIGUIProducto();
 	public abstract GUIAltaProducto generaGUIAltaProducto();
 	public abstract GUIBajaProducto generaGUIBajaProducto();
 	public  abstract GUIListarProductos generaGUIListarProducto();
@@ -87,6 +98,7 @@ public abstract class FactoriaPresentacion {
 	/*
 	 * CLIENTES
 	 */
+	public abstract IGUICliente generaIGUICliente();
 	public abstract GUIAltaCliente generaGUIAltaCliente();
 	public abstract GUIBajaCliente generaGUIBajaCliente();
 	public  abstract GUIListarClientes generaGUIListarCliente();

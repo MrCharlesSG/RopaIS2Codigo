@@ -1,8 +1,5 @@
 
-IGUICliente
-
-
-	package Presentacion.Cliente;
+package Presentacion.Clientes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

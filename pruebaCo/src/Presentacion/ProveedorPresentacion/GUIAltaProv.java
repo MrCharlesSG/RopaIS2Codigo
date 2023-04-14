@@ -1,4 +1,4 @@
-package ProveedorPresentacion;
+package Presentacion.ProveedorPresentacion;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

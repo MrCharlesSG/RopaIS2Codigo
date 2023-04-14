@@ -5,21 +5,30 @@ package Presentacion.FactoriaPresentacion;
 
 import javax.swing.JComponent;
 
+import Presentacion.Clientes.GUIAltaCliente;
+import Presentacion.Clientes.GUIBajaCliente;
+import Presentacion.Clientes.GUIClientePorID;
+import Presentacion.Clientes.GUIListarClientes;
+import Presentacion.Clientes.GUIModificarCliente;
+import Presentacion.Clientes.IGUICliente;
 import Presentacion.MarcaPresentacion.GUIAltaMarca;
 import Presentacion.MarcaPresentacion.GUIBajaMarca;
 import Presentacion.MarcaPresentacion.GUIListarMarcas;
 import Presentacion.MarcaPresentacion.GUIMarcaPorID;
 import Presentacion.MarcaPresentacion.GUIModificarMarca;
+import Presentacion.MarcaPresentacion.IGUIMarca;
 import Presentacion.Producto.GUIAltaProducto;
 import Presentacion.Producto.GUIBajaProducto;
 import Presentacion.Producto.GUIListarProductos;
 import Presentacion.Producto.GUIModificarProducto;
 import Presentacion.Producto.GUIProductoPorID;
-import ProveedorPresentacion.GUIAltaProv;
-import ProveedorPresentacion.GUIBajaProv;
-import ProveedorPresentacion.GUIListarProv;
-import ProveedorPresentacion.GUIModificarProv;
-import ProveedorPresentacion.GUIProvPorID;
+import Presentacion.Producto.IGUIProducto;
+import Presentacion.ProveedorPresentacion.GUIAltaProv;
+import Presentacion.ProveedorPresentacion.GUIBajaProv;
+import Presentacion.ProveedorPresentacion.GUIListarProv;
+import Presentacion.ProveedorPresentacion.GUIModificarProv;
+import Presentacion.ProveedorPresentacion.GUIProvPorID;
+import Presentacion.ProveedorPresentacion.IGUIProv;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -53,7 +62,10 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	public GUIModificarMarca generaGUIModificarMarca() {
 		return new GUIModificarMarca();
 	}
-
+	@Override
+	public IGUIMarca generaIGUIMarca() {
+		return new IGUIMarca();
+	}
 	@Override
 	public void generaGUI() {
 		// TODO Auto-generated method stub
@@ -83,7 +95,11 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	public GUIModificarProducto generaGUIModificarProducto() {
 		return new GUIModificarProducto();
 	}
-	
+	@Override
+	public IGUIProv generaIGUIProveedores() {
+		return new IGUIProv();
+	}
+
 	/*
 	 * PROVEEDOR
 	 */
@@ -111,12 +127,15 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	public GUIModificarProv generaGUIModificarProveedor() {
 		return new GUIModificarProv();
 	}
+	@Override
+	public IGUIProducto generaIGUIProducto() {
+		return new IGUIProducto();
+	}
 	/*
 	 * CLIENTES
 	 */
 	@Override
 	public GUIAltaCliente generaGUIAltaCliente() {
-		
 		return new GUIAltaCliente();
 	}
 	@Override
@@ -134,6 +153,10 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	@Override
 	public GUIModificarCliente generaGUIModificarCliente() {
 		return new GUIModificarCliente();
+	}
+	@Override
+	public IGUICliente generaIGUICliente() {
+		return new IGUICliente();
 	}
 
 
