@@ -84,4 +84,14 @@ public abstract class FactoriaPresentacion {
 	public  abstract GUIListarProductos generaGUIListarProducto();
 	public abstract GUIProductoPorID generaGUIProductoPorID();
 	public abstract GUIModificarProducto generaGUIModificarProducto();
+	/*
+	 * CLIENTES
+	 */
+	public abstract GUIAltaCliente generaGUIAltaCliente();
+	public abstract GUIBajaCliente generaGUIBajaCliente();
+	public  abstract GUIListarClientes generaGUIListarCliente();
+	public abstract GUIClientePorID generaGUIClientePorID();
+	public abstract GUIModificarCliente generaGUIModificarCliente();
+
+
 }

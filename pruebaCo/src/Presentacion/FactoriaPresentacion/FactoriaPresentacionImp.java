@@ -111,4 +111,30 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	public GUIModificarProv generaGUIModificarProveedor() {
 		return new GUIModificarProv();
 	}
+	/*
+	 * CLIENTES
+	 */
+	@Override
+	public GUIAltaCliente generaGUIAltaCliente() {
+		
+		return new GUIAltaCliente();
+	}
+	@Override
+	public GUIBajaCliente generaGUIBajaCliente() {
+		return new GUIBajaCliente();
+	}
+	@Override
+	public GUIListarClientes generaGUIListarCliente() {
+		return new GUIListarClientes();
+	}
+	@Override
+	public GUIClientePorID generaGUIClientePorID() {
+		return new GUIClientePorID();
+	}
+	@Override
+	public GUIModificarCliente generaGUIModificarCliente() {
+		return new GUIModificarCliente();
+	}
+
+
 }
