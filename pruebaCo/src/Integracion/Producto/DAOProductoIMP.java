@@ -138,8 +138,11 @@ public class DAOProductoIMP implements DAOProducto{
 			boolean found = false;
 			
 			while((line = br.readLine()) !=null){
+				if(!line.equalsIgnoreCase("")){
 				splitArray = line.split(": ", 6);
 				list.add(new TProducto(splitArray[0], Integer.parseInt(splitArray[2]), Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), splitArray[4], Integer.parseInt(splitArray[5])));	
+			
+				}
 			}
 			br.close();
 		}catch(Exception e){

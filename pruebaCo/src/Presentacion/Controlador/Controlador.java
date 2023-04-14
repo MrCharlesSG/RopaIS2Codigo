@@ -32,7 +32,7 @@ public class Controlador {
 	private SAProveedores saProveedor;
 	private GUI gui;
 	
-	private Controlador(GUI gui){
+	private Controlador(){
 		this.gui=gui;
 		this.saMarca=FactoriaNegocio.getInstance().generaSAMarca();
 		this.saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
@@ -40,7 +40,7 @@ public class Controlador {
 	}
 	public static Controlador getInstancia() {
 		if(controlador==null){
-			controlador= new Controlador(GUIBiblioteca.getInstancia());
+			controlador= new Controlador();
 		}
 		return controlador;
 	}
@@ -116,7 +116,7 @@ public class Controlador {
 				break;
 			}
 			case Evento.BAJA_PRODUCTO:{
-				int res=saProducto.delete((int) datos);
+				int res=saProducto.delete(((TProducto) datos).getIdProducto());
 				if(res>0){
 					gui.update(Evento.RES_BAJA_PRODUCTO_OK, new Integer(res));
 				}
@@ -127,12 +127,7 @@ public class Controlador {
 			}
 			case Evento.LISTAR_PRODUCTOS:{
 				Collection<TProducto>productos=saProducto.readAll();
-				gui.update(Evento.PRODUCTO_POR_ID, productos);
-				break;
-			}
-			case Evento.MARCA_POR_PRODUCTO:{
-				TProducto producto=saProducto.read((int) datos);
-				gui.update(Evento.MARCA_POR_PRODUCTO, producto);
+				gui.update(Evento.LISTAR_PRODUCTOS, productos);
 				break;
 			}
 			case Evento.MODIFICAR_PRODUCTO:{
@@ -146,8 +141,11 @@ public class Controlador {
 				break;
 			}
 			case Evento.PRODUCTO_POR_ID:{
-				TProducto producto=saProducto.read((int) datos);
-				gui.update(Evento.PRODUCTO_POR_ID, producto);
+				TProducto producto=saProducto.read(((TProducto) datos).getIdProducto());
+				if(producto.getIdMarca() == -1)
+					gui.update(Evento.RES_PRODUCTO_POR_ID_OK, producto);
+				else
+					gui.update(Evento.RES_PRODUCTO_POR_ID_KO, producto);
 				break;
 			}
 			case Evento.VENTA_POR_PRODUCTO:{
@@ -203,6 +201,58 @@ public class Controlador {
                 	}
                 break;
             }
+            /*
+			 * CLIENTES
+			 */
+			case Evento.ALTA_CLIENTE:{
+				/*
+				 * int res=this.saCliente.create((TCliente)datos);
+				 * if(res>0){
+					gui.update(Evento.RES_ALTA_CLIENTE_OK, new Integer(res));
+				}
+				else{
+					gui.update(Evento.RES_ALTA_Cliente_KO, null);
+				}
+				 */
+				break;
+            }
+            case Evento.BAJA_CLIENTE:{
+                int idcliente=(int) datos;
+                /*
+                 * int res = saCliente.delete(idcliente);
+                 * 
+                 *  if(res > 0)
+                    gui.update(Evento.RES_BAJA_CLIENTE_OK, new Integer(res));
+                else
+                    gui.update(Evento.RES_BAJA_CLIENTE_KO, null);
+                 */
+                break;
+            }
+            case Evento.LISTAR_CLIENTES:{
+              //  Collection<TCliente>clientes;// = saCliente.readAll();
+                //if(clientes!= null && clientes instanceof ArrayList){
+                	//gui.update(Evento.RES_LISTAR_CLIENTE_OK, datos);
+                //}else{
+                	//gui.update(Evento.RES_LISTAR_CLIENTE_KO, null);
+                //}
+                break;
+            }
+            case Evento.CLIENTE_POR_ID:{
+            	   // TCliente cliente = saCliente.read((int)datos);
+            	   // int res= cliente==null ? Evento.RES_CLIENTE_POR_ID_KO : Evento.RES_CLIENTE_POR_ID_OK;
+            	  //  gui.update(res, cliente);
+                break;
+            }
+            case Evento.MODIFICAR_CLIENTE:{
+                	//TCliente cliente= FactoriaNegocio.getInstance().generaTCliente((String[])datos);
+                	//if(cliente!=null && saCliente.update(cliente)>0){
+                	//	gui.update(Evento.RES_MODIFICAR_CLIENTE_OK, cliente);
+                	//}else{
+                		//gui.update(Evento.RES_MODIFICAR_CLIENTE_KO, null);
+                	//}
+                break;
+            }
+
 		}
 	}
 	

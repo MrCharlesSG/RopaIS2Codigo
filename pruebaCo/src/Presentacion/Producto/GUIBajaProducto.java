@@ -6,12 +6,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.GUI.GUI;
 
 
 /** 
@@ -21,7 +23,7 @@ import Presentacion.Controlador.Evento;
 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
 
-public class GUIBajaProducto extends JFrame{
+public class GUIBajaProducto extends JFrame implements GUI{
 	
 	public GUIBajaProducto(){
 		this.setTitle("Baja Producto");
@@ -45,6 +47,7 @@ public class GUIBajaProducto extends JFrame{
 				setVisible(false);
 				String id=jTextField.getText();
 				TProducto tprod =new TProducto(null, Integer.parseInt(id), -1, -1, null, -1);
+				Controlador.getInstancia().setGUI(GUIBajaProducto.this);
 				Controlador.getInstancia().accion(Evento.BAJA_PRODUCTO, tprod);
 				
 			}
@@ -60,5 +63,18 @@ public class GUIBajaProducto extends JFrame{
 			}
 			
 		});
+	}
+
+	@Override
+	public void update(int evento, Object datos) {
+		switch(evento){
+		case Evento.RES_BAJA_PRODUCTO_OK:
+			Integer id= (Integer) datos;
+			JOptionPane.showMessageDialog(null,"Se ha dado de baja correctamente el producto con ID: "+id.intValue());
+			break;
+		case Evento.RES_BAJA_PRODUCTO_KO:
+			JOptionPane.showMessageDialog(null, "No se pudo encontrar el producto con ese ID");
+			break; 
+		}
 	}
 }

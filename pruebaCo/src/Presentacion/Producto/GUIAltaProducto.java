@@ -14,8 +14,9 @@ import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.GUI.GUI;
 
-public class GUIAltaProducto extends JPanel{
+public class GUIAltaProducto extends JPanel implements GUI{
 	
 	public GUIAltaProducto() {
 		this.setLayout(new BorderLayout());
@@ -64,6 +65,7 @@ public class GUIAltaProducto extends JPanel{
 					String IDMarca = tIDMarca.getText();
 					//nombre: id: cantidad: talla: categoria: idMarca:
 					TProducto tP= new TProducto (nombre,-1, Integer.parseInt(cant), Integer.parseInt(talla), cat, Integer.parseInt(IDMarca));;
+					Controlador.getInstancia().setGUI(GUIAltaProducto.this);
 					Controlador.getInstancia().accion(Evento.ALTA_PRODUCTO, tP);
 				}
 		});
@@ -76,4 +78,10 @@ public class GUIAltaProducto extends JPanel{
 		
 	
 }
+
+	@Override
+	public void update(int evento, Object datos) {
+		// TODO Auto-generated method stub
+		
+	}
 }

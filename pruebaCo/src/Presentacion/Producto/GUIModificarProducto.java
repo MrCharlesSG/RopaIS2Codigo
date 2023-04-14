@@ -1,17 +1,25 @@
 package Presentacion.Producto;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.NumberFormatter;
 
 import Negocio.MarcaNegocio.TMarca;
+import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.GUI.GUI;
 
 
 /** 
@@ -21,32 +29,110 @@ import Presentacion.Controlador.Evento;
 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
 
-public class GUIModificarProducto extends JFrame{
+public class GUIModificarProducto extends JFrame implements GUI{
+	private JPanel id;
+	private JLabel idL;
+	private JFormattedTextField idT;
+	
+	private JPanel nombre;
+	private JLabel nombreL;
+	private JTextField nombreT;
+	
+	private JPanel cantidad;
+	private JLabel cantidadL;
+	private JFormattedTextField cantidadT;
+	
+	private JPanel talla;
+	private JLabel tallaL;
+	private JFormattedTextField tallaT;
+	
+	private JPanel categoria;
+	private JLabel categoriaL;
+	private JTextField categoriaT;
+	
+	private JPanel idMarca;
+	private JLabel idMarcaL;
+	private JFormattedTextField idMarcaT;
+	
+	private JPanel but;
+	private JButton aceptar;
+	private JButton cancelar;
+	
+	private static final Dimension DIM = new Dimension(220, 20);
 	
 	public GUIModificarProducto(){
+		
+		NumberFormat longFormat = NumberFormat.getIntegerInstance();
+		NumberFormatter numberFormatter = new NumberFormatter(longFormat);
+		numberFormatter.setValueClass(Long.class); //optional, ensures you will always get a long value
+		numberFormatter.setAllowsInvalid(false); //this is the key!!
+		
 		this.setTitle("Modificar Producto");
 		JPanel jpanel=new JPanel();
-		JLabel jlabel=new JLabel("Nombre: ");
-		final JTextField jTextField=new JTextField(20);
-		JButton aceptar=new JButton("Aceptar");
-		JButton cancelar=new JButton("Cancelar");
+		jpanel.setLayout(new BoxLayout(jpanel, BoxLayout.Y_AXIS));
 		
-		jpanel.add(jlabel);
-		jpanel.add(jTextField);
-		jpanel.add(aceptar);
-		jpanel.add(cancelar);
+		jpanel.add(new JLabel("Introduzca el 'id' del producto a modificar."));
+		
+		id = new JPanel();
+		id.add((idL=new JLabel("ID: ")));
+		id.add((idT = new JFormattedTextField(numberFormatter)));
+		idT.setMaximumSize(DIM);
+		idT.setMinimumSize(DIM);
+		idT.setPreferredSize(DIM);
+		jpanel.add(id);
+		
+		jpanel.add(new JLabel("Introduzca los datos a modificar."));
+		
+		nombre = new JPanel();
+		nombre.add((nombreL=new JLabel("Nombre: ")));
+		nombre.add((nombreT = new JTextField(20)));
+		jpanel.add(nombre);
+		
+		cantidad = new JPanel();
+		cantidad.add((cantidadL = new JLabel("Cantidad: ")));
+		cantidad.add((cantidadT = new JFormattedTextField(numberFormatter)));
+		cantidadT.setMaximumSize(DIM);
+		cantidadT.setMinimumSize(DIM);
+		cantidadT.setPreferredSize(DIM);
+		jpanel.add(cantidad);
+		
+		talla = new JPanel();
+		talla.add((tallaL = new JLabel("Talla: ")));
+		talla.add((tallaT = new JFormattedTextField(numberFormatter)));
+		tallaT.setMaximumSize(DIM);
+		tallaT.setMinimumSize(DIM);
+		tallaT.setPreferredSize(DIM);
+		jpanel.add(talla);
+		
+		categoria = new JPanel();
+		categoria.add((categoriaL = new JLabel("Categoría: ")));
+		categoria.add((categoriaT = new JTextField(20)));
+		jpanel.add(categoria);
+		
+		idMarca = new JPanel();
+		idMarca.add((idMarcaL = new JLabel("idMarca: ")));
+		idMarca.add((idMarcaT = new JFormattedTextField(numberFormatter)));
+		idMarcaT.setMaximumSize(DIM);
+		idMarcaT.setMinimumSize(DIM);
+		idMarcaT.setPreferredSize(DIM);
+		jpanel.add(idMarca);
+		
+		but = new JPanel();
+		but.add((aceptar=new JButton("Aceptar")));
+		but.add((cancelar=new JButton("Cancelar")));
+		jpanel.add(but);
 		
 		this.getContentPane().add(jpanel);
 		this.pack();
 		
 		aceptar.addActionListener(new ActionListener(){
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				String nombre=jTextField.getName();
-				int id=Integer.parseInt(nombre);
-				Controlador.getInstancia().accion(Evento.MODIFICAR_PRODUCTO, new Integer(id));
+				Controlador.getInstancia().accion(Evento.MODIFICAR_PRODUCTO, new TProducto(
+						nombreT.getText(), Integer.parseInt(cantidadT.getText()), Integer.parseInt(tallaT.getText()),
+						Integer.parseInt(idT.getText()) ,categoriaT.getText(), Integer.parseInt(idMarcaT.getText())));
 				
 			}
 			
@@ -61,5 +147,18 @@ public class GUIModificarProducto extends JFrame{
 			}
 			
 		});
+	}
+
+	@Override
+	public void update(int evento, Object datos) {
+		switch(evento){
+		case Evento.RES_MODIFICAR_PRODUCTO_OK:
+			Integer id= (Integer) datos;
+			JOptionPane.showMessageDialog(null,"Se ha modificado correctamente el producto con ID: "+id.intValue());
+			break;
+		case Evento.RES_MODIFICAR_PRODUCTO_KO:
+			JOptionPane.showMessageDialog(null, "No se pudo modificar el producto con ese ID");
+			break; 
+		}
 	}
 }
