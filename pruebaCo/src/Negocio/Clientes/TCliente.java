@@ -10,7 +10,7 @@ public abstract class TCliente {
 	private int Telefono;
 	private boolean Premiumbool;
 	
-	public TCliente(boolean Active, String apellido1, String apellido2, String dni, int id, String nombre, int tlf, boolean es_premium){
+	public TCliente(boolean Active,String apellido1, String apellido2, String dni, int id,String nombre, int tlf, boolean es_premium){
 		this.Active=Active;
 		this.Apellido1=apellido1;
 		this.Apellido2=apellido2;
@@ -19,6 +19,25 @@ public abstract class TCliente {
 		this.Nombre=nombre;
 		this.Telefono=tlf;
 		this.Premiumbool=es_premium;
+	}
+	public TCliente(int id,String nombre_apellidos,String dni,int tlf,int es_premium,int activo){
+		if(activo==1)
+			this.Active=true;
+		else
+			this.Active=false;
+		String datos[];
+		datos=nombre_apellidos.split(" ");
+		
+		this.Apellido1=datos[1];
+		this.Apellido2=datos[2];
+		this.Nombre=datos[0];
+		this.DNI=dni;
+		this.IDCliente=id;
+		this.Telefono=tlf;
+		if(es_premium==1)
+			this.Premiumbool=true;
+		else
+			this.Premiumbool=false;
 	}
 	
 	public abstract double calcularPrecio(double precio);

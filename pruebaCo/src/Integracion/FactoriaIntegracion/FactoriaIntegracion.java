@@ -3,6 +3,7 @@
  */
 package Integracion.FactoriaIntegracion;
 
+import Integracion.Clientes.DAOClientes;
 import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.Producto.DAOProducto;
 import Integracion.Proveedores.DAOProveedores;
@@ -43,4 +44,6 @@ public abstract class FactoriaIntegracion {
 	public abstract DAOMarca generaDAOMarca();
 	public abstract DAOProducto generaDAOProducto();
 	public abstract DAOProveedores generaDAOProveedor();
+
+	public abstract DAOClientes generaDAOClientes() ;
 }

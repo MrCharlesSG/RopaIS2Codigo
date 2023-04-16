@@ -35,4 +35,9 @@ public class ComprobadorSintactico {
 		return !name.contains(":")&&!(name.length()==0);
 	
 	}
+
+	public static boolean isDNI(String dni) {//yo quitaria lo de dni
+		// TODO Auto-generated method stub
+		return true;
+	}
 }
