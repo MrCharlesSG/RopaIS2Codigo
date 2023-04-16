@@ -258,7 +258,6 @@ public class DAOMarcaImp implements DAOMarca {
 			}
 		}
 		catch (IOException e) {
-			//cosas
 			return id;
 		}
 		

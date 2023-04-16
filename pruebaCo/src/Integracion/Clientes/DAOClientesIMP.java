@@ -13,6 +13,7 @@ import java.util.Scanner;
 import Negocio.Clientes.TCliente;
 import Negocio.Clientes.TClienteNormal;
 import Negocio.Clientes.TClientePremium;
+import Negocio.MarcaNegocio.TMarca;
 
 
 public class DAOClientesIMP implements DAOClientes {
@@ -45,7 +46,6 @@ public class DAOClientesIMP implements DAOClientes {
 				if(!encontrado)
 					buffer.append(id+":"+cliente.getNombre()+" "+cliente.getApellido1()+" "+cliente.getApellido2()+":"+cliente.getDNI()+":"+cliente.getTelefono()+":"+cliente.getPremium()+":1");
 			}catch (IOException e) {
-				/
 				return id;
 			}
 		}
@@ -141,12 +141,8 @@ public class DAOClientesIMP implements DAOClientes {
 			}
 		}
 		catch (IOException e) {
-			//cosas
 			return id;
 		}
-		
-	}
-
 	}
 
 	@Override
@@ -176,13 +172,28 @@ public class DAOClientesIMP implements DAOClientes {
 		catch (IOException e) {
 			return id;
 		}
-		
 	}
 
 	@Override
 	public TCliente readByName(String dni) {
-		
-		return null;
+		File file=new File(ARCHIVO);
+		boolean encontrado=false;
+		TCliente cliente=null;
+		try(Scanner scanner= new Scanner(file)){
+			while(scanner.hasNext() &&!encontrado) {
+				String datos[]=scanner.nextLine().split(":");
+				if (datos[2].equalsIgnoreCase(dni)&&datos[5].equalsIgnoreCase("1")) {
+					if(Integer.parseInt(datos[4])==1)
+						cliente=new TClientePremium(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), Integer.parseInt(datos[4]),Integer.parseInt(datos[5]));
+					else
+						cliente=new TClienteNormal(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), Integer.parseInt(datos[4]),Integer.parseInt(datos[5]));
+					encontrado=true;
+				}
+			}
+			return cliente;
+		}catch(IOException e){
+			return cliente;
+		}
 	}
 
 }
