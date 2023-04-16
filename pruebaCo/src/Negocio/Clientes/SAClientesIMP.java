@@ -16,7 +16,7 @@ public class SAClientesIMP implements SAClientes {
 	public int create(TCliente cliente) {
 		int id=-1;
 		if(esValido(cliente)){
-			TCliente leido=daoClientes.readByName(cliente.getNombre(),cliente.getApellido1(),cliente.getApellido2());
+		TCliente leido=daoClientes.readByName(cliente.getDNI());
 			if(leido==null||!leido.getActivo())
 				id=daoClientes.create(cliente);
 			}
@@ -59,10 +59,10 @@ public class SAClientesIMP implements SAClientes {
 	}
 
 	@Override
-	public TCliente readByName(String nombre,String apellido1,String apellido2) {	
+	public TCliente readByName(String dni) {	
 		TCliente cliente=null;
-		if(ComprobadorSintactico.isName(nombre)&&ComprobadorSintactico.isName(apellido1)&&ComprobadorSintactico.isName(apellido2))
-			cliente=daoClientes.readByName(nombre,apellido1,apellido2);
+		if(ComprobadorSintactico.isDNI(dni))
+			cliente=daoClientes.readByName(dni);
 		return cliente;
 	}
 	

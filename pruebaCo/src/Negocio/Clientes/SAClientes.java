@@ -17,6 +17,6 @@ public interface SAClientes {
 	
 	public int delete(int ID);
 
-	public TCliente readByName(String nombre,String apellido1,String apellido2);
+	public TCliente readByName(String dni);
 	
 }

@@ -22,7 +22,7 @@ public interface DAOClientes {
 	public int delete(TCliente cliente);
 
 	 
-	public TCliente readByName(String nombre,String ap1,String ap2);
+	public TCliente readByName(String dni);
 
 	 
 }
