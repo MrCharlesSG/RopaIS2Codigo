@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -16,11 +17,10 @@ import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 
-public class GUIAltaProducto extends JPanel implements GUI{
+public class GUIAltaProducto extends JFrame implements GUI{
 	
 	public GUIAltaProducto() {
-		this.setLayout(new BorderLayout());
-		this.add(new JLabel("Alta Producto"), BorderLayout.PAGE_START);
+		this.setTitle("Alta Producto");
 		JPanel panel=new JPanel();
 		JLabel lNombre=new JLabel("Nombre:");
 		final JTextField tNombre= new JTextField(20);
@@ -52,7 +52,8 @@ public class GUIAltaProducto extends JPanel implements GUI{
 		panel.add(tIDMarca);
 		panel.add(aceptar);
 		panel.add(cancelar);
-		this.add(panel, BorderLayout.CENTER);
+		this.getContentPane().add(panel);
+		this.pack();
 		
 		aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
@@ -64,7 +65,7 @@ public class GUIAltaProducto extends JPanel implements GUI{
 					String cant = tCant.getText();
 					String IDMarca = tIDMarca.getText();
 					//nombre: id: cantidad: talla: categoria: idMarca:
-					TProducto tP= new TProducto (nombre,-1, Integer.parseInt(cant), Integer.parseInt(talla), cat, Integer.parseInt(IDMarca));;
+					TProducto tP= new TProducto (nombre, Integer.parseInt(cant), Integer.parseInt(talla), -1, cat, Integer.parseInt(IDMarca));;
 					Controlador.getInstancia().setGUI(GUIAltaProducto.this);
 					Controlador.getInstancia().accion(Evento.ALTA_PRODUCTO, tP);
 				}
@@ -81,7 +82,14 @@ public class GUIAltaProducto extends JPanel implements GUI{
 
 	@Override
 	public void update(int evento, Object datos) {
-		// TODO Auto-generated method stub
-		
+		switch(evento){
+		case Evento.RES_ALTA_PRODUCTO_OK:
+			Integer id= (Integer) datos;
+			JOptionPane.showMessageDialog(null,"Se ha dado de alta correctamente el producto");
+			break;
+		case Evento.RES_ALTA_PRODUCTO_KO:
+			JOptionPane.showMessageDialog(null, "No se dar de alta el producto correctamente");
+			break; 
+		}
 	}
 }

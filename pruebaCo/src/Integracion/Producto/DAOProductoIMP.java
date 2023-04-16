@@ -178,7 +178,7 @@ public class DAOProductoIMP implements DAOProducto{
 
 	@Override
 	public int update(TProducto Tprod) {
-		String[] stringArray = null;
+		String[] stringArray = new String[6];
 		//nombre: id: cantidad: talla: categoria: idMarca:
 		stringArray[0] = Tprod.getNombre();
 		stringArray[1] = Integer.toString(Tprod.getIdProducto());
@@ -196,14 +196,12 @@ public class DAOProductoIMP implements DAOProducto{
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 		    String line;
-		    while ((line = br.readLine()) != null) {
+		    while ((line = br.readLine()) != null && !line.equals("")) {
 		        splitArray = line.split(": ", 6);
 		        //nombre: id: cantidad: talla: categoria: idMarca:
-		        sb.append(splitArray[0] + ": " + splitArray[1] + ": " + splitArray[2] + ": " 
-		        + splitArray[3] + ": " + splitArray[4] + ": " + splitArray[5] + System.lineSeparator());
 		        	
-		        if(splitArray[1] == stringArray[1]){
-		        	 sb.append(stringArray[0] + ": " + splitArray[1] + ": " + (splitArray[2] + stringArray[2]) + ": " + stringArray[3]
+		        if(splitArray[1].equals(stringArray[1])){
+		        	 sb.append(stringArray[0] + ": " + splitArray[1] + ": " + (Integer.parseInt(splitArray[2]) + Integer.parseInt(stringArray[2])) + ": " + stringArray[3]
 		        			 + ": " + stringArray[4] + ": " + splitArray[5] + System.lineSeparator());
 		        }else{
 		        	   sb.append(splitArray[0] + ": " + splitArray[1] + ": " + splitArray[2] + ": " 

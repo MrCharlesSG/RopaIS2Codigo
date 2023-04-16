@@ -46,7 +46,7 @@ public class GUIBajaProducto extends JFrame implements GUI{
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				String id=jTextField.getText();
-				TProducto tprod =new TProducto(null, Integer.parseInt(id), -1, -1, null, -1);
+				TProducto tprod =new TProducto(null, -1, -1, Integer.parseInt(id), null, -1);
 				Controlador.getInstancia().setGUI(GUIBajaProducto.this);
 				Controlador.getInstancia().accion(Evento.BAJA_PRODUCTO, tprod);
 				
@@ -70,7 +70,7 @@ public class GUIBajaProducto extends JFrame implements GUI{
 		switch(evento){
 		case Evento.RES_BAJA_PRODUCTO_OK:
 			Integer id= (Integer) datos;
-			JOptionPane.showMessageDialog(null,"Se ha dado de baja correctamente el producto con ID: "+id.intValue());
+			JOptionPane.showMessageDialog(null,"Se ha dado de baja correctamente el producto");
 			break;
 		case Evento.RES_BAJA_PRODUCTO_KO:
 			JOptionPane.showMessageDialog(null, "No se pudo encontrar el producto con ese ID");

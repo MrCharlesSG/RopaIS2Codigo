@@ -91,9 +91,9 @@ public class SAProductoIMP implements SAProducto{
 	public int update(TProducto Tprod) {
 		if(ComprobadorSintactico.isName(Tprod.getNombre())){
 			TProducto Tprod2;
-			Tprod2 = dao.readByName(Tprod.getNombre());
-			if(Tprod.getIdProducto() == -1){
-				dao.update(new TProducto(Tprod2.getNombre(), Tprod.getIdProducto(), Tprod.getCantidad(), Tprod.getTalla(), Tprod.getCategoria(), Tprod.getIdMarca()));
+			Tprod2 = dao.read(Tprod.getIdProducto());
+			if(!(Tprod2.getIdProducto() == -1)){
+				dao.update(new TProducto(Tprod.getNombre(), Tprod.getCantidad(), Tprod.getTalla(), Tprod.getIdProducto(), Tprod.getCategoria(), Tprod.getIdMarca()));
 			}else{
 				return -1;
 			}

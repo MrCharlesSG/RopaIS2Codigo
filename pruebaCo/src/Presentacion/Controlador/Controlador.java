@@ -1,3 +1,4 @@
+
 package Presentacion.Controlador;
 
 import java.util.ArrayList;
@@ -106,7 +107,7 @@ public class Controlador {
 			 */
 			case Evento.ALTA_PRODUCTO:{
 				int res=saProducto.create((TProducto) datos);
-				if(res>0){
+				if(res>=0){
 					gui.update(Evento.RES_ALTA_PRODUCTO_OK, new Integer(res));
 				}
 				else{
@@ -116,7 +117,7 @@ public class Controlador {
 			}
 			case Evento.BAJA_PRODUCTO:{
 				int res=saProducto.delete(((TProducto) datos).getIdProducto());
-				if(res>0){
+				if(res>=0){
 					gui.update(Evento.RES_BAJA_PRODUCTO_OK, new Integer(res));
 				}
 				else{
@@ -131,8 +132,8 @@ public class Controlador {
 			}
 			case Evento.MODIFICAR_PRODUCTO:{
 				int res=saProducto.update((TProducto)datos);
-				if(res>0){
-					gui.update(Evento.RES_MODIFICAR_PRODUCTO_OK, new Integer(res));
+				if(res>=0){
+					gui.update(Evento.RES_MODIFICAR_PRODUCTO_OK,  new Integer(res));
 				}
 				else{
 					gui.update(Evento.RES_MODIFICAR_PRODUCTO_KO, null);
@@ -145,11 +146,6 @@ public class Controlador {
 					gui.update(Evento.RES_PRODUCTO_POR_ID_OK, producto);
 				else
 					gui.update(Evento.RES_PRODUCTO_POR_ID_KO, producto);
-				break;
-			}
-			case Evento.VENTA_POR_PRODUCTO:{
-				TProducto producto=saProducto.read((int) datos);
-				gui.update(Evento.VENTA_POR_PRODUCTO, producto);
 				break;
 			}
 			

@@ -37,7 +37,7 @@ import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 				{ 
 				public void actionPerformed(ActionEvent e)
 					{		
-						j = FactoriaPresentacion.getInstance().generaGUIAltaProducto();
+						FactoriaPresentacion.getInstance().generaGUIAltaProducto().setVisible(true);
 					}
 			});
 			
