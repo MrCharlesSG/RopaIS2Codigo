@@ -32,8 +32,14 @@ public class ComprobadorSintactico {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public static boolean isName(String name) {
-		
-		return !name.contains(":")&&!(name.length()==0);
+		boolean nombre=false;
+		if(name!=null && name.length()!=0){
+			nombre=true;
+			for(int i=0; i<name.length() && nombre; i++){
+				nombre= !Character.isDigit(name.charAt(i));
+			}
+		}
+		return nombre;
 	
 	}
 
