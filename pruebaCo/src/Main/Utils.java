@@ -31,7 +31,7 @@ public class Utils {
 	}
 	
 	public static void showCorrectMsg(String msg){
-		JOptionPane.showMessageDialog(null, msg, "CORRECT", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, msg, "CORRECT", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	static void quit(Component c) {

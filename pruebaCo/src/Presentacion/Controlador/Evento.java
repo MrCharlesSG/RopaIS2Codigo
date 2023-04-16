@@ -6,6 +6,10 @@ public class Evento {
 	public static final int Mostrar_GUI_PRODUCTOS = 1;
 	public static final int Mostrar_GUI_PROVEEDORES = 3;
 	
+	//Respuestas
+	public static final int KO = 10;
+	public static final int OK = 11;
+	
 	//Marca
 	public static final int ALTA_MARCA= 101;
 	public static final int BAJA_MARCA= 102;

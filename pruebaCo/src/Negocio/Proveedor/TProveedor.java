@@ -40,4 +40,15 @@ public class TProveedor {
 	public void setNombre(String nombre){
 		this.nombre = nombre;
 	}
+	@Override
+	public String toString() {
+	    StringBuilder buffer = new StringBuilder();
+	    buffer.append(" ID: "+ idProv+ "|| Nombre: "+nombre);
+	    int i=1;
+	    for(Integer m:marcas){
+	    	buffer.append("|| Marca "+i+": "+m);
+	    }
+	    return buffer.toString();
+	}
+	
 }

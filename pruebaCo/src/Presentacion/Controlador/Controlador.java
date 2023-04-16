@@ -33,7 +33,6 @@ public class Controlador {
 	private GUI gui;
 	
 	private Controlador(){
-		this.gui=gui;
 		this.saMarca=FactoriaNegocio.getInstance().generaSAMarca();
 		this.saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
 		this.saProducto= FactoriaNegocio.getInstance().generaSAProducto();
@@ -141,7 +140,7 @@ public class Controlador {
 				break;
 			}
 			case Evento.PRODUCTO_POR_ID:{
-				TProducto producto=saProducto.read(((TProducto) datos).getIdProducto());
+				TProducto producto=saProducto.read((Integer)datos);
 				if(producto.getIdMarca() == -1)
 					gui.update(Evento.RES_PRODUCTO_POR_ID_OK, producto);
 				else
@@ -160,44 +159,43 @@ public class Controlador {
 			case Evento.ALTA_PROVEEDOR:{
 				int res=this.saProveedor.create((TProveedor)datos);
 				if(res>0){
-					gui.update(Evento.RES_ALTA_PROVEEDOR_OK, new Integer(res));
+					gui.update(Evento.OK, new Integer(res));
 				}
 				else{
-					gui.update(Evento.RES_ALTA_PROVEEDOR_KO, null);
+					gui.update(Evento.KO, null);
 				}
 				break;
             }
             case Evento.BAJA_PROVEEDOR:{
-                int idProveedor=(int) datos;
-                int res = saProveedor.delete(idProveedor);
+                int res = saProveedor.delete(((TProveedor)datos).getId());
 
                 if(res > 0)
-                    gui.update(Evento.RES_BAJA_PROVEEDOR_OK, new Integer(res));
+                    gui.update(Evento.OK, new Integer(res));
                 else
-                    gui.update(Evento.RES_BAJA_PROVEEDOR_KO, null);
+                    gui.update(Evento.KO, null);
                 break;
             }
             case Evento.LISTAR_PROVEEDORES:{
                 Collection<TProveedor>proveedores = saProveedor.readAll();
                 if(proveedores!= null && proveedores instanceof ArrayList){
-                	gui.update(Evento.RES_LISTAR_PROVEEDOR_OK, datos);
+                	gui.update(Evento.OK, proveedores);
                 }else{
-                	gui.update(Evento.RES_LISTAR_PROVEEDOR_KO, null);
+                	gui.update(Evento.KO, null);
                 }
                 break;
             }
             case Evento.PROVEEDOR_POR_ID:{
             	    TProveedor proveedor = saProveedor.read((int)datos);
-            	    int res= proveedor==null ? Evento.RES_PROVEEDOR_POR_ID_KO : Evento.RES_PROVEEDOR_POR_ID_OK;
+            	    int res= proveedor==null ? Evento.KO : Evento.OK;
             	    gui.update(res, proveedor);
                 break;
             }
             case Evento.MODIFICAR_PROVEEDOR:{
-                	TProveedor proveedor = FactoriaNegocio.getInstance().generaTProveedor((String[])datos);
-                	if(proveedor!=null && saProveedor.update(proveedor)>0){
-                		gui.update(Evento.RES_MODIFICAR_PRODUCTO_OK, proveedor);
+                	int res = this.saProveedor.update((TProveedor)datos);
+                	if( res>0){
+                		gui.update(Evento.OK, datos);
                 	}else{
-                		gui.update(Evento.RES_MODIFICAR_PROVEEDOR_KO, null);
+                		gui.update(Evento.KO, null);
                 	}
                 break;
             }
@@ -259,4 +257,23 @@ public class Controlador {
 	public void setGUI(GUI gui){
 		this.gui=gui;
 	}
+	public boolean marcasExisten(ArrayList<Integer> marcas) {
+		boolean existe=true;
+		if(marcas.size()!=0){
+			SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
+			Collection<TMarca> listam = saMarca.readAll();
+			int i=0;
+			while(existe && i<marcas.size() ){
+				existe=false;
+				for(TMarca t: listam){
+					if(t.getID()==marcas.get(i)){
+						existe=true;
+					}
+				}
+				i++;
+			}
+		}
+		return existe;
 	}
+}
+	

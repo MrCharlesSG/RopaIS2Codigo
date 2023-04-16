@@ -1,11 +1,13 @@
 package Presentacion.ProveedorPresentacion;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -16,7 +18,7 @@ import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 
-public class GUIAltaProv extends JPanel implements GUI{
+public class GUIAltaProv extends JFrame implements GUI{
 	
 	/**
 	 * 
@@ -25,10 +27,14 @@ public class GUIAltaProv extends JPanel implements GUI{
 
 	public GUIAltaProv() {
 		initGUI();	
+		setVisible(true);
 	}
 	
 	private void initGUI(){
+		setTitle("Alta Proveedor");
 		this.setLayout(new BorderLayout());
+		this.setMinimumSize(new Dimension(500, 500));
+		this.setMaximumSize(new Dimension(500, 500));
 		this.add(new JLabel("Alta Proveedor"), BorderLayout.PAGE_START);
 		JPanel panel=new JPanel();
 		JLabel lNombre=new JLabel("Nombre:");
@@ -49,23 +55,7 @@ public class GUIAltaProv extends JPanel implements GUI{
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		
-		panel.add(lNombre);
-		panel.add(tNombre);
 		
-		panel.add(lM1);
-		panel.add(tM1);
-		panel.add(lM2);
-		panel.add(tM2);
-		panel.add(lM3);
-		panel.add(tM3);
-		panel.add(lM4);
-		panel.add(tM4);
-		panel.add(lM5);
-		panel.add(tM5);
-		
-		panel.add(aceptar);
-		panel.add(cancelar);
-		this.add(panel, BorderLayout.CENTER);
 		
 		aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
@@ -73,19 +63,23 @@ public class GUIAltaProv extends JPanel implements GUI{
 					try{
 						setVisible(false);
 						String nombre= tNombre.getText();
-						ArrayList<Integer> lista = new ArrayList<Integer>();
 						
-						lista.add(Integer.parseInt(tM1.getText()));
-						lista.add(Integer.parseInt(tM2.getText()));
-						lista.add(Integer.parseInt(tM3.getText()));
-						lista.add(Integer.parseInt(tM4.getText()));
-						lista.add(Integer.parseInt(tM5.getText()));
+						String[] aux= new String[5];
+						aux[0]=tM1.getText();
+						aux[1]=tM2.getText();
+						aux[2]=tM3.getText();
+						aux[3]=tM4.getText();
+						aux[4]=tM4.getText();
+						
+						ArrayList<Integer> lista=anadeALista(aux);
 						
 						Controlador.getInstancia().accion(Evento.ALTA_PROVEEDOR, new TProveedor(nombre,2, lista, true ));
 					}catch(NumberFormatException e1){
 						Utils.showErrorMsg("Tienen que ser numeros");
 					}
 				}
+
+			
 		});
 		cancelar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
@@ -93,17 +87,48 @@ public class GUIAltaProv extends JPanel implements GUI{
 					setVisible(false);
 			}
 		});
+		
+		panel.add(lNombre);
+		panel.add(tNombre);
+		
+		
+		panel.add(lM1);panel.add(tM1);
+		panel.add(lM2);panel.add(tM2);
+		
+		panel.add(lM3);panel.add(tM3);
+		
+		panel.add(lM4);panel.add(tM4);
+		
+		panel.add(lM5);panel.add(tM5);
+		
+		
+		panel.add(aceptar);
+		panel.add(cancelar);
+		this.add(panel, BorderLayout.CENTER);
+		pack();
+		
+	}
+	
+	private ArrayList<Integer> anadeALista(String[] aux) {
+		ArrayList<Integer> lista = new ArrayList<Integer>();
+		for(String s:aux){
+			if(s!=null && !s.equals("")){
+				lista.add(Integer.parseInt(s));
+			}
+		}
+		return lista;
+		
 	}
 
 	@Override
 	public void update(int evento, Object datos) {
 		
 		switch(evento){
-		case Evento.RES_ALTA_PROVEEDOR_OK:{
+		case Evento.OK:{
 			Utils.showCorrectMsg("El Proveedor ha sido creado correctamente con el siguiente id: "+datos.toString());
 			this.setVisible(false);
 			break;
-		}case Evento.RES_ALTA_PROVEEDOR_KO:{
+		}case Evento.KO:{
 			Utils.showErrorMsg("Ha habido un error al crear el proveedor");
 			this.setVisible(false);
 			break;

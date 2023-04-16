@@ -58,8 +58,8 @@ public class GUIProvPorID extends JFrame implements GUI{
 			public void actionPerformed(ActionEvent e) {
 				try{
 					setVisible(false);
-					int id=Integer.parseInt(jtextID.getText());
-					Controlador.getInstancia().accion(Evento.PRODUCTO_POR_ID, new Integer(id));
+					Integer id=Integer.parseInt(jtextID.getText());
+					Controlador.getInstancia().accion(Evento.PROVEEDOR_POR_ID,id);
 				}catch(Exception e1){
 					Utils.showErrorMsg("El ID debe de ser un numero");
 					setVisible(false);
@@ -77,45 +77,17 @@ public class GUIProvPorID extends JFrame implements GUI{
 			}
 			
 		});
-	}
-	
-	private void mostrarProveedor(TProveedor pr){
-		this.removeAll();
-		this.setTitle("Proveedor "+ pr.getId());
-		JPanel panel=new JPanel();
-		
-		//añado un boton de cerrar
-		JButton cerrar =new JButton("Cerrar");
-		cerrar.addActionListener(new ActionListener()
-		{ public void actionPerformed(ActionEvent e)
-			{		
-				setVisible(false);
-			}
-		});
-		
-		//Añado datos Proveedor
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("Los datos del proveedor son: "+ System.lineSeparator());
-		buffer.append("Id: "+ pr.getId()+ System.lineSeparator()+System.lineSeparator());
-		buffer.append("Nombre: "+ pr.getNombre()+ System.lineSeparator()+System.lineSeparator());
-		buffer.append("Marcas: "+ pr.getMarca()+ System.lineSeparator());
-		
-		panel.add(new JLabel(buffer.toString()));
-		
-		panel.add(cerrar);
-		getContentPane().add(panel);
-		pack();
-		setVisible(true);
+		this.setVisible(true);
 	}
 
 	@Override
 	public void update(int evento, Object datos) {
 		switch(evento){
-		case Evento.RES_PROVEEDOR_POR_ID_KO:{
+		case Evento.KO:{
 			Utils.showErrorMsg("No se pudo encontrar el proveedor con dicho ID");
 			setVisible(false);
-		}case Evento.RES_PROVEEDOR_POR_ID_OK:{
-			this.mostrarProveedor((TProveedor)datos);
+		}case Evento.OK:{
+			Utils.showCorrectMsg("Esto son los datos del Proveedor:"+System.lineSeparator()+datos.toString());
 		}
 		}
 	}

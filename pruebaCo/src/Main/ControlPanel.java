@@ -56,6 +56,20 @@ public class ControlPanel extends JPanel {
 			
 		});
 		_toolBar.add(producto);
+		proveedor = new JButton();
+		proveedor.setToolTipText("abrir menú productos");
+		proveedor.setText("Prov");
+		proveedor.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.openView(2);
+			}
+			
+		});
+		_toolBar.add(proveedor);
+		
+		 
 		
 		_toolBar.add(Box.createGlue()); // this aligns the button to the right
 		_toolBar.addSeparator();

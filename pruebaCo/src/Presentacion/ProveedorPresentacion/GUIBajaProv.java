@@ -55,6 +55,7 @@ public class GUIBajaProv extends JFrame implements GUI{
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				int id=Integer.parseInt(jTextField.getText());
+				
 				Controlador.getInstancia().accion(Evento.BAJA_PROVEEDOR, new TProveedor(null, id,null,true ));				
 			}
 			
@@ -68,16 +69,17 @@ public class GUIBajaProv extends JFrame implements GUI{
 			}
 			
 		});
+		this.setVisible(true);
 	}
 
 	@Override
 	public void update(int evento, Object datos) {
 		switch(evento){
-		case Evento.RES_BAJA_PROVEEDOR_OK:{
+		case Evento.OK:{
 			Utils.showCorrectMsg("El proveedor con id: "+datos.toString()+System.lineSeparator()+"Ha sido eliminado correctamente");
 			this.setVisible(false);
 			break;
-		}case Evento.RES_BAJA_PROVEEDOR_KO:{
+		}case Evento.KO:{
 			Utils.showErrorMsg("Ha habido un error al eliminar el proveedor");
 			this.setVisible(false);
 			break;

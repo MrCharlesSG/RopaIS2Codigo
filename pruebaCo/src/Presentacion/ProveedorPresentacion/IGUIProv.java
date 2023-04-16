@@ -6,7 +6,9 @@ package Presentacion.ProveedorPresentacion;
 	import javax.swing.BoxLayout;
 	import javax.swing.JButton;
 	import javax.swing.JPanel;
-	import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
+
+import Presentacion.Controlador.Controlador;
+import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 
 	public class IGUIProv extends JPanel {
 		
@@ -30,39 +32,38 @@ package Presentacion.ProveedorPresentacion;
 			
 			altaProv.addActionListener(new ActionListener()
 				{ 
-				public void actionPerformed(ActionEvent e){		
-						setVisibility(false);	
-						FactoriaPresentacion.getInstance().generaGUIAltaProveedor();
+				public void actionPerformed(ActionEvent e){	
+					Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIAltaProveedor());
 					}
 			});
 			
 			bajaProv.addActionListener(new ActionListener()
 				{ 
 				public void actionPerformed(ActionEvent e){		
-						setVisibility(false);
-						FactoriaPresentacion.getInstance().generaGUIBajaProveedor();
+						
+					Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIBajaProveedor());
 					}
 			});
 			
 			listarProv.addActionListener(new ActionListener()
 			{ 
 				public void actionPerformed(ActionEvent e){		
-					setVisibility(false);
+					//este no usa el set Gui porque no tiene botones y directamente llama al controlador
 					FactoriaPresentacion.getInstance().generaGUIListarProveedor();
 			}
 			});
 			modificarProv.addActionListener(new ActionListener()
 			{ 
 				public void actionPerformed(ActionEvent e){		
-					setVisibility(false);
-					FactoriaPresentacion.getInstance().generaGUIModificarProveedor();
+					
+					Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIModificarProveedor());
 				}
 			});
 			provPorID.addActionListener(new ActionListener()
 			{ 
 				public void actionPerformed(ActionEvent e){		
-					setVisibility(false);
-					FactoriaPresentacion.getInstance().generaGUIProveedorPorID();
+					
+					Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIProveedorPorID());
 				}
 			});
 			
@@ -71,12 +72,9 @@ package Presentacion.ProveedorPresentacion;
 			this.add(listarProv);
 			this.add(modificarProv);
 			this.add(provPorID);
-			this.setVisibility(true);
+			this.setVisible(false);
 		}
 		
-		private void setVisibility(boolean vis){
-			this.setVisible(vis);
-		}
 
 	}
 	

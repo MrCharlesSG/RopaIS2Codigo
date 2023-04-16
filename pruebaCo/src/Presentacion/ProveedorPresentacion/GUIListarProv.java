@@ -1,5 +1,6 @@
 package Presentacion.ProveedorPresentacion;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -37,46 +38,23 @@ public class GUIListarProv extends JFrame implements GUI{
 	}
 	
 	private void initGUI() {
-		setTitle("Listar Proveedores");
-		JPanel panel=new JPanel();
-		
-		JButton aceptar=new JButton("Aceptar");
-		JButton cancelar=new JButton("Cancelar");
-		
-		aceptar.addActionListener(new ActionListener()
-			{ public void actionPerformed(ActionEvent e)
-				{		
-					setVisible(false);
-					Controlador.getInstancia().accion(Evento.LISTAR_MARCAS,null);
-				}
-		});
-		cancelar.addActionListener(new ActionListener()
-			{ public void actionPerformed(ActionEvent e)
-				{		
-					setVisible(false);
-			}
-			
-		});
-		panel.add(aceptar);
-		panel.add(cancelar);
-		getContentPane().add(panel);
-		pack();
-		setVisible(true);
+		Controlador.getInstancia().setGUI(GUIListarProv.this);
+		Controlador.getInstancia().accion(Evento.LISTAR_PROVEEDORES,null);
 	}
 
 	private void listaProveedores(ArrayList<Object> datos){
-		this.removeAll();
 		this.setTitle("Lista de Proveedores");
+		this.setMinimumSize(new Dimension(500, 500));
 		JPanel panel=new JPanel();
 		
 		//añado un boton de cerrar
 		JButton cerrar =new JButton("Cerrar");
 		cerrar.addActionListener(new ActionListener()
-		{ public void actionPerformed(ActionEvent e)
-			{		
-				setVisible(false);
-			}
-		});
+			{ public void actionPerformed(ActionEvent e)
+				{		
+					setVisible(false);
+				}
+			});
 		
 		//añado la lista
 		DefaultListModel<String> modelo = new DefaultListModel<>();
@@ -97,11 +75,11 @@ public class GUIListarProv extends JFrame implements GUI{
 	@Override
 	public void update(int evento, Object datos) {
 		switch(evento){
-		case Evento.RES_LISTAR_PROVEEDOR_KO:{
+		case Evento.KO:{
 			setVisible(false);
 			Utils.showErrorMsg("No se ha podido listar los proveedores");
 		}
-		case Evento.RES_LISTAR_PROVEEDOR_OK:{
+		case Evento.OK:{
 			this.listaProveedores((ArrayList<Object>)datos);
 		}
 		}

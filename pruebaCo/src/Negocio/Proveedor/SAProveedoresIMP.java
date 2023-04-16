@@ -8,6 +8,7 @@ import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.Proveedores.DAOProveedores;
 import Negocio.ComprobadorSintactico;
+import Presentacion.Controlador.Controlador;
 
 
 
@@ -17,57 +18,33 @@ public class SAProveedoresIMP implements SAProveedores{
 		int id=-1;
 		
 		DAOProveedores daoProveedor = FactoriaIntegracion.getInstance().generaDAOProveedor();
-		if(tProv!=null && ComprobadorSintactico.isName(tProv.getNombre())){
+		if(tProv!=null && ComprobadorSintactico.isName(tProv.getNombre()) && Controlador.getInstancia().marcasExisten(tProv.getMarca())){//Mirar si hay que comprobar que la marca existe o no
 			TProveedor leido = daoProveedor.readByName(tProv.getNombre());
 			
 			if(leido == null)
 				id = daoProveedor.create(tProv); //TODO gestionar el hecho de estar activo en el create
 			
-			}
+		}
 		return id;
 		
 	};
 	public int delete(int id){
 		int res = -1;
 		DAOProveedores daoProveedor = FactoriaIntegracion.getInstance().generaDAOProveedor();
-		DAOMarca daoMarca= FactoriaIntegracion.getInstance().generaDAOMarca();
-		boolean resB=true;
 		
 		if(ComprobadorSintactico.isPositive(id)){
-			TProveedor prov = daoProveedor.read(id);	
-			
-			if(prov!=null){
-				//alomejor la marca tiene otro prov
-				ArrayList<Integer> lista= prov.getMarca();
-				for(Integer i: lista){
-					if(resB&&daoMarca.delete(daoMarca.read(i))==-1){
-						resB=false;
-					}
-				}
-				if(resB){
-					res=daoProveedor.delete(id);
-					//como se desactiva
-				}else{
-					res=-1;
-				}
-			}
-				/* TODO llamar a delete para borrar las marcas y poner el activo
-					a false
-				  id=daoProveedor.delete(prov);
-				 * 
-				 */
-			}
+			res= daoProveedor.delete(id);
+		}
 		
 		return res;
 		
 	};
 	public TProveedor read(int id){
-		DAOProveedores daoProveedor = FactoriaIntegracion.getInstance().generaDAOProveedor();
 		
-		TProveedor prov = null;
 		if(ComprobadorSintactico.isPositive(id))
-			prov = daoProveedor.read(id);
-		return prov;
+			return FactoriaIntegracion.getInstance().generaDAOProveedor().read(id);
+		
+		return null;
 		
 	};
 	public Collection<TProveedor> readAll(){
@@ -76,7 +53,18 @@ public class SAProveedoresIMP implements SAProveedores{
 		
 	};
 	public int update(TProveedor tProv){
-		return FactoriaIntegracion.getInstance().generaDAOProveedor().update(tProv);
+		int id=-1;
+		
+		DAOProveedores daoProveedor = FactoriaIntegracion.getInstance().generaDAOProveedor();
+		if(tProv!=null &&daoProveedor.read(tProv.getId())!=null&& ComprobadorSintactico.isName(tProv.getNombre()) && Controlador.getInstancia().marcasExisten(tProv.getMarca())){//Mirar si hay que comprobar que la marca existe o no
+			TProveedor leido = daoProveedor.readByName(tProv.getNombre());
+			
+			if(leido == null)
+				id = daoProveedor.update(tProv); //TODO gestionar el hecho de estar activo en el create
+			
+		}
+		return id;
+		
 	};
 	
 	public TProveedor readByName(String nombre){
