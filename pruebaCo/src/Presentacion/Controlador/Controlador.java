@@ -37,6 +37,7 @@ public class Controlador {
 		this.saMarca=FactoriaNegocio.getInstance().generaSAMarca();
 		this.saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
 		this.saProducto= FactoriaNegocio.getInstance().generaSAProducto();
+	//	this.saEmpleado = FactoriaNegocio.getInstance().generaSAEmpleado();
 	}
 	public static Controlador getInstancia() {
 		if(controlador==null){

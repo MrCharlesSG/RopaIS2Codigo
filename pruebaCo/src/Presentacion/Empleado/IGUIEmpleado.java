@@ -1,0 +1,62 @@
+package Presentacion.Empleado;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
+
+public class IGUIEmpleado extends JPanel{
+	public IGUIEmpleado() {
+	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	JButton altaEmpleado=new JButton("Alta de empleado");
+	JButton bajaEmpleado=new JButton("Baja de empleado");
+	JButton listarEmpleado=new JButton("Listar empleado");
+	JButton modificarEmpleado=new JButton("Modificar empleado");
+	JButton empleadoPorID=new JButton("empleado por ID");
+	
+	this.add(altaEmpleado);
+	this.add(bajaEmpleado);
+	this.add(listarEmpleado);
+	this.add(modificarEmpleado);
+	this.add(empleadoPorID);
+	this.setVisible(false);
+	
+	altaEmpleado.addActionListener(new ActionListener()
+		{ public void actionPerformed(ActionEvent e)
+			{		
+				
+				FactoriaPresentacion.getInstance().generaGUIAltaCliente();
+			}
+	});
+	bajaEmpleado.addActionListener(new ActionListener()
+		{ public void actionPerformed(ActionEvent e)
+			{		
+				FactoriaPresentacion.getInstance().generaGUIBajaCliente();
+		}
+	});
+	listarEmpleado.addActionListener(new ActionListener()
+	{ public void actionPerformed(ActionEvent e)
+		{		
+			FactoriaPresentacion.getInstance().generaGUIListarCliente();
+	}
+	});
+	modificarEmpleado.addActionListener(new ActionListener()
+	{ public void actionPerformed(ActionEvent e)
+		{	
+			FactoriaPresentacion.getInstance().generaGUIModificarCliente();
+	}
+	});
+	empleadoPorID.addActionListener(new ActionListener()
+	{ public void actionPerformed(ActionEvent e)
+		{		
+			FactoriaPresentacion.getInstance().generaGUIClientePorID();
+	}
+	});
+	
+	}
+
+}

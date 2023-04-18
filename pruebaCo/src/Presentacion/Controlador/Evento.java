@@ -81,4 +81,23 @@ public class Evento {
 		public static final int RES_LISTAR_CLIENTE_KO = 962;
 		public static final int RES_CLIENTE_POR_ID_OK = 963;
 		public static final int RES_CLIENTE_POR_ID_KO = 964;
+		
+		//clientes
+		public static final int ALTA_EMPLEADO = 300;
+		public static final int BAJA_EMPLEADO= 301;
+		public static final int MODIFICAR_EMPLEADO = 302;
+		public static final int EMPLEADO_POR_ID = 303;
+		public static final int LISTAR_EMPLEADO = 304;
+				
+		//respuestas clientes
+		public static final int RES_ALTA_EMPLEADO_OK = 305;
+		public static final int RES_ALTA_EMPLEADO_KO = 306;
+		public static final int RES_BAJA_EMPLEADO_OK = 307;
+		public static final int RES_BAJA_EMPLEADO_KO = 308;
+		public static final int RES_MODIFICAR_EMPLEADO_OK = 309;
+		public static final int RES_MODIFICAR_EMPLEADO_KO = 310;
+		public static final int RES_LISTAR_EMPLEADO_OK = 311;
+		public static final int RES_LISTAR_EMPLEADO_KO = 312;
+		public static final int RES_EMPLEADO_POR_ID_OK = 313;
+		public static final int RES_EMPLEADO_POR_ID_KO = 314;
 }

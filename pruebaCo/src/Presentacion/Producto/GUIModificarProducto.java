@@ -20,6 +20,7 @@ import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
+import Presentacion.MarcaPresentacion.GUIAltaMarca;
 
 
 /** 
@@ -130,6 +131,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				Controlador.getInstancia().setGUI(GUIModificarProducto.this);
 				Controlador.getInstancia().accion(Evento.MODIFICAR_PRODUCTO, new TProducto(
 						nombreT.getText(), Integer.parseInt(cantidadT.getText()), Integer.parseInt(tallaT.getText()),
 						Integer.parseInt(idT.getText()) ,categoriaT.getText(), Integer.parseInt(idMarcaT.getText())));
