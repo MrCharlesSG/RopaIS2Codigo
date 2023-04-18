@@ -64,13 +64,13 @@ public class GUIModificarCliente extends JFrame implements GUI{
 			botones.add(cancelar);
 			panel.add(desc);
 			panel.add(lDNI);
+			panel.add(tDNI);
 			panel.add(lNombre);
 			panel.add(tNombre);
 			panel.add(lApellido1);
 			panel.add(tApellido1);
 			panel.add(lApellido2);
 			panel.add(tApellido2);
-			panel.add(tDNI);
 			panel.add(ltlf);
 			panel.add(ttlf);
 			panel.add(box);
@@ -106,7 +106,7 @@ public class GUIModificarCliente extends JFrame implements GUI{
 						setVisible(false);
 				}
 			});
-			
+			this.setVisible(true);
 		}
 
 		@Override

@@ -44,6 +44,7 @@ public class MainWindow extends JPanel{
 			options.add(marca);
 			options.add(prod);
 			options.add(prov);
+			options.add(clientes);
 			
 			w.add(options, BorderLayout.WEST);
 			

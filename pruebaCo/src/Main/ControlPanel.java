@@ -19,6 +19,7 @@ public class ControlPanel extends JPanel {
 	private JButton marca;
 	private JButton producto;
 	private JButton proveedor;
+	private JButton cliente;
 	
 	public ControlPanel() {
 		initGui();
@@ -69,7 +70,12 @@ public class ControlPanel extends JPanel {
 		});
 		_toolBar.add(proveedor);
 		
-		 
+		//boton abrir menu clientes
+		cliente = new JButton();
+		cliente.setToolTipText("abrir menú clientes");
+		cliente.setText("Clientes");
+		cliente.addActionListener((e) -> MainWindow.openView(3));
+		_toolBar.add(cliente);
 		
 		_toolBar.add(Box.createGlue()); // this aligns the button to the right
 		_toolBar.addSeparator();
@@ -78,5 +84,6 @@ public class ControlPanel extends JPanel {
 		quit.setIcon(new ImageIcon("resources/exit.png"));
 		quit.addActionListener((e) -> Utils.quit(this));
 		_toolBar.add(quit);
+		
 	}
 }
