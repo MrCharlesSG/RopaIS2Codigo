@@ -88,7 +88,7 @@ public class GUIAltaProducto extends JFrame implements GUI{
 			JOptionPane.showMessageDialog(null,"Se ha dado de alta correctamente el producto");
 			break;
 		case Evento.RES_ALTA_PRODUCTO_KO:
-			JOptionPane.showMessageDialog(null, "No se dar de alta el producto correctamente");
+			JOptionPane.showMessageDialog(null, "No se pudo dar de alta el producto correctamente");
 			break; 
 		}
 	}

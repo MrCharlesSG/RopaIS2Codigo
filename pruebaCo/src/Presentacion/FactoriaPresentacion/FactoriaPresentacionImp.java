@@ -11,6 +11,11 @@ import Presentacion.Clientes.GUIClientePorID;
 import Presentacion.Clientes.GUIListarClientes;
 import Presentacion.Clientes.GUIModificarCliente;
 import Presentacion.Clientes.IGUICliente;
+import Presentacion.Empleado.GUIAltaEmpleado;
+import Presentacion.Empleado.GUIBajaEmpleado;
+import Presentacion.Empleado.GUIEmpleadoPorID;
+import Presentacion.Empleado.GUIListarEmpleados;
+import Presentacion.Empleado.GUIModificarEmpleado;
 import Presentacion.Empleado.IGUIEmpleado;
 import Presentacion.MarcaPresentacion.GUIAltaMarca;
 import Presentacion.MarcaPresentacion.GUIBajaMarca;
@@ -176,8 +181,8 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 		return new GUIBajaEmpleado();
 	}
 	@Override
-	public GUIListarEmpleado generaGUIListarEmpleado() {
-		return new GUIListarEmpleado();
+	public GUIListarEmpleados generaGUIListarEmpleado() {
+		return new GUIListarEmpleados();
 	}
 	@Override
 	public GUIEmpleadoPorID generaGUIEmpleadoPorID() {

@@ -29,31 +29,31 @@ public class IGUIEmpleado extends JPanel{
 		{ public void actionPerformed(ActionEvent e)
 			{		
 				
-				FactoriaPresentacion.getInstance().generaGUIAltaCliente();
+				FactoriaPresentacion.getInstance().generaGUIAltaEmpleado();
 			}
 	});
 	bajaEmpleado.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUIBajaCliente();
+				FactoriaPresentacion.getInstance().generaGUIBajaEmpleado();
 		}
 	});
 	listarEmpleado.addActionListener(new ActionListener()
 	{ public void actionPerformed(ActionEvent e)
 		{		
-			FactoriaPresentacion.getInstance().generaGUIListarCliente();
+			FactoriaPresentacion.getInstance().generaGUIListarEmpleado();
 	}
 	});
 	modificarEmpleado.addActionListener(new ActionListener()
 	{ public void actionPerformed(ActionEvent e)
 		{	
-			FactoriaPresentacion.getInstance().generaGUIModificarCliente();
+			FactoriaPresentacion.getInstance().generaGUIModificarEmpleado();
 	}
 	});
 	empleadoPorID.addActionListener(new ActionListener()
 	{ public void actionPerformed(ActionEvent e)
 		{		
-			FactoriaPresentacion.getInstance().generaGUIClientePorID();
+			FactoriaPresentacion.getInstance().generaGUIEmpleadoPorID();
 	}
 	});
 	

@@ -20,6 +20,7 @@ public class ControlPanel extends JPanel {
 	private JButton producto;
 	private JButton proveedor;
 	private JButton cliente;
+	private JButton empleado;
 	
 	public ControlPanel() {
 		initGui();
@@ -57,6 +58,7 @@ public class ControlPanel extends JPanel {
 			
 		});
 		_toolBar.add(producto);
+		
 		proveedor = new JButton();
 		proveedor.setToolTipText("abrir menú productos");
 		proveedor.setText("Prov");
@@ -76,6 +78,19 @@ public class ControlPanel extends JPanel {
 		cliente.setText("Clientes");
 		cliente.addActionListener((e) -> MainWindow.openView(3));
 		_toolBar.add(cliente);
+		
+		//boton abrir menu empleados
+		empleado = new JButton();
+		empleado.setToolTipText("abrir menú empleados");
+		empleado.setText("Empleados");
+		empleado.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				MainWindow.openView(4);
+			}
+		});
+		_toolBar.add(empleado);
 		
 		_toolBar.add(Box.createGlue()); // this aligns the button to the right
 		_toolBar.addSeparator();

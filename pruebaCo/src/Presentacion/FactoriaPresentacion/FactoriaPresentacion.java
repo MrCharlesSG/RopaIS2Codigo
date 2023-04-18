@@ -12,6 +12,11 @@ import Presentacion.Clientes.GUIClientePorID;
 import Presentacion.Clientes.GUIListarClientes;
 import Presentacion.Clientes.GUIModificarCliente;
 import Presentacion.Clientes.IGUICliente;
+import Presentacion.Empleado.GUIAltaEmpleado;
+import Presentacion.Empleado.GUIBajaEmpleado;
+import Presentacion.Empleado.GUIEmpleadoPorID;
+import Presentacion.Empleado.GUIListarEmpleados;
+import Presentacion.Empleado.GUIModificarEmpleado;
 import Presentacion.Empleado.IGUIEmpleado;
 import Presentacion.MarcaPresentacion.GUIAltaMarca;
 import Presentacion.MarcaPresentacion.GUIBajaMarca;
@@ -111,7 +116,7 @@ public abstract class FactoriaPresentacion {
 	public abstract IGUIEmpleado generaIGUIEmpleado();
 	public abstract GUIAltaEmpleado generaGUIAltaEmpleado();
 	public abstract GUIBajaEmpleado generaGUIBajaEmpleado();
-	public abstract GUIListarEmpleado generaGUIListarEmpleado();
+	public abstract GUIListarEmpleados generaGUIListarEmpleado();
 	public abstract GUIEmpleadoPorID generaGUIEmpleadoPorID();
 	public abstract GUIModificarEmpleado generaGUIModificarEmpleado();
 
