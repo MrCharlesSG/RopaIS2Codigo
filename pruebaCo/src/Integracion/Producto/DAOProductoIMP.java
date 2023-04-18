@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.lang.StringBuilder;
 
+import Negocio.FactoriaNegocio.FactoriaNegocio;
+import Negocio.MarcaNegocio.SAMarca;
 import Negocio.Producto.TProducto;
 
 public class DAOProductoIMP implements DAOProducto{
@@ -46,6 +48,7 @@ public class DAOProductoIMP implements DAOProducto{
 		        	
 		        	if(splitArray[0].equals(stringArray[0]) && splitArray[5].equals(stringArray[5])){
 		        			found = true;
+		        		
 		        	}
 		    	}
 		    }
@@ -60,6 +63,7 @@ public class DAOProductoIMP implements DAOProducto{
 		    	bw.close();
 		    }
 		    br.close();
+		 
 		}
 		catch (Exception e) {
 		   return -1;
@@ -83,7 +87,6 @@ public class DAOProductoIMP implements DAOProducto{
 					sb.append(splitArray[0] + ": " + splitArray[1] + ": " + splitArray[2] + ": " 
 							+ splitArray[3] + ": " + splitArray[4] + ": " + splitArray[5] + System.lineSeparator());
 				}
-				
 			}
 			br.close();
 			
@@ -91,7 +94,7 @@ public class DAOProductoIMP implements DAOProducto{
 			bw.append(sb);
 			bw.flush();
 			bw.close();
-			
+			  
 		}catch (Exception e){
 			return -1;
 		}

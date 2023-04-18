@@ -242,7 +242,7 @@ public class DAOMarcaImp implements DAOMarca {
 		
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
-				if (Integer.parseInt(datos[0])==ID&&datos[3]=="1") {	
+				if (Integer.parseInt(datos[0])==ID&&datos[3].equalsIgnoreCase("1")) {	
 					id=Integer.parseInt(datos[0]);
 					aum+=Integer.parseInt(datos[2]);
 					buffer.append(id+":"+datos[1]+":"+aum+":"+datos[3]).append(System.lineSeparator());

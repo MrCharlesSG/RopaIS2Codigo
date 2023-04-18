@@ -11,14 +11,17 @@ import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.Producto.DAOProducto;
 import Negocio.ComprobadorSintactico;
+import Negocio.FactoriaNegocio.FactoriaNegocio;
+import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
 
 public class SAProductoIMP implements SAProducto{
 	
-	DAOProducto dao;
-	
+	private DAOProducto dao;
+	private SAMarca saMarca;
 	public SAProductoIMP(){
 	 dao = FactoriaIntegracion.getInstance().generaDAOProducto();
+	 saMarca=FactoriaNegocio.getInstance().generaSAMarca();
 	}
 	
 
@@ -27,12 +30,12 @@ public class SAProductoIMP implements SAProducto{
 		TProducto TprodAux;
 		if(ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria())){
 			TprodAux = dao.readByName(Tprod.getNombre());
-			DAOMarca daoM = FactoriaIntegracion.getInstance().generaDAOMarca();
-			TMarca tMarca = daoM.read(Tprod.getIdMarca());
+			
+			TMarca tMarca = saMarca.read(Tprod.getIdMarca());
 			if(TprodAux != null && tMarca != null){
 				if(TprodAux.getIdMarca() != Tprod.getIdMarca()){
 				dao.create(Tprod);
-				daoM.actualizarCantidad(Tprod.getIdMarca(),true);
+				saMarca.actualizarCantidad(Tprod.getIdMarca(),true);
 				}else{
 					return -1;
 				}
@@ -51,10 +54,10 @@ public class SAProductoIMP implements SAProducto{
 			TProducto Tprod = read(id);
 			if(!Tprod.getNombre().equals(null) && Tprod.getCantidad() == 0){
 				dao.delete(Tprod.getIdProducto());
-				DAOMarca daoM = FactoriaIntegracion.getInstance().generaDAOMarca();
-				TMarca tMarca = daoM.read(Tprod.getIdMarca());
-				if(tMarca.getCantidad() !=  0)
-					daoM.actualizarCantidad(Tprod.getIdMarca(),false);
+				
+				//TMarca tMarca = saMarca.read(Tprod.getIdMarca());
+				//if(tMarca.getCantidad() !=  0)
+				saMarca.actualizarCantidad(Tprod.getIdMarca(),false);
 			}else{
 				return -1;
 			}

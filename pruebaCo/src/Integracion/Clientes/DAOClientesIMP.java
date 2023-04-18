@@ -14,7 +14,6 @@ import java.util.Scanner;
 import Negocio.Clientes.TCliente;
 import Negocio.Clientes.TClienteNormal;
 import Negocio.Clientes.TClientePremium;
-import Negocio.MarcaNegocio.TMarca;
 
 
 public class DAOClientesIMP implements DAOClientes {

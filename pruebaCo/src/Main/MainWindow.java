@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import Presentacion.Clientes.IGUICliente;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 import Presentacion.MarcaPresentacion.IGUIMarca;
 import Presentacion.Producto.IGUIProducto;
@@ -18,6 +19,7 @@ public class MainWindow extends JPanel{
 		private static IGUIMarca marca;
 		private static IGUIProducto prod;
 		private static IGUIProv prov;
+		private static IGUICliente clientes;
 		private JPanel options;
 		private static JPanel infoPanel;
 	
@@ -25,6 +27,7 @@ public class MainWindow extends JPanel{
 			marca = FactoriaPresentacion.getInstance().generaIGUIMarca();
 			prod = FactoriaPresentacion.getInstance().generaIGUIProducto();
 			prov = FactoriaPresentacion.getInstance().generaIGUIProveedores();
+			clientes=FactoriaPresentacion.getInstance().generaIGUICliente();
 			initGUI();
 		}
 
@@ -54,20 +57,30 @@ public class MainWindow extends JPanel{
 			case 0:
 				prod.setVisible(false);
 				marca.setVisible(true);
+				clientes.setVisible(false);
 				prov.setVisible(false);
 				break;
 			case 1:
 				prod.setVisible(true);
 				marca.setVisible(false);
+				clientes.setVisible(false);
 				prov.setVisible(false);
 				break;
 			
 			case 2:
 				prod.setVisible(false);
 				marca.setVisible(false);
+				clientes.setVisible(false);
 				prov.setVisible(true);
 				break;
+			case 3:
+				prod.setVisible(false);
+				marca.setVisible(false);
+				prov.setVisible(false);
+				clientes.setVisible(true);
+				break;
 			}
+				
 		}
 		
 		public static void updateInfoPanel(JPanel p){

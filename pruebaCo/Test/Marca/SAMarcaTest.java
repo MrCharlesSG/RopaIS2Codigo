@@ -59,7 +59,19 @@ public class SAMarcaTest {
 		h= this.saMarca.read(2);
 		assertEquals("No se ha leido correctamente la 2da marca",h.getNombre(), this.tMAlmd.getNombre());
 		assertEquals("No se ha leido correctamente la 2da marca",h.getNombre(), this.tMAlmd.getNombre());
-	
+		
+		//compruebo si el actualizar funciona 
+		int anterior=h.getCantidad();
+		saMarca.actualizarCantidad(h.getID(), true);
+		h=saMarca.read(h.getID());
+		assertEquals("No se ha incrementado correctamente la cantidad",h.getCantidad(), anterior+1);
+		
+		 anterior=h.getCantidad();
+		saMarca.actualizarCantidad(h.getID(), false);
+		h=saMarca.read(h.getID());
+		assertEquals("No se ha decrementado correctamente la cantidad",h.getCantidad(), anterior-1);
+		
+		
 		h= this.saMarca.readByName("Almendra");
 		assertEquals("No se ha leido correctamente la 2da marca",h.getNombre(), this.tMAlmd.getNombre());
 		assertEquals("No se ha leido correctamente la 2da marca",h.getNombre(), this.tMAlmd.getNombre());

@@ -21,8 +21,8 @@ import Negocio.Producto.TProducto;
 	public class TestSAProductos {
 
 		private SAProducto saProducto = FactoriaNegocioImp.getInstance().generaSAProducto();//teneis que creaar este metodo 
-		private TProducto tPant = new TProducto("Pantalones azules", 10, 1,0,"M",0);
-		private TProducto tCami = new TProducto("Camiseta blanca", 0, 1,2,"M",0);
+		private TProducto tPant = new TProducto("Pantalones azules", 10, 1,0,"pantalones",0);
+		private TProducto tCami = new TProducto("Camiseta blanca", 0, 1,2,"Camiseta",0);
 		
 		private Collection<TProducto> mockCollec = new ArrayList<TProducto>();
 		

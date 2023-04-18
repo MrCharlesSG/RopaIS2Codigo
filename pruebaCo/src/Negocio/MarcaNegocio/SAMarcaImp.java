@@ -109,8 +109,11 @@ public class SAMarcaImp implements SAMarca {
 	public int actualizarCantidad(int ID,boolean aumento){
 		int id=-1;
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();	
+		
 		if(ComprobadorSintactico.isPositive(ID)){
-			id=daoMarca.actualizarCantidad(ID,aumento);
+			TMarca leido=daoMarca.read(ID);
+			if(leido!=null)
+				id=daoMarca.actualizarCantidad(ID,aumento);
 		}
 			
 		return id;
