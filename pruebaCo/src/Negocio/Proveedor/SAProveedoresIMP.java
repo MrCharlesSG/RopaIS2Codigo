@@ -21,9 +21,14 @@ public class SAProveedoresIMP implements SAProveedores{
 		if(tProv!=null && ComprobadorSintactico.isName(tProv.getNombre()) && Controlador.getInstancia().marcasExisten(tProv.getMarca())){//Mirar si hay que comprobar que la marca existe o no
 			TProveedor leido = daoProveedor.readByName(tProv.getNombre());
 			
-			if(leido == null)
-				id = daoProveedor.create(tProv); //TODO gestionar el hecho de estar activo en el create
-			
+			if(leido == null){
+				tProv.setActivo(true);
+				id = daoProveedor.create(tProv); 
+			}else{
+				if(!leido.getActivo()){
+					id=daoProveedor.update(tProv);
+				}
+			}
 		}
 		return id;
 		
@@ -41,16 +46,26 @@ public class SAProveedoresIMP implements SAProveedores{
 	};
 	public TProveedor read(int id){
 		
-		if(ComprobadorSintactico.isPositive(id))
-			return FactoriaIntegracion.getInstance().generaDAOProveedor().read(id);
-		
+		if(ComprobadorSintactico.isPositive(id)){
+			TProveedor tp=FactoriaIntegracion.getInstance().generaDAOProveedor().read(id);
+			if(tp!=null && tp.getActivo()){
+				return tp;
+			}
+		}
 		return null;
 		
 	};
 	public Collection<TProveedor> readAll(){
-		DAOProveedores daoProv = FactoriaIntegracion.getInstance().generaDAOProveedor();
-		return daoProv.readAll();
-		
+		Collection<TProveedor> lista= new ArrayList<TProveedor>();
+		Collection<TProveedor> aux = FactoriaIntegracion.getInstance().generaDAOProveedor().readAll();
+		if(aux!=null){
+			for(TProveedor p:aux){
+				if(p.getActivo()){
+					lista.add(p);
+				}
+			}
+		}
+		return lista;
 	};
 	public int update(TProveedor tProv){
 		int id=-1;
@@ -61,19 +76,22 @@ public class SAProveedoresIMP implements SAProveedores{
 			
 			if(leido == null)
 				id = daoProveedor.update(tProv); //TODO gestionar el hecho de estar activo en el create
-			
 		}
 		return id;
 		
 	};
 	
-	public TProveedor readByName(String nombre){
-		DAOProveedores daoProv = FactoriaIntegracion.getInstance().generaDAOProveedor();	
+	public TProveedor readByName(String nombre){	
 		TProveedor prov=null;
-		
 		if(ComprobadorSintactico.isName(nombre))
-			prov= daoProv.readByName(nombre);
-		return prov;
+			prov= FactoriaIntegracion.getInstance().generaDAOProveedor().readByName(nombre);
+		
+		if(prov!=null && prov.getActivo()){
+			return prov;
+		}else{
+			return null;
+		}
+		
 		
 	}
 }

@@ -19,50 +19,41 @@ public class DAOProveedoresIMP implements DAOProveedores{
 	 * (non-Javadoc)
 	 * @see Integracion.Proveedores.DAOProveedores#create(Negocio.Proveedor.TProveedor)
 	 * 
-	 * EL formato ser: id, nombre, id marcas 
+	 * EL formato ser: id, nombre, activo, id marcas 
 	 */
 	@Override
 	public int create(TProveedor tProv) {
 		StringBuilder buffer=new StringBuilder();
 		File file=new File(ARCHIVO);
 		String datos[];
-		int id=-1;
+		int id=1;
 		
-		if(file.length()==0){
-			buffer.append("1"+":"+tProv.getNombre());
+		try(Scanner scanner=new Scanner(file)) {//bufferreader
+			//al dao le deeria de dar igual si esta escribiendo algo mal de eso ya se encargan otros
+			//recojo los antiguos datos
+			while(scanner.hasNext()) {
+				
+			
+				datos=scanner.nextLine().split(":");
+				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]);
+				for(int i=3; i<datos.length; i++){
+					buffer.append(":"+datos[i]);
+				}
+				id=Integer.parseInt(datos[0])+1;
+				buffer.append(System.lineSeparator());
+			}
+			
+			//anado a los antiguos datos los nuevos
+			buffer.append((id)+":"+tProv.getNombre()+ ":"+ tProv.getActivo());
 			ArrayList<Integer> lista= tProv.getMarca();
-			for(Integer i:lista){
-				buffer.append(":"+i);
+			for(int i=0; i<lista.size(); i++){
+				buffer.append(":"+lista.get(i));
 			}
-			id=1;
+				
+		}catch (IOException | NumberFormatException e) {
+			return -1;
 		}
-		else{
-			try(Scanner scanner=new Scanner(file)) {//bufferreader
-				//al dao le deeria de dar igual si esta escribiendo algo mal de eso ya se encargan otros
-				//recojo los antiguos datos
-				while(scanner.hasNext()) {
-					
-				
-					datos=scanner.nextLine().split(":");
-					buffer.append(datos[0]+":"+datos[1]);
-					for(int i=2; i<datos.length; i++){
-						buffer.append(":"+datos[i]);
-					}
-					id=Integer.parseInt(datos[0])+1;
-					buffer.append(System.lineSeparator());
-				}
-				
-				//anado a los antiguos datos los nuevos
-				buffer.append((id)+":"+tProv.getNombre());
-				ArrayList<Integer> lista= tProv.getMarca();
-				for(int i=0; i<lista.size(); i++){
-					buffer.append(":"+lista.get(i));
-				}
-				
-			}catch (IOException | NumberFormatException e) {
-				return -1;
-			}
-		}
+	
 		
 			
 		try(Writer w=new BufferedWriter(
@@ -80,33 +71,34 @@ public class DAOProveedoresIMP implements DAOProveedores{
 		StringBuilder buffer=new StringBuilder();
 		File file=new File(ARCHIVO);
 		String datos[];
-		boolean encontrado=false;
+		boolean encontrado=false, activo=true;
 		
-		if(file.length()==0){
-			return -1;
-		}
-		else{
-			try(Scanner scanner=new Scanner(file)) {//bufferreader
+		try(Scanner scanner=new Scanner(file)) {//bufferreader
+			
+			//recojo los datos sin el que tenga el id
+			while(scanner.hasNext()) {
 				
-				//recojo los datos sin el que tenga el id
-				while(scanner.hasNext()) {
-					
-					datos=scanner.nextLine().split(":");
-					if(id!=Integer.parseInt(datos[0])){
-						buffer.append(datos[0]+":"+datos[1]);
-						for(int i=2; i<datos.length; i++){
-							buffer.append(":"+datos[i]);
-						}
-						buffer.append(System.lineSeparator());
-					}else{
-						encontrado=true;
+				datos=scanner.nextLine().split(":");
+				if(id!=Integer.parseInt(datos[0])){
+					buffer.append(datos[0]+":"+datos[1]+":"+ datos[2]);
+					for(int i=3; i<datos.length; i++){
+						buffer.append(":"+datos[i]);
 					}
+					buffer.append(System.lineSeparator());
+				}else{
+					buffer.append(datos[0]+":"+datos[1]+":"+ false);
+					for(int i=3; i<datos.length; i++){
+						buffer.append(":"+datos[i]);
+					}
+					buffer.append(System.lineSeparator());
+					encontrado=true;
+					activo=Boolean.parseBoolean(datos[3]);
 				}
-				
-				
-			}catch (IOException e) {
-				return -1;
 			}
+			
+		
+		}catch (IOException e) {
+			return -1;
 		}
 		
 		if(encontrado){
@@ -114,7 +106,11 @@ public class DAOProveedoresIMP implements DAOProveedores{
 										new OutputStreamWriter(
 										new FileOutputStream(ARCHIVO)))){
 				w.write(buffer.toString());
-				return id;
+				if(activo){
+					return -1;
+				}else{
+					return id;
+				}
 			}catch (IOException e) {
 				return -1;
 			}
@@ -143,10 +139,10 @@ public class DAOProveedoresIMP implements DAOProveedores{
 					if(id==Integer.parseInt(datos[0])){
 						encontrado=true;
 						ArrayList<Integer> lista= new ArrayList<Integer>();
-						for(int i=2; i<datos.length; i++){
+						for(int i=3; i<datos.length; i++){
 							lista.add(Integer.parseInt(datos[i]));
 						}
-						prov= new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, true);
+						prov= new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, Boolean.parseBoolean(datos[2]));
 					}
 				}
 				return prov;
@@ -169,10 +165,10 @@ public class DAOProveedoresIMP implements DAOProveedores{
 				
 				datos=scanner.nextLine().split(":");
 				ArrayList<Integer> lista= new ArrayList<Integer>();
-				for(int i=2; i<datos.length; i++){
+				for(int i=3; i<datos.length; i++){
 					lista.add(Integer.parseInt(datos[i]));
 				}
-				provs.add( new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, true));
+				provs.add( new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, Boolean.parseBoolean(datos[2] )));
 			}
 			return provs;
 			
@@ -195,7 +191,7 @@ public class DAOProveedoresIMP implements DAOProveedores{
 			
 				datos=scanner.nextLine().split(":");
 				if(Integer.parseInt(datos[0])==tProv.getId()){
-					buffer.append(tProv.getId()+":"+tProv.getNombre());
+					buffer.append(tProv.getId()+":"+tProv.getNombre()+ ":"+ tProv.getActivo());
 					
 					ArrayList<Integer> lista= tProv.getMarca();
 					for(int i=0; i<lista.size(); i++){
@@ -203,8 +199,8 @@ public class DAOProveedoresIMP implements DAOProveedores{
 					}
 					buffer.append(System.lineSeparator());
 				}else{
-					buffer.append(datos[0]+":"+datos[1]);
-					for(int i=2; i<datos.length; i++){
+					buffer.append(datos[0]+":"+datos[1]+ ":"+ datos[2]);
+					for(int i=3; i<datos.length; i++){
 						buffer.append(":"+datos[i]);
 					}
 					buffer.append(System.lineSeparator());
@@ -245,10 +241,10 @@ public class DAOProveedoresIMP implements DAOProveedores{
 					if(nombre.equals(datos[1])){
 						encontrado=true;
 						ArrayList<Integer> lista= new ArrayList<Integer>();
-						for(int i=2; i<datos.length; i++){
+						for(int i=3; i<datos.length; i++){
 							lista.add(Integer.parseInt(datos[i]));
 						}
-						prov= new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, true);
+						prov= new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, Boolean.parseBoolean(datos[2]));
 					}
 				}
 				return prov;

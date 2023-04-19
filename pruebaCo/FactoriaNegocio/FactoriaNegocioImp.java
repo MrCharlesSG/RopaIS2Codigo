@@ -3,7 +3,6 @@
  */
 package Negocio.FactoriaNegocio;
 
-import Negocio.Clientes.SAClientes;
 import Negocio.Clientes.TCliente;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Empleado.TEmpleadoTC;
@@ -80,20 +79,14 @@ public class FactoriaNegocioImp extends FactoriaNegocio {
 			if(datos.length==7){
 				boolean tiempo = Boolean.parseBoolean(datos[6]);
 				if(tiempo){
-					empl= new TEmpleadoTC(datos[0], datos[1], datos[2], datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), true);
+					empl= new TEmpleadoTC(datos[0], datos[1], datos[2], datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]));
 				}else{
-					empl= new TEmpleadoTP(datos[0], datos[1], datos[2], datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), true);
+					empl= new TEmpleadoTP(datos[0], datos[1], datos[2], datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]));
 				}
 			}
 		}catch(NumberFormatException e){
 			return null;
 		}
 		return empl;
-	}
-
-	@Override
-	public SAClientes generaSAClientes() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

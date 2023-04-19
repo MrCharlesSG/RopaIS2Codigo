@@ -3,7 +3,6 @@
  */
 package Negocio.FactoriaNegocio;
 
-import Negocio.Clientes.SAClientes;
 import Negocio.Clientes.TCliente;
 import Negocio.Empleado.TEmpleado;
 import Negocio.MarcaNegocio.SAMarca;
@@ -58,8 +57,6 @@ public abstract class FactoriaNegocio {
 	public abstract SAProducto generaSAProducto();
 	
 	public abstract SAProveedores generaSAProveedor();
-	
-	public abstract SAClientes generaSAClientes();
 	
 	public abstract TProveedor generaTProveedor(String[] datos);
 	
