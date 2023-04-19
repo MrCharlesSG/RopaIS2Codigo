@@ -28,44 +28,37 @@ public class SAProductoIMP implements SAProducto{
 	@Override
 	public int create(TProducto Tprod) {
 		TProducto TprodAux;
+		int id=-1;
 		if(ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria())){
 			TprodAux = dao.readByName(Tprod.getNombre());
 			
 			TMarca tMarca = saMarca.read(Tprod.getIdMarca());
 			if(TprodAux != null && tMarca != null){
 				if(TprodAux.getIdMarca() != Tprod.getIdMarca()){
-				dao.create(Tprod);
+				id=dao.create(Tprod);
 				saMarca.actualizarCantidad(Tprod.getIdMarca(),true);
-				}else{
-					return -1;
 				}
-			}else{
-				return -1;
 			}
-		}else{
-			return -1;
 		}
-		return 0;
+		return id;
 	}
+	
+	
 
 	@Override
 	public int delete(int id) {
+		int ID=-1;
 		if(ComprobadorSintactico.isPositive(id)){
 			TProducto Tprod = read(id);
 			if(!Tprod.getNombre().equals(null) && Tprod.getCantidad() == 0){
-				dao.delete(Tprod.getIdProducto());
-				
-				//TMarca tMarca = saMarca.read(Tprod.getIdMarca());
-				//if(tMarca.getCantidad() !=  0)
+				ID=dao.delete(Tprod.getIdProducto());
 				saMarca.actualizarCantidad(Tprod.getIdMarca(),false);
-			}else{
-				return -1;
 			}
-		}else{
-			return -1;
 		}
-		return 0;
+		return ID;
 	}
+	
+	
 
 	@Override
 	public TProducto read(int id) {

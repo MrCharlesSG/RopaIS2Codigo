@@ -21,7 +21,7 @@ public class DAOProductoIMP implements DAOProducto{
 	@Override
 	public int create(TProducto Tprod) {
 		String[] stringArray = new String[6];
-		//nombre: id: cantidad: talla: categoria: idMarca:
+		//  nombre:  id: cantidad: talla: categoria: idMarca:
 		stringArray[0] = Tprod.getNombre();
 		stringArray[1] = Integer.toString(Tprod.getIdProducto());
 		stringArray[2] = Integer.toString(Tprod.getCantidad());
@@ -34,46 +34,56 @@ public class DAOProductoIMP implements DAOProducto{
 		String[] splitArray = new String[6];
 		splitArray[1] = "-1";
 		StringBuilder sb =new StringBuilder();
-		
+		int id=-1;
 		boolean found =false;
-		
-		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+		if(f.length()==0){
+			sb.append(stringArray[0] + ": " + 1 + ": " + stringArray[2] + ": " 
+			        + stringArray[3] + ": " + stringArray[4] + ": " + stringArray[5] + System.lineSeparator());
+			id=1;
+		}
+
+		else{
+			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 		    String line;
 		    while ((line = br.readLine()) != null && found == false) {
 		    	if(!line.equalsIgnoreCase("")){
-		        splitArray = line.split(": ", 6);
+		        splitArray = line.split(": ");
+
+		        	if(splitArray[1].equals(stringArray[1]) && splitArray[5].equals(stringArray[5])&&stringArray[2].equalsIgnoreCase("0")){
+
+		        		found = true;
+		        		splitArray[2]=stringArray[2] ;
+		        	}
 		        	//nombre: id: cantidad: talla: categoria: idMarca:
 		        	sb.append(splitArray[0] + ": " + splitArray[1] + ": " + splitArray[2] + ": " 
 		        			+ splitArray[3] + ": " + splitArray[4] + ": " + splitArray[5] + System.lineSeparator());
-		        	
-		        	if(splitArray[0].equals(stringArray[0]) && splitArray[5].equals(stringArray[5])){
-		        			found = true;
-		        		
-		        	}
 		    	}
 		    }
 		    
 		    if(!found){
 		    	BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-		    	sb.append(stringArray[0] + ": " + Integer.toString((Integer.parseInt(splitArray[1]) + 1)) + ": " + stringArray[2] + ": " 
-		        + stringArray[3] + ": " + stringArray[4] + ": " + stringArray[5] + System.lineSeparator());
+		    	id=(Integer.parseInt(splitArray[1]) + 1);
+		    	sb.append(stringArray[0] + ": " + id + ": " + stringArray[2] + ": " 
+				        + stringArray[3] + ": " + stringArray[4] + ": " + stringArray[5] + System.lineSeparator());
 		    	
 		    	bw.append(sb);
 		    	bw.flush();
 		    	bw.close();
 		    }
 		    br.close();
-		 
+		
 		}
 		catch (Exception e) {
 		   return -1;
 		}
-		return 0;
+		}
+		return id;
 	}
 
 	@Override
 	public int delete(int id) {
 		File f = new File(ARCHIVO);
+		int ID=-1;
 		try(BufferedReader br = new BufferedReader(new FileReader(f))){
 			
 			String line;
@@ -82,10 +92,15 @@ public class DAOProductoIMP implements DAOProducto{
 			
 			while((line = br.readLine()) !=null){
 				splitArray = line.split(": ", 6);
-				if(!splitArray[1].equals(Integer.toString(id)) || !splitArray[2].equals("0")){
+				if(!splitArray[1].equals(Integer.toString(id)) ){
 					//nombre: id: cantidad: talla: categoria: idMarca:
 					sb.append(splitArray[0] + ": " + splitArray[1] + ": " + splitArray[2] + ": " 
 							+ splitArray[3] + ": " + splitArray[4] + ": " + splitArray[5] + System.lineSeparator());
+				}
+				else if(splitArray[1].equals(Integer.toString(id))){
+					sb.append(splitArray[0] + ": " + splitArray[1] + ": " + 0 + ": " 
+							+ splitArray[3] + ": " + splitArray[4] + ": " + splitArray[5] + System.lineSeparator());
+				ID=id;
 				}
 			}
 			br.close();
@@ -98,7 +113,7 @@ public class DAOProductoIMP implements DAOProducto{
 		}catch (Exception e){
 			return -1;
 		}
-		return 0;
+		return ID;
 	}
 
 	@Override
