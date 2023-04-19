@@ -46,8 +46,7 @@ public class DAOMarcaImp implements DAOMarca {
 		else{
 			try(Scanner scanner=new Scanner(file)) {//bufferreader
 				while(scanner.hasNext()) {
-					
-				
+
 					datos=scanner.nextLine().split(":");
 					if(datos[1].equalsIgnoreCase(marca.getNombre())){
 						encontrado=true;
@@ -75,7 +74,7 @@ public class DAOMarcaImp implements DAOMarca {
 			return id;
 		}
 		
-	}//esto esta feo pero bueno 
+	}
 	/** 
 	* (non-Javadoc)
 	* @see DAOMarca#readAll()

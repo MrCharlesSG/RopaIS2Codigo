@@ -40,10 +40,12 @@ public class DAOProductoIMP implements DAOProducto{
 			sb.append(stringArray[0] + ": " + 1 + ": " + stringArray[2] + ": " 
 			        + stringArray[3] + ": " + stringArray[4] + ": " + stringArray[5] + System.lineSeparator());
 			id=1;
+			found =true;
 		}
 
 		else{
 			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+		
 		    String line;
 		    while ((line = br.readLine()) != null && found == false) {
 		    	if(!line.equalsIgnoreCase("")){
@@ -57,26 +59,25 @@ public class DAOProductoIMP implements DAOProducto{
 		        	//nombre: id: cantidad: talla: categoria: idMarca:
 		        	sb.append(splitArray[0] + ": " + splitArray[1] + ": " + splitArray[2] + ": " 
 		        			+ splitArray[3] + ": " + splitArray[4] + ": " + splitArray[5] + System.lineSeparator());
+		        	id=(Integer.parseInt(splitArray[1]) + 1);
 		    	}
 		    }
-		    
+		    br.close();
 		    if(!found){
-		    	BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-		    	id=(Integer.parseInt(splitArray[1]) + 1);
 		    	sb.append(stringArray[0] + ": " + id + ": " + stringArray[2] + ": " 
 				        + stringArray[3] + ": " + stringArray[4] + ": " + stringArray[5] + System.lineSeparator());
-		    	
-		    	bw.append(sb);
-		    	bw.flush();
-		    	bw.close();
 		    }
-		    br.close();
-		
+			}catch (Exception e) {
+				   return -1;
+				}
 		}
-		catch (Exception e) {
-		   return -1;
-		}
-		}
+		    try(BufferedWriter bw = new BufferedWriter(new FileWriter(f))){
+		    bw.append(sb);
+		   	bw.flush();
+		   	bw.close();
+		   	}catch (Exception e) {
+		   		return -1;
+		    	}
 		return id;
 	}
 
@@ -91,7 +92,7 @@ public class DAOProductoIMP implements DAOProducto{
 			StringBuilder sb = new StringBuilder();
 			
 			while((line = br.readLine()) !=null){
-				splitArray = line.split(": ", 6);
+				splitArray = line.split(": ");
 				if(!splitArray[1].equals(Integer.toString(id)) ){
 					//nombre: id: cantidad: talla: categoria: idMarca:
 					sb.append(splitArray[0] + ": " + splitArray[1] + ": " + splitArray[2] + ": " 
@@ -120,7 +121,7 @@ public class DAOProductoIMP implements DAOProducto{
 	public TProducto read(int id) {
 		
 		File f = new File(ARCHIVO);
-		TProducto Tprod = new TProducto(null, -1, -1, -1, null, -1);
+		TProducto Tprod = null;
 		try(BufferedReader br = new BufferedReader(new FileReader(f))){
 			
 			String line;
@@ -153,7 +154,6 @@ public class DAOProductoIMP implements DAOProducto{
 			
 			String line;
 			String[] splitArray;
-			boolean found = false;
 			
 			while((line = br.readLine()) !=null){
 				if(!line.equalsIgnoreCase("")){
@@ -172,7 +172,7 @@ public class DAOProductoIMP implements DAOProducto{
 	@Override
 	public TProducto readByName(String name) {
 		File f = new File(ARCHIVO);
-		TProducto Tprod = new TProducto(null, -1, -1, -1, null, -1);
+		TProducto Tprod =null;
 		try(BufferedReader br = new BufferedReader(new FileReader(f))){
 			
 			String line;

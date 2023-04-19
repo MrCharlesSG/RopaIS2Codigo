@@ -31,13 +31,11 @@ public class SAProductoIMP implements SAProducto{
 		int id=-1;
 		if(ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria())){
 			TprodAux = dao.readByName(Tprod.getNombre());
-			
+
 			TMarca tMarca = saMarca.read(Tprod.getIdMarca());
-			if(TprodAux != null && tMarca != null){
-				if(TprodAux.getIdMarca() != Tprod.getIdMarca()){
+			if(((TprodAux == null)||(coinciden(Tprod,TprodAux)&&TprodAux.getCantidad()==0))&& tMarca != null){	
 				id=dao.create(Tprod);
 				saMarca.actualizarCantidad(Tprod.getIdMarca(),true);
-				}
 			}
 		}
 		return id;
@@ -45,12 +43,17 @@ public class SAProductoIMP implements SAProducto{
 	
 	
 
+	private boolean coinciden(TProducto tprod, TProducto tprodAux) {
+		return tprod.getCategoria().equalsIgnoreCase(tprodAux.getCategoria())&&tprod.getTalla()==tprodAux.getTalla();
+	}
+
+
 	@Override
 	public int delete(int id) {
 		int ID=-1;
 		if(ComprobadorSintactico.isPositive(id)){
 			TProducto Tprod = read(id);
-			if(!Tprod.getNombre().equals(null) && Tprod.getCantidad() == 0){
+			if(Tprod!=null){
 				ID=dao.delete(Tprod.getIdProducto());
 				saMarca.actualizarCantidad(Tprod.getIdMarca(),false);
 			}
