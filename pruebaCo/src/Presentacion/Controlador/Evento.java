@@ -5,6 +5,8 @@ public class Evento {
 	public static final int Mostrar_GUI_MARCA = 0;
 	public static final int Mostrar_GUI_PRODUCTOS = 1;
 	public static final int Mostrar_GUI_PROVEEDORES = 3;
+	public static final int Mostrar_GUI_CLIENTES=4;
+	public static final int Mostrar_GUI_VENTAS=7;
 	
 	//Respuestas
 	public static final int KO = 10;
@@ -100,4 +102,34 @@ public class Evento {
 		public static final int RES_LISTAR_EMPLEADO_KO = 312;
 		public static final int RES_EMPLEADO_POR_ID_OK = 313;
 		public static final int RES_EMPLEADO_POR_ID_KO = 314;
+		
+		//ventas
+		public static final int ABRIR_VENTA= 1101;
+		public static final int CAMBIAR_VENTA= 1102;
+		public static final int CERRAR_VENTA= 1103;
+		public static final int DEVOLUCION_VENTA=1104;
+		public static final int VENTA_POR_ID=1105;
+		public static final int LISTAR_VENTAS=1106;
+		public static final int VENTAS_DE_UN_CLIENTE=1107;
+		public static final int VENTAS_DE_UN_EMPLEADO=1108;
+			
+			
+		//respuestas ventas
+		public static final int RES_ABRIR_VENTA_OK= 1109;
+		public static final int RES_ABRIR_VENTA_KO= 1110;
+		public static final int RES_CAMBIAR_VENTA_OK= 1111;
+		public static final int RES_CAMBIAR_VENTA_KO= 1112;
+		public static final int RES_CERRAR_VENTA_OK= 1113;
+		public static final int RES_CERRAR_VENTA_KO= 1114;
+		public static final int RES_DEVOLUCION_VENTA_OK=1115;
+		public static final int RES_DEVOLUCION_VENTA_KO=1116;
+		public static final int RES_VENTA_POR_ID_OK=1117;
+		public static final int RES_VENTA_POR_ID_KO=1118;
+		public static final int RES_LISTAR_VENTAS_OK=1119;
+		public static final int RES_LISTAR_VENTAS_KO=1120;
+		public static final int RES_VENTAS_DE_UN_CLIENTE_OK=1121;
+		public static final int RES_VENTAS_DE_UN_CLIENTE_KO=1122;
+		public static final int RES_VENTAS_DE_UN_EMPLEADO_OK=1123;
+		public static final int RES_VENTAS_DE_UN_EMPLEADO_KO=1124;
+
 }

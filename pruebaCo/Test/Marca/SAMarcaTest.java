@@ -89,8 +89,8 @@ public class SAMarcaTest {
 		aux2 = saMarca.delete(2);
 		assertEquals("No se ha eliminado correctamente", aux2, 2);
 		
-		//readAll de 0 marcas
-		assertEquals("Read all no funciona para 0 marcas", this.saMarca.readAll().size(), 0);
+		//readAll de 0 marcas activas
+		assertEquals(this.saMarca.readAll().size(), 2);
 		
 		//Añadir 5 marcas
 	/*	String nombre= "Manolo";

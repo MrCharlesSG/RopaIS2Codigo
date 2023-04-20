@@ -42,7 +42,7 @@ public class DAOMarcaTest{
         Collection<TMarca> marcas2 =new ArrayList<TMarca>();
         marcas2 = dmarca.readAll();
 
-        assertEquals(marcas2.size(),0);
+        assertEquals(marcas2.size(),1);
 
         Collection<TMarca> marcas =new ArrayList<TMarca>();
         TMarca tmarca1= new TMarca("coca-cola",1,0,1);
@@ -78,7 +78,7 @@ public class DAOMarcaTest{
 				new FileOutputStream("Marcas.txt")))){
 			w.write("");
 		
-	}catch (IOException e) {
+ 	}catch (IOException e) {
 		
 	}
 	}

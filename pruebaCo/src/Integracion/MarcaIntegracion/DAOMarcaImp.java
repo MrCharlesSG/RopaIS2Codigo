@@ -1,7 +1,4 @@
 
-/**
- * 
- */
 package Integracion.MarcaIntegracion;
 
 import Negocio.MarcaNegocio.TMarca;
@@ -88,10 +85,10 @@ public class DAOMarcaImp implements DAOMarca {
 		try(Scanner sacanner=new Scanner(file)){
 			while(sacanner.hasNextLine()){
 				datos=sacanner.nextLine().split(":");
-				if(datos[3].equalsIgnoreCase("1")){
-					marca=new TMarca(datos[1],Integer.parseInt(datos[0]),Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
-					marcas.add(marca);
-				}
+				
+				marca=new TMarca(datos[1],Integer.parseInt(datos[0]),Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
+				marcas.add(marca);
+				
 				
 			}
 			return marcas;
@@ -116,7 +113,7 @@ public class DAOMarcaImp implements DAOMarca {
 				String tokens[]=scanner.nextLine().split(":");
 
 				int ID=Integer.parseInt(tokens[0]);
-			if (ID==id&&tokens[3].equalsIgnoreCase("1")) {
+			if (ID==id) {
 				 marca=new TMarca(tokens[1],Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
 				 encontrado=true;
 				}
@@ -215,7 +212,7 @@ public class DAOMarcaImp implements DAOMarca {
 				
 				String tokens[]=scanner.nextLine().split(":");
 				
-				if (tokens[1].equalsIgnoreCase(nombre)&&tokens[3].equalsIgnoreCase("1")) {
+				if (tokens[1].equalsIgnoreCase(nombre)) {
 					 marca=new TMarca(nombre,Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
 					encontrado=true;
 				}

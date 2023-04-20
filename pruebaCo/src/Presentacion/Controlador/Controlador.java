@@ -247,6 +247,45 @@ public class Controlador {
                 	//}
                 break;
             }
+            case Evento.ABRIR_VENTA:{
+            	//TODO
+            	break;
+            }
+            case Evento.CAMBIAR_VENTA:{
+            	//TODO
+            	break;
+            }
+            case Evento.CERRAR_VENTA:{
+            	//TODO
+            	break;
+            }
+            case Evento.VENTA_POR_ID:{
+            	//TVenta venta=saVenta.read((int)datos);
+				//if(venta==null){
+					//gui.update(Evento.RES_VENTA_POR_ID_KO, null);
+				//}
+				//else{
+					//gui.update(Evento.RES_VENTA_POR_ID_OK, marca);
+				//}
+            	break;
+            }
+            case Evento.LISTAR_VENTAS:{
+            	//Collection<TVenta>ventas=saVenta.readAll();
+				//gui.update(Evento.LISTAR_VENTAS, ventas);
+            	break;
+            }
+            case Evento.DEVOLUCION_VENTA:{
+            	//TODO
+            	break;
+            }
+            case Evento.VENTAS_DE_UN_CLIENTE:{
+            	//TODO
+            	break;
+            }
+            case Evento.VENTAS_DE_UN_EMPLEADO:{
+            	//TODO
+            	break;
+            }
 
 		}
 	}

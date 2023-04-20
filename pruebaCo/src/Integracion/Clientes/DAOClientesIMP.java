@@ -70,17 +70,17 @@ public class DAOClientesIMP implements DAOClientes {
 		try(Scanner sacanner=new Scanner(file)){
 			while(sacanner.hasNextLine()){
 				datos=sacanner.nextLine().split(":");
-				if(datos[3].equalsIgnoreCase("1")){
+				
 					
-				if(Integer.parseInt(datos[4])==1)
+				if(Integer.parseInt(datos[4])==1){
 					cliente=new TClientePremium(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), Integer.parseInt(datos[4]),Integer.parseInt(datos[5]));
 					clientes.add(cliente);
 				}
 				else{
 					cliente=new TClienteNormal(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), Integer.parseInt(datos[4]),Integer.parseInt(datos[5]));
-					clientes.add(cliente);
+					clientes.add(cliente);			
 				}
-			}
+			}	
 			return clientes;
 		}catch (IOException e) {
 			return null;
@@ -100,7 +100,7 @@ public class DAOClientesIMP implements DAOClientes {
 				String datos[]=scanner.nextLine().split(":");
 
 				int ID=Integer.parseInt(datos[0]);
-			if (ID==id&&datos[5].equalsIgnoreCase("1")) {
+			if (ID==id) {
 				if(Integer.parseInt(datos[4])==1)
 					cliente=new TClientePremium(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), Integer.parseInt(datos[4]),Integer.parseInt(datos[5]));
 				}
@@ -115,7 +115,7 @@ public class DAOClientesIMP implements DAOClientes {
 		}
 	}
 	@Override
-	public int update(TCliente cliente) {//le paso la subscripcion a premium 
+	public int update(TCliente cliente) {
 		StringBuilder buffer=new StringBuilder();
 		File file=new File(ARCHIVO);
 		String datos[];
@@ -126,8 +126,12 @@ public class DAOClientesIMP implements DAOClientes {
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
 				if (cliente.getID()==Integer.parseInt(datos[0])) {	
+					
 					id=Integer.parseInt(datos[0]);
-					buffer.append(id+":"+datos[1]+":"+datos[2]+":"+datos[3]+":1:"+datos[5]).append(System.lineSeparator());
+					if(cliente.getPremium())
+						buffer.append(id+":"+datos[1]+":"+datos[2]+":"+datos[3]+ ":1:"+datos[5]).append(System.lineSeparator());
+					else
+						buffer.append(id+":"+datos[1]+":"+datos[2]+":"+datos[3]+ ":0:"+datos[5]).append(System.lineSeparator());
 				}
 				else
 					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]+":"+datos[4]+":"+datos[5]).append(System.lineSeparator());
@@ -182,7 +186,7 @@ public class DAOClientesIMP implements DAOClientes {
 		try(Scanner scanner= new Scanner(file)){
 			while(scanner.hasNext() &&!encontrado) {
 				String datos[]=scanner.nextLine().split(":");
-				if (datos[2].equalsIgnoreCase(dni)&&datos[5].equalsIgnoreCase("1")) {
+				if (datos[2].equalsIgnoreCase(dni)) {
 					if(Integer.parseInt(datos[4])==1)
 						cliente=new TClientePremium(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), Integer.parseInt(datos[4]),Integer.parseInt(datos[5]));
 					else
@@ -197,5 +201,3 @@ public class DAOClientesIMP implements DAOClientes {
 	}
 
 }
-
-
