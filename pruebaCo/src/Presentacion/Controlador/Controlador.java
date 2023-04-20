@@ -226,7 +226,7 @@ public class Controlador {
             }
             case Evento.LISTAR_CLIENTES:{
               Collection<TCliente>clientes= saCliente.readAll();
-              gui.update(Evento.RES_LISTAR_CLIENTE_OK, clientes);
+              gui.update(Evento.LISTAR_CLIENTES, clientes);
                break;
             }
             case Evento.CLIENTE_POR_ID:{
