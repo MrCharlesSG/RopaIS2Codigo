@@ -43,7 +43,7 @@ public class ComprobadorSintactico {
 	
 	}
 
-	public static boolean isDNI(String dni) {//yo quitaria lo de dni
-		// TODO Auto-generated method stub
-		return true;
+	public static boolean isDNI(String dni) {
+	
+		return true;//dni.length()==9;
 	}}

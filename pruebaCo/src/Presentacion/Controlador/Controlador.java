@@ -4,6 +4,8 @@ package Presentacion.Controlador;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import Negocio.Clientes.SAClientes;
+import Negocio.Clientes.TCliente;
 import Negocio.FactoriaNegocio.FactoriaNegocio;
 import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
@@ -31,6 +33,7 @@ public class Controlador {
 	private SAMarca saMarca; 
 	private SAProducto saProducto;
 	private SAProveedores saProveedor;
+	private SAClientes saCliente;
 	private GUI gui;
 	
 	private Controlador(){
@@ -38,6 +41,7 @@ public class Controlador {
 		this.saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
 		this.saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 	//	this.saEmpleado = FactoriaNegocio.getInstance().generaSAEmpleado();
+		saCliente=FactoriaNegocio.getInstance().generaSAClientes();
 	}
 	public static Controlador getInstancia() {
 		if(controlador==null){
@@ -200,51 +204,43 @@ public class Controlador {
 			 * CLIENTES
 			 */
 			case Evento.ALTA_CLIENTE:{
-				/*
-				 * int res=this.saCliente.create((TCliente)datos);
-				 * if(res>0){
+				
+				 int res=this.saCliente.create((TCliente)datos);
+				 if(res>0){
 					gui.update(Evento.RES_ALTA_CLIENTE_OK, new Integer(res));
 				}
 				else{
-					gui.update(Evento.RES_ALTA_Cliente_KO, null);
+					gui.update(Evento.RES_ALTA_CLIENTE_KO, null);
 				}
-				 */
+			
 				break;
             }
             case Evento.BAJA_CLIENTE:{
-                int idcliente=(int) datos;
-                /*
-                 * int res = saCliente.delete(idcliente);
-                 * 
-                 *  if(res > 0)
+                  int idcliente=(int) datos;
+                  int res = saCliente.delete(idcliente);
+                  if(res > 0)
                     gui.update(Evento.RES_BAJA_CLIENTE_OK, new Integer(res));
                 else
                     gui.update(Evento.RES_BAJA_CLIENTE_KO, null);
-                 */
                 break;
             }
             case Evento.LISTAR_CLIENTES:{
-              //  Collection<TCliente>clientes;// = saCliente.readAll();
-                //if(clientes!= null && clientes instanceof ArrayList){
-                	//gui.update(Evento.RES_LISTAR_CLIENTE_OK, datos);
-                //}else{
-                	//gui.update(Evento.RES_LISTAR_CLIENTE_KO, null);
-                //}
-                break;
+              Collection<TCliente>clientes= saCliente.readAll();
+              gui.update(Evento.RES_LISTAR_CLIENTE_OK, clientes);
+               break;
             }
             case Evento.CLIENTE_POR_ID:{
-            	   // TCliente cliente = saCliente.read((int)datos);
-            	   // int res= cliente==null ? Evento.RES_CLIENTE_POR_ID_KO : Evento.RES_CLIENTE_POR_ID_OK;
-            	  //  gui.update(res, cliente);
+            	    TCliente cliente = saCliente.read((int)datos);
+            	   int res= cliente==null ? Evento.RES_CLIENTE_POR_ID_KO : Evento.RES_CLIENTE_POR_ID_OK;
+            	   gui.update(res, cliente);
                 break;
             }
             case Evento.MODIFICAR_CLIENTE:{
-                	//TCliente cliente= FactoriaNegocio.getInstance().generaTCliente((String[])datos);
-                	//if(cliente!=null && saCliente.update(cliente)>0){
-                	//	gui.update(Evento.RES_MODIFICAR_CLIENTE_OK, cliente);
-                	//}else{
-                		//gui.update(Evento.RES_MODIFICAR_CLIENTE_KO, null);
-                	//}
+                	int res=saCliente.update((TCliente)datos);
+                	if(res>0)
+                		gui.update(Evento.RES_MODIFICAR_CLIENTE_OK, res);
+                	else
+                		gui.update(Evento.RES_MODIFICAR_CLIENTE_KO, null);
                 break;
             }
             case Evento.ABRIR_VENTA:{
@@ -293,7 +289,7 @@ public class Controlador {
 	public void setGUI(GUI gui){
 		this.gui=gui;
 	}
-	public boolean marcasExisten(ArrayList<Integer> marcas) {
+	public boolean marcasExisten(ArrayList<Integer> marcas) {// esto no se comprueba aqui
 		boolean existe=true;
 		if(marcas.size()!=0){
 			SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();

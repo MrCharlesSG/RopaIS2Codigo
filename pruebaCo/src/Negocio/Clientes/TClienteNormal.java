@@ -8,7 +8,7 @@ public class TClienteNormal extends TCliente{
 
 	}
 
-	public TClienteNormal(int id, String nombre_apellidos, String dni, int tlf, int premium, int activo) {
+	public TClienteNormal(int id, String nombre_apellidos, String dni, int tlf, String premium, int activo) {
 		super(id,nombre_apellidos,dni,tlf,premium,activo);
 	}
 

@@ -21,7 +21,7 @@ public abstract class TCliente {
 		this.Telefono=tlf;
 		this.Premiumbool=es_premium;
 	}
-	public TCliente(int id,String nombre_apellidos,String dni,int tlf,int es_premium,int activo){
+	public TCliente(int id,String nombre_apellidos,String dni,int tlf,String es_premium,int activo){
 		if(activo==1)
 			this.Active=true;
 		else
@@ -35,7 +35,7 @@ public abstract class TCliente {
 		this.DNI=dni;
 		this.IDCliente=id;
 		this.Telefono=tlf;
-		if(es_premium==1)
+		if(es_premium.equalsIgnoreCase("true"))
 			this.Premiumbool=true;
 		else
 			this.Premiumbool=false;

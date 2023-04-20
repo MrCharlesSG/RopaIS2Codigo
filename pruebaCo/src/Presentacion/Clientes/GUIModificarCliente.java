@@ -112,12 +112,12 @@ public class GUIModificarCliente extends JFrame implements GUI{
 		@Override
 		public void update(int evento, Object datos) {
 			switch(evento){
-			case Evento.OK:{
-				Utils.showCorrectMsg("El cliente ha sido modificado con exito:"+ System.lineSeparator()+datos.toString());
+			case Evento.RES_MODIFICAR_CLIENTE_OK:{
+				Utils.showCorrectMsg("El cliente" +datos.toString()+" ha sido modificado con exito");
 				this.setVisible(false);
 				break;
 			}
-			case Evento.KO:{
+			case Evento.RES_MODIFICAR_CLIENTE_KO:{
 				Utils.showErrorMsg("El cliente no se ha podido modificar");
 				this.setVisible(false);
 				break;

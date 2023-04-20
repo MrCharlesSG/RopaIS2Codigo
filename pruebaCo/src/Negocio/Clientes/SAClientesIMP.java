@@ -40,9 +40,9 @@ public class SAClientesIMP implements SAClientes {
 	@Override
 	public int update(TCliente cliente) {
 		int id=-1;
-		if(esValido(cliente))
-			id=daoClientes.update(cliente);
-		
+		TCliente leido=daoClientes.readByName(cliente.getDNI());
+		if(esValido(cliente)&&leido!=null)
+			id=daoClientes.update(leido);
 		return id;
 	}
 
@@ -51,7 +51,7 @@ public class SAClientesIMP implements SAClientes {
 	public int delete(int ID) {
 		int id=-1;
 		if(ComprobadorSintactico.isPositive(ID)){
-			TCliente cliente=daoClientes.read(id);
+			TCliente cliente=daoClientes.read(ID);
 			if(cliente!=null&&cliente.getActivo())
 				id=daoClientes.delete(cliente);
 		}

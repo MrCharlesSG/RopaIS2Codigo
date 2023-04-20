@@ -4,6 +4,7 @@
 package Negocio.FactoriaNegocio;
 
 import Negocio.Clientes.SAClientes;
+import Negocio.Clientes.SAClientesIMP;
 import Negocio.Clientes.TCliente;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Empleado.TEmpleadoTC;
@@ -93,7 +94,7 @@ public class FactoriaNegocioImp extends FactoriaNegocio {
 
 	@Override
 	public SAClientes generaSAClientes() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new SAClientesIMP() ;
 	}
 }
