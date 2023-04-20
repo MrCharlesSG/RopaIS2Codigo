@@ -21,7 +21,7 @@ import Presentacion.GUI.GUI;
 public class GUIModificarEmpleado extends JFrame implements GUI {
 
 	public GUIModificarEmpleado() {
-		setTitle("Modificar cliente");
+		setTitle("Modificar empleado");
 		
 		JPanel panel=new JPanel();
 		
@@ -44,8 +44,8 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 		final JTextField ttlf=new JTextField(9);
 		
 		DefaultComboBoxModel<String> opciones=new DefaultComboBoxModel<>();
-		opciones.addElement("Premium");
-		opciones.addElement("Normal");
+		opciones.addElement("Tiempo Parcial");
+		opciones.addElement("Tiempo Completo");
 		JComboBox<String>box=new JComboBox<>(opciones);
 		
 		JButton ok=new JButton("Aceptar");
@@ -105,12 +105,12 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 	public void update(int evento, Object datos) {
 		switch(evento){
 		case Evento.OK:{
-			Utils.showCorrectMsg("El cliente ha sido modificado con exito:"+ System.lineSeparator()+datos.toString());
+			Utils.showCorrectMsg("El empleado ha sido modificado con exito:"+ System.lineSeparator()+datos.toString());
 			this.setVisible(false);
 			break;
 		}
 		case Evento.KO:{
-			Utils.showErrorMsg("El cliente no se ha podido modificar");
+			Utils.showErrorMsg("El empleado no se ha podido modificar");
 			this.setVisible(false);
 			break;
 		}
