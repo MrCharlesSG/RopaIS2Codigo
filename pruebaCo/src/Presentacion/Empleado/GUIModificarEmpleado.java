@@ -98,7 +98,7 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 						 t= new TEmpleadoTP(nombre, apellido1, apellido2, DNI, tlf, -1 , true);
 					}
 					Controlador.getInstancia().setGUI(GUIModificarEmpleado.this);
-					Controlador.getInstancia().accion(Evento.MODIFICAR_CLIENTE, t);
+					Controlador.getInstancia().accion(Evento.MODIFICAR_EMPLEADO, t);
 				}
 		});
 		

@@ -277,9 +277,9 @@ public class Controlador {
             	break;
             }
             case Evento.EMPLEADO_POR_ID:{
-            	TCliente cliente = saCliente.read((int)datos);
-	         	int res= cliente==null ? Evento.RES_CLIENTE_POR_ID_KO : Evento.RES_CLIENTE_POR_ID_OK;
-	         	gui.update(res, cliente);
+            	TEmpleado empl = saEmpleado.read((int)datos);
+	         	int res= empl==null ? Evento.RES_CLIENTE_POR_ID_KO : Evento.RES_CLIENTE_POR_ID_OK;
+	         	gui.update(res, empl);
 	        	break;
             }
             case Evento.LISTAR_EMPLEADO:{

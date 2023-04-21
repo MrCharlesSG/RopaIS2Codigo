@@ -27,7 +27,7 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 	
 	private void initGUI() {
 		Controlador.getInstancia().setGUI(GUIListarEmpleados.this);
-		Controlador.getInstancia().accion(Evento.LISTAR_PROVEEDORES,null);
+		Controlador.getInstancia().accion(Evento.LISTAR_EMPLEADO,null);
 	}
 
 	private void listaEmpleados(ArrayList<Object> datos){
@@ -63,11 +63,11 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 	@Override
 	public void update(int evento, Object datos) {
 		switch(evento){
-		case Evento.RES_LISTAR_EMPLEADO_KO:{
+		case Evento.KO:{
 			setVisible(false);
 			Utils.showErrorMsg("No se ha podido listar los Empleados");
 		}
-		case Evento.RES_LISTAR_EMPLEADO_OK:{
+		case Evento.OK:{
 			this.listaEmpleados((ArrayList<Object>)datos);
 		}
 		}

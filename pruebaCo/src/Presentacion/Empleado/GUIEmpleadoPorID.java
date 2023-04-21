@@ -53,7 +53,7 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 
 	@Override
 	public void update(int evento, Object datos) {
-	if( Evento.RES_EMPLEADO_POR_ID_OK==evento){
+	if( Evento.OK==evento){
 	TEmpleado c=(TEmpleado) datos;
 		StringBuilder str=new StringBuilder();
 		str.append("ID: NOMBRE: APELLIDO1: APELLIDO2: DNI: TLF: TIPO CONTRATO: ACTIVO").append(System.lineSeparator());
@@ -61,7 +61,7 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 		JOptionPane.showMessageDialog(null, str.toString());
 	
 	}
-	if( Evento.RES_CLIENTE_POR_ID_KO==evento)
+	if( Evento.KO==evento)
 	{
 		JOptionPane.showMessageDialog(null, "No se pudo encontrar el empleado con ese ID");
 

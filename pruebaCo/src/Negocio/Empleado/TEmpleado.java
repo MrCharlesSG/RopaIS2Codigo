@@ -85,6 +85,16 @@ public abstract class TEmpleado {
 		this.tiempoCompleto = tiempoCompleto;
 	}
 	
-	
+	@Override
+	public String toString() {
+	    StringBuilder buffer = new StringBuilder();
+	    buffer.append("ID: "+ ID+" || Nombre: "+ nombre+ " || ");
+	    if(tiempoCompleto) {
+	    	buffer.append("Tiempo Completo");
+	    }else {
+	    	buffer.append("Tiempo Parcial");
+	    }
+	    return buffer.toString();
+	}
 	
 }

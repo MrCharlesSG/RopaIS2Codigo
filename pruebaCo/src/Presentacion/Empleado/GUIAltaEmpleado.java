@@ -99,11 +99,11 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 
 	@Override
 	public void update(int evento, Object datos) {
-		if(Evento.RES_ALTA_EMPLEADO_OK==evento){
+		if(Evento.OK==evento){
 		Integer id= (Integer) datos;
 		JOptionPane.showMessageDialog(null,"Alta de empleado con ID: "+id.intValue());
 		}
-		else if( Evento.RES_ALTA_EMPLEADO_KO==evento)
+		else if( Evento.KO==evento)
 		{ 
 		JOptionPane.showMessageDialog(null, "No se pudo dar de alta el empleado"); 
 		}
