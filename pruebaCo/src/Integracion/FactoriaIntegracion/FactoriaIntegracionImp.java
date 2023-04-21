@@ -5,6 +5,8 @@ package Integracion.FactoriaIntegracion;
 
 import Integracion.Clientes.DAOClientes;
 import Integracion.Clientes.DAOClientesIMP;
+import Integracion.Empleados.DAOEmpleado;
+import Integracion.Empleados.DAOEmpleadoImp;
 import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.MarcaIntegracion.DAOMarcaImp;
 import Integracion.Producto.DAOProducto;
@@ -33,5 +35,10 @@ public class FactoriaIntegracionImp extends FactoriaIntegracion {
 	@Override
 	public DAOClientes generaDAOClientes() {
 		return new DAOClientesIMP();
+	}
+
+	@Override
+	public DAOEmpleado generaDAOEmpleado() {
+		return new DAOEmpleadoImp();
 	}
 }

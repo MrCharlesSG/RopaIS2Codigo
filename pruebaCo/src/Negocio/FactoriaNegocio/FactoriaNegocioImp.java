@@ -6,6 +6,8 @@ package Negocio.FactoriaNegocio;
 import Negocio.Clientes.SAClientes;
 import Negocio.Clientes.SAClientesIMP;
 import Negocio.Clientes.TCliente;
+import Negocio.Empleado.SAEmpleado;
+import Negocio.Empleado.SAEmpleadoImp;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Empleado.TEmpleadoTC;
 import Negocio.Empleado.TEmpleadoTP;
@@ -96,5 +98,10 @@ public class FactoriaNegocioImp extends FactoriaNegocio {
 	public SAClientes generaSAClientes() {
 		
 		return new SAClientesIMP() ;
+	}
+
+	@Override
+	public SAEmpleado generaSAEmpleado() {
+		return new SAEmpleadoImp();
 	}
 }

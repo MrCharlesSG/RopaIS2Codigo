@@ -11,4 +11,5 @@ public interface SAProveedores {
     public Collection<TProveedor> readAll();
     public int update(TProveedor tProv); //TODO parametros
     public TProveedor readByName(String nombre);
+    
 }

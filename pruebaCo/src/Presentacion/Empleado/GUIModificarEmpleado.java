@@ -14,11 +14,20 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Main.Utils;
+import Negocio.Empleado.TEmpleado;
+import Negocio.Empleado.TEmpleadoTC;
+import Negocio.Empleado.TEmpleadoTP;
+import Presentacion.Clientes.GUIModificarCliente;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 
 public class GUIModificarEmpleado extends JFrame implements GUI {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public GUIModificarEmpleado() {
 		setTitle("Modificar empleado");
@@ -82,12 +91,13 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 					String tipo=(String) box.getSelectedItem();
 					TEmpleado t;
 					if(tipo.equalsIgnoreCase("Premium")){
-						 t= new TEmpleadoTC(true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
+						//
+						 t= new TEmpleadoTC(nombre, apellido1, apellido2, DNI,tlf, -1, true);
 					}
 					else{
-						 t= new TEmpleadoTP(true, apellido1, apellido2, DNI, -1, nombre, tlf, false);
+						 t= new TEmpleadoTP(nombre, apellido1, apellido2, DNI, tlf, -1 , true);
 					}
-					Controlador.getInstancia().setGUI(GUIModificarCliente.this);
+					Controlador.getInstancia().setGUI(GUIModificarEmpleado.this);
 					Controlador.getInstancia().accion(Evento.MODIFICAR_CLIENTE, t);
 				}
 		});
