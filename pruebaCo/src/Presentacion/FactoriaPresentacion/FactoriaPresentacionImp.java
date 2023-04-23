@@ -35,6 +35,7 @@ import Presentacion.ProveedorPresentacion.GUIListarProv;
 import Presentacion.ProveedorPresentacion.GUIModificarProv;
 import Presentacion.ProveedorPresentacion.GUIProvPorID;
 import Presentacion.ProveedorPresentacion.IGUIProv;
+import Presentacion.Ventas.IGUIVentas;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -191,6 +192,13 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	@Override
 	public GUIModificarEmpleado generaGUIModificarEmpleado() {
 		return new GUIModificarEmpleado();
+	}
+	/*
+	 * VENTAS
+	 */
+	@Override
+	public IGUIVentas generaIGUIVenta() {
+		return new IGUIVentas();
 	}
 
 

@@ -36,6 +36,7 @@ import Presentacion.ProveedorPresentacion.GUIListarProv;
 import Presentacion.ProveedorPresentacion.GUIModificarProv;
 import Presentacion.ProveedorPresentacion.GUIProvPorID;
 import Presentacion.ProveedorPresentacion.IGUIProv;
+import Presentacion.Ventas.IGUIVentas;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -101,6 +102,7 @@ public abstract class FactoriaPresentacion {
 	public  abstract GUIListarProductos generaGUIListarProducto();
 	public abstract GUIProductoPorID generaGUIProductoPorID();
 	public abstract GUIModificarProducto generaGUIModificarProducto();
+	
 	/*
 	 * CLIENTES
 	 */
@@ -110,6 +112,7 @@ public abstract class FactoriaPresentacion {
 	public  abstract GUIListarClientes generaGUIListarCliente();
 	public abstract GUIClientePorID generaGUIClientePorID();
 	public abstract GUIModificarCliente generaGUIModificarCliente();
+	
 	/*
 	 * EMPLEADOS
 	 */
@@ -119,5 +122,10 @@ public abstract class FactoriaPresentacion {
 	public abstract GUIListarEmpleados generaGUIListarEmpleado();
 	public abstract GUIEmpleadoPorID generaGUIEmpleadoPorID();
 	public abstract GUIModificarEmpleado generaGUIModificarEmpleado();
+	
+	/*
+	 * VENTAS
+	 */
+	public abstract IGUIVentas generaIGUIVenta() ;
 
 }

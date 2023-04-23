@@ -99,7 +99,7 @@ public class GUIModificarProv extends JFrame implements GUI{
 			}
 			
 		});
-		
+		/*
 		panel.add(lID);
 		panel.add(jtextID);
 		panel.add(lNombre);
@@ -114,7 +114,7 @@ public class GUIModificarProv extends JFrame implements GUI{
 		panel.add(lM4);panel.add(tM4);		
 		panel.add(Box.createVerticalStrut(10));
 		panel.add(lM5);panel.add(tM5);
-		
+		*/
 		JPanel panelBotones = new JPanel();
         panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.X_AXIS));
         panelBotones.add(Box.createHorizontalGlue());
