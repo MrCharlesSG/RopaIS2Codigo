@@ -95,7 +95,7 @@ public class DAOMarcaTest{
 		        TMarca elem1 = it1.next();
 		        TMarca elem2 = it2.next();
 		
-		        if (!elem1.getNombre().equals(elem2.getNombre()) || elem1.getActivo()!= elem2.getActivo()  ||elem1.getID()!= elem2.getID() || elem1.getCantidad()!=elem2.getCantidad()) {
+		        if (!elem1.getNombre().equalsIgnoreCase(elem2.getNombre()) || elem1.getActivo()!= elem2.getActivo()  ||elem1.getID()!= elem2.getID() || elem1.getCantidad()!=elem2.getCantidad()) {
                     iguales = false;
                 }
 		    }

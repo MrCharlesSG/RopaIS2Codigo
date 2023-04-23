@@ -25,8 +25,8 @@ import Negocio.Clientes.TClientePremium;
 
 public class SaClienteTest {
 	private SAClientes saCliente=FactoriaNegocioImp.getInstance().generaSAClientes();
-    private TCliente tDani=new TClienteNormal(true, "Diaz", "Diaz", "12234324423A", 1, "Dani", 613456987, false);;
-    private TCliente tPablo= new TClientePremium(true, "Gonzalez", "Gonzalez", "432678987E", 2, "Pablo", 654798654, true);
+    private TCliente tDani=new TClienteNormal(true, "Diaz", "Diaz", "12234324A", 1, "Dani", 613456987, false);;
+    private TCliente tPablo= new TClientePremium(true, "Gonzalez", "Gonzalez", "43267896E", 2, "Pablo", 654798654, true);
     private Collection<TCliente> mockCollec=new ArrayList<TCliente>();
 	@Test
     public void basicBehaviuor(){
@@ -42,7 +42,7 @@ public class SaClienteTest {
         assertEquals(cliente1.getID(), this.tDani.getID());
        
         //leo por nombre el cliente
-        TCliente cliente2=this.saCliente.readByName("12234324423A");
+        TCliente cliente2=this.saCliente.readByName("12234324A");
         assertEquals(cliente2.getNombre(), "Dani");
         assertEquals(cliente2.getID(), this.tDani.getID());
 
@@ -57,7 +57,7 @@ public class SaClienteTest {
         assertEquals(cliente1.getNombre(), this.tPablo.getNombre());
         assertEquals(cliente1.getID(), this.tPablo.getID());
         
-        cliente2=this.saCliente.readByName("432678987E");
+        cliente2=this.saCliente.readByName("43267896E");
         assertEquals(cliente2.getNombre(), this.tPablo.getNombre());
         assertEquals(cliente2.getID(), this.tPablo.getID());
 
