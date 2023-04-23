@@ -8,6 +8,7 @@ import Integracion.Empleados.DAOEmpleado;
 import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.Producto.DAOProducto;
 import Integracion.Proveedores.DAOProveedores;
+import Negocio.Ventas.DAOVentas;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -47,4 +48,5 @@ public abstract class FactoriaIntegracion {
 	public abstract DAOProveedores generaDAOProveedor();
 	public abstract DAOEmpleado generaDAOEmpleado() ;	
 	public abstract DAOClientes generaDAOClientes() ;
+	public abstract DAOVentas generaDAOVentas() ;
 }

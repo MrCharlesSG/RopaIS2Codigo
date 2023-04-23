@@ -340,9 +340,10 @@ public class Controlador {
 	public void setGUI(GUI gui){
 		this.gui=gui;
 	}
-	public boolean marcasExisten(ArrayList<Integer> marcas) {// esto no se comprueba aqui
-		boolean existe=true;
+	public boolean marcasExisten(ArrayList<Integer> marcas) {
+		boolean existe=false;
 		if(marcas.size()!=0){
+			 existe=true;
 			SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 			Collection<TMarca> listam = saMarca.readAll();
 			int i=0;
@@ -358,5 +359,6 @@ public class Controlador {
 		}
 		return existe;
 	}
+	
 }
 	

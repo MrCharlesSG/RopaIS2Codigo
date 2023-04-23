@@ -19,6 +19,8 @@ import Negocio.Producto.SAProductoIMP;
 import Negocio.Proveedor.SAProveedores;
 import Negocio.Proveedor.SAProveedoresIMP;
 import Negocio.Proveedor.TProveedor;
+import Negocio.Ventas.SAVentas;
+import Negocio.Ventas.SAVentasIMP;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -103,5 +105,11 @@ public class FactoriaNegocioImp extends FactoriaNegocio {
 	@Override
 	public SAEmpleado generaSAEmpleado() {
 		return new SAEmpleadoImp();
+	}
+
+	@Override
+	public SAVentas generaSAVentas() {
+		
+		return new SAVentasIMP();
 	}
 }

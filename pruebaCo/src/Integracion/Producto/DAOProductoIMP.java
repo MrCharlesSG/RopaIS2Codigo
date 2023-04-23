@@ -206,7 +206,7 @@ public class DAOProductoIMP implements DAOProducto{
 		stringArray[5] = Integer.toString(Tprod.getIdMarca());
 		
 		File f =new File(ARCHIVO);
-		
+		int id=-1;
 		String[] splitArray = null;
 		StringBuilder sb =new StringBuilder();
 		
@@ -221,6 +221,7 @@ public class DAOProductoIMP implements DAOProducto{
 		        if(splitArray[1].equals(stringArray[1])){
 		        	 sb.append(stringArray[0] + ": " + splitArray[1] + ": " + (Integer.parseInt(splitArray[2]) + Integer.parseInt(stringArray[2])) + ": " + stringArray[3]
 		        			 + ": " + stringArray[4] + ": " + splitArray[5] + System.lineSeparator());
+		        	 id=Tprod.getIdProducto();
 		        }else{
 		        	   sb.append(splitArray[0] + ": " + splitArray[1] + ": " + splitArray[2] + ": " 
 		       		        + splitArray[3] + ": " + splitArray[4] + ": " + splitArray[5] + System.lineSeparator());
@@ -234,9 +235,9 @@ public class DAOProductoIMP implements DAOProducto{
 		    br.close();
 		}
 		catch (Exception e) {
-		   return -1;
+		   return id;
 		}
-		return 0;
+		return id;
 	}
 
 	@Override

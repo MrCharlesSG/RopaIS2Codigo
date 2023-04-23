@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.junit.Test;
-import Integracion.Clientes.DAOClientes;
 import Integracion.Clientes.DAOClientesIMP;
 import Negocio.Clientes.TClienteNormal;
 import Negocio.Clientes.TClientePremium;

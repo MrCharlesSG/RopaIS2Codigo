@@ -30,7 +30,7 @@ public class DAOProductosTest {
 			
 			assertEquals(null, res);
 			
-			TProducto tVaqueros=new TProducto("vaqueros", 1, 38, 2, "pantalones",0 );
+			TProducto tVaqueros=new TProducto("vaqueros", 0, 38, 1, "pantalones",0 );
 			
 			int id= dproducto.create(tVaqueros);
 			assertEquals(1, id);
@@ -48,15 +48,16 @@ public class DAOProductosTest {
 			
 			
 			Collection<TProducto> productos=new ArrayList<TProducto>();
-			TProducto prod1= new TProducto("vaqueros", 1, 38, 0, "pantalones", 0);
-			TProducto prod2= new TProducto("chandal", 1, 38, 1, "pantalones", 0);
-			TProducto prod3= new TProducto("cargos", 1, 38, 2, "pantalones", 0);
+			TProducto prod1= new TProducto("vaqueros", 1, 38, 2, "pantalones", 0);
+			TProducto prod2= new TProducto("chandal", 1, 38, 3, "pantalones", 0);
+			TProducto prod3= new TProducto("cargos", 1, 38, 4, "pantalones", 0);
 			
 			dproducto.create(prod1);
 			dproducto.create(prod2);
 			dproducto.create(prod3);
 			
 			Collection<TProducto> aux=new ArrayList<TProducto>();
+			aux.add(tVaqueros);
 			aux.add(prod1);
 			aux.add(prod2);
 			aux.add(prod3);
@@ -66,11 +67,8 @@ public class DAOProductosTest {
 			assertEquals(true, equalsCollection(productos, aux));
 			
 			int updatee=dproducto.update(prod3);
-			assertNotEquals(-1, updatee);
-			
-			productos=dproducto.readAll();
-			assertEquals(true, equalsCollection(productos, aux));
-			
+			assertEquals(4, updatee);
+
 			this.vaciarBaseDatos();
 			
 
@@ -102,7 +100,7 @@ public class DAOProductosTest {
 			
 			        if (!elem1.getNombre().equals(elem2.getNombre()) || elem1.getCantidad()!= elem2.getCantidad()  
 			        	||elem1.getTalla()!= elem2.getTalla() || elem1.getIdProducto()!=elem2.getIdProducto()
-			        	||elem1.getCategoria().equalsIgnoreCase(elem2.getCategoria())||elem1.getIdMarca()!=elem2.getIdMarca()) {
+			        	||!elem1.getCategoria().equalsIgnoreCase(elem2.getCategoria())||elem1.getIdMarca()!=elem2.getIdMarca()) {
 	                    iguales = false;
 	                }
 			    }

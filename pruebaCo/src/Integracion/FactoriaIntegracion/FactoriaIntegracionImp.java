@@ -13,6 +13,8 @@ import Integracion.Producto.DAOProducto;
 import Integracion.Producto.DAOProductoIMP;
 import Integracion.Proveedores.DAOProveedores;
 import Integracion.Proveedores.DAOProveedoresIMP;
+import Negocio.Ventas.DAOVentas;
+import Negocio.Ventas.DAOVentasIMP;
 
 
 public class FactoriaIntegracionImp extends FactoriaIntegracion {
@@ -40,5 +42,11 @@ public class FactoriaIntegracionImp extends FactoriaIntegracion {
 	@Override
 	public DAOEmpleado generaDAOEmpleado() {
 		return new DAOEmpleadoImp();
+	}
+
+	@Override
+	public DAOVentas generaDAOVentas() {
+		
+		return new DAOVentasIMP();
 	}
 }
