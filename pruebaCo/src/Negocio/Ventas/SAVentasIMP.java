@@ -6,9 +6,10 @@ import Integracion.Clientes.DAOClientes;
 import Integracion.Empleados.DAOEmpleado;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.MarcaIntegracion.DAOMarca;
+import Integracion.Ventas.DAOVentas;
 import Negocio.ComprobadorSintactico;
 import Negocio.Clientes.TCliente;
-import Negocio.MarcaNegocio.TMarca;
+import Negocio.Empleado.TEmpleado;
 
 public class SAVentasIMP implements SAVentas {
 	private DAOVentas daoVentas;
@@ -22,10 +23,8 @@ public class SAVentasIMP implements SAVentas {
 	@Override
 	public int create(TVenta venta) {
 		int id=-1;
-		
 		if(esValida(venta)){
 			TVenta leido=daoVentas.read(venta.get_id());
-			TCliente cliente=
 			if(leido==null||!leido.get_activo())
 				id=daoVentas.create(venta);
 			}
@@ -35,31 +34,38 @@ public class SAVentasIMP implements SAVentas {
 
 	@Override
 	public Collection<TVenta> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return daoVentas.readAll();
 	}
 
 	@Override
 	public TVenta read(int id) {
-		// TODO Auto-generated method stub
+		TVenta venta=null;
+		if(ComprobadorSintactico.isPositive(id)){
+			venta=daoVentas.read(id);
+		}
+		return venta;
+	}
+
+	@Override
+	public Collection<TVenta> readByEmpleado(int idEmpleado) {
+		if(ComprobadorSintactico.isPositive(idEmpleado))
+			return daoVentas.readByEmpleado(idEmpleado);
 		return null;
 	}
-
 	@Override
-	public int update(TVenta venta) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Collection<TVenta> readByCliente(int idCliente) {
+		if(ComprobadorSintactico.isPositive(idCliente))
+			return daoVentas.readByCliente(idCliente);
+		return null;
 	}
-
-	@Override
-	public int delete(int ID) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 	private boolean esValida(TVenta venta) {
+		TCliente cliente=daoClientes.read(venta.get_id_cliente());
+		TEmpleado empleado=daoEmpleados.read(venta.get_id_empleado());
 		
 		return ComprobadorSintactico.isPositive(venta.get_id())&&ComprobadorSintactico.isPositive(venta.get_id_cliente())&&
-				ComprobadorSintactico.isPositive(venta.get_id_empleado());
+				ComprobadorSintactico.isPositive(venta.get_id_empleado())&&empleado!=null&&cliente!=null;
 	}
+
 
 }

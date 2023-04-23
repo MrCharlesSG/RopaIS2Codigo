@@ -1,8 +1,10 @@
-package Negocio.Ventas;
+package Integracion.Ventas;
 
 import java.util.Collection;
 
-public interface SAVentas {
+import Negocio.Ventas.TVenta;
+
+public interface DAOVentas {
 	public int create(TVenta venta);
 	
 	public Collection<TVenta> readAll();

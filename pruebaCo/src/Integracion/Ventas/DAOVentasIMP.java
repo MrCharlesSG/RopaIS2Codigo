@@ -1,6 +1,8 @@
-package Negocio.Ventas;
+package Integracion.Ventas;
 
 import java.util.Collection;
+
+import Negocio.Ventas.TVenta;
 
 public class DAOVentasIMP implements DAOVentas {
 
@@ -23,15 +25,14 @@ public class DAOVentasIMP implements DAOVentas {
 	}
 
 	@Override
-	public int update(TVenta venta) {
+	public Collection<TVenta> readByEmpleado(int idEmpleado) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
-	public int delete(int ID) {
+	public Collection<TVenta> readByCliente(int idCliente) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
-	
 }

@@ -8,7 +8,7 @@ import Integracion.Empleados.DAOEmpleado;
 import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.Producto.DAOProducto;
 import Integracion.Proveedores.DAOProveedores;
-import Negocio.Ventas.DAOVentas;
+import Integracion.Ventas.DAOVentas;
 
 /** 
 * <!-- begin-UML-doc -->

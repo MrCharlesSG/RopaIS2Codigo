@@ -13,8 +13,8 @@ import Integracion.Producto.DAOProducto;
 import Integracion.Producto.DAOProductoIMP;
 import Integracion.Proveedores.DAOProveedores;
 import Integracion.Proveedores.DAOProveedoresIMP;
-import Negocio.Ventas.DAOVentas;
-import Negocio.Ventas.DAOVentasIMP;
+import Integracion.Ventas.DAOVentas;
+import Integracion.Ventas.DAOVentasIMP;
 
 
 public class FactoriaIntegracionImp extends FactoriaIntegracion {
