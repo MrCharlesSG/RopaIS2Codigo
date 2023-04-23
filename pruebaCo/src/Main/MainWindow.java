@@ -24,12 +24,6 @@ public class MainWindow extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		private static IGUIMarca marca;
-		private static IGUIProducto prod;
-		private static IGUIProv prov;
-		private static IGUICliente clientes;
-		private static IGUIEmpleado empleados;
-		private static IGUIVentas ventas;
 		private JPanel options;
 		private static JPanel infoPanel;
 		private static ArrayList<JPanel> iguis;
