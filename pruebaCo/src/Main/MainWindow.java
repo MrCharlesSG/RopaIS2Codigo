@@ -3,6 +3,9 @@ package Main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -24,55 +27,61 @@ public class MainWindow extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		private JPanel options;
+		private static JPanel options;
+		private static JFrame main;
 		private static JPanel infoPanel;
-		private static ArrayList<JPanel> iguis;
+		private static JPanel eventPanel;
+		private static List<JPanel> listaIGguis;
+		private static Map<Integer, GUI> mapaGuis;
 		
 		
 		public MainWindow(){
-			iguis= new ArrayList<JPanel>();
-			iguis.add( FactoriaPresentacion.getInstance().generaIGUIMarca());
-			iguis.add(FactoriaPresentacion.getInstance().generaIGUIProducto());
-			iguis.add(FactoriaPresentacion.getInstance().generaIGUIProveedores());
-			iguis.add(FactoriaPresentacion.getInstance().generaIGUICliente());
-			iguis.add( FactoriaPresentacion.getInstance().generaIGUIEmpleado());
-			iguis.add(FactoriaPresentacion.getInstance().generaIGUIVenta());
+			listaIGguis= FactoriaPresentacion.getInstance().getIGUIs();
 			initGUI();
 		}
 
-		private void initGUI() {
-			JFrame w= new JFrame("");
-			w.setBounds(400,400,600,300);
-			w.setVisible (true );
-			w.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		private static void initGUI() {
+			main= new JFrame("Tienda Ropa");
+			main.setBounds(400,400,600,300);
+			main.setVisible (true );
+			main.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 			
 			JPanel controlPanel = new ControlPanel();
-			w.add(controlPanel, BorderLayout.PAGE_START);
+			main.add(controlPanel, BorderLayout.PAGE_START);
 			
 			options = new JPanel();
 			setOptions(options);
 			
-			w.add(options, BorderLayout.WEST);
-			
+			main.add(options, BorderLayout.WEST);
+			eventPanel = new JPanel();
+			main.add(eventPanel);
 			//Futuras Versiones añadir info al panel de en medio
 			infoPanel = new JPanel();
 			infoPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-			w.add(infoPanel, BorderLayout.CENTER);
+			main.add(infoPanel, BorderLayout.CENTER);
 		}
+		
+		/*public static void setGUIEvent(JPanel panel) {
+			
+			main.remove(eventPanel);
+			main.add(panel, BorderLayout.EAST);
+			main.repaint();
+			
+		}*/
 		
 		static void openView(int num){
 			
-			for(int i=0; i<iguis.size(); i++) {
+			for(int i=0; i<listaIGguis.size(); i++) {
 				if(num==i)
-					iguis.get(i).setVisible(true);
+					listaIGguis.get(i).setVisible(true);
 				else
-					iguis.get(i).setVisible(false);
+					listaIGguis.get(i).setVisible(false);
 			}
 			
 		}
 		
 		private static void setOptions(JPanel options) {
-			for(JPanel p:iguis) {
+			for(JPanel p:listaIGguis) {
 				options.add(p);
 			}
 		}

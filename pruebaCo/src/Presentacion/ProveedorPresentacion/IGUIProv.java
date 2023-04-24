@@ -7,8 +7,10 @@ package Presentacion.ProveedorPresentacion;
 	import javax.swing.JButton;
 	import javax.swing.JPanel;
 
+import Main.Utils;
 import Presentacion.Controlador.Controlador;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
+import Presentacion.GUI.GUI;
 
 	public class IGUIProv extends JPanel {
 		
@@ -16,7 +18,6 @@ import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		private JPanel j;
 		
 		public IGUIProv(){
 			initGUI();			

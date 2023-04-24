@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.MainWindow;
 import Main.Utils;
 import Negocio.Proveedor.TProveedor;
 import Presentacion.Controlador.Controlador;
@@ -31,6 +32,7 @@ public class GUIBajaProv extends JFrame implements GUI{
 	private static final long serialVersionUID = 1L;
 
 	public GUIBajaProv(){
+		
 		initGUI();
 	}
 
@@ -66,10 +68,12 @@ public class GUIBajaProv extends JFrame implements GUI{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				//MainWindow.setGUIEvent(new JPanel());
 			}
 			
 		});
-		this.setVisible(true);
+		setVisible(true);
+		//MainWindow.setGUIEvent(jpanel);
 	}
 
 	@Override

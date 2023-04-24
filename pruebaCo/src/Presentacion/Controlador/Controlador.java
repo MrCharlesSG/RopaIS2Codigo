@@ -341,9 +341,8 @@ public class Controlador {
 		this.gui=gui;
 	}
 	public boolean marcasExisten(ArrayList<Integer> marcas) {
-		boolean existe=false;
+		boolean existe=true;
 		if(marcas.size()!=0){
-			 existe=true;
 			SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 			Collection<TMarca> listam = saMarca.readAll();
 			int i=0;

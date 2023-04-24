@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Frame;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class Utils {
@@ -11,7 +12,7 @@ public class Utils {
 	/*
 	 * return the frame to which 'c' belongs
 	 */
-	static Frame getWindow(Component c) {
+	public static Frame getWindow(Component c) {
 		Frame w = null;
 		if (c != null) {
 			if (c instanceof Frame)

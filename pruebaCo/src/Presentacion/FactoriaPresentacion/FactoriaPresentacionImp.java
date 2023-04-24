@@ -17,6 +17,7 @@ import Presentacion.Empleado.GUIEmpleadoPorID;
 import Presentacion.Empleado.GUIListarEmpleados;
 import Presentacion.Empleado.GUIModificarEmpleado;
 import Presentacion.Empleado.IGUIEmpleado;
+import Presentacion.GUI.GUI;
 import Presentacion.MarcaPresentacion.GUIAltaMarca;
 import Presentacion.MarcaPresentacion.GUIBajaMarca;
 import Presentacion.MarcaPresentacion.GUIListarMarcas;
@@ -102,42 +103,45 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	public GUIModificarProducto generaGUIModificarProducto() {
 		return new GUIModificarProducto();
 	}
+	
 	@Override
-	public IGUIProv generaIGUIProveedores() {
-		return new IGUIProv();
+	public IGUIProducto generaIGUIProducto() {
+		return new IGUIProducto();
 	}
 
 	/*
 	 * PROVEEDOR
 	 */
 	@Override
+	public IGUIProv generaIGUIProveedores() {
+		return new IGUIProv();
+	}
+	
+	@Override
 	public GUIAltaProv generaGUIAltaProveedor() {
 		return new GUIAltaProv();
 	}
 
 	@Override
-	public GUIBajaProv generaGUIBajaProveedor() {
+	public GUI generaGUIBajaProveedor() {
 		return new GUIBajaProv();
 	}
 
 	@Override
-	public GUIListarProv generaGUIListarProveedor() {
+	public GUI generaGUIListarProveedor() {
 		return new GUIListarProv();
 	}
 
 	@Override
-	public GUIProvPorID generaGUIProveedorPorID() {
+	public GUI generaGUIProveedorPorID() {
 		return new GUIProvPorID();
 	}
 
 	@Override
-	public GUIModificarProv generaGUIModificarProveedor() {
+	public GUI generaGUIModificarProveedor() {
 		return new GUIModificarProv();
 	}
-	@Override
-	public IGUIProducto generaIGUIProducto() {
-		return new IGUIProducto();
-	}
+	
 	/*
 	 * CLIENTES
 	 */
