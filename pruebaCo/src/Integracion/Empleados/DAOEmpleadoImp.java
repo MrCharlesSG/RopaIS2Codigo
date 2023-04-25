@@ -185,10 +185,10 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 		File file=new File(ARCHIVO);
 		StringBuilder buffer=new StringBuilder();
 		String datos[];
-		boolean encontrado=false;
+		boolean encontrado=false, activo=true;
 		try(Scanner scanner=new Scanner(file)) {//bufferreader
 			TEmpleado aux=null;
-			while(scanner.hasNext() && !encontrado) {
+			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
 				
 				//0: 1:::::2::::::::::3:::::::::4:::5::::6:::::::::::::::7
@@ -204,6 +204,7 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 				}else{
 					datos=scanner.nextLine().split(":");
 					buffer.append(datos[0]+":"+datos[1]);
+					activo= Boolean.parseBoolean(datos[7]);
 					for(int i=2; i<datos.length; i++){
 						if(i==6){
 							datos[i]="false";
@@ -211,6 +212,7 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 						buffer.append(":"+datos[i]);
 					}
 					buffer.append(System.lineSeparator());
+					encontrado=true;
 				}
 				
 			}
@@ -219,7 +221,18 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 			return -1;
 		}
 		if(encontrado){
-			return id;
+			try(Writer w=new BufferedWriter(
+					new OutputStreamWriter(
+					new FileOutputStream(ARCHIVO)))){
+			w.write(buffer.toString());
+				if(activo){
+					return id;
+				}else{
+					return -1;
+				}
+			}catch (IOException e) {
+			return -1;
+			}
 		}else{
 			return -1;
 		}
@@ -238,7 +251,7 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 				//0: 1:::::2::::::::::3:::::::::4:::5::::6:::::::::::::::7
 				//ID:Nombre:Apellido1:Apellido2:TFNO:DNI:tiempoCompleto:Activo
 				encontrado=datos[5].equals(dni);
-				if(encontrado){
+				if(encontrado && datos[7].equals("true")){
 					if(Boolean.parseBoolean(datos[6])){
 						aux= new TEmpleadoTC(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]));
 					}else{

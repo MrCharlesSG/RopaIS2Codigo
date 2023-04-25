@@ -92,7 +92,7 @@ public class DAOProveedoresIMP implements DAOProveedores{
 					}
 					buffer.append(System.lineSeparator());
 					encontrado=true;
-					activo=Boolean.parseBoolean(datos[3]);
+					activo=Boolean.parseBoolean(datos[2]);
 				}
 			}
 			
@@ -107,9 +107,9 @@ public class DAOProveedoresIMP implements DAOProveedores{
 										new FileOutputStream(ARCHIVO)))){
 				w.write(buffer.toString());
 				if(activo){
-					return -1;
-				}else{
 					return id;
+				}else{
+					return -1;
 				}
 			}catch (IOException e) {
 				return -1;
