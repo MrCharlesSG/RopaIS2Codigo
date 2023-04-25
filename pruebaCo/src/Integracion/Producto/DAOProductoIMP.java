@@ -261,6 +261,11 @@ public class DAOProductoIMP implements DAOProducto{
 		        	sb.append(splitArray[0] + ": " + splitArray[1] + ": " + splitArray[2] + ": "
 		    		        + splitArray[3] + ": " + splitArray[4] + ": " +splitArray[5]);
 		        }
+		        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		        bw.append(sb);
+		        bw.flush();
+		        bw.close();
+		        br.close();
 		    }
 		}catch(Exception e){
 			return false;
