@@ -34,7 +34,7 @@ public class GUIAltaProducto extends JFrame implements GUI{
 		JLabel lCant=new JLabel("Cantidad:");
 		final JTextField tCant= new JTextField(20);
 		
-		JLabel lIDMarca=new JLabel("IDMarca:");
+		JLabel lIDMarca=new JLabel("IDMarca:");00
 		final JTextField tIDMarca= new JTextField(20);
 		
 		JButton aceptar=new JButton("Aceptar");

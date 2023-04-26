@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,8 +15,11 @@ import javax.swing.JTextField;
 
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.GUI.GUI;
 
 public class GUIAltaVenta extends JFrame implements GUI{
+	private Map<Integer,Integer> carro;
+	private CarritoDialog carrito;
 	public GUIAltaVenta() {
 		setTitle("Alta Venta");
 		JPanel panel=new JPanel();
@@ -44,13 +48,11 @@ public class GUIAltaVenta extends JFrame implements GUI{
 					setVisible(false);
 					int id_cliente=Integer.parseInt(tID.getText());
 					int id_empleado=Integer.parseInt(tID_PR.getText());
-					Controlador.comprobarempleado(id_empleado);
-					Controlador.comprobarcliente(id_cliente);
-					datos.add(id);
-					datos.add(id_pr);
-					datos.add(cantidad);
-					Controlador.getInstancia().setGUI(GUIDevolverVenta.this);
-					Controlador.getInstancia().accion(Evento.DEVOLUCION_VENTA, datos);
+				//	Controlador.comprobarempleado(id_empleado);
+				//	Controlador.comprobarcliente(id_cliente);
+					
+					Controlador.getInstancia().setGUI(GUIAltaVenta.this);
+					//Controlador.getInstancia().accion(Evento.ALta_V, datos);
 				}
 		});
 		cancelar.addActionListener(new ActionListener()
@@ -71,8 +73,13 @@ public class GUIAltaVenta extends JFrame implements GUI{
 	}
 	if(Evento.RES_ABRIR_VENTA_OK==evento)
 	{
-		
-
+		if(carrito==null)
+			carrito=new CarritoDialog(this,carro);
+		boolean status=carrito.open();
+		if(status){
+			Controlador.getInstancia().setGUI(GUIAltaVenta.this);
+			//Controlador.getInstancia().accion(Evento.update, datos);
+		}
 	}
 	}
 }
