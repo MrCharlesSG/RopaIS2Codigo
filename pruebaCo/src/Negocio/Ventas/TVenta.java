@@ -3,6 +3,7 @@ package Negocio.Ventas;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class TVenta {
 	private int id;
 	private int id_empleado;
@@ -85,4 +86,5 @@ public class TVenta {
 	public boolean get_activo(){
 		return this.activo;
 	}
+	
 }
