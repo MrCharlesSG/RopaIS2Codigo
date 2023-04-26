@@ -6,6 +6,8 @@ import java.util.Collection;
 
 import Negocio.Clientes.SAClientes;
 import Negocio.Clientes.TCliente;
+import Negocio.Empleado.SAEmpleado;
+import Negocio.Empleado.TEmpleado;
 import Negocio.FactoriaNegocio.FactoriaNegocio;
 import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
@@ -34,13 +36,14 @@ public class Controlador {
 	private SAProducto saProducto;
 	private SAProveedores saProveedor;
 	private SAClientes saCliente;
+	private SAEmpleado saEmpleado;
 	private GUI gui;
 	
 	private Controlador(){
 		this.saMarca=FactoriaNegocio.getInstance().generaSAMarca();
 		this.saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
 		this.saProducto= FactoriaNegocio.getInstance().generaSAProducto();
-	//	this.saEmpleado = FactoriaNegocio.getInstance().generaSAEmpleado();
+		this.saEmpleado = FactoriaNegocio.getInstance().generaSAEmpleado();
 		saCliente=FactoriaNegocio.getInstance().generaSAClientes();
 	}
 	public static Controlador getInstancia() {
@@ -160,7 +163,7 @@ public class Controlador {
 			case Evento.ALTA_PROVEEDOR:{
 				int res=this.saProveedor.create((TProveedor)datos);
 				if(res>0){
-					gui.update(Evento.OK, new Integer(res));
+					gui.update(Evento.OK, res);
 				}
 				else{
 					gui.update(Evento.KO, null);
@@ -171,7 +174,7 @@ public class Controlador {
                 int res = saProveedor.delete(((TProveedor)datos).getId());
 
                 if(res > 0)
-                    gui.update(Evento.OK, new Integer(res));
+                    gui.update(Evento.OK, res);
                 else
                     gui.update(Evento.KO, null);
                 break;
@@ -243,6 +246,54 @@ public class Controlador {
                 		gui.update(Evento.RES_MODIFICAR_CLIENTE_KO, null);
                 break;
             }
+            /*
+             * EMPLEADOS
+             */
+            case Evento.ALTA_EMPLEADO:{
+            	int res = this.saEmpleado.create((TEmpleado)datos);
+            	if(res>0) {
+            		gui.update(Evento.OK, res);
+            	}else {
+            		gui.update(Evento.KO, null);
+            	}
+            	break;
+            }
+            case Evento.BAJA_EMPLEADO:{
+            	int res = this.saEmpleado.delete((int)datos);
+            	if(res==(int)datos) {
+            		gui.update(Evento.OK, res);
+            	}else {
+            		gui.update(Evento.KO, null);
+            	}
+            	break;
+            }
+            case Evento.MODIFICAR_EMPLEADO:{
+            	int res = this.saEmpleado.update((TEmpleado)datos);
+            	if(res>0) {
+            		gui.update(Evento.OK, (TEmpleado)datos);
+            	}else {
+            		gui.update(Evento.KO, null);
+            	}
+            	break;
+            }
+            case Evento.EMPLEADO_POR_ID:{
+            	TEmpleado empl = saEmpleado.read((int)datos);
+	         	int res= empl==null ? Evento.RES_CLIENTE_POR_ID_KO : Evento.RES_CLIENTE_POR_ID_OK;
+	         	gui.update(res, empl);
+	        	break;
+            }
+            case Evento.LISTAR_EMPLEADO:{
+            	Collection<TEmpleado> lista = this.saEmpleado.readAll();
+            	if(lista!= null && lista instanceof ArrayList){
+                	gui.update(Evento.OK, lista);
+                }else{
+                	gui.update(Evento.KO, null);
+                }
+                break;
+            }
+            /*
+             * VENTAS
+             */
             case Evento.ABRIR_VENTA:{
             	//TODO
             	break;
@@ -289,7 +340,7 @@ public class Controlador {
 	public void setGUI(GUI gui){
 		this.gui=gui;
 	}
-	public boolean marcasExisten(ArrayList<Integer> marcas) {// esto no se comprueba aqui
+	public boolean marcasExisten(ArrayList<Integer> marcas) {
 		boolean existe=true;
 		if(marcas.size()!=0){
 			SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
@@ -307,5 +358,6 @@ public class Controlador {
 		}
 		return existe;
 	}
+	
 }
 	

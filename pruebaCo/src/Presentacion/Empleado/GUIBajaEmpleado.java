@@ -36,7 +36,7 @@ public class GUIBajaEmpleado extends JFrame implements GUI{
 					setVisible(false);
 					int id=Integer.parseInt(tID.getText());
 					Controlador.getInstancia().setGUI(GUIBajaEmpleado.this);
-					Controlador.getInstancia().accion(Evento.BAJA_CLIENTE, new Integer(id));
+					Controlador.getInstancia().accion(Evento.BAJA_CLIENTE, id);
 				}
 		});
 		cancelar.addActionListener(new ActionListener()
@@ -51,11 +51,11 @@ public class GUIBajaEmpleado extends JFrame implements GUI{
 
 	@Override
 	public void update(int evento, Object datos) {
-	if( Evento.RES_BAJA_EMPLEADO_OK==evento) {
+	if( Evento.OK==evento) {
 		Integer id= (Integer) datos;
 		JOptionPane.showMessageDialog(null,"Se ha dado de baja correctamente el empleado con ID: "+id.intValue());
 	}
-	else if( Evento.RES_BAJA_EMPLEADO_KO==evento) { 
+	else if( Evento.KO==evento) { 
 		JOptionPane.showMessageDialog(null, "No se pudo dar de baja el empleado");	
 	}
 		

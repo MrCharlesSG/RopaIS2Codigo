@@ -14,14 +14,23 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Main.Utils;
+import Negocio.Empleado.TEmpleado;
+import Negocio.Empleado.TEmpleadoTC;
+import Negocio.Empleado.TEmpleadoTP;
+import Presentacion.Clientes.GUIModificarCliente;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 
 public class GUIModificarEmpleado extends JFrame implements GUI {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public GUIModificarEmpleado() {
-		setTitle("Modificar cliente");
+		setTitle("Modificar empleado");
 		
 		JPanel panel=new JPanel();
 		
@@ -44,8 +53,8 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 		final JTextField ttlf=new JTextField(9);
 		
 		DefaultComboBoxModel<String> opciones=new DefaultComboBoxModel<>();
-		opciones.addElement("Premium");
-		opciones.addElement("Normal");
+		opciones.addElement("Tiempo Parcial");
+		opciones.addElement("Tiempo Completo");
 		JComboBox<String>box=new JComboBox<>(opciones);
 		
 		JButton ok=new JButton("Aceptar");
@@ -82,13 +91,14 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 					String tipo=(String) box.getSelectedItem();
 					TEmpleado t;
 					if(tipo.equalsIgnoreCase("Premium")){
-						 t= new TEmpleadoTC(true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
+						//
+						 t= new TEmpleadoTC(nombre, apellido1, apellido2, DNI,tlf, -1, true);
 					}
 					else{
-						 t= new TEmpleadoTP(true, apellido1, apellido2, DNI, -1, nombre, tlf, false);
+						 t= new TEmpleadoTP(nombre, apellido1, apellido2, DNI, tlf, -1 , true);
 					}
-					Controlador.getInstancia().setGUI(GUIModificarCliente.this);
-					Controlador.getInstancia().accion(Evento.MODIFICAR_CLIENTE, t);
+					Controlador.getInstancia().setGUI(GUIModificarEmpleado.this);
+					Controlador.getInstancia().accion(Evento.MODIFICAR_EMPLEADO, t);
 				}
 		});
 		
@@ -105,12 +115,12 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 	public void update(int evento, Object datos) {
 		switch(evento){
 		case Evento.OK:{
-			Utils.showCorrectMsg("El cliente ha sido modificado con exito:"+ System.lineSeparator()+datos.toString());
+			Utils.showCorrectMsg("El empleado ha sido modificado con exito:"+ System.lineSeparator()+datos.toString());
 			this.setVisible(false);
 			break;
 		}
 		case Evento.KO:{
-			Utils.showErrorMsg("El cliente no se ha podido modificar");
+			Utils.showErrorMsg("El empleado no se ha podido modificar");
 			this.setVisible(false);
 			break;
 		}

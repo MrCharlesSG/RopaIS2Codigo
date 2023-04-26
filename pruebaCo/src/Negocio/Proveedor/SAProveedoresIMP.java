@@ -75,7 +75,7 @@ public class SAProveedoresIMP implements SAProveedores{
 			TProveedor leido = daoProveedor.readByName(tProv.getNombre());
 			
 			if(leido == null)
-				id = daoProveedor.update(tProv); //TODO gestionar el hecho de estar activo en el create
+				id = daoProveedor.update(tProv); 
 		}
 		return id;
 		

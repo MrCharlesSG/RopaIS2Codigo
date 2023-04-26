@@ -5,12 +5,14 @@ package Negocio.FactoriaNegocio;
 
 import Negocio.Clientes.SAClientes;
 import Negocio.Clientes.TCliente;
+import Negocio.Empleado.SAEmpleado;
 import Negocio.Empleado.TEmpleado;
 import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.SAProducto;
 import Negocio.Proveedor.SAProveedores;
 import Negocio.Proveedor.TProveedor;
+import Negocio.Ventas.SAVentas;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -66,6 +68,9 @@ public abstract class FactoriaNegocio {
 	public abstract TCliente generaTCliente(String[] datos);
 	
 	public abstract TEmpleado generaTEmpleado(String[] datos);
+
+	public abstract SAEmpleado generaSAEmpleado();
+	public abstract SAVentas generaSAVentas();
 	
 
 }

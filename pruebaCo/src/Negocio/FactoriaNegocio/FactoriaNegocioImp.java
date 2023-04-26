@@ -6,6 +6,8 @@ package Negocio.FactoriaNegocio;
 import Negocio.Clientes.SAClientes;
 import Negocio.Clientes.SAClientesIMP;
 import Negocio.Clientes.TCliente;
+import Negocio.Empleado.SAEmpleado;
+import Negocio.Empleado.SAEmpleadoImp;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Empleado.TEmpleadoTC;
 import Negocio.Empleado.TEmpleadoTP;
@@ -17,6 +19,8 @@ import Negocio.Producto.SAProductoIMP;
 import Negocio.Proveedor.SAProveedores;
 import Negocio.Proveedor.SAProveedoresIMP;
 import Negocio.Proveedor.TProveedor;
+import Negocio.Ventas.SAVentas;
+import Negocio.Ventas.SAVentasIMP;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -96,5 +100,16 @@ public class FactoriaNegocioImp extends FactoriaNegocio {
 	public SAClientes generaSAClientes() {
 		
 		return new SAClientesIMP() ;
+	}
+
+	@Override
+	public SAEmpleado generaSAEmpleado() {
+		return new SAEmpleadoImp();
+	}
+
+	@Override
+	public SAVentas generaSAVentas() {
+		
+		return new SAVentasIMP();
 	}
 }

@@ -45,5 +45,17 @@ public class ComprobadorSintactico {
 
 	public static boolean isDNI(String dni) {
 	
-		return true;//dni.length()==9;
-	}}
+		boolean valido=false;
+		if(dni.length()==9){
+			//066 553 87s
+			valido=true;
+			for(int i=0; i<dni.length()-1&& valido; i++){
+				valido= Character.isDigit(dni.charAt(i));
+			}
+			if(valido)// si despues del bucle sigue siendo valido comprobamossi su ultimo caracter es una letra
+				valido=!Character.isDigit(dni.charAt(dni.length()-1));
+		}
+		return valido;
+		
+	}
+	}

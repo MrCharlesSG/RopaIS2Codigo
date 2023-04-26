@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.junit.Test;
-import Integracion.Clientes.DAOClientes;
 import Integracion.Clientes.DAOClientesIMP;
 import Negocio.Clientes.TClienteNormal;
 import Negocio.Clientes.TClientePremium;
@@ -27,7 +26,7 @@ public class DaoClienteTest {
 		
 		assertEquals(null, res);
 		
-		TClienteNormal tcliente=new TClienteNormal(true, "AAA", "BBB", "12345689A", 1, "MrCharles", 666777888, false);
+		TClienteNormal tcliente=new TClienteNormal(false, "AAA", "BBB", "12345689A", 1, "MrCharles", 666777888, false);
 		int id=dcliente.create(tcliente);
 		res=dcliente.read(1);
 		
@@ -43,9 +42,9 @@ public class DaoClienteTest {
 		assertEquals(clientes2.size(),1);
 		
 		Collection<TCliente> clientes=new ArrayList<TCliente>();
-		TCliente cliente1=new TClientePremium(true, "CCC", "DDD", "987654321A", 1, "EEE",111222333, true);
-		TCliente cliente2=new TClienteNormal(true, "FFF", "GGG", "513421430B", 2, "HHH",222333444, false);
-		TCliente cliente3=new TClientePremium(true, "III", "JJJ", "243873442G", 3, "LLL", 555666777, true);
+		TCliente cliente1=new TClientePremium(true, "CCC", "DDD", "98765432A", 2, "EEE",111222333, true);
+		TCliente cliente2=new TClienteNormal(true, "FFF", "GGG", "51342143B", 3, "HHH",222333444, false);
+		TCliente cliente3=new TClientePremium(true, "III", "JJJ", "24387344G", 4, "LLL", 555666777, true);
 		
 		dcliente.create(cliente1);
 		dcliente.create(cliente2);
@@ -58,16 +57,9 @@ public class DaoClienteTest {
 		aux.add(cliente2);
 		aux.add(cliente3);
 		
-		//assertEquals(true, equalsCollection(clientes, aux)); no va ns porque pero comrobando una a una si
+		assertEquals(true, equalsCollection(clientes, aux));
+
 		
-		TCliente cliente4=new TClienteNormal(true, "MMM", "NNN", "244798243V", 4, "OOO", 678312432, false);
-		
-		//int update=dcliente.update(cliente4);
-		
-	//	assertEquals(-1, update); esto da error pero porque el que se encarga de comprobar esta parte de los datos es el sa no el dao
-		
-		//clientes=dcliente.readAll();
-	//	assertEquals(true, equalsCollection(clientes, aux));
 		vaciarBaseDatos();
 		
 		
@@ -94,11 +86,15 @@ public class DaoClienteTest {
 			while (it1.hasNext()&& it2.hasNext()){
 				TCliente elem1=it1.next();
 				TCliente elem2=it2.next();
-				if(elem1.getActivo()!=elem2.getActivo()|| !elem1.getApellido1().equalsIgnoreCase(elem2.getApellido2())
-				|| !elem1.getDNI().equalsIgnoreCase(elem2.getDNI())|| elem1.getID()!=elem2.getID()
-				||!elem1.getNombre().equalsIgnoreCase(elem2.getNombre())
-				||elem1.getTelefono()!=elem2.getTelefono()||elem1.getPremium()!=elem2.getPremium()){
-					iguales=false;
+				if(elem1.getActivo()!=elem2.getActivo()|| 
+						!elem1.getApellido1().equalsIgnoreCase(elem2.getApellido1())||
+						!elem1.getApellido2().equalsIgnoreCase(elem2.getApellido2())||
+						!elem1.getDNI().equalsIgnoreCase(elem2.getDNI())|| 
+						elem1.getID()!=elem2.getID()||
+						!elem1.getNombre().equalsIgnoreCase(elem2.getNombre())||
+						elem1.getTelefono()!=elem2.getTelefono()||
+						elem1.getPremium()!=elem2.getPremium()){
+							iguales=false;
 				}
 			}
 			return iguales;

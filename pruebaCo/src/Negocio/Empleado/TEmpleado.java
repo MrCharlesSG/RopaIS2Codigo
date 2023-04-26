@@ -85,6 +85,29 @@ public abstract class TEmpleado {
 		this.tiempoCompleto = tiempoCompleto;
 	}
 	
+	@Override
+	public String toString() {
+	    StringBuilder buffer = new StringBuilder();
+	    buffer.append("ID: "+ ID+" || Nombre: "+ nombre+ " || ");
+	    if(tiempoCompleto) {
+	    	buffer.append("Tiempo Completo");
+	    }else {
+	    	buffer.append("Tiempo Parcial");
+	    }
+	    return buffer.toString();
+	}
 	
+	@Override
+	public boolean equals(Object anObject ) {
+		TEmpleado a = (TEmpleado) anObject;
+		return this.apellido1.equals(a.getApellido1()) &&
+				this.apellido2.equals(a.getApellido2()) &&
+				this.activo==a.isActivo() &&
+				this.tiempoCompleto==a.isTiempoCompleto() &&
+				this.nombre.equals(a.getNombre()) &&
+				this.DNI.equals(a.getDNI()) &&
+				this.tfno==a.getTfno() &&
+				this.ID == a.getID();
+	}
 	
 }

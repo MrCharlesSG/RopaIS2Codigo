@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Negocio.Clientes.TCliente;
+import Negocio.Empleado.TEmpleado;
 import Presentacion.Clientes.GUIClientePorID;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -38,7 +39,7 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 					setVisible(false);
 					int id=Integer.parseInt(tID.getText());
 					Controlador.getInstancia().setGUI(GUIEmpleadoPorID.this);
-					Controlador.getInstancia().accion(Evento.EMPLEADO_POR_ID, new Integer(id));
+					Controlador.getInstancia().accion(Evento.EMPLEADO_POR_ID, id);
 				}
 		});
 		cancelar.addActionListener(new ActionListener()
@@ -52,15 +53,15 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 
 	@Override
 	public void update(int evento, Object datos) {
-	if( Evento.RES_EMPLEADO_POR_ID_OK==evento){
+	if( Evento.OK==evento){
 	TEmpleado c=(TEmpleado) datos;
 		StringBuilder str=new StringBuilder();
 		str.append("ID: NOMBRE: APELLIDO1: APELLIDO2: DNI: TLF: TIPO CONTRATO: ACTIVO").append(System.lineSeparator());
-		str.append(c.getID()+":      "+c.getNombre()+":      "+c.getApellido1()+":      "+c.getApellido2()+":      "+c.getDNI() +":      "+c.getTelefono()+":      "+c.getTc()+":      "+c.getActivo()).append(System.lineSeparator());
+		str.append(c.getID()+":      "+c.getNombre()+":      "+c.getApellido1()+":      "+c.getApellido2()+":      "+c.getDNI() +":      "+c.getTfno()+":      "+c.isTiempoCompleto()+":      "+c.isActivo()).append(System.lineSeparator());
 		JOptionPane.showMessageDialog(null, str.toString());
 	
 	}
-	if( Evento.RES_CLIENTE_POR_ID_KO==evento)
+	if( Evento.KO==evento)
 	{
 		JOptionPane.showMessageDialog(null, "No se pudo encontrar el empleado con ese ID");
 

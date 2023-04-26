@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Negocio.Empleado.TEmpleadoTC;
+import Negocio.Empleado.TEmpleadoTP;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
@@ -63,11 +65,28 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 					String apellido2=tApellido2.getText();
 					String DNI= tDNI.getText();
 					int tlf= Integer.parseInt (ttlf.getText ());
-					TEmpleadoTC tCP= new TEmpleadoTC (true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
+					//String nombre, String apellido1, String apellido2, String DNI, int tfno, int ID, boolean activo
+					TEmpleadoTC tCP= new TEmpleadoTC (nombre, apellido1, apellido2, DNI, tlf, -1,  true);
 					Controlador.getInstancia().setGUI(GUIAltaEmpleado.this);
 					Controlador.getInstancia().accion(Evento.ALTA_EMPLEADO, tCP);
 				}
 		});
+		
+		tp.addActionListener(new ActionListener()
+		{ public void actionPerformed(ActionEvent e)
+		{		
+			setVisible(false);
+			String nombre= tNombre.getText();
+			String apellido1=tApellido1.getText();
+			String apellido2=tApellido2.getText();
+			String DNI= tDNI.getText();
+			int tlf= Integer.parseInt (ttlf.getText ());
+			//String nombre, String apellido1, String apellido2, String DNI, int tfno, int ID, boolean activo
+			TEmpleadoTP tCP= new TEmpleadoTP (nombre, apellido1, apellido2, DNI, tlf, -1,  true);
+			Controlador.getInstancia().setGUI(GUIAltaEmpleado.this);
+			Controlador.getInstancia().accion(Evento.ALTA_EMPLEADO, tCP);
+		}
+});
 		
 		cancelar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
@@ -80,11 +99,11 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 
 	@Override
 	public void update(int evento, Object datos) {
-		if(Evento.RES_ALTA_EMPLEADO_OK==evento){
+		if(Evento.OK==evento){
 		Integer id= (Integer) datos;
 		JOptionPane.showMessageDialog(null,"Alta de empleado con ID: "+id.intValue());
 		}
-		else if( Evento.RES_ALTA_EMPLEADO_KO==evento)
+		else if( Evento.KO==evento)
 		{ 
 		JOptionPane.showMessageDialog(null, "No se pudo dar de alta el empleado"); 
 		}

@@ -18,7 +18,7 @@ public interface DAOEmpleado {
 	public int update(TEmpleado empleado);
 
  
-	public int delete(TEmpleado empleado);
+	public int delete(int id);
 
 	 
 	public TEmpleado readByName(String dni);
