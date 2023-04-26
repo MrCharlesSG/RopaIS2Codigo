@@ -150,12 +150,11 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 				//ID:Nombre:Apellido1:Apellido2:TFNO:DNI:tiempoCompleto:Activo
 				
 				if(Integer.parseInt(datos[0])!=empleado.getID()){
-					datos=scanner.nextLine().split(":");
 					buffer.append(datos[0]+":"+datos[1]);
 					for(int i=2; i<datos.length; i++){
 						buffer.append(":"+datos[i]);
 					}
-					buffer.append(System.lineSeparator());
+					
 				}else{
 					encontrado=true;
 					buffer.append(datos[0]+":"+empleado.getNombre());
@@ -166,10 +165,14 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 					buffer.append(":"+empleado.isTiempoCompleto());			
 					buffer.append(":"+empleado.isActivo());
 				}
+				buffer.append(System.lineSeparator());
 				
 			}
 			if(encontrado){
-				return empleado.getID();
+				try(Writer w=new BufferedWriter(
+						new OutputStreamWriter(
+						new FileOutputStream(ARCHIVO)))){w.write(buffer.toString());}
+						return empleado.getID();
 			}else{
 				return -1;
 			}
@@ -187,7 +190,6 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 		String datos[];
 		boolean encontrado=false, activo=true;
 		try(Scanner scanner=new Scanner(file)) {//bufferreader
-			TEmpleado aux=null;
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
 				
@@ -195,18 +197,16 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 				//ID:Nombre:Apellido1:Apellido2:TFNO:DNI:tiempoCompleto:Activo
 				
 				if(Integer.parseInt(datos[0])!=id){
-					datos=scanner.nextLine().split(":");
 					buffer.append(datos[0]+":"+datos[1]);
 					for(int i=2; i<datos.length; i++){
 						buffer.append(":"+datos[i]);
 					}
 					buffer.append(System.lineSeparator());
 				}else{
-					datos=scanner.nextLine().split(":");
 					buffer.append(datos[0]+":"+datos[1]);
 					activo= Boolean.parseBoolean(datos[7]);
 					for(int i=2; i<datos.length; i++){
-						if(i==6){
+						if(i==7){
 							datos[i]="false";
 						}
 						buffer.append(":"+datos[i]);
@@ -251,7 +251,7 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 				//0: 1:::::2::::::::::3:::::::::4:::5::::6:::::::::::::::7
 				//ID:Nombre:Apellido1:Apellido2:TFNO:DNI:tiempoCompleto:Activo
 				encontrado=datos[5].equals(dni);
-				if(encontrado && datos[7].equals("true")){
+				if(encontrado){
 					if(Boolean.parseBoolean(datos[6])){
 						aux= new TEmpleadoTC(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]));
 					}else{

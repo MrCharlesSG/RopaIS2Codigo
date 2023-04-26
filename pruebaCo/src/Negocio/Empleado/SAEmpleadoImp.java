@@ -71,7 +71,7 @@ public class SAEmpleadoImp implements SAEmpleado {
 		if(this.comprobadorTEmpleado(empl)&&daoEmpl.read(empl.getID())!=null){
 			TEmpleado leido = daoEmpl.readByName(empl.getDNI());
 			
-			if(leido == null)
+			if(leido != null)
 				id = daoEmpl.update(empl); 
 		}
 		return id;
