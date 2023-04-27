@@ -64,7 +64,7 @@ public class SaClienteTest {
         //comprobacion del readAll
         this.mockCollec.add(tPablo);
         Collection<TCliente> readAllCollection=saCliente.readAll();
-        assertEquals(equalsCollection(mockCollec, readAllCollection), true);
+        assertEquals(readAllCollection.equals(mockCollec), true);
       
         //elimino los dos clientes
         aux1=saCliente.delete(1);
@@ -88,27 +88,6 @@ public class SaClienteTest {
 	}catch (IOException e) {
 		
 	}
-	}
-	
-	boolean equalsCollection(Collection <TCliente>a, Collection <TCliente> b){
-		if (a.size()!=b.size())
-			return false;
-		else{
-			Iterator<TCliente> it1=a.iterator();
-			Iterator<TCliente> it2=b.iterator();
-			boolean iguales=true;
-			while (it1.hasNext()&& it2.hasNext()){
-				TCliente elem1=it1.next();
-				TCliente elem2=it2.next();
-				if(elem1.getActivo()!=elem2.getActivo()|| !elem1.getApellido1().equals(elem2.getApellido2())
-				|| !elem1.getDNI().equals(elem2.getDNI())|| elem1.getID()!=elem2.getID()
-				||!elem1.getNombre().equals(elem2.getNombre())
-				||elem1.getTelefono()!=elem2.getTelefono()||elem1.getPremium()!=elem2.getPremium()){
-					iguales=false;
-				}
-			}
-			return iguales;
-		}
 	}
 	
 }

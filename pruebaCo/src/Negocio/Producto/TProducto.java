@@ -2,6 +2,8 @@
 
 package Negocio.Producto;
 
+import Negocio.Empleado.TEmpleado;
+
 public class TProducto {
 
 	private int cantidad;
@@ -66,5 +68,17 @@ public class TProducto {
 	
 	public void setTalla(int t){
 		this.talla = t;
+	}
+	
+	@Override
+	public boolean equals(Object anObject ) {
+		TProducto a = (TProducto) anObject;
+		return this.categoria.equals(a.getCategoria()) &&
+				this.cantidad==a.getCantidad() &&
+				this.getIdMarca()==a.getIdMarca() &&
+				this.getTalla()==a.getTalla() &&
+				this.nombre.equals(a.getNombre())&&
+				this.talla == a.getTalla();
+	
 	}
 }

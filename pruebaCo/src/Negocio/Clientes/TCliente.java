@@ -1,6 +1,8 @@
 
 package Negocio.Clientes;
 
+import Negocio.Empleado.TEmpleado;
+
 public abstract class TCliente {
 	private boolean Active;
 	private String Apellido1;
@@ -107,5 +109,18 @@ public abstract class TCliente {
 		this.Telefono=tlf;
 	}
 	
+	@Override
+	public boolean equals(Object anObject ) {
+		TCliente a = (TCliente) anObject;
+		return this.Apellido1.equals(a.getApellido1()) &&
+				this.Apellido2.equals(a.getApellido2()) &&
+				this.Active==a.getActivo() &&
+				this.Premiumbool==a.getPremium() &&
+				this.Nombre.equals(a.getNombre()) &&
+				this.DNI.equals(a.getDNI()) &&
+				this.Telefono==a.getTelefono() &&
+				this.IDCliente == a.getID();
+	
+	}
 	
 }

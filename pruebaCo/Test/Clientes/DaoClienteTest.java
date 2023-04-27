@@ -57,7 +57,7 @@ public class DaoClienteTest {
 		aux.add(cliente2);
 		aux.add(cliente3);
 		
-		assertEquals(true, equalsCollection(clientes, aux));
+		assert(aux.equals(clientes));
 
 		
 		vaciarBaseDatos();
@@ -76,30 +76,7 @@ public class DaoClienteTest {
 	}
 	}
 	
-	boolean equalsCollection(Collection <TCliente>a, Collection <TCliente> b){
-		if (a.size()!=b.size())
-			return false;
-		else{
-			Iterator<TCliente> it1=a.iterator();
-			Iterator<TCliente> it2=b.iterator();
-			boolean iguales=true;
-			while (it1.hasNext()&& it2.hasNext()){
-				TCliente elem1=it1.next();
-				TCliente elem2=it2.next();
-				if(elem1.getActivo()!=elem2.getActivo()|| 
-						!elem1.getApellido1().equalsIgnoreCase(elem2.getApellido1())||
-						!elem1.getApellido2().equalsIgnoreCase(elem2.getApellido2())||
-						!elem1.getDNI().equalsIgnoreCase(elem2.getDNI())|| 
-						elem1.getID()!=elem2.getID()||
-						!elem1.getNombre().equalsIgnoreCase(elem2.getNombre())||
-						elem1.getTelefono()!=elem2.getTelefono()||
-						elem1.getPremium()!=elem2.getPremium()){
-							iguales=false;
-				}
-			}
-			return iguales;
-		}
-	}
+	
 	
 	
 }

@@ -1,7 +1,12 @@
 package Negocio.Ventas;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import Main.Utils;
+import Negocio.Empleado.TEmpleado;
 
 
 public class TVenta {
@@ -10,7 +15,7 @@ public class TVenta {
 	private int id_cliente;
 	private double precio;
 	private int contador_productos;
-	private Map<Integer,Integer> prod_unidades;
+	private Map<Integer,Integer> prod_unidades;//producto, nro Unidades
 	private boolean activo;
 	
 	public TVenta(int id, int id_emp, int id_cl, double prec, int cont, boolean activo){
@@ -87,4 +92,16 @@ public class TVenta {
 		return this.activo;
 	}
 	
+	@Override
+	public boolean equals(Object anObject ) {
+		TVenta a = (TVenta) anObject;
+		return this.id==a.get_id() &&
+				this.id_cliente==a.get_id_cliente() &&
+				this.id_empleado == a.get_id_empleado()&&
+				this.precio == a.get_precio()&&
+				this.get_contador() == a.get_contador()&&
+				this.activo == a.get_activo() &&
+				this.prod_unidades.equals(a.get_map())
+				;
+	}
 }

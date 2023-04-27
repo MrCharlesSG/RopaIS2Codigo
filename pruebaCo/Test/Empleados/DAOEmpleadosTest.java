@@ -46,7 +46,7 @@ public class DAOEmpleadosTest {
 		
 		//Leer los dos empleados
 		listaAux= dao.readAll();
-		assert(equalsCollection(lista, listaAux));
+		assert(lista.equals( listaAux));
 		
 		//leer por nombre
 		TEmpleado name= dao.readByName("5151Y");
@@ -103,26 +103,6 @@ public class DAOEmpleadosTest {
 	}catch (IOException e) {
 		
 	}
-	}
-	
-	boolean equalsCollection(Collection <TEmpleado>a, Collection <TEmpleado> b){
-		if (a.size()!=b.size())
-			return false;
-		else{
-			Iterator<TEmpleado> it1=a.iterator();
-			Iterator<TEmpleado> it2=b.iterator();
-			boolean iguales=true;
-			while (it1.hasNext()&& it2.hasNext()&& iguales){
-				TEmpleado elem1=it1.next();
-				TEmpleado elem2=it2.next();
-				if(!elem1.equals(elem2)){
-					iguales=false;
-				}
-			}
-			return iguales;
-		}
-	}
-	
-	
+	}	
 }
 

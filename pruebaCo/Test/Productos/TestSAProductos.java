@@ -83,9 +83,8 @@ import Negocio.Producto.TProducto;
 			//Comprobamos el read all de los dos productos añadidos
 			this.mockCollec.add(tCami);
 			Collection<TProducto> readAllCollec = saProducto.readAll();
-			if(this.equalsCollection(readAllCollec, mockCollec)){
-				fail("El readAll no funciona correctamente para 2 productos");
-			}
+
+			assert(mockCollec.equals(readAllCollec));
 			
 			//eliminar las dos marcas creadas
 			aux1= saProducto.delete(1);
@@ -148,30 +147,5 @@ import Negocio.Producto.TProducto;
 				
 			
 			}
-			
-		
-
-		private boolean equalsCollection(Collection<TProducto> a, Collection<TProducto> b){
-
-			if (a.size() != b.size()) {
-				return false;
-			} else {
-			    Iterator<TProducto> it1 = a.iterator();
-			    Iterator<TProducto> it2 = b.iterator();
-			    boolean iguales = true;
-			
-			    while (it1.hasNext() && iguales) {
-			        TProducto elem1 = it1.next();
-			        TProducto elem2 = it2.next();
-			
-			        if (elem1.getIdMarca()!=elem2.getIdMarca()||elem1.getIdProducto()!=elem1.getIdProducto()||elem1.getNombre()!=elem2.getNombre()) {
-			            iguales = false;
-			        }
-			    }
-			    return iguales;
-			}
-			
-			
-		}
 
 	}

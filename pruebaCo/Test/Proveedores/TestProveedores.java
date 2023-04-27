@@ -69,7 +69,7 @@ public class TestProveedores {
 		this.proveedorColeccion.add(tProveedor2);
 		Collection<TProveedor>coll=this.saProveedores.readAll();
 		
-		if(this.equalsCollection(coll,this.proveedorColeccion)){
+		if(this.proveedorColeccion.equals(coll)){
 			fail("No funciona para dos proveedores");
 		}
 		
@@ -102,26 +102,6 @@ public class TestProveedores {
 	}catch (IOException e) {
 		
 	}
-	}
-	
-	private boolean equalsCollection(Collection<TProveedor> coll, Collection<TProveedor> proveedorColeccion2) {
-		if(coll.size()!=proveedorColeccion2.size()){
-			return false;
-		}
-		else{
-			Iterator<TProveedor>it1=coll.iterator();
-			Iterator<TProveedor>it2=proveedorColeccion2.iterator();
-			
-			while(it1.hasNext()&&true){
-				TProveedor prov1=it1.next();
-				TProveedor prov2=it2.next();
-				
-				if(prov1!=prov2){
-					return false;
-				}
-			}
-		}
-		return false;
 	}
 	
 }

@@ -60,7 +60,7 @@ public class SAVentaTest {
 		
 		//comprobar el readAll
 		this.mockCollec.add(venta2);		
-		assertEquals(equalsCollection(mockCollec, this.saVenta.readAll()), true);
+		assert(mockCollec.equals(this.saVenta.readAll()));
 
 		
 	}

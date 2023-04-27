@@ -55,7 +55,7 @@ public class SAEmpleadosTest {
 		assert(aux.equals(emp1));
 		
 		Collection<TEmpleado> listaAux = sa.readAll();
-		assert(this.equalsCollection(listaAux, this.lista));
+		assert(lista.equals(listaAux));
 		
 		//Update
 		emp1=new TEmpleadoTC("Iñaqui", "Wito", "Maquina", d1, 515151, 1, true );
@@ -68,7 +68,7 @@ public class SAEmpleadosTest {
 		lista.add(emp1);
 		lista.add(emp2);
 		listaAux = sa.readAll();
-		assert(this.equalsCollection(listaAux, this.lista));
+		assert(lista.equals(listaAux));
 		
 		//delete
 		a=sa.delete(2);
@@ -91,24 +91,6 @@ public class SAEmpleadosTest {
 	}catch (IOException e) {
 		
 	}
-	}
-	
-	boolean equalsCollection(Collection <TEmpleado>a, Collection <TEmpleado> b){
-		if (a.size()!=b.size())
-			return false;
-		else{
-			Iterator<TEmpleado> it1=a.iterator();
-			Iterator<TEmpleado> it2=b.iterator();
-			boolean iguales=true;
-			while (it1.hasNext()&& it2.hasNext()&& iguales){
-				TEmpleado elem1=it1.next();
-				TEmpleado elem2=it2.next();
-				if(!elem1.equals(elem2)){
-					iguales=false;
-				}
-			}
-			return iguales;
-		}
 	}
 	
 }

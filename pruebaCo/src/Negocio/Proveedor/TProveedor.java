@@ -2,6 +2,8 @@ package Negocio.Proveedor;
 
 import java.util.ArrayList;
 
+import Negocio.Producto.TProducto;
+
 public class TProveedor {
 
 	private boolean activo;
@@ -49,6 +51,17 @@ public class TProveedor {
 	    	buffer.append("|| Marca "+i+": "+m);
 	    }
 	    return buffer.toString();
+	}
+	
+	@Override
+	public boolean equals(Object anObject ) {
+		TProveedor a = (TProveedor) anObject;
+		return this.nombre.equals(a.getNombre()) &&
+				
+				this.getId()==a.getId() &&
+				this.getActivo()==a.getActivo() &&
+				this.marcas.equals(a.getMarca());
+	
 	}
 	
 }

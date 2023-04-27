@@ -79,9 +79,7 @@ public class SAMarcaTest {
 		//Comprobamos el read all de las dos marcas añadidas
 		this.mockCollec.add(tMAlmd);
 		Collection<TMarca> readAllCollec = saMarca.readAll();
-		if(this.equalsCollection(readAllCollec, mockCollec)){
-			fail("El readAll no funciona correctamente para 2 marcas");
-		}
+		assert(mockCollec.equals(readAllCollec));
 		
 		//eliminar las dos marcas creadas
 		aux1= saMarca.delete(1);
@@ -127,29 +125,6 @@ public class SAMarcaTest {
 	}catch (IOException e) {
 		
 	}
-	}
-
-	private boolean equalsCollection(Collection<TMarca> a, Collection<TMarca> b){
-
-		if (a.size() != b.size()) {
-			return false;
-		} else {
-		    Iterator<TMarca> it1 = a.iterator();
-		    Iterator<TMarca> it2 = b.iterator();
-		    boolean iguales = true;
-		
-		    while (it1.hasNext() && iguales) {
-		        TMarca elem1 = it1.next();
-		        TMarca elem2 = it2.next();
-		
-		        if (elem1!=elem2) {
-		            iguales = false;
-		        }
-		    }
-		    return iguales;
-		}
-		
-		
 	}
 
 }

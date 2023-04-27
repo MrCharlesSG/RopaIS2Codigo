@@ -108,6 +108,7 @@ public abstract class TEmpleado {
 				this.DNI.equals(a.getDNI()) &&
 				this.tfno==a.getTfno() &&
 				this.ID == a.getID();
+	
 	}
 	
 }

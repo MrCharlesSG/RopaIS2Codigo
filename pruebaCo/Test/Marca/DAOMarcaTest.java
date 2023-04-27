@@ -57,8 +57,7 @@ public class DAOMarcaTest{
         aux.add(tmarca2);
         aux.add(tmarca3);
         marcas = dmarca.readAll();
-       
-        assertEquals(true,equalsCollection(marcas,aux));
+        assert(aux.equals(marcas));
 
       TMarca tmarca4 = new TMarca("pepsicambio",4,1,0);
 
@@ -67,7 +66,7 @@ public class DAOMarcaTest{
         assertEquals(-1,updateee);
         marcas = dmarca.readAll();
         
-        assertEquals(true,equalsCollection(marcas,aux));
+        assert(aux.equals(marcas));
         vaciarBaseDatos();
       
     }
@@ -82,24 +81,4 @@ public class DAOMarcaTest{
 		
 	}
 	}
-	private boolean equalsCollection(Collection<TMarca> a, Collection<TMarca> b){
-
-		if (a.size() != b.size()) {
-			return false;
-		} else {
-		    Iterator<TMarca> it1 = a.iterator();
-		    Iterator<TMarca> it2 = b.iterator();
-		    boolean iguales = true;
-		
-		    while (it1.hasNext() && iguales) {
-		        TMarca elem1 = it1.next();
-		        TMarca elem2 = it2.next();
-		
-		        if (!elem1.getNombre().equalsIgnoreCase(elem2.getNombre()) || elem1.getActivo()!= elem2.getActivo()  ||elem1.getID()!= elem2.getID() || elem1.getCantidad()!=elem2.getCantidad()) {
-                    iguales = false;
-                }
-		    }
-		    return iguales;
-		}
-    }
 }

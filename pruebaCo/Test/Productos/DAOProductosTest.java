@@ -64,7 +64,7 @@ public class DAOProductosTest {
 			
 			productos=dproducto.readAll();
 			
-			assertEquals(true, equalsCollection(productos, aux));
+			assert( aux.equals(productos));
 			
 			int updatee=dproducto.update(prod3);
 			assertEquals(4, updatee);
@@ -84,28 +84,5 @@ public class DAOProductosTest {
 			
 		}
 		}
-		
-		private boolean equalsCollection(Collection<TProducto> a, Collection<TProducto> b){
-
-			if (a.size() != b.size()) {
-				return false;
-			} else {
-			    Iterator<TProducto> it1 = a.iterator();
-			    Iterator<TProducto> it2 = b.iterator();
-			    boolean iguales = true;
-			
-			    while (it1.hasNext() && iguales) {
-			        TProducto elem1 = it1.next();
-			        TProducto elem2 = it2.next();
-			
-			        if (!elem1.getNombre().equals(elem2.getNombre()) || elem1.getCantidad()!= elem2.getCantidad()  
-			        	||elem1.getTalla()!= elem2.getTalla() || elem1.getIdProducto()!=elem2.getIdProducto()
-			        	||!elem1.getCategoria().equalsIgnoreCase(elem2.getCategoria())||elem1.getIdMarca()!=elem2.getIdMarca()) {
-	                    iguales = false;
-	                }
-			    }
-			    return iguales;
-			}
-	    }
 		
 }

@@ -2,10 +2,15 @@ package Main;
 
 import java.awt.Component;
 import java.awt.Frame;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import Negocio.Proveedor.TProveedor;
 
 public class Utils {
 
@@ -44,6 +49,48 @@ public class Utils {
 			System.exit(0);
 		}
 	}
+	
+	public static boolean equalsCollection(Collection<Object> coll, Collection<Object> proveedorColeccion2) {
+		boolean correcto=true;
+		if(coll.size()!=proveedorColeccion2.size()){
+			correcto=false;
+		}
+		else{
+			
+			Iterator<Object>it1=coll.iterator();
+			Iterator<Object>it2=proveedorColeccion2.iterator();
+			
+			while(it1.hasNext()&&correcto){
+				Object prov1=it1.next();
+				Object prov2=it2.next();
+				if(!prov1.equals(prov2)) {
+					correcto=false;
+				}
+			}
+		}
+		return correcto;
+	}
+	
+	public static boolean equalsMap(Map<Object, Object> map1, Map<Object, Object> map2) {
+		boolean correcto=true;
+		if(map1.size()==map2.size()){
+			correcto=false;
+		}
+		else{
+			Iterator<Object>it1=map1.keySet().iterator();
+			Iterator<Object>it2=map2.keySet().iterator();
+			while(it1.hasNext() && correcto) {
+				it1.next();
+				it2.next();
+				if(!it1.equals(it2)|| map1.get(it1).equals(map2.get(it2)))
+					correcto=false;
+				
+			}
+			
+		}
+		return correcto;
+	}
+	
 
 }
 

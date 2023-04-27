@@ -59,7 +59,7 @@ public class DaoVentaTest {
         aux.add(tventa3);
         ventas=dventa.readAll();
         
-        assertEquals(true, equalsCollection(aux, ventas));
+        assert(ventas.equals(aux));
         
         
         this.vaciarBaseDatos();
@@ -76,31 +76,6 @@ public class DaoVentaTest {
 	}catch (IOException e) {
 		
 	}
-	}
-	
-	private boolean equalsCollection(Collection<TVenta> a, Collection<TVenta> b){
-
-		if (a.size() != b.size()) {
-			return false;
-		} else {
-		    Iterator<TVenta> it1 = a.iterator();
-		    Iterator<TVenta> it2 = b.iterator();
-		    boolean iguales = true;
-		
-		    while (it1.hasNext() && iguales) {
-		    	TVenta elem1 = it1.next();
-		    	TVenta elem2 = it2.next();
-		
-		        if (elem1.get_id()!=elem2.get_id()|| elem1.get_id_empleado()!=elem2.get_id_empleado()||
-		        	elem1.get_id_cliente()!=elem2.get_id_cliente()|| elem1.get_precio()!=elem2.get_precio()||
-		        	elem1.get_contador()!=elem2.get_contador()|| elem1.get_activo()!=elem2.get_activo()) {
-		            iguales = false;
-		        }
-		    }
-		    return iguales;
-		}
-		
-		
 	}
 }
 
