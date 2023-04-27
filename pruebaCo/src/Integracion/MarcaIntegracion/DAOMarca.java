@@ -56,7 +56,7 @@ public interface DAOMarca {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int delete(TMarca marca);
+	public int delete(int id);
 
 	/** 
 	* <!-- begin-UML-doc -->

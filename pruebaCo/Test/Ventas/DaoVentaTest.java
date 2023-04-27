@@ -54,6 +54,7 @@ public class DaoVentaTest {
         dventa.create(tventa2);
         dventa.create(tventa3);
         Collection<TVenta> aux=new ArrayList<TVenta>();
+        aux.add(tventa);
         aux.add(tventa1);
         aux.add(tventa2);
         aux.add(tventa3);
@@ -70,7 +71,7 @@ public class DaoVentaTest {
 	private void vaciarBaseDatos() {
 		try(Writer w=new BufferedWriter(
 				new OutputStreamWriter(
-				new FileOutputStream("Marcas.txt")))){
+				new FileOutputStream("Ventas.txt")))){
 			w.write("");
 		
 	}catch (IOException e) {

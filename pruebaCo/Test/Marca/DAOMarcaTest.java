@@ -13,60 +13,72 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
+import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.MarcaIntegracion.DAOMarcaImp;
 import Negocio.MarcaNegocio.TMarca;
 
 public class DAOMarcaTest{
+	
+	private TMarca m1= new TMarca("Juan", 1, 0, true);
+	private DAOMarca dao = FactoriaIntegracion.getInstance().generaDAOMarca();
+	private Collection<TMarca> lista= new ArrayList<TMarca>();
 
+	//String nombre, int ID, int cantidad, boolean activo)
     @Test
     public void test() {
     	this.vaciarBaseDatos();
-        DAOMarcaImp dmarca =new DAOMarcaImp();
-        TMarca res = dmarca.read(15);
-
-        assertEquals(null,res);
-
-       TMarca tmarca= new TMarca("coca-cola",1,0,1);
-
-        int id=dmarca.create(tmarca);
-        assertEquals(1,id);
-        res = dmarca.read(1);
-
-        assertEquals("coca-cola",res.getNombre());
-        
-        int deletee = dmarca.delete(tmarca);
-
-        assertEquals(1,deletee);
-
-        Collection<TMarca> marcas2 =new ArrayList<TMarca>();
-        marcas2 = dmarca.readAll();
-
-        assertEquals(marcas2.size(),1);
-
-        Collection<TMarca> marcas =new ArrayList<TMarca>();
-        TMarca tmarca1= new TMarca("coca-cola",1,0,1);
-        TMarca tmarca2= new TMarca("pepsi",2,0,1);
-        TMarca tmarca3= new TMarca("cola",3,0,1);
-
-        dmarca.create(tmarca1);
-        dmarca.create(tmarca2);
-        dmarca.create(tmarca3);
-        Collection<TMarca> aux=new ArrayList<TMarca>();
-        aux.add(tmarca1);
-        aux.add(tmarca2);
-        aux.add(tmarca3);
-        marcas = dmarca.readAll();
-        assert(aux.equals(marcas));
-
-      TMarca tmarca4 = new TMarca("pepsicambio",4,1,0);
-
-        int updateee=dmarca.update(tmarca4);
-
-        assertEquals(-1,updateee);
-        marcas = dmarca.readAll();
-        
-        assert(aux.equals(marcas));
+    	
+    	int res=dao.create(m1);
+    	assert(res==1);
+    	TMarca maux=dao.read(1);
+    	assert(maux.equals(m1));
+    	
+    	dao.actualizarCantidad(1, true);
+    	
+    	maux=dao.read(1);
+    	assert(maux.getCantidad()==1);
+    	
+    	maux=dao.readByName("Juan");
+    	m1=new TMarca("Juan", 1, 1, true);
+    	assert(maux.equals(m1 ));
+    	
+    	res=dao.delete(m1.getID());
+    	assert(res==1);
+    	
+    	maux=new TMarca("Monica", 2, 0, true);
+    	res=dao.create(maux);
+    	assert(res==2);
+    	
+    	m1.setActivo(false);
+    	lista.add(m1);
+    	lista.add(maux);
+    	Collection<TMarca> listaAux=dao.readAll();
+    	assert(listaAux.equals(lista));
+    	
+    	res=dao.delete(maux.getID());
+    	assert(res==2);
+    	maux=new TMarca("Monica", 2, 0, false);
+    	
+    	
+    	
+    	lista.clear();
+    	lista.add(m1);
+    	lista.add(maux);
+    	maux=new TMarca("Juani", 3, 0, false);
+    	res=dao.create(maux);
+    	assert(res==3);
+    	lista.add(maux);
+    	
+    	res=dao.delete(maux.getID());
+    	
+    	listaAux=dao.readAll();   	
+    	assert(lista.equals(listaAux));
+    	
+    	maux= new TMarca("Malaq", 3, 33, true);
+    	res= dao.update(maux);
+    	assert(res==3);
+    	
         vaciarBaseDatos();
       
     }

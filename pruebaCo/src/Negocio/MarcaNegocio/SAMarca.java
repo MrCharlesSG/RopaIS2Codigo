@@ -64,5 +64,6 @@ public interface SAMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public TMarca readByName(String nombre);
+	
 	public int actualizarCantidad(int ID,boolean aumento);
 }

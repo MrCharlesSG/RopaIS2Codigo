@@ -46,7 +46,7 @@ public class GUIModificarMarca extends JFrame implements GUI {
 			{ public void actionPerformed(ActionEvent e)
 				{
 					setVisible(false);
-					TMarca tmarca=new TMarca(tNombre.getText(),Integer.parseInt(tId.getText()), 0,0);
+					TMarca tmarca=new TMarca(tNombre.getText(),Integer.parseInt(tId.getText()), 0,true);
 					Controlador.getInstancia().accion(Evento.MODIFICAR_MARCA, tmarca);
 				}
 			});

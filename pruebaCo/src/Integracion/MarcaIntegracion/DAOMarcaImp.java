@@ -30,6 +30,12 @@ public class DAOMarcaImp implements DAOMarca {
 	*/
 	static final String ARCHIVO="Marcas.txt";
 	
+	/*
+	 * String nombre, int ID, int cantidad, boolean activo)
+	 * 0      1     2       3
+	 * nombre:id:cantidad:activo
+	 */
+	
 	public int create(TMarca marca) {
 		StringBuilder buffer=new StringBuilder();
 		File file=new File(ARCHIVO);
@@ -37,39 +43,31 @@ public class DAOMarcaImp implements DAOMarca {
 		boolean encontrado=false;
 		int id=-1;
 		if(file.length()==0){
-			buffer.append((1)+":"+marca.getNombre()+":0:1");
 			id=1;
+			buffer.append(marca.getNombre()+":"+id+":"+0+":"+true);
 		}
 		else{
 			try(Scanner scanner=new Scanner(file)) {//bufferreader
 				while(scanner.hasNext()) {
-
 					datos=scanner.nextLine().split(":");
-					if(datos[1].equalsIgnoreCase(marca.getNombre())){
-						encontrado=true;
-						id=Integer.parseInt(datos[0]);
-						datos[3]="1";
-					}
-					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
-					if(!encontrado)id=Integer.parseInt(datos[0])+1;//no me deja ponerlo fuera pero bueno
+					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]);
+					buffer.append(System.lineSeparator());
+					id=Integer.parseInt(datos[1])+1;
 				}
-				if(!encontrado)
-					buffer.append((id)+":"+marca.getNombre()+":0:1");
+				buffer.append(marca.getNombre()+":"+id+":"+0+":"+true);
+				buffer.append(System.lineSeparator());
 			}catch (IOException e) {
-				return id;
+				return -1;
 			}
 		}
-		
-			
 			try(Writer w=new BufferedWriter(
 										new OutputStreamWriter(
 										new FileOutputStream(ARCHIVO)))){
 				w.write(buffer.toString());
 				return id; 
 			}catch (IOException e) {
-			 
-			return id;
-		}
+				return -1;						
+			}
 		
 	}
 	/** 
@@ -86,10 +84,8 @@ public class DAOMarcaImp implements DAOMarca {
 			while(sacanner.hasNextLine()){
 				datos=sacanner.nextLine().split(":");
 				
-				marca=new TMarca(datos[1],Integer.parseInt(datos[0]),Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
+				marca=new TMarca(datos[0],Integer.parseInt(datos[1]),Integer.parseInt(datos[2]), Boolean.parseBoolean(datos[3]));
 				marcas.add(marca);
-				
-				
 			}
 			return marcas;
 		}catch (IOException e) {
@@ -109,13 +105,12 @@ public class DAOMarcaImp implements DAOMarca {
 		try(Scanner scanner= new Scanner(file)){
 			
 			while(scanner.hasNext() &&!encontrado) {
-				
 				String tokens[]=scanner.nextLine().split(":");
-
-				int ID=Integer.parseInt(tokens[0]);
-			if (ID==id) {
-				 marca=new TMarca(tokens[1],Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
-				 encontrado=true;
+				
+				int ID=Integer.parseInt(tokens[1]);
+				if (ID==id) {
+					marca=new TMarca(tokens[0],Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]), Boolean.parseBoolean(tokens[3]));
+					encontrado=true;
 				}
 			}
 		
@@ -140,9 +135,9 @@ public class DAOMarcaImp implements DAOMarca {
 		
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
-				if (marca.getID()==Integer.parseInt(datos[0])) {	
-					id=Integer.parseInt(datos[0]);
-					buffer.append(id+":"+marca.getNombre()+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
+				if (marca.getID()==Integer.parseInt(datos[1])) {	
+					id=Integer.parseInt(datos[1]);
+					buffer.append(marca.getNombre()+":"+id+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
 				}
 				else
 					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
@@ -167,19 +162,19 @@ public class DAOMarcaImp implements DAOMarca {
 	* @see DAOMarca#delete(TMarca marca)
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int delete(TMarca marca) {
+	public int delete(int id) {
 		StringBuilder buffer=new StringBuilder();
 		File file=new File(ARCHIVO);
 		String datos[];
-		int id=-1;
+		boolean encontrado=false;
+		
 		try(Scanner scanner=new Scanner(file)) {//bufferreader
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
 			
-				if (Integer.parseInt(datos[0])==marca.getID()) {
-				
-					datos[3]="0";
-					id=Integer.parseInt(datos[0]);
+				if (Integer.parseInt(datos[1])==id) {
+					datos[3]="false";
+					encontrado=true;
 				}
 				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
 			}
@@ -187,12 +182,11 @@ public class DAOMarcaImp implements DAOMarca {
 									new OutputStreamWriter(
 									new FileOutputStream(ARCHIVO)))){
 				w.write(buffer.toString());
-				return id;
+				return encontrado? id:-1;
 			}
 		}
 		catch (IOException e) {
-			//cosas
-			return id;
+			return -1;
 		}
 		
 	}
@@ -212,16 +206,14 @@ public class DAOMarcaImp implements DAOMarca {
 				
 				String tokens[]=scanner.nextLine().split(":");
 				
-				if (tokens[1].equalsIgnoreCase(nombre)) {
-					 marca=new TMarca(nombre,Integer.parseInt(tokens[0]),Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
+				if (tokens[0].equalsIgnoreCase(nombre)) {
+					 marca=new TMarca(tokens[0],Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]), Boolean.parseBoolean(tokens[3]));
 					encontrado=true;
 				}
 			}
-		
 			return marca;
 		}catch(IOException e){
-			//cosas
-			return marca;
+			return null;
 		}
 	}
 
@@ -231,17 +223,14 @@ public class DAOMarcaImp implements DAOMarca {
 		File file=new File(ARCHIVO);
 		String datos[];
 		int id=-1;
-		int aum=-1;
-		if(aumento)
-			aum=1;
+		int aum=aumento?1:-1;
 		try(Scanner scanner=new Scanner(file)) {//bufferreader
 		
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
-				if (Integer.parseInt(datos[0])==ID&&datos[3].equalsIgnoreCase("1")) {	
-					id=Integer.parseInt(datos[0]);
+				if (Integer.parseInt(datos[1])==ID) {	
 					aum+=Integer.parseInt(datos[2]);
-					buffer.append(id+":"+datos[1]+":"+aum+":"+datos[3]).append(System.lineSeparator());
+					buffer.append(datos[0]+":"+datos[1]+":"+aum+":"+datos[3]).append(System.lineSeparator());
 				}
 				else
 					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());

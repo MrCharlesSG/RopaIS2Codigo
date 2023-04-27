@@ -3,6 +3,7 @@
  */
 package Negocio.MarcaNegocio;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
@@ -27,10 +28,14 @@ public class SAMarcaImp implements SAMarca {
 		if(marca!=null&&ComprobadorSintactico.isName(marca.getNombre())){
 			TMarca leido=daoMarca.readByName(marca.getNombre());
 			
-			if(leido==null||!leido.getActivo())
+			if(leido==null)
 				id=daoMarca.create(marca);//hay que quitar el boolean
-			
+			else {
+				if(leido.getActivo()) {
+					id=daoMarca.update(marca);
+				}
 			}
+		}
 		return id;
 	}
 
@@ -41,7 +46,14 @@ public class SAMarcaImp implements SAMarca {
 	*/
 	public Collection<TMarca> readAll() {
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
-		return daoMarca.readAll();
+		Collection<TMarca> lista = new ArrayList<TMarca>();
+		Collection<TMarca> listaAux = daoMarca.readAll();
+		for(TMarca m:listaAux) {
+			if(m.getActivo()) {
+				lista.add(m);
+			}
+		}
+		return lista;
 	}
 
 	/** 
@@ -51,11 +63,12 @@ public class SAMarcaImp implements SAMarca {
 	*/
 	public TMarca read(int id) {
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
-		
 		TMarca marca=null;
 		if(ComprobadorSintactico.isPositive(id))
 			marca=daoMarca.read(id);
-		return marca;
+		
+		return	(marca!=null&&marca.getActivo())? marca:null;
+		 
 	}
 
 	/** 
@@ -68,11 +81,11 @@ public class SAMarcaImp implements SAMarca {
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();//yo lo dejaria como atributo de sa
 		if(ComprobadorSintactico.isPositive(marca.getID())){
 			TMarca leido=daoMarca.read(marca.getID());	
-			if(leido!=null)
+			if(leido!=null && leido.getActivo())
 				id=daoMarca.update(marca);
 			}
 		return id;
-		// end-user-code
+		
 	}
 
 	/** 
@@ -87,7 +100,7 @@ public class SAMarcaImp implements SAMarca {
 			TMarca leido=daoMarca.read(ID);	
 			
 			if(leido!=null&&leido.getCantidad()==0&&leido.getActivo())
-			id=daoMarca.delete(leido);// hay hay que mirar los argumentos ...
+				id=daoMarca.delete(id);// hay hay que mirar los argumentos ...S
 			}
 		
 		return id;
@@ -103,9 +116,11 @@ public class SAMarcaImp implements SAMarca {
 		TMarca marca=null;
 		if(ComprobadorSintactico.isName(nombre))
 			marca=daoMarca.readByName(nombre);
-		return marca;
+		return (marca!=null && marca.getActivo())? marca:null;
 		// end-user-code
 	}
+	
+	
 	public int actualizarCantidad(int ID,boolean aumento){
 		int id=-1;
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();	

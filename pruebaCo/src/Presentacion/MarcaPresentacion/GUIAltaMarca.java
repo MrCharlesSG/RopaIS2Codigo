@@ -45,7 +45,7 @@ public class GUIAltaMarca extends JFrame implements GUI{
 				{		
 					setVisible(false);
 					String nombre= tNombre.getText();
-					TMarca tM= new TMarca (nombre,-1,1, 0);
+					TMarca tM= new TMarca (nombre,-1,1, true);
 					Controlador.getInstancia().setGUI(GUIAltaMarca.this);
 					Controlador.getInstancia().accion(Evento.ALTA_MARCA, tM);
 				}

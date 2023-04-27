@@ -16,7 +16,7 @@ import Negocio.Ventas.TVenta;
 
 public class DAOVentasIMP implements DAOVentas {
 	
-	static final String ARCHIVO="Empleados.txt";
+	static final String ARCHIVO="Ventas.txt";
 
 	/*
 	 * int id, int id_emp, int id_cl, double prec, int cont, boolean activo

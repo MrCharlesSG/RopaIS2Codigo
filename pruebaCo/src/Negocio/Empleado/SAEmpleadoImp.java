@@ -18,7 +18,6 @@ public class SAEmpleadoImp implements SAEmpleado {
 			TEmpleado leido = daoEmpleado.readByName(empl.getDNI());
 			
 			if(leido == null){
-				empl.setActivo(true);
 				id = daoEmpleado.create(empl); 
 			}else{
 				if(!leido.isActivo()){

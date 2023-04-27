@@ -25,8 +25,8 @@ import Negocio.MarcaNegocio.TMarca;
 public class SAMarcaTest {
 		
 	private SAMarca saMarca = FactoriaNegocioImp.getInstance().generaSAMarca();
-	private TMarca tMJuli = new TMarca("Julian", 1, 1,1);
-	private TMarca tMAlmd = new TMarca("Almendra", 2, 1,1);
+	private TMarca tMJuli = new TMarca("Julian", 1, 1,true);
+	private TMarca tMAlmd = new TMarca("Almendra", 2, 1,true);
 	private Collection<TMarca> mockCollec = new ArrayList<TMarca>();
 	
 	@Test
@@ -45,7 +45,7 @@ public class SAMarcaTest {
 		assertEquals("No se ha leido correctamente por id de marca", tMAux.getID(), this.tMJuli.getID());
 		
 		//crear una marca con el mismo nombre
-		tMAux= new TMarca("Julian", 2, 1, 1);
+		tMAux= new TMarca("Julian", 2, 1, true);
 		aux3 = saMarca.create(tMAux);
 		assertEquals("Se ha creado una marca con el mismo nombre", aux3, -1);
 		
@@ -109,7 +109,7 @@ public class SAMarcaTest {
 		}*/
 
 		//crear marca sin nombre
-		assertEquals("Se ha creado una marca sin nombre", this.saMarca.create(new TMarca("", 2, 1, 2)), -1);
+		assertEquals("Se ha creado una marca sin nombre", this.saMarca.create(new TMarca("", 2, 1, false)), -1);
 		
 		//read de un id nulo
 		assertEquals("Se ha leido un id invalido", this.saMarca.read(100), null);

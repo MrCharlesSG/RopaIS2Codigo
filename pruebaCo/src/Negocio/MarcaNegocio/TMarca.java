@@ -3,6 +3,8 @@
  */
 package Negocio.MarcaNegocio;
 
+import Negocio.Producto.TProducto;
+
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
@@ -33,13 +35,12 @@ public class TMarca {
 	 * @param nombre2 
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public TMarca(String nombre, int ID, int cantidad, int activo) {
+	public TMarca(String nombre, int ID, int cantidad, boolean activo) {
 		this.Nombre=nombre;
 		this.IDMarca=ID;
 		this.activo=false;
 		this.cantidad = cantidad;
-		if(activo==1)
-			this.activo=true;
+		this.activo=activo;
 	}
 
 	/** 
@@ -105,5 +106,16 @@ public class TMarca {
 	
 	public int getCantidad(){
 		return this.cantidad;
+	}
+	
+	@Override
+	public boolean equals(Object anObject ) {
+		TMarca a = (TMarca) anObject;
+		return this.activo==a.getActivo()&&
+				this.cantidad==a.getCantidad() &&
+				this.IDMarca==a.getID()&&
+				this.Nombre.equals(a.getNombre())
+				;
+	
 	}
 }
