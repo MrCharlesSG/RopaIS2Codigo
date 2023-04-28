@@ -61,7 +61,7 @@ public class ControlPanel extends JPanel {
 		_toolBar.add(producto);
 		
 		proveedor = new JButton();
-		proveedor.setToolTipText("abrir menú productos");
+		proveedor.setToolTipText("abrir menú proveedores");
 		proveedor.setText("Proveedores");
 		proveedor.addActionListener(new ActionListener(){
 

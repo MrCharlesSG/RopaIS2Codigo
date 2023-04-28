@@ -231,7 +231,7 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 		return new GUIListarVentas();
 	}
 	@Override
-	public GUIVentaPorID genraGUIVentaPorID() {
+	public GUIVentaPorID generaGUIVentaPorID() {
 		return new GUIVentaPorID();
 	}
 

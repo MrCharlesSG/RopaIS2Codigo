@@ -34,7 +34,7 @@ public class IGUIVentas extends JPanel implements GUI{
 		altaV.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){	
-				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIAltaProveedor());
+				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIAltaVenta());
 				}
 		});
 		
@@ -42,7 +42,7 @@ public class IGUIVentas extends JPanel implements GUI{
 			{ 
 			public void actionPerformed(ActionEvent e){		
 					
-				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIBajaProveedor());
+				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIDevolverVenta());
 				}
 		});
 		
@@ -50,14 +50,14 @@ public class IGUIVentas extends JPanel implements GUI{
 		{ 
 			public void actionPerformed(ActionEvent e){		
 				//este no usa el set Gui porque no tiene botones y directamente llama al controlador
-				FactoriaPresentacion.getInstance().generaGUIListarProveedor();
+				FactoriaPresentacion.getInstance().generaGUIListarVentas();
 		}
 		});
 		ventaPorID.addActionListener(new ActionListener()
 		{ 
 			public void actionPerformed(ActionEvent e){		
 				
-				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIModificarProveedor());
+				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIVentaPorID());
 			}
 		});
 		ventasPorEmpleados.addActionListener(new ActionListener(){

@@ -171,6 +171,6 @@ public abstract class FactoriaPresentacion {
 	public abstract GUIAltaVenta generaGUIAltaVenta();
 	public abstract GUIDevolverVenta generaGUIDevolverVenta();
 	public abstract GUIListarVentas generaGUIListarVentas();
-	public abstract GUIVentaPorID genraGUIVentaPorID();
+	public abstract GUIVentaPorID generaGUIVentaPorID();
 
 }
