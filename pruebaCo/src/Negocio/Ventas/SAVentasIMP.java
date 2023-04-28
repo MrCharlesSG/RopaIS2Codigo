@@ -10,22 +10,21 @@ import Integracion.Ventas.DAOVentas;
 import Negocio.ComprobadorSintactico;
 import Negocio.Clientes.TCliente;
 import Negocio.Empleado.TEmpleado;
+import Presentacion.Controlador.Controlador;
 
 public class SAVentasIMP implements SAVentas {
 	private DAOVentas daoVentas;
-	private DAOEmpleado daoEmpleados;
-	private DAOClientes daoClientes;
+	
 	public SAVentasIMP(){
 		daoVentas=FactoriaIntegracion.getInstance().generaDAOVentas();
-		daoEmpleados=FactoriaIntegracion.getInstance().generaDAOEmpleado();
-		daoClientes=FactoriaIntegracion.getInstance().generaDAOClientes();
 	}
 	@Override
 	public int create(TVenta venta) {
+		// solo da de alta la venta sin donde aun no hay productos
 		int id=-1;
 		if(esValida(venta)){
 			TVenta leido=daoVentas.read(venta.get_id());
-			if(leido==null||!leido.get_activo())
+			if(leido==null)
 				id=daoVentas.create(venta);
 			}
 		return id;
@@ -60,12 +59,20 @@ public class SAVentasIMP implements SAVentas {
 	}
 	
 	private boolean esValida(TVenta venta) {
-		TCliente cliente=daoClientes.read(venta.get_id_cliente());
-		TEmpleado empleado=daoEmpleados.read(venta.get_id_empleado());
-		
-		return ComprobadorSintactico.isPositive(venta.get_id())&&ComprobadorSintactico.isPositive(venta.get_id_cliente())&&
-				ComprobadorSintactico.isPositive(venta.get_id_empleado())&&empleado!=null&&cliente!=null;
-	}
 
+		return Controlador.getInstancia().clienteExiste(venta.get_id_cliente())&&Controlador.getInstancia().empleadoExiste(venta.get_id_empleado())&&
+				ComprobadorSintactico.isPositive(venta.get_id())&&ComprobadorSintactico.isPositive(venta.get_id_cliente())&&
+				ComprobadorSintactico.isPositive(venta.get_id_empleado());
+	}
+// tengo que crear un update que me añade proctos o me los registra en la base de datos 
+	// se le pasa un id de venta y un mapa con <id_prod,cantidad>
+	@Override
+	public int update(TVenta venta) {
+		int id=-1;
+		if(esValida(venta)&&Controlador.getInstancia().productosExisten(venta.get_map())){
+			id=daoVentas.update(venta);	
+		}
+		return id;
+	}
 
 }

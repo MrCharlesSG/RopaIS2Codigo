@@ -3,6 +3,7 @@ package Presentacion.Controlador;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import Negocio.Clientes.SAClientes;
 import Negocio.Clientes.TCliente;
@@ -343,7 +344,7 @@ public class Controlador {
 	public boolean marcasExisten(ArrayList<Integer> marcas) {
 		boolean existe=true;
 		if(marcas.size()!=0){
-			SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
+			//SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 			Collection<TMarca> listam = saMarca.readAll();
 			int i=0;
 			while(existe && i<marcas.size() ){
@@ -358,6 +359,39 @@ public class Controlador {
 		}
 		return existe;
 	}
+	public boolean clienteExiste(int id_cliente) {
+		boolean existe=true;
+		
+		if(saCliente.read(id_cliente)==null)
+			existe=false;
+		return existe;
+	}
+	public boolean empleadoExiste(int id_empleado) {
+		boolean existe=true;
+		if(saEmpleado.read(id_empleado)==null)
+			existe=false;
+		return existe;
+	}
+	public boolean productosExisten(Map<Integer, Integer> productos) {
+		boolean existe=true;
+		if(productos.keySet().size()!=0){
+			Collection<TProducto> listap = saProducto.readAll();
+			int i=0;
+			for(int id: productos.keySet()){
+			existe=false;
+				for(TProducto p:listap){
+					if(p.getIdProducto()==id&&p.getCantidad()<productos.get(id))
+						return false;//existe el producto pero se ha seleccionado demasiada cantidad
+					if(p.getIdProducto()==id){
+						existe=true;
+					}
+				}
+				if(!existe)//si sale del for sin que cambie existe a true es q no existe ese prod
+					return false;
+			}
+			
+		}
+		return existe;
 	
 }
 	

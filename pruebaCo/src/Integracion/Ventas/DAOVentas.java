@@ -14,5 +14,7 @@ public interface DAOVentas {
 	public Collection<TVenta> readByEmpleado(int idEmpleado);
 	
 	public Collection<TVenta> readByCliente(int idCliente);
+
+	public int update(TVenta venta);
 	
 }
