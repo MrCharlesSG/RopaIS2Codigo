@@ -1,4 +1,4 @@
-package Presentacion.Ventas;
+	package Presentacion.Ventas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,7 +32,7 @@ public class IGUIVentas extends JPanel implements GUI{
 		altaV.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){	
-				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIAltaProveedor());
+				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaIGUIAltaVenta());
 				}
 		});
 		

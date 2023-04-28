@@ -1,4 +1,3 @@
-
 package Presentacion.Controlador;
 
 import java.util.ArrayList;
@@ -18,6 +17,8 @@ import Presentacion.Controlador.Evento;
 import Negocio.Producto.TProducto;
 import Negocio.Proveedor.SAProveedores;
 import Negocio.Proveedor.TProveedor;
+import Negocio.Ventas.SAVentas;
+import Negocio.Ventas.TVenta;
 import Negocio.Producto.SAProducto;
 /** 
  * <!-- begin-UML-doc -->
@@ -39,13 +40,15 @@ public class Controlador {
 	private SAClientes saCliente;
 	private SAEmpleado saEmpleado;
 	private GUI gui;
+	private SAVentas saVenta;
 	
 	private Controlador(){
 		this.saMarca=FactoriaNegocio.getInstance().generaSAMarca();
 		this.saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
 		this.saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 		this.saEmpleado = FactoriaNegocio.getInstance().generaSAEmpleado();
-		saCliente=FactoriaNegocio.getInstance().generaSAClientes();
+		this.saCliente=FactoriaNegocio.getInstance().generaSAClientes();
+		this.saVenta = FactoriaNegocio.getInstance().generaSAVentas();
 	}
 	public static Controlador getInstancia() {
 		if(controlador==null){
@@ -296,15 +299,23 @@ public class Controlador {
              * VENTAS
              */
             case Evento.ABRIR_VENTA:{
-            	//TODO
-            	break;
-            }
-            case Evento.CAMBIAR_VENTA:{
-            	//TODO
+            	int res=saVenta.create((TVenta)datos);
+            	if(res>0){
+            		gui.update(Evento.RES_ABRIR_VENTA_OK, saVenta.read(res));
+            	}
+            	else{
+            		gui.update(Evento.RES_ABRIR_VENTA_OK, null);
+            	}
             	break;
             }
             case Evento.CERRAR_VENTA:{
-            	//TODO
+            	int res=saVenta.update((TVenta)datos);
+            	if(res>0){
+            		gui.update(Evento.RES_CERRAR_VENTA_OK, null);
+            	}
+            	else{
+            		gui.update(Evento.RES_CERRAR_VENTA_KO, null);
+            	}
             	break;
             }
             case Evento.VENTA_POR_ID:{
@@ -392,8 +403,5 @@ public class Controlador {
 			
 		}
 		return existe;
-	
-
 	}
 }
-	

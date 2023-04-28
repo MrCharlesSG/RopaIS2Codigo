@@ -1,3 +1,4 @@
+
 package Negocio.Ventas;
 
 import java.util.Collection;
@@ -103,5 +104,8 @@ public class TVenta {
 				this.activo == a.get_activo() &&
 				this.prod_unidades.equals(a.get_map())
 				;
+	}
+	public void setProductos(Map<Integer,Integer> aux){
+		prod_unidades.putAll(aux);
 	}
 }

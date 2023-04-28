@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -32,7 +33,7 @@ public class CarritoDialog extends Dialog {
 	this.initGUI() ;
 	}
 	private void initGUI() {
-		setTitle("Seleccion de productos");
+		setTitle("Carrito de de productos");
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		JLabel descripcion=new JLabel("<html><p>Elige un producto por su id y selecciona una cantidad</p></html>");
@@ -45,7 +46,9 @@ public class CarritoDialog extends Dialog {
 		JLabel lcanti=new JLabel("Cantidad:");
 		final JTextField tcant= new JTextField(20);
 		JButton aniadir=new JButton("Añadir");
+		aniadir.setToolTipText("Añade n unidades de un producto");
 		JButton elim=new JButton("Eliminar");
+		elim.setToolTipText("Elimina n unidades de un producto");
 		JButton aceptar=new JButton("Aceptar");
 		panel.add(lprod);
 		panel.add(tprod);
@@ -62,7 +65,13 @@ public class CarritoDialog extends Dialog {
 		aniadir.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{	
-			carro.put(Integer.parseInt(tprod.getText()), Integer.parseInt(tcant.getText()));
+			try{
+				carro.put(Integer.parseInt(tprod.getText()), Integer.parseInt(tcant.getText()));
+			}
+			catch(Exception e1){
+				Utils.showErrorMsg("Los parametros introducidos no son validos, intentelo de nuevo");
+			}
+			
 			tprod.setText(null);
 			tcant.setText(null);
 				
