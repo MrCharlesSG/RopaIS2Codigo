@@ -31,7 +31,7 @@ public class SAMarcaImp implements SAMarca {
 			if(leido==null)
 				id=daoMarca.create(marca);//hay que quitar el boolean
 			else {
-				if(leido.getActivo()) {
+				if(!leido.getActivo()) {
 					id=daoMarca.update(marca);
 				}
 			}
@@ -100,7 +100,7 @@ public class SAMarcaImp implements SAMarca {
 			TMarca leido=daoMarca.read(ID);	
 			
 			if(leido!=null&&leido.getCantidad()==0&&leido.getActivo())
-				id=daoMarca.delete(id);// hay hay que mirar los argumentos ...S
+				id=daoMarca.delete(ID);// hay hay que mirar los argumentos ...S
 			}
 		
 		return id;

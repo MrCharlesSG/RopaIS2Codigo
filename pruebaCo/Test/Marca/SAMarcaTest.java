@@ -25,8 +25,9 @@ import Negocio.MarcaNegocio.TMarca;
 public class SAMarcaTest {
 		
 	private SAMarca saMarca = FactoriaNegocioImp.getInstance().generaSAMarca();
-	private TMarca tMJuli = new TMarca("Julian", 1, 1,true);
-	private TMarca tMAlmd = new TMarca("Almendra", 2, 1,true);
+	//String nombre, int ID, int cantidad, boolean activo
+	private TMarca tMJuli = new TMarca("Julian", 1, 0,true);
+	private TMarca tMAlmd = new TMarca("Almendra", 2, 0,true);
 	private Collection<TMarca> mockCollec = new ArrayList<TMarca>();
 	
 	@Test
@@ -88,7 +89,8 @@ public class SAMarcaTest {
 		assertEquals("No se ha eliminado correctamente", aux2, 2);
 		
 		//readAll de 0 marcas activas
-		assertEquals(this.saMarca.readAll().size(), 2);
+		readAllCollec=this.saMarca.readAll();
+		assertEquals(readAllCollec.size(), 0);
 		
 		//Añadir 5 marcas
 	/*	String nombre= "Manolo";
