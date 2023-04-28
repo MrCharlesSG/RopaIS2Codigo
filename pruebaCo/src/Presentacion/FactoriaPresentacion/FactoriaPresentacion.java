@@ -40,6 +40,12 @@ import Presentacion.Producto.GUIModificarProducto;
 import Presentacion.Producto.GUIProductoPorID;
 import Presentacion.Producto.IGUIProducto;
 import Presentacion.ProveedorPresentacion.IGUIProv;
+import Presentacion.Ventas.GUIAltaVenta;
+import Presentacion.Ventas.GUIDevolverVenta;
+import Presentacion.Ventas.GUIListarVentas;
+import Presentacion.Ventas.GUIVentaPorID;
+import Presentacion.Ventas.GUIVenta_Cliente;
+import Presentacion.Ventas.GUIVenta_Empleado;
 import Presentacion.Ventas.IGUIVentas;
 
 /** 
@@ -160,5 +166,11 @@ public abstract class FactoriaPresentacion {
 	 * VENTAS
 	 */
 	public abstract IGUIVentas generaIGUIVenta() ;
+	public abstract GUIVenta_Empleado generaGUIVenta_Empleado();
+	public abstract GUIVenta_Cliente generaGUIVenta_Cliente();
+	public abstract GUIAltaVenta generaGUIAltaVenta();
+	public abstract GUIDevolverVenta generaGUIDevolverVenta();
+	public abstract GUIListarVentas generaGUIListarVentas();
+	public abstract GUIVentaPorID genraGUIVentaPorID();
 
 }

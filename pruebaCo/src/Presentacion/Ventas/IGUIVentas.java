@@ -1,4 +1,4 @@
-	package Presentacion.Ventas;
+package Presentacion.Ventas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,11 +28,13 @@ public class IGUIVentas extends JPanel implements GUI{
 		JButton devol=new JButton("Devolucion");
 		JButton listarC=new JButton("Listar Ventas");
 		JButton ventaPorID=new JButton("Venta por ID");
+		JButton ventasPorEmpleados = new JButton("Ventas por Empleados");
+		JButton ventasPorCliente = new JButton("Ventas por Cliente");
 		
 		altaV.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){	
-				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaIGUIAltaVenta());
+				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIAltaProveedor());
 				}
 		});
 		
@@ -58,12 +60,26 @@ public class IGUIVentas extends JPanel implements GUI{
 				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIModificarProveedor());
 			}
 		});
+		ventasPorEmpleados.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIVenta_Empleado());
+			}
+		});
+		ventasPorCliente.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIVenta_Cliente());
+			}
+		});
 		
 		
 		this.add(altaV);
 		this.add(devol);
 		this.add(listarC);
 		this.add(ventaPorID);
+		this.add(ventasPorEmpleados);
+		this.add(ventasPorCliente);
 		this.setVisible(false);
 	}
 

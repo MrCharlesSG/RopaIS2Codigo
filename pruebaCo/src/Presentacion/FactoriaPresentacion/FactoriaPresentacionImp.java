@@ -36,6 +36,12 @@ import Presentacion.ProveedorPresentacion.GUIListarProv;
 import Presentacion.ProveedorPresentacion.GUIModificarProv;
 import Presentacion.ProveedorPresentacion.GUIProvPorID;
 import Presentacion.ProveedorPresentacion.IGUIProv;
+import Presentacion.Ventas.GUIAltaVenta;
+import Presentacion.Ventas.GUIDevolverVenta;
+import Presentacion.Ventas.GUIListarVentas;
+import Presentacion.Ventas.GUIVentaPorID;
+import Presentacion.Ventas.GUIVenta_Cliente;
+import Presentacion.Ventas.GUIVenta_Empleado;
 import Presentacion.Ventas.IGUIVentas;
 
 /** 
@@ -203,6 +209,30 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	@Override
 	public IGUIVentas generaIGUIVenta() {
 		return new IGUIVentas();
+	}
+	@Override
+	public GUIVenta_Empleado generaGUIVenta_Empleado() {
+		return new GUIVenta_Empleado();
+	}
+	@Override
+	public GUIVenta_Cliente generaGUIVenta_Cliente() {
+		return new GUIVenta_Cliente();
+	}
+	@Override
+	public GUIAltaVenta generaGUIAltaVenta() {
+		return new GUIAltaVenta();
+	}
+	@Override
+	public GUIDevolverVenta generaGUIDevolverVenta() {
+		return new GUIDevolverVenta();
+	}
+	@Override
+	public GUIListarVentas generaGUIListarVentas() {
+		return new GUIListarVentas();
+	}
+	@Override
+	public GUIVentaPorID genraGUIVentaPorID() {
+		return new GUIVentaPorID();
 	}
 
 
