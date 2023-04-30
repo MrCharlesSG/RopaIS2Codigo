@@ -155,7 +155,7 @@ public class Controlador {
 			}
 			case Evento.PRODUCTO_POR_ID:{
 				TProducto producto=saProducto.read((Integer)datos);
-				if(producto.getIdMarca() == -1)
+				if(producto.getIdMarca() != -1)
 					gui.update(Evento.RES_PRODUCTO_POR_ID_OK, producto);
 				else
 					gui.update(Evento.RES_PRODUCTO_POR_ID_KO, producto);
