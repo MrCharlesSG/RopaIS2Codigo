@@ -39,7 +39,12 @@ public class SAVentaTest {
 		assertEquals(aux1, 1);
 		this.mockCollec.add(venta1);
 		TVenta v=this.saVenta.read(1);
-		assertEquals(v.get_id(), venta1.get_id());
+		assertEquals(v, venta1);
+		
+		aux1=saVenta.create(venta2);
+		assertEquals(aux1, 2);
+		v=this.saVenta.read(2);
+		assertEquals(v, venta2);
 		
 		//compruebo el readByEmpleado
 		Collection<TVenta> empleado1=new ArrayList<TVenta>();
@@ -56,7 +61,7 @@ public class SAVentaTest {
 		
 		//crear una venta existente
 		aux3=saVenta.create(venta1);
-		assertEquals(aux1, -1);
+		assertEquals(aux3, -1);
 		
 		//comprobar el readAll
 		this.mockCollec.add(venta2);		
@@ -68,7 +73,7 @@ public class SAVentaTest {
 	private void vaciarBaseDatos() {
 		try(Writer w=new BufferedWriter(
 				new OutputStreamWriter(
-				new FileOutputStream("Marcas.txt")))){
+				new FileOutputStream("Ventas.txt")))){
 			w.write("");
 		
 	}catch (IOException e) {
@@ -89,11 +94,10 @@ public class SAVentaTest {
 		    	TVenta elem1 = it1.next();
 		    	TVenta elem2 = it2.next();
 		
-		        if (elem1.get_id()!=elem2.get_id()|| elem1.get_id_empleado()!=elem2.get_id_empleado()||
-		        	elem1.get_id_cliente()!=elem2.get_id_cliente()|| elem1.get_precio()!=elem2.get_precio()||
-		        	elem1.get_contador()!=elem2.get_contador()|| elem1.get_activo()!=elem2.get_activo()) {
-		            iguales = false;
+		        if (!elem1.equals(elem2)) {
+		        	 iguales = false;
 		        }
+		       
 		    }
 		    return iguales;
 		}

@@ -67,17 +67,20 @@ public class SAVentasIMP implements SAVentas {
 // tengo que crear un update que me añade proctos o me los registra en la base de datos 
 	// se le pasa un id de venta y un mapa con <id_prod,cantidad>
 	@Override
-	public int update(TVenta venta) {
+	public int update(TVenta venta,boolean devol) {
 		int id=-1;
 		if(esValida(venta)&&Controlador.getInstancia().productosExisten(venta.get_map())){
 			int contador=0;
-			for(Integer i:venta.get_map().values()){
-				contador+=i;
+			for(Integer i:venta.get_map().keySet()){
+				if(!devol)
+					Controlador.getInstancia().restarProd(i, venta.get_map().get(i));
+				contador+=venta.get_map().get(i);
 			}
 			venta.set_contador_productos(contador);
 			id=daoVentas.update(venta);	
 		}
-		return id;
+			return id;
+		
 	}
 	@Override
 	public int devolucionVenta(List<Integer> datos) {
@@ -85,11 +88,12 @@ public class SAVentasIMP implements SAVentas {
 		TVenta venta=read(datos.get(0));
 		Map<Integer, Integer> mapa = venta.get_map();
 		if(mapa.containsKey(datos.get(1))&&mapa.get(datos.get(1))>=datos.get(2)){
+			Controlador.getInstancia().devolverProd(datos.get(1),datos.get(2));
 			mapa.put(datos.get(1),mapa.get(datos.get(1))- datos.get(2));
 			if(mapa.get(datos.get(1))==0)
 				mapa.remove(datos.get(1));
 			venta.setProductos(mapa);
-			this.update(venta);
+			this.update(venta,true);
 			id=venta.get_id();
 		}
 		return id;

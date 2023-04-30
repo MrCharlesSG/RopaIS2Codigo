@@ -104,8 +104,16 @@ public class SAProductoIMP implements SAProducto{
 	@Override
 	public boolean restarCantidad(int id, int cant) {
 		TProducto tProd = dao.read(id);
-		if(tProd.getIdProducto() != -1 && (tProd.getCantidad() - cant) >= 0){
+		if(tProd!=null && (tProd.getCantidad() - cant) >= 0){
 			return dao.restarCantidad(id, cant);
+		}
+		return false;
+	}
+	@Override
+	public boolean devolverCantidad(int id, int cant){
+		TProducto tProd = dao.read(id);
+		if(tProd!=null){
+			return dao.restarCantidad(id, cant*-1);
 		}
 		return false;
 	}

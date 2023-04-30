@@ -310,7 +310,7 @@ public class Controlador {
             	break;
             }
             case Evento.CERRAR_VENTA:{
-            	int res=saVenta.update((TVenta)datos);
+            	int res=saVenta.update((TVenta)datos,false);
             	if(res>0){
             		gui.update(Evento.RES_CERRAR_VENTA_OK, null);
             	}
@@ -337,10 +337,10 @@ public class Controlador {
             case Evento.DEVOLUCION_VENTA:{
             	int res=saVenta.devolucionVenta((List<Integer>)datos);
             	if(res>0){
-            		
+            		gui.update(Evento.RES_DEVOLUCION_VENTA_OK,res);
             	}
             	else{
-            		
+            		gui.update(Evento.RES_DEVOLUCION_VENTA_KO,null);
             	}
             	break;
             }
@@ -412,5 +412,11 @@ public class Controlador {
 			
 		}
 		return existe;
+	}
+	public boolean devolverProd(Integer id, Integer cant) {
+		return this.saProducto.devolverCantidad(id, cant);
+	}
+	public boolean restarProd(Integer id, Integer cant) {
+		return this.saProducto.restarCantidad(id, cant);
 	}
 }

@@ -72,7 +72,7 @@ public class GUIDevolverVenta extends JFrame implements GUI{
 	public void update(int evento, Object datos) {
 	if( Evento.RES_DEVOLUCION_VENTA_OK==evento){
 		
-		JOptionPane.showMessageDialog(null, "Se ha devuelto con éxito el producto");
+		JOptionPane.showMessageDialog(null, "Se ha devuelto con éxito el producto de la venta");
 	
 	}
 	if( Evento.RES_DEVOLUCION_VENTA_KO==evento)

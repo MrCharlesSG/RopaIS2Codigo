@@ -14,7 +14,7 @@ public interface SAVentas {
 	
 	public Collection<TVenta> readByCliente(int idCliente);
 	
-	public int update(TVenta venta);
+	public int update(TVenta venta,boolean devol);
 
 	public int devolucionVenta(List<Integer> datos);
 }
