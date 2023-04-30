@@ -1,0 +1,2 @@
+s: 1: 20: 1: hola: 1
+Camiseta blanca: 2: 0: 1: Camiseta: 1

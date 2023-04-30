@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -83,15 +84,13 @@ public class GUIAltaVenta extends JFrame implements GUI{
 	}
 	if(Evento.RES_ABRIR_VENTA_OK==evento)
 	{
-		if(carrito==null)
+		carro=new TreeMap<Integer,Integer>();
+		if(carrito==null){
 			carrito=new CarritoDialog(this,carro);
-		boolean status=carrito.open();
-		if(status){
-			TVenta venta=(TVenta)datos;
-			venta.setProductos(carro);
-			Controlador.getInstancia().setGUI(GUIAltaVenta.this);
-			Controlador.getInstancia().accion(Evento.CERRAR_VENTA, venta);
 		}
+			
+		boolean status=carrito.open((TVenta)datos);
+		
 	}
 	if( Evento.RES_CERRAR_VENTA_OK==evento){
 		

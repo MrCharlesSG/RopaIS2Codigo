@@ -1,6 +1,8 @@
 package Negocio.Ventas;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import Integracion.Clientes.DAOClientes;
 import Integracion.Empleados.DAOEmpleado;
@@ -60,9 +62,7 @@ public class SAVentasIMP implements SAVentas {
 	
 	private boolean esValida(TVenta venta) {
 
-		return Controlador.getInstancia().clienteExiste(venta.get_id_cliente())&&Controlador.getInstancia().empleadoExiste(venta.get_id_empleado())&&
-				ComprobadorSintactico.isPositive(venta.get_id())&&ComprobadorSintactico.isPositive(venta.get_id_cliente())&&
-				ComprobadorSintactico.isPositive(venta.get_id_empleado());
+		return Controlador.getInstancia().clienteExiste(venta.get_id_cliente())&&Controlador.getInstancia().empleadoExiste(venta.get_id_empleado());
 	}
 // tengo que crear un update que me añade proctos o me los registra en la base de datos 
 	// se le pasa un id de venta y un mapa con <id_prod,cantidad>
@@ -70,7 +70,27 @@ public class SAVentasIMP implements SAVentas {
 	public int update(TVenta venta) {
 		int id=-1;
 		if(esValida(venta)&&Controlador.getInstancia().productosExisten(venta.get_map())){
+			int contador=0;
+			for(Integer i:venta.get_map().values()){
+				contador+=i;
+			}
+			venta.set_contador_productos(contador);
 			id=daoVentas.update(venta);	
+		}
+		return id;
+	}
+	@Override
+	public int devolucionVenta(List<Integer> datos) {
+		int id=-1;
+		TVenta venta=read(datos.get(0));
+		Map<Integer, Integer> mapa = venta.get_map();
+		if(mapa.containsKey(datos.get(1))&&mapa.get(datos.get(1))>=datos.get(2)){
+			mapa.put(datos.get(1),mapa.get(datos.get(1))- datos.get(2));
+			if(mapa.get(datos.get(1))==0)
+				mapa.remove(datos.get(1));
+			venta.setProductos(mapa);
+			this.update(venta);
+			id=venta.get_id();
 		}
 		return id;
 	}

@@ -122,7 +122,7 @@ import Negocio.Producto.TProducto;
 			
 			//read de un id nulo
 			assertEquals("Se ha leido un id invalido",null, this.saProducto.read(100));
-			vaciarBaseDatos();
+		//	vaciarBaseDatos();
 			
 		}
 		

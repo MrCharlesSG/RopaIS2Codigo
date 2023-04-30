@@ -8,16 +8,24 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
+import Negocio.Ventas.TVenta;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.GUI.GUI;
 import Presentacion.MarcaPresentacion.GUIAltaMarca;
 
 public class CarritoDialog extends Dialog {
@@ -27,8 +35,9 @@ public class CarritoDialog extends Dialog {
 	private static final long serialVersionUID = 1L;
 	private Map<Integer,Integer> carro;
 	private boolean status;
+	private TVenta venta;
 	public CarritoDialog (Frame parent,Map<Integer,Integer> c){
-		super(parent);
+		super(parent,true);
 		carro=c;
 	this.initGUI() ;
 	}
@@ -39,23 +48,27 @@ public class CarritoDialog extends Dialog {
 		JLabel descripcion=new JLabel("<html><p>Elige un producto por su id y selecciona una cantidad</p></html>");
 		descripcion.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.add(descripcion);
-		
-		JPanel panel=new JPanel();
+		this.add(mainPanel);
+		JPanel panel1=new JPanel();
 		JLabel lprod=new JLabel("ID Producto:");
 		final JTextField tprod= new JTextField(20);
+		JPanel panel2=new JPanel();
 		JLabel lcanti=new JLabel("Cantidad:");
 		final JTextField tcant= new JTextField(20);
+		panel1.add(lprod);
+		panel1.add(tprod);
+		panel2.add(lcanti);
+		panel2.add(tcant);
+		mainPanel.add(panel1);
+		mainPanel.add(panel2);
 		JButton aniadir=new JButton("Añadir");
 		aniadir.setToolTipText("Añade n unidades de un producto");
 		JButton elim=new JButton("Eliminar");
 		elim.setToolTipText("Elimina n unidades de un producto");
 		JButton aceptar=new JButton("Aceptar");
-		panel.add(lprod);
-		panel.add(tprod);
-		panel.add(lcanti);
-		panel.add(tcant);
 		
-		mainPanel.add(panel);
+		
+		
 		JPanel botones=new JPanel();
 		botones.add(aniadir);
 		botones.add(elim);
@@ -66,10 +79,12 @@ public class CarritoDialog extends Dialog {
 		{ public void actionPerformed(ActionEvent e)
 			{	
 			try{
-				carro.put(Integer.parseInt(tprod.getText()), Integer.parseInt(tcant.getText()));
+				Integer id=Integer.parseInt(tprod.getText());
+				Integer cantidad=Integer.parseInt(tcant.getText());
+				carro.put(id,cantidad );
 			}
 			catch(Exception e1){
-				Utils.showErrorMsg("Los parametros introducidos no son validos, intentelo de nuevo");
+				Utils.showErrorMsg("Los parametros introducidos no son validos, intentelo de nuevo" );
 			}
 			
 			tprod.setText(null);
@@ -79,13 +94,20 @@ public class CarritoDialog extends Dialog {
 	});
 		elim.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
-			{		
-				if(carro.containsKey(Integer.parseInt(tprod.getText()))&&carro.get(Integer.parseInt(tprod.getText()))>=Integer.parseInt(tcant.getText())){
-					carro.replace((Integer.parseInt(tprod.getText())), carro.get(Integer.parseInt(tprod.getText()))-Integer.parseInt(tcant.getText()));
+			{		try{
+				int actual=carro.get(Integer.parseInt(tprod.getText()));
+				int nuevo=Integer.parseInt(tcant.getText());
+				if(carro.containsKey(Integer.parseInt(tprod.getText()))&&actual>=nuevo){
+					
+					carro.replace((Integer.parseInt(tprod.getText())), actual-nuevo);
+					
 					if(carro.get(Integer.parseInt(tprod.getText()))==0){
 						carro.remove(Integer.parseInt(tprod.getText()));
 					}
 				}
+			}catch(Exception e1){
+				Utils.showErrorMsg("Los parametros introducidos no son validos, intentelo de nuevo" );
+			}
 				tprod.setText(null);
 				tcant.setText(null);
 			}
@@ -97,14 +119,19 @@ public class CarritoDialog extends Dialog {
 				status=true;
 				tprod.setText(null);
 				tcant.setText(null);
+				venta.setProductos(carro);
+				Controlador.getInstancia().setGUI((GUI) CarritoDialog.this.getParent());
+				Controlador.getInstancia().accion(Evento.CERRAR_VENTA, venta);
 			}
 	});
 		
 		setPreferredSize(new Dimension(400, 400));
 		pack();
+		setResizable(false);
+		setVisible(false);
 	}
-	public boolean  open() {
-	
+	public boolean  open(TVenta datos) {
+		this.venta=datos;
 		if (getParent() != null)
 			setLocation(//
 					getParent().getLocation().x + getParent().getWidth() / 2 - getWidth() / 2, //

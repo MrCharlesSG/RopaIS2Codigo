@@ -2,6 +2,7 @@ package Presentacion.Controlador;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import Negocio.Clientes.SAClientes;
@@ -319,30 +320,38 @@ public class Controlador {
             	break;
             }
             case Evento.VENTA_POR_ID:{
-            	//TVenta venta=saVenta.read((int)datos);
-				//if(venta==null){
-					//gui.update(Evento.RES_VENTA_POR_ID_KO, null);
-				//}
-				//else{
-					//gui.update(Evento.RES_VENTA_POR_ID_OK, marca);
-				//}
+            	TVenta venta=saVenta.read((int)datos);
+				if(venta==null){
+					gui.update(Evento.RES_VENTA_POR_ID_KO, null);
+				}
+				else{
+					gui.update(Evento.RES_VENTA_POR_ID_OK, venta);
+				}
             	break;
             }
             case Evento.LISTAR_VENTAS:{
-            	//Collection<TVenta>ventas=saVenta.readAll();
-				//gui.update(Evento.LISTAR_VENTAS, ventas);
+            	Collection<TVenta>ventas=saVenta.readAll();
+				gui.update(Evento.LISTAR_VENTAS, ventas);
             	break;
             }
             case Evento.DEVOLUCION_VENTA:{
-            	//TODO
+            	int res=saVenta.devolucionVenta((List<Integer>)datos);
+            	if(res>0){
+            		
+            	}
+            	else{
+            		
+            	}
             	break;
             }
             case Evento.VENTAS_DE_UN_CLIENTE:{
-            	//TODO
+            	Collection<TVenta>ventas=saVenta.readByCliente((Integer)datos);
+            	gui.update(Evento.VENTAS_DE_UN_CLIENTE, ventas);
             	break;
             }
             case Evento.VENTAS_DE_UN_EMPLEADO:{
-            	//TODO
+            	Collection<TVenta>ventas=saVenta.readByEmpleado((Integer)datos);
+            	gui.update(Evento.VENTAS_DE_UN_EMPLEADO, ventas);
             	break;
             }
 
