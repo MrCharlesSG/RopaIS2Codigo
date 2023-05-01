@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,40 +21,59 @@ import Presentacion.GUI.GUI;
 
 public class GUIAltaProducto extends JFrame implements GUI{
 	
+	private JLabel lNombre;
+	private final JTextField tNombre;
+	
+	private JLabel lTalla;
+	private final JTextField tTalla;
+	
+	private JLabel lCat;
+	private final JTextField tCat;
+	
+	private JLabel lCant;
+	private final JTextField tCant;
+	
+	private JLabel lIDMarca;
+	private final JTextField tIDMarca;
+	
+	private JButton aceptar;
+	private JButton cancelar;
+
 	public GUIAltaProducto() {
 		this.setTitle("Alta Producto");
 		JPanel panel=new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
-		JLabel lNombre=new JLabel("Nombre:");
-		final JTextField tNombre= new JTextField(20);
+		JPanel nombre = new JPanel();
+		nombre.add(lNombre=new JLabel("Nombre:"));
+		nombre.add(tNombre= new JTextField(20));
 		
-		JLabel lTalla=new JLabel("Talla:");
-		final JTextField tTalla= new JTextField(20);
+		JPanel talla = new JPanel();
+		talla.add(lTalla=new JLabel("Talla:"));
+		talla.add(tTalla= new JTextField(20));
 		
-		JLabel lCat=new JLabel("Categoria:");
-		final JTextField tCat= new JTextField(20);
+		JPanel cat = new JPanel();
+		cat.add(lCat=new JLabel("Categoria:"));
+		cat.add(tCat= new JTextField(20));
 		
-		JLabel lCant=new JLabel("Cantidad:");
-		final JTextField tCant= new JTextField(20);
+		JPanel cant = new JPanel();
+		cant.add(lCant=new JLabel("Cantidad:"));
+		cant.add(tCant= new JTextField(20));
 		
-		JLabel lIDMarca=new JLabel("IDMarca:");
-		final JTextField tIDMarca= new JTextField(20);
+		JPanel IdMarca = new JPanel();
+		IdMarca.add(lIDMarca=new JLabel("IDMarca:"));
+		IdMarca.add(tIDMarca= new JTextField(20));
 		
-		JButton aceptar=new JButton("Aceptar");
-		JButton cancelar=new JButton("Cancelar");
+		JPanel okKo = new JPanel();
+		okKo.add(aceptar=new JButton("Aceptar"));
+		okKo.add(cancelar=new JButton("Cancelar"));
 		
-		panel.add(lNombre);
-		panel.add(tNombre);
-		panel.add(lTalla);
-		panel.add(tTalla);
-		panel.add(lCat);
-		panel.add(tCat);
-		panel.add(lCant);
-		panel.add(tCant);
-		panel.add(lIDMarca);
-		panel.add(tIDMarca);
-		panel.add(aceptar);
-		panel.add(cancelar);
+		panel.add(nombre);
+		panel.add(talla);
+		panel.add(cat);
+		panel.add(cant);
+		panel.add(IdMarca);
+		panel.add(okKo);
 		this.getContentPane().add(panel);
 		this.pack();
 		
