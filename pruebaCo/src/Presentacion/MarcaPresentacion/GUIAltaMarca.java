@@ -29,26 +29,37 @@ public class GUIAltaMarca extends JFrame implements GUI{
 	public GUIAltaMarca() {
 		setTitle("Alta Marca");
 		JPanel panel=new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		JLabel lNombre=new JLabel("Nombre:");
 		final JTextField tNombre= new JTextField(20);
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		this.setLocationRelativeTo(null);
-		panel.add(lNombre);
-		panel.add(tNombre);
-		panel.add(aceptar);
-		panel.add(cancelar);
+		JPanel texto=new JPanel();
+		JPanel botones=new JPanel();
+		
+		texto.add(lNombre);
+		texto.add(tNombre);
+		botones.add(aceptar);
+		botones.add(cancelar);
+		panel.add(texto);
+		panel.add(botones);
+		
 		getContentPane().add(panel);
 		pack();
 		
 		aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
+				try{
 					setVisible(false);
 					String nombre= tNombre.getText();
 					TMarca tM= new TMarca (nombre,-1,1, true);
 					Controlador.getInstancia().setGUI(GUIAltaMarca.this);
 					Controlador.getInstancia().accion(Evento.ALTA_MARCA, tM);
+				}catch(Exception e1){
+				Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+				}
 				}
 		});
 		cancelar.addActionListener(new ActionListener()

@@ -6,6 +6,7 @@ package Presentacion.MarcaPresentacion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -33,26 +35,40 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 	public GUIMarcaPorID() {
 		setTitle("Marca por ID");
 		JPanel panel=new JPanel();
+		
 		JLabel lID=new JLabel("Identificador:");
 		final JTextField tID= new JTextField(5);
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		this.setLocationRelativeTo(null);
 		
-		panel.add(lID);
-		panel.add(tID);
-		panel.add(aceptar);
-		panel.add(cancelar);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		JPanel texto=new JPanel();
+		JPanel botones=new JPanel();
+		
+		texto.add(lID);
+		texto.add(tID);
+	
+		botones.add(aceptar);
+		botones.add(cancelar);
+		panel.add(texto);
+		panel.add(botones);
+		
 		getContentPane().add(panel);
 		pack();
 		
 		aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
+				try{
 					setVisible(false);
 					int id=Integer.parseInt(tID.getText());
 					Controlador.getInstancia().setGUI(GUIMarcaPorID.this);
 					Controlador.getInstancia().accion(Evento.MARCA_PORID, new Integer(id));
+				}catch(Exception e1){
+					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+				}
+				
 				}
 		});
 		cancelar.addActionListener(new ActionListener()

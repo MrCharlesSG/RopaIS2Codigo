@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.Utils;
 import Negocio.Ventas.TVenta;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -30,24 +32,30 @@ public class GUIDevolverVenta extends JFrame implements GUI{
 		
 		JLabel luds=new JLabel("Unidades:");
 		final JTextField tuds= new JTextField(5);
-		
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
+		JPanel texto=new JPanel();
+		JPanel botones=new JPanel();
 		
-		panel.add(lID);
-		panel.add(tID);
-		panel.add(lID_PR);
-		panel.add(tID_PR);
-		panel.add(luds);
-		panel.add(tuds);
-		panel.add(aceptar);
-		panel.add(cancelar);
+		texto.add(lID);
+		texto.add(tID);
+		texto.add(lID_PR);
+		texto.add(tID_PR);
+		texto.add(luds);
+		texto.add(tuds);
+		botones.add(aceptar);
+		botones.add(cancelar);
+		panel.add(texto);
+		panel.add(botones);
+		
 		getContentPane().add(panel);
 		pack();
 		
 		aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
-				{		
+				{	
+				try{
 					setVisible(false);
 					int id=Integer.parseInt(tID.getText());
 					int id_pr=Integer.parseInt(tID_PR.getText());
@@ -58,6 +66,10 @@ public class GUIDevolverVenta extends JFrame implements GUI{
 					datos.add(cantidad);
 					Controlador.getInstancia().setGUI(GUIDevolverVenta.this);
 					Controlador.getInstancia().accion(Evento.DEVOLUCION_VENTA, datos);
+				}catch(Exception e1){
+					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+				}
+				
 				}
 		});
 		cancelar.addActionListener(new ActionListener()

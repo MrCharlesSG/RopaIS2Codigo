@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -28,6 +29,7 @@ public class GUIModificarMarca extends JFrame implements GUI {
 	public GUIModificarMarca() {
 			setTitle("Alta Marca");
 			JPanel panel=new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 			JLabel lId=new JLabel("Identificador:");
 			final JTextField tId= new JTextField(10);
 			JLabel lNombre=new JLabel("Nombre: ");
@@ -35,23 +37,32 @@ public class GUIModificarMarca extends JFrame implements GUI {
 			JButton aceptar=new JButton("Aceptar:");
 			JButton cancelar=new JButton("Cancelar");
 			this.setLocationRelativeTo(null);
+			JPanel texto=new JPanel();
+			JPanel botones=new JPanel();
 			
-			panel.add(lId);
-			panel.add(lId);
-		
-			panel.add(lNombre);
-			panel.add(lNombre);
-			panel.add(aceptar);
-			panel.add(cancelar);
+			texto.add(lId);
+			texto.add(tId);
+			texto.add(lNombre);
+			texto.add(tNombre);
+			botones.add(aceptar);
+			botones.add(cancelar);
+			panel.add(texto);
+			panel.add(botones);
+			
 			getContentPane().add(panel);
 			pack();
 			
 			aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{
+				try{
 					setVisible(false);
 					TMarca tmarca=new TMarca(tNombre.getText(),Integer.parseInt(tId.getText()), 0,true);
 					Controlador.getInstancia().accion(Evento.MODIFICAR_MARCA, tmarca);
+				}catch(Exception e1){
+					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+				}
+				
 				}
 			});
 			cancelar.addActionListener(new ActionListener()

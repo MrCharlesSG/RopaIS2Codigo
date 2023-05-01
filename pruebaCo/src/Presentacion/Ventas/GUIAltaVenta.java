@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,22 +31,28 @@ public class GUIAltaVenta extends JFrame implements GUI{
 	public GUIAltaVenta() {
 		setTitle("Alta Venta");
 		JPanel panel=new JPanel();
+		
 		JLabel lID=new JLabel("Identificador de cliente:");
 		final JTextField tID= new JTextField(5);
 		this.setLocationRelativeTo(null);
 		JLabel lID_PR=new JLabel("Identificador de empleado:");
 		final JTextField tID_PR= new JTextField(5);
 		
-		
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
+		JPanel texto=new JPanel();
+		JPanel botones=new JPanel();
 		
-		panel.add(lID);
-		panel.add(tID);
-		panel.add(lID_PR);
-		panel.add(tID_PR);
-		panel.add(aceptar);
-		panel.add(cancelar);
+		texto.add(lID);
+		texto.add(tID);
+		texto.add(lID_PR);
+		texto.add(tID_PR);
+		botones.add(aceptar);
+		botones.add(cancelar);
+		panel.add(texto);
+		panel.add(botones);
+		
 		getContentPane().add(panel);
 		pack();
 		
