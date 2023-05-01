@@ -96,10 +96,10 @@ public class Controlador {
 			case Evento.MARCA_PORID:{
 				TMarca marca=saMarca.read((int)datos);
 				if(marca==null){
-					gui.update(Evento.RES_MARCA_PORID_KO, null);
+					gui.update(Evento.KO, null);
 				}
 				else{
-					gui.update(Evento.RES_MARCA_PORID_OK, marca);
+					gui.update(Evento.OK, marca);
 				}
 			
 				break;

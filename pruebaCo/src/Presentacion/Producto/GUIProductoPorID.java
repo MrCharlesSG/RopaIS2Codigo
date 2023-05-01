@@ -93,7 +93,7 @@ public class GUIProductoPorID extends JFrame implements GUI{
 	public void update(int evento, Object datos) {
 		switch(evento){
 		case Evento.KO:{
-			Utils.showErrorMsg("No se pudo encontrar el proveedor con dicho ID");
+			Utils.showErrorMsg("No se pudo encontrar el producto con dicho ID");
 			setVisible(false);
 			break;
 		}case Evento.OK:{
@@ -126,8 +126,7 @@ public class GUIProductoPorID extends JFrame implements GUI{
 					setVisible(false);
 				}
 			});
-		
-		//añado la lista
+	
 		this._dataTableModel = new DefaultTableModel();
 		_dataTableModel.setColumnIdentifiers(header);;
 		_dataTableModel.setNumRows(1);

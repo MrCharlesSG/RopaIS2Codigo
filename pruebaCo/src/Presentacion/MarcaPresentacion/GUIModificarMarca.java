@@ -27,7 +27,7 @@ public class GUIModificarMarca extends JFrame implements GUI {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public GUIModificarMarca() {
-			setTitle("Alta Marca");
+			setTitle("Modificar Marca");
 			JPanel panel=new JPanel();
 			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 			JLabel lId=new JLabel("Identificador:");
@@ -76,7 +76,7 @@ public class GUIModificarMarca extends JFrame implements GUI {
 
 	@Override
 	public void update(int evento, Object datos) {
-		if(Evento.MODIFICAR_MARCA==evento){
+		if(Evento.RES_MODIFICAR_MARCA_OK==evento){
 			JOptionPane.showMessageDialog(null, "La marca ha sido modificado con exito");
 			this.setVisible(false);
 		}
