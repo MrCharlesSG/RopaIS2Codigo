@@ -28,33 +28,8 @@ import Presentacion.GUI.GUI;
 public class GUIListarProductos extends JFrame implements GUI{
 	
 	public GUIListarProductos(){
-		setTitle("Listar Prodcutos");
-		JPanel panel=new JPanel();
-		this.setLocationRelativeTo(null);
-		
-		JButton aceptar=new JButton("Aceptar");
-		JButton cancelar=new JButton("Cancelar");
-		
-		panel.add(aceptar);
-		panel.add(cancelar);
-		getContentPane().add(panel);
-		pack();
-		
-		aceptar.addActionListener(new ActionListener()
-			{ public void actionPerformed(ActionEvent e)
-				{		
-					setVisible(false);
-					Controlador.getInstancia().setGUI(GUIListarProductos.this);
-					Controlador.getInstancia().accion(Evento.LISTAR_PRODUCTOS,null);
-				}
-		});
-		cancelar.addActionListener(new ActionListener()
-			{ public void actionPerformed(ActionEvent e)
-				{		
-					setVisible(false);
-			}
-			
-		});
+		Controlador.getInstancia().setGUI(GUIListarProductos.this);
+		Controlador.getInstancia().accion(Evento.LISTAR_PRODUCTOS,null);
 	}
 
 	@Override
