@@ -84,22 +84,26 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 			{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
-					String nombre= tNombre.getText();
-					String apellido1=tApellido1.getText();
-					String apellido2=tApellido2.getText();
-					String DNI= tDNI.getText();
-					int tlf= Integer.parseInt (ttlf.getText ());
-					String tipo=(String) box.getSelectedItem();
-					TEmpleado t;
-					if(tipo.equalsIgnoreCase("Premium")){
-						//
-						 t= new TEmpleadoTC(nombre, apellido1, apellido2, DNI,tlf, -1, true);
+					try{
+						String nombre= tNombre.getText();
+						String apellido1=tApellido1.getText();
+						String apellido2=tApellido2.getText();
+						String DNI= tDNI.getText();
+						int tlf= Integer.parseInt (ttlf.getText ());
+						String tipo=(String) box.getSelectedItem();
+						TEmpleado t;
+						if(tipo.equalsIgnoreCase("Premium")){
+							//
+							 t= new TEmpleadoTC(nombre, apellido1, apellido2, DNI,tlf, -1, true);
+						}
+						else{
+							 t= new TEmpleadoTP(nombre, apellido1, apellido2, DNI, tlf, -1 , true);
+						}
+						Controlador.getInstancia().setGUI(GUIModificarEmpleado.this);
+						Controlador.getInstancia().accion(Evento.MODIFICAR_EMPLEADO, t);	
+					}catch(Exception e1){
+						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 					}
-					else{
-						 t= new TEmpleadoTP(nombre, apellido1, apellido2, DNI, tlf, -1 , true);
-					}
-					Controlador.getInstancia().setGUI(GUIModificarEmpleado.this);
-					Controlador.getInstancia().accion(Evento.MODIFICAR_EMPLEADO, t);
 				}
 		});
 		

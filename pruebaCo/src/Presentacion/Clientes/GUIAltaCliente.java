@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.Utils;
 import Negocio.Clientes.TClientePremium;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -60,14 +61,19 @@ public class GUIAltaCliente extends JFrame implements GUI{
 			{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
-					String nombre= tNombre.getText();
-					String apellido1=tApellido1.getText();
-					String apellido2=tApellido2.getText();
-					String DNI= tDNI.getText();
-					int tlf= Integer.parseInt (ttlf.getText ());
-					TClientePremium tCP= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
-					Controlador.getInstancia().setGUI(GUIAltaCliente.this);
-					Controlador.getInstancia().accion(Evento.ALTA_CLIENTE, tCP);
+					try{
+						String nombre= tNombre.getText();
+						String apellido1=tApellido1.getText();
+						String apellido2=tApellido2.getText();
+						String DNI= tDNI.getText();
+						int tlf= Integer.parseInt (ttlf.getText ());
+						TClientePremium tCP= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
+						Controlador.getInstancia().setGUI(GUIAltaCliente.this);
+						Controlador.getInstancia().accion(Evento.ALTA_CLIENTE, tCP);	
+					}catch(Exception e1){
+						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+					}
+					
 				}
 		});
 		

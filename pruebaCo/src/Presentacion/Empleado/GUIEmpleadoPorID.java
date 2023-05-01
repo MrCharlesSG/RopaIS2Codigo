@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.Utils;
 import Negocio.Clientes.TCliente;
 import Negocio.Empleado.TEmpleado;
 import Presentacion.Clientes.GUIClientePorID;
@@ -38,9 +39,13 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 			{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
-					int id=Integer.parseInt(tID.getText());
-					Controlador.getInstancia().setGUI(GUIEmpleadoPorID.this);
-					Controlador.getInstancia().accion(Evento.EMPLEADO_POR_ID, id);
+					try{
+						int id=Integer.parseInt(tID.getText());
+						Controlador.getInstancia().setGUI(GUIEmpleadoPorID.this);
+						Controlador.getInstancia().accion(Evento.EMPLEADO_POR_ID, id);	
+					}catch(Exception e1){
+						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+					}
 				}
 		});
 		cancelar.addActionListener(new ActionListener()

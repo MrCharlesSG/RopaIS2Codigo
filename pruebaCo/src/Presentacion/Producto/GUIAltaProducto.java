@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
@@ -60,15 +61,20 @@ public class GUIAltaProducto extends JFrame implements GUI{
 			{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
-					String nombre= tNombre.getText();
-					String talla = tTalla.getText();
-					String cat = tCat.getText();
-					String cant = tCant.getText();
-					String IDMarca = tIDMarca.getText();
-					//nombre: id: cantidad: talla: categoria: idMarca:
-					TProducto tP= new TProducto (nombre, Integer.parseInt(cant), Integer.parseInt(talla), -1, cat, Integer.parseInt(IDMarca));;
-					Controlador.getInstancia().setGUI(GUIAltaProducto.this);
-					Controlador.getInstancia().accion(Evento.ALTA_PRODUCTO, tP);
+					try{
+						String nombre= tNombre.getText();
+						String talla = tTalla.getText();
+						String cat = tCat.getText();
+						String cant = tCant.getText();
+						String IDMarca = tIDMarca.getText();
+						//nombre: id: cantidad: talla: categoria: idMarca:
+						TProducto tP= new TProducto (nombre, Integer.parseInt(cant), Integer.parseInt(talla), -1, cat, Integer.parseInt(IDMarca));;
+						Controlador.getInstancia().setGUI(GUIAltaProducto.this);
+						Controlador.getInstancia().accion(Evento.ALTA_PRODUCTO, tP);
+					}catch(Exception e1){
+						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+					}
+					
 				}
 		});
 		cancelar.addActionListener(new ActionListener()

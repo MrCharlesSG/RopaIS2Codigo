@@ -82,21 +82,26 @@ public class GUIModificarCliente extends JFrame implements GUI{
 				{ public void actionPerformed(ActionEvent e)
 					{		
 						setVisible(false);
-						String nombre= tNombre.getText();
-						String apellido1=tApellido1.getText();
-						String apellido2=tApellido2.getText();
-						String DNI= tDNI.getText();
-						int tlf= Integer.parseInt (ttlf.getText ());
-						String tipo=(String) box.getSelectedItem();
-						TCliente tC;
-						if(tipo.equalsIgnoreCase("Premium")){
-							 tC= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
+						try{
+							String nombre= tNombre.getText();
+							String apellido1=tApellido1.getText();
+							String apellido2=tApellido2.getText();
+							String DNI= tDNI.getText();
+							int tlf= Integer.parseInt (ttlf.getText ());
+							String tipo=(String) box.getSelectedItem();
+							TCliente tC;
+							if(tipo.equalsIgnoreCase("Premium")){
+								 tC= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
+							}
+							else{
+								 tC= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, false);
+							}
+							Controlador.getInstancia().setGUI(GUIModificarCliente.this);
+							Controlador.getInstancia().accion(Evento.MODIFICAR_CLIENTE, tC);
+						}catch(Exception e1){
+							Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 						}
-						else{
-							 tC= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, false);
-						}
-						Controlador.getInstancia().setGUI(GUIModificarCliente.this);
-						Controlador.getInstancia().accion(Evento.MODIFICAR_CLIENTE, tC);
+						
 					}
 			});
 			

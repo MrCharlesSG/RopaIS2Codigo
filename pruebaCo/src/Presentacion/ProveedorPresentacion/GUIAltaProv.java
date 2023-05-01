@@ -83,12 +83,18 @@ public class GUIAltaProv extends JFrame implements GUI{
 				//botones
 				JButton aceptarB= new JButton("Aceptar");
 				JButton cancelarB= new JButton("Cancelar");
+				
 				aceptarB.addActionListener(new ActionListener()
 				{ public void actionPerformed(ActionEvent e)
-					{		
+					{
+					ventana.setVisible(false);
+					try{
 						anadeALista(idTF.getText());
 						updateLista();
-						ventana.setVisible(false);
+					}catch(Exception e1){
+						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+					}
+						
 					}
 				});
 				

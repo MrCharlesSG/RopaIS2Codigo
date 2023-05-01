@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.Utils;
 import Negocio.Empleado.TEmpleadoTC;
 import Negocio.Empleado.TEmpleadoTP;
 import Presentacion.Controlador.Controlador;
@@ -59,8 +60,9 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 		
 		tc.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
-				{		
+				{
 					setVisible(false);
+					try{
 					String nombre= tNombre.getText();
 					String apellido1=tApellido1.getText();
 					String apellido2=tApellido2.getText();
@@ -70,6 +72,9 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 					TEmpleadoTC tCP= new TEmpleadoTC (nombre, apellido1, apellido2, DNI, tlf, -1,  true);
 					Controlador.getInstancia().setGUI(GUIAltaEmpleado.this);
 					Controlador.getInstancia().accion(Evento.ALTA_EMPLEADO, tCP);
+				}catch(Exception e1){
+					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+				}
 				}
 		});
 		
@@ -77,15 +82,20 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 		{ public void actionPerformed(ActionEvent e)
 		{		
 			setVisible(false);
-			String nombre= tNombre.getText();
-			String apellido1=tApellido1.getText();
-			String apellido2=tApellido2.getText();
-			String DNI= tDNI.getText();
-			int tlf= Integer.parseInt (ttlf.getText ());
-			//String nombre, String apellido1, String apellido2, String DNI, int tfno, int ID, boolean activo
-			TEmpleadoTP tCP= new TEmpleadoTP (nombre, apellido1, apellido2, DNI, tlf, -1,  true);
-			Controlador.getInstancia().setGUI(GUIAltaEmpleado.this);
-			Controlador.getInstancia().accion(Evento.ALTA_EMPLEADO, tCP);
+			try{
+				String nombre= tNombre.getText();
+				String apellido1=tApellido1.getText();
+				String apellido2=tApellido2.getText();
+				String DNI= tDNI.getText();
+				int tlf= Integer.parseInt (ttlf.getText ());
+				//String nombre, String apellido1, String apellido2, String DNI, int tfno, int ID, boolean activo
+				TEmpleadoTP tCP= new TEmpleadoTP (nombre, apellido1, apellido2, DNI, tlf, -1,  true);
+				Controlador.getInstancia().setGUI(GUIAltaEmpleado.this);
+				Controlador.getInstancia().accion(Evento.ALTA_EMPLEADO, tCP);
+			}catch(Exception e1){
+				Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+			}
+			
 		}
 });
 		
