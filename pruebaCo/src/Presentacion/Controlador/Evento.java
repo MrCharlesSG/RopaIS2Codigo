@@ -38,15 +38,6 @@ public class Evento {
 	public static final int PRODUCTO_POR_ID = 706;
 	public static final int VENTA_POR_PRODUCTO = 707;
 	
-	public static final int RES_ALTA_PRODUCTO_OK= 801;
-	public static final int RES_ALTA_PRODUCTO_KO= 802;
-	public static final int RES_MODIFICAR_PRODUCTO_OK = 803;
-	public static final int RES_MODIFICAR_PRODUCTO_KO = 804;
-	public static final int RES_BAJA_PRODUCTO_OK = 805;
-	public static final int RES_BAJA_PRODUCTO_KO = 806;
-	public static final int RES_PRODUCTO_POR_ID_OK = 807;
-	public static final int RES_PRODUCTO_POR_ID_KO = 808;
-	
 		//Proveedor
 		public static final int ALTA_PROVEEDOR = 901;
 		public static final int BAJA_PROVEEDOR = 902;

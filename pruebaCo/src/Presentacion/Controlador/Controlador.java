@@ -121,20 +121,20 @@ public class Controlador {
 			case Evento.ALTA_PRODUCTO:{
 				int res=saProducto.create((TProducto) datos);
 				if(res>=0){
-					gui.update(Evento.RES_ALTA_PRODUCTO_OK, new Integer(res));
+					gui.update(Evento.OK, new Integer(res));
 				}
 				else{
-					gui.update(Evento.RES_ALTA_PRODUCTO_KO, null);
+					gui.update(Evento.KO, null);
 				}
 				break;
 			}
 			case Evento.BAJA_PRODUCTO:{
 				int res=saProducto.delete(((TProducto) datos).getIdProducto());
 				if(res>=0){
-					gui.update(Evento.RES_BAJA_PRODUCTO_OK, new Integer(res));
+					gui.update(Evento.OK, new Integer(res));
 				}
 				else{
-					gui.update(Evento.RES_BAJA_PRODUCTO_KO, null);
+					gui.update(Evento.KO, null);
 				}
 				break;
 			}
@@ -146,19 +146,19 @@ public class Controlador {
 			case Evento.MODIFICAR_PRODUCTO:{
 				int res=saProducto.update((TProducto)datos);
 				if(res>=0){
-					gui.update(Evento.RES_MODIFICAR_PRODUCTO_OK,  new Integer(res));
+					gui.update(Evento.OK,  new Integer(res));
 				}
 				else{
-					gui.update(Evento.RES_MODIFICAR_PRODUCTO_KO, null);
+					gui.update(Evento.KO, null);
 				}
 				break;
 			}
 			case Evento.PRODUCTO_POR_ID:{
 				TProducto producto=saProducto.read((Integer)datos);
 				if(producto.getIdMarca() != -1)
-					gui.update(Evento.RES_PRODUCTO_POR_ID_OK, producto);
+					gui.update(Evento.OK, producto);
 				else
-					gui.update(Evento.RES_PRODUCTO_POR_ID_KO, producto);
+					gui.update(Evento.KO, producto);
 				break;
 			}
 			

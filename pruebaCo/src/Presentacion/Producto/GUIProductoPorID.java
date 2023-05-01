@@ -1,18 +1,28 @@
 package Presentacion.Producto;
 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.TProducto;
+import Negocio.Proveedor.TProveedor;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
@@ -26,6 +36,9 @@ import Presentacion.GUI.GUI;
 */
 
 public class GUIProductoPorID extends JFrame implements GUI{
+	
+	String[] header = { "Nombre", "Id", "Categoria", "Talla", "Cantidad", " Id Marca"};
+	private DefaultTableModel _dataTableModel;
 	
 	public GUIProductoPorID(){
 		this.setTitle("Producto por ID");
@@ -53,9 +66,8 @@ public class GUIProductoPorID extends JFrame implements GUI{
 				setVisible(false);
 				try{
 					String id=jtextID.getText();
-					TProducto tprod =new TProducto(null, Integer.parseInt(id), -1, -1, null, -1);
 					Controlador.getInstancia().setGUI(GUIProductoPorID.this);
-					Controlador.getInstancia().accion(Evento.PRODUCTO_POR_ID, tprod);
+					Controlador.getInstancia().accion(Evento.PRODUCTO_POR_ID, Integer.parseInt(id));
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 				}
@@ -80,19 +92,76 @@ public class GUIProductoPorID extends JFrame implements GUI{
 	@Override
 	public void update(int evento, Object datos) {
 		switch(evento){
-		case Evento.RES_PRODUCTO_POR_ID_OK:
-			//imprimir por pantalla el elemento
-			StringBuilder str= new StringBuilder();
-			TProducto tprod= (TProducto) datos;
-			str.append("Se ha encontrado el producto con ID: " + tprod.getIdProducto() + System.lineSeparator());
-			str.append("NOMBRE: " + tprod.getNombre() + "ID: " + tprod.getIdProducto() + "CANTIIDAD: " + tprod.getCantidad()
-			+ "TALLA: "+ tprod.getTalla() +  "CATEGORIA: " + tprod.getCategoria() + "IDMARCA: " + tprod.getIdMarca());
-			JOptionPane.showMessageDialog(null, str);
+		case Evento.KO:{
+			Utils.showErrorMsg("No se pudo encontrar el proveedor con dicho ID");
+			setVisible(false);
 			break;
-		case Evento.RES_BAJA_PRODUCTO_KO:
-			JOptionPane.showMessageDialog(null, "No se pudo encontrar el producto con ese ID");
-			break; 
+		}case Evento.OK:{
+			listarProducto((TProducto)datos);
+			break;
+		}
 		}
 	}
+
+	private void listarProducto(TProducto datos) {
+		//Elimino todos los componentes
+		Container contentPane = getContentPane();
+
+		Component[] components = contentPane.getComponents();
+		for (Component component : components) {
+		    contentPane.remove(component);
+		}
 		
+		setTitle("Empleado por id");
+		this.setPreferredSize(new Dimension(500, 200));
+		JPanel panel=new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		this.setLocationRelativeTo(null);
+		
+		//añado un boton de cerrar
+		JButton cerrar =new JButton("Cerrar");
+		cerrar.addActionListener(new ActionListener()
+			{ public void actionPerformed(ActionEvent e)
+				{		
+					setVisible(false);
+				}
+			});
+		
+		//añado la lista
+		this._dataTableModel = new DefaultTableModel();
+		_dataTableModel.setColumnIdentifiers(header);;
+		_dataTableModel.setNumRows(1);
+		_dataTableModel.setValueAt(datos.getNombre(), 0, 0);
+		_dataTableModel.setValueAt(datos.getIdProducto(), 0, 1);
+		_dataTableModel.setValueAt(datos.getCategoria(), 0, 2);
+		_dataTableModel.setValueAt(datos.getTalla(), 0, 3);
+		_dataTableModel.setValueAt(datos.getCantidad(), 0, 4);
+		_dataTableModel.setValueAt(datos.getIdMarca(), 0, 5);
+	
+		
+		JTable dataTable = new JTable(_dataTableModel) {
+			private static final long serialVersionUID = 1L;
+
+			// we override prepareRenderer to resize columns to fit to content
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+				Component component = super.prepareRenderer(renderer, row, column);
+				int rendererWidth = component.getPreferredSize().width;
+				TableColumn tableColumn = getColumnModel().getColumn(column);
+				tableColumn.setPreferredWidth(
+						Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+				return component;
+			}
+		};
+		JScrollPane tabelScroll = new JScrollPane(dataTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		panel.add(tabelScroll);
+
+		panel.add(cerrar);
+		revalidate();
+		repaint();
+		getContentPane().add(panel);
+		pack();
+		setVisible(true);
+	}
 }

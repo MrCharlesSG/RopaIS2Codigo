@@ -158,11 +158,11 @@ public class GUIModificarProducto extends JFrame implements GUI{
 	@Override
 	public void update(int evento, Object datos) {
 		switch(evento){
-		case Evento.RES_MODIFICAR_PRODUCTO_OK:
+		case Evento.OK:
 			Integer id= (Integer) datos;
 			JOptionPane.showMessageDialog(null,"Se ha modificado correctamente el producto con ID: "+id.intValue());
 			break;
-		case Evento.RES_MODIFICAR_PRODUCTO_KO:
+		case Evento.KO:
 			JOptionPane.showMessageDialog(null, "No se pudo modificar el producto con ese ID");
 			break; 
 		}

@@ -75,11 +75,11 @@ public class GUIBajaProducto extends JFrame implements GUI{
 	@Override
 	public void update(int evento, Object datos) {
 		switch(evento){
-		case Evento.RES_BAJA_PRODUCTO_OK:
+		case Evento.OK:
 			Integer id= (Integer) datos;
 			JOptionPane.showMessageDialog(null,"Se ha dado de baja correctamente el producto");
 			break;
-		case Evento.RES_BAJA_PRODUCTO_KO:
+		case Evento.KO:
 			JOptionPane.showMessageDialog(null, "No se pudo encontrar el producto con ese ID");
 			break; 
 		}
