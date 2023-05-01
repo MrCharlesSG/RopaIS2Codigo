@@ -3,8 +3,6 @@
  */
 package Negocio.MarcaNegocio;
 
-import Negocio.Producto.TProducto;
-
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->

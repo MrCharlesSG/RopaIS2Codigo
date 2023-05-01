@@ -2,24 +2,13 @@ package Main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
-import Presentacion.Clientes.IGUICliente;
-import Presentacion.Empleado.IGUIEmpleado;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
-import Presentacion.GUI.GUI;
-import Presentacion.MarcaPresentacion.IGUIMarca;
-import Presentacion.Producto.IGUIProducto;
-import Presentacion.ProveedorPresentacion.IGUIProv;
-import Presentacion.Ventas.IGUIVentas;
 
 public class MainWindow extends JPanel{
 	
@@ -32,7 +21,6 @@ public class MainWindow extends JPanel{
 		private static JPanel infoPanel;
 		private static JPanel eventPanel;
 		private static List<JPanel> listaIGguis;
-		private static Map<Integer, GUI> mapaGuis;
 		
 		
 		public MainWindow(){

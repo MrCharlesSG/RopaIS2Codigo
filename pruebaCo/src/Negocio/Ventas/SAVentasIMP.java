@@ -4,14 +4,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import Integracion.Clientes.DAOClientes;
-import Integracion.Empleados.DAOEmpleado;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
-import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.Ventas.DAOVentas;
 import Negocio.ComprobadorSintactico;
-import Negocio.Clientes.TCliente;
-import Negocio.Empleado.TEmpleado;
 import Presentacion.Controlador.Controlador;
 
 public class SAVentasIMP implements SAVentas {

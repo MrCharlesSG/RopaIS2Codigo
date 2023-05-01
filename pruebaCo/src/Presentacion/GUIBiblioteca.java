@@ -12,8 +12,11 @@ import Presentacion.GUI.GUI;
 import Presentacion.MarcaPresentacion.IGUIMarca;
 
 public class GUIBiblioteca extends JFrame implements GUI{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static GUIBiblioteca guiBiblioteca;
-    private IGUIMarca guiMarca;
 //	private IGUIProducto guiProducto;
 //	private IGUIVenta guiVenta;
 //	private Controlador controlador;

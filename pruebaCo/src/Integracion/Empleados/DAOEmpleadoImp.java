@@ -142,7 +142,6 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 		String datos[];
 		boolean encontrado=false;
 		try(Scanner scanner=new Scanner(file)) {//bufferreader
-			TEmpleado aux=null;
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
 				

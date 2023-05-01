@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Main.MainWindow;
 import Main.Utils;
 import Negocio.Proveedor.TProveedor;
 import Presentacion.Controlador.Controlador;

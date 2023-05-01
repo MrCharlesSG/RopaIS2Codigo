@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.lang.StringBuilder;
 
-import Negocio.FactoriaNegocio.FactoriaNegocio;
-import Negocio.MarcaNegocio.SAMarca;
 import Negocio.Producto.TProducto;
 
 public class DAOProductoIMP implements DAOProducto{
@@ -148,7 +146,6 @@ public class DAOProductoIMP implements DAOProducto{
 	public Collection<TProducto> readAll() {
 
 		File f = new File(ARCHIVO);
-		TProducto Tprod = null;
 		ArrayList<TProducto> list = new ArrayList<TProducto>();
 		try(BufferedReader br = new BufferedReader(new FileReader(f))){
 			
@@ -209,8 +206,6 @@ public class DAOProductoIMP implements DAOProducto{
 		int id=-1;
 		String[] splitArray = null;
 		StringBuilder sb =new StringBuilder();
-		
-		boolean found =false;
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 		    String line;

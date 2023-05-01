@@ -6,12 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,11 +18,9 @@ import javax.swing.table.TableColumn;
 
 import Main.Utils;
 import Negocio.Empleado.TEmpleado;
-import Negocio.Proveedor.TProveedor;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
-import Presentacion.ProveedorPresentacion.GUIListarProv;
 
 public class GUIListarEmpleados extends JFrame implements GUI{
 

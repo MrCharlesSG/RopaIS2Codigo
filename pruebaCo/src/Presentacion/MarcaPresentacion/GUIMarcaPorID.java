@@ -13,7 +13,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,7 +23,6 @@ import javax.swing.table.TableColumn;
 
 import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
-import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;

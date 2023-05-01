@@ -5,17 +5,15 @@ package Presentacion.Producto;
 
 	import javax.swing.BoxLayout;
 	import javax.swing.JButton;
-	import javax.swing.JFrame;
-	import javax.swing.JLabel;
 	import javax.swing.JPanel;
-	import javax.swing.JTextField;
-
-import Main.MainWindow;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 
 	public class IGUIProducto extends JPanel {//probablemente sea mejor hacerlo singleton o algo
 		
-		private JPanel j;
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		
 		public IGUIProducto(){
 			

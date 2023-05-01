@@ -11,6 +11,11 @@ import javax.swing.JPanel;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 
 public class IGUICliente extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public IGUICliente() {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

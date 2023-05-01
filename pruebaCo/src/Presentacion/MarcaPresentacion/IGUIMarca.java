@@ -5,14 +5,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 
 public class IGUIMarca extends JPanel {//probablemente sea mejor hacerlo singleton o algo
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public IGUIMarca(){
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

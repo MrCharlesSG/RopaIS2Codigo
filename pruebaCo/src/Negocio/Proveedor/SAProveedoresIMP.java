@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
-import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.Proveedores.DAOProveedores;
 import Negocio.ComprobadorSintactico;
 import Presentacion.Controlador.Controlador;

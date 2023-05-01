@@ -17,7 +17,6 @@ import Main.Utils;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Empleado.TEmpleadoTC;
 import Negocio.Empleado.TEmpleadoTP;
-import Presentacion.Clientes.GUIModificarCliente;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;

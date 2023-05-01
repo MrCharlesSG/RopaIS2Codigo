@@ -7,10 +7,9 @@ package Presentacion.ProveedorPresentacion;
 	import javax.swing.JButton;
 	import javax.swing.JPanel;
 
-import Main.Utils;
+
 import Presentacion.Controlador.Controlador;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
-import Presentacion.GUI.GUI;
 
 	public class IGUIProv extends JPanel {
 		

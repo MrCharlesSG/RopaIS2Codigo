@@ -1,7 +1,6 @@
 
 package Negocio.Clientes;
 
-import Negocio.Empleado.TEmpleado;
 
 public abstract class TCliente {
 	private boolean Active;

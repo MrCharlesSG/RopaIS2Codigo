@@ -9,11 +9,14 @@ import javax.swing.JToolBar;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ControlPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JToolBar _toolBar;
 	private JButton quit;
 	private JButton marca;

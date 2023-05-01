@@ -16,6 +16,11 @@ import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 
 public class GUIBajaEmpleado extends JFrame implements GUI{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public GUIBajaEmpleado() {
 		setTitle("Baja de Empleado");
 		JPanel panel=new JPanel();

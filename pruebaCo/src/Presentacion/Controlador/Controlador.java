@@ -12,7 +12,6 @@ import Negocio.Empleado.TEmpleado;
 import Negocio.FactoriaNegocio.FactoriaNegocio;
 import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
-import Presentacion.GUIBiblioteca;
 import Presentacion.GUI.GUI;
 import Presentacion.Controlador.Evento;
 import Negocio.Producto.TProducto;
@@ -396,7 +395,6 @@ public class Controlador {
 		boolean existe=true;
 		if(productos.keySet().size()!=0){
 			Collection<TProducto> listap = saProducto.readAll();
-			int i=0;
 			for(int id: productos.keySet()){
 			existe=false;
 				for(TProducto p:listap){

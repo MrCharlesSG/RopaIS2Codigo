@@ -1,15 +1,9 @@
 package Presentacion.Clientes;
 
-import java.awt.BorderLayout;
-import java.awt.LayoutManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.BoxLayout;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,6 +22,11 @@ import Presentacion.GUI.GUI;
 
 public class GUIModificarCliente extends JFrame implements GUI{
 	
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 		public GUIModificarCliente() {
 			setTitle("Modificar cliente");
 			this.setLocationRelativeTo(null);

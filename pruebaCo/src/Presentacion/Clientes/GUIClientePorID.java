@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,12 +20,15 @@ import javax.swing.table.TableColumn;
 
 import Main.Utils;
 import Negocio.Clientes.TCliente;
-import Negocio.Ventas.TVenta;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 
 public class GUIClientePorID extends JFrame implements GUI{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] header = { "ID","NOMBRE", "APELLIDO1", "APELLIDO2","DNI", "TELEFONO","PREMIUM","ACTIVO"};
 	private DefaultTableModel _dataTableModel;
 	
@@ -105,6 +107,11 @@ public class GUIClientePorID extends JFrame implements GUI{
 		
 		//añado la lista
 		this._dataTableModel = new DefaultTableModel(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;

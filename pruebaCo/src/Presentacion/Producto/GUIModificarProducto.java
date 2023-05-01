@@ -32,28 +32,26 @@ import Presentacion.MarcaPresentacion.GUIAltaMarca;
 */
 
 public class GUIModificarProducto extends JFrame implements GUI{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel id;
-	private JLabel idL;
 	private JFormattedTextField idT;
 	
 	private JPanel nombre;
-	private JLabel nombreL;
 	private JTextField nombreT;
 	
 	private JPanel cantidad;
-	private JLabel cantidadL;
 	private JFormattedTextField cantidadT;
 	
 	private JPanel talla;
-	private JLabel tallaL;
 	private JFormattedTextField tallaT;
 	
 	private JPanel categoria;
-	private JLabel categoriaL;
 	private JTextField categoriaT;
 	
 	private JPanel idMarca;
-	private JLabel idMarcaL;
 	private JFormattedTextField idMarcaT;
 	
 	private JPanel but;
@@ -76,7 +74,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		jpanel.add(new JLabel("Introduzca el 'id' del producto a modificar."));
 		
 		id = new JPanel();
-		id.add((idL=new JLabel("ID: ")));
+		id.add((new JLabel("ID: ")));
 		id.add((idT = new JFormattedTextField(numberFormatter)));
 		idT.setMaximumSize(DIM);
 		idT.setMinimumSize(DIM);
@@ -86,12 +84,12 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		jpanel.add(new JLabel("Introduzca los datos a modificar."));
 		
 		nombre = new JPanel();
-		nombre.add((nombreL=new JLabel("Nombre: ")));
+		nombre.add((new JLabel("Nombre: ")));
 		nombre.add((nombreT = new JTextField(20)));
 		jpanel.add(nombre);
 		
 		cantidad = new JPanel();
-		cantidad.add((cantidadL = new JLabel("Cantidad: ")));
+		cantidad.add((new JLabel("Cantidad: ")));
 		cantidad.add((cantidadT = new JFormattedTextField(numberFormatter)));
 		cantidadT.setMaximumSize(DIM);
 		cantidadT.setMinimumSize(DIM);
@@ -99,7 +97,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		jpanel.add(cantidad);
 		
 		talla = new JPanel();
-		talla.add((tallaL = new JLabel("Talla: ")));
+		talla.add((new JLabel("Talla: ")));
 		talla.add((tallaT = new JFormattedTextField(numberFormatter)));
 		tallaT.setMaximumSize(DIM);
 		tallaT.setMinimumSize(DIM);
@@ -107,12 +105,12 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		jpanel.add(talla);
 		
 		categoria = new JPanel();
-		categoria.add((categoriaL = new JLabel("Categoría: ")));
+		categoria.add((new JLabel("Categoría: ")));
 		categoria.add((categoriaT = new JTextField(20)));
 		jpanel.add(categoria);
 		
 		idMarca = new JPanel();
-		idMarca.add((idMarcaL = new JLabel("idMarca: ")));
+		idMarca.add((new JLabel("idMarca: ")));
 		idMarca.add((idMarcaT = new JFormattedTextField(numberFormatter)));
 		idMarcaT.setMaximumSize(DIM);
 		idMarcaT.setMinimumSize(DIM);

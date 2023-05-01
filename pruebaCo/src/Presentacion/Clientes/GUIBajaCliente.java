@@ -17,6 +17,11 @@ import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 
 public class GUIBajaCliente extends JFrame implements GUI{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public GUIBajaCliente() {
 		setTitle("Baja de Cliente");
 		JPanel panel=new JPanel();

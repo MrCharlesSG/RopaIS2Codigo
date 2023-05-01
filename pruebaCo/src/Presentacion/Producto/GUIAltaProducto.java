@@ -1,6 +1,4 @@
 package Presentacion.Producto;
-
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Main.Utils;
-import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -21,19 +18,18 @@ import Presentacion.GUI.GUI;
 
 public class GUIAltaProducto extends JFrame implements GUI{
 	
-	private JLabel lNombre;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JTextField tNombre;
 	
-	private JLabel lTalla;
 	private final JTextField tTalla;
 	
-	private JLabel lCat;
 	private final JTextField tCat;
 	
-	private JLabel lCant;
 	private final JTextField tCant;
 	
-	private JLabel lIDMarca;
 	private final JTextField tIDMarca;
 	
 	private JButton aceptar;
@@ -45,23 +41,23 @@ public class GUIAltaProducto extends JFrame implements GUI{
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		JPanel nombre = new JPanel();
-		nombre.add(lNombre=new JLabel("Nombre:"));
+		nombre.add(new JLabel("Nombre:"));
 		nombre.add(tNombre= new JTextField(20));
 		
 		JPanel talla = new JPanel();
-		talla.add(lTalla=new JLabel("Talla:"));
+		talla.add(new JLabel("Talla:"));
 		talla.add(tTalla= new JTextField(20));
 		
 		JPanel cat = new JPanel();
-		cat.add(lCat=new JLabel("Categoria:"));
+		cat.add(new JLabel("Categoria:"));
 		cat.add(tCat= new JTextField(20));
 		
 		JPanel cant = new JPanel();
-		cant.add(lCant=new JLabel("Cantidad:"));
+		cant.add(new JLabel("Cantidad:"));
 		cant.add(tCant= new JTextField(20));
 		
 		JPanel IdMarca = new JPanel();
-		IdMarca.add(lIDMarca=new JLabel("IDMarca:"));
+		IdMarca.add(new JLabel("IDMarca:"));
 		IdMarca.add(tIDMarca= new JTextField(20));
 		
 		JPanel okKo = new JPanel();

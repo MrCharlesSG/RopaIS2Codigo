@@ -10,7 +10,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,9 +19,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import Main.Utils;
-import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.TProducto;
-import Negocio.Proveedor.TProveedor;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
@@ -37,6 +34,10 @@ import Presentacion.GUI.GUI;
 
 public class GUIProductoPorID extends JFrame implements GUI{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] header = { "Nombre", "Id", "Categoria", "Talla", "Cantidad", " Id Marca"};
 	private DefaultTableModel _dataTableModel;
 	

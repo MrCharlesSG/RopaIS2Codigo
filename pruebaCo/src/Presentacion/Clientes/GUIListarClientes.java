@@ -9,7 +9,6 @@ import java.util.Collection;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,7 +16,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import Main.Utils;
 import Negocio.Clientes.TCliente;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -25,6 +23,10 @@ import Presentacion.GUI.GUI;
 
 
 public class GUIListarClientes extends JFrame implements GUI {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] header = { "ID","NOMBRE", "APELLIDO1", "APELLIDO2","DNI", "TELEFONO","PREMIUM","ACTIVO"};
 	private DefaultTableModel _dataTableModel;
 	
@@ -59,6 +61,11 @@ public class GUIListarClientes extends JFrame implements GUI {
 		
 		//añado la lista
 		this._dataTableModel = new DefaultTableModel(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;

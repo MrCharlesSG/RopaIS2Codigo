@@ -1,13 +1,9 @@
 
 package Negocio.Ventas;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import Main.Utils;
-import Negocio.Empleado.TEmpleado;
 
 
 public class TVenta {

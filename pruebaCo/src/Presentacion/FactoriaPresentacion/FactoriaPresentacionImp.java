@@ -3,8 +3,6 @@
  */
 package Presentacion.FactoriaPresentacion;
 
-import javax.swing.JComponent;
-
 import Presentacion.Clientes.GUIAltaCliente;
 import Presentacion.Clientes.GUIBajaCliente;
 import Presentacion.Clientes.GUIClientePorID;

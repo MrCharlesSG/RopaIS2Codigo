@@ -8,7 +8,6 @@ import Negocio.Producto.TProducto;
 import java.util.Collection;
 
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
-import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.Producto.DAOProducto;
 import Negocio.ComprobadorSintactico;
 import Negocio.FactoriaNegocio.FactoriaNegocio;

@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 
 public class IGUIEmpleado extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public IGUIEmpleado() {
 	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	JButton altaEmpleado=new JButton("Alta de empleado");

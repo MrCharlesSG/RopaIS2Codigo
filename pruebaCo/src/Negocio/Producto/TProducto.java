@@ -2,8 +2,6 @@
 
 package Negocio.Producto;
 
-import Negocio.Empleado.TEmpleado;
-
 public class TProducto {
 
 	private int cantidad;

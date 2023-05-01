@@ -18,6 +18,11 @@ import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 
 public class GUIAltaCliente extends JFrame implements GUI{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public GUIAltaCliente() {
 		setTitle("Alta Cliente");
 		JPanel panel=new JPanel();

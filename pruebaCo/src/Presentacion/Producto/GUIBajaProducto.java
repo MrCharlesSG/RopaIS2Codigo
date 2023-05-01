@@ -26,6 +26,11 @@ import Presentacion.GUI.GUI;
 
 public class GUIBajaProducto extends JFrame implements GUI{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public GUIBajaProducto(){
 		this.setTitle("Baja Producto");
 		JPanel jpanel=new JPanel();
@@ -76,7 +81,6 @@ public class GUIBajaProducto extends JFrame implements GUI{
 	public void update(int evento, Object datos) {
 		switch(evento){
 		case Evento.OK:
-			Integer id= (Integer) datos;
 			JOptionPane.showMessageDialog(null,"Se ha dado de baja correctamente el producto");
 			break;
 		case Evento.KO:

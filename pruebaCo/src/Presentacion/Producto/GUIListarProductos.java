@@ -35,6 +35,10 @@ import Presentacion.GUI.GUI;
 
 public class GUIListarProductos extends JFrame implements GUI{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] header = { "Nombre", "Id", "Categoria", "Talla", "Cantidad", " Id Marca"};
 	private DefaultTableModel _dataTableModel;
 	

@@ -3,12 +3,9 @@ package Integracion.MarcaIntegracion;
 
 import Negocio.MarcaNegocio.TMarca;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -40,7 +37,6 @@ public class DAOMarcaImp implements DAOMarca {
 		StringBuilder buffer=new StringBuilder();
 		File file=new File(ARCHIVO);
 		String datos[];
-		boolean encontrado=false;
 		int id=-1;
 		if(file.length()==0){
 			id=1;
