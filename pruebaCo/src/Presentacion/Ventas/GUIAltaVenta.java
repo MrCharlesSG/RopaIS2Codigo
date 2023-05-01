@@ -32,7 +32,7 @@ public class GUIAltaVenta extends JFrame implements GUI{
 		JPanel panel=new JPanel();
 		JLabel lID=new JLabel("Identificador de cliente:");
 		final JTextField tID= new JTextField(5);
-		
+		this.setLocationRelativeTo(null);
 		JLabel lID_PR=new JLabel("Identificador de empleado:");
 		final JTextField tID_PR= new JTextField(5);
 		

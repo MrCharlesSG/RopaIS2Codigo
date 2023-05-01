@@ -27,6 +27,7 @@ public class GUIVenta_Empleado extends JFrame implements GUI{
 		final JTextField tID= new JTextField(5);
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
+		this.setLocationRelativeTo(null);
 		
 		panel.add(lID);
 		panel.add(tID);

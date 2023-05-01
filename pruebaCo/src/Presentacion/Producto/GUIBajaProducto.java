@@ -28,6 +28,7 @@ public class GUIBajaProducto extends JFrame implements GUI{
 	public GUIBajaProducto(){
 		this.setTitle("Baja Producto");
 		JPanel jpanel=new JPanel();
+		this.setLocationRelativeTo(null);
 		JLabel jlabel=new JLabel("IDProducto: ");
 		final JTextField jTextField=new JTextField(20);
 		JButton aceptar=new JButton("Aceptar");

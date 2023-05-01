@@ -22,6 +22,7 @@ public class GUIAltaProducto extends JFrame implements GUI{
 	public GUIAltaProducto() {
 		this.setTitle("Alta Producto");
 		JPanel panel=new JPanel();
+		this.setLocationRelativeTo(null);
 		JLabel lNombre=new JLabel("Nombre:");
 		final JTextField tNombre= new JTextField(20);
 		

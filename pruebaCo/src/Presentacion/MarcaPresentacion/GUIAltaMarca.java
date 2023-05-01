@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -32,7 +33,7 @@ public class GUIAltaMarca extends JFrame implements GUI{
 		final JTextField tNombre= new JTextField(20);
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
-		
+		this.setLocationRelativeTo(null);
 		panel.add(lNombre);
 		panel.add(tNombre);
 		panel.add(aceptar);

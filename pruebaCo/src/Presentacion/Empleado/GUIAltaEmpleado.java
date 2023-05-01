@@ -20,6 +20,7 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 	public GUIAltaEmpleado() {
 		setTitle("Alta Empleado");
 		JPanel panel=new JPanel();
+		this.setLocationRelativeTo(null);
 		
 		JLabel lNombre=new JLabel("Nombre:");
 		final JTextField tNombre= new JTextField(20);

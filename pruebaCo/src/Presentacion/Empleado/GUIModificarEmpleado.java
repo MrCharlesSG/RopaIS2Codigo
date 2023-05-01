@@ -31,6 +31,7 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 
 	public GUIModificarEmpleado() {
 		setTitle("Modificar empleado");
+		this.setLocationRelativeTo(null);
 		
 		JPanel panel=new JPanel();
 		

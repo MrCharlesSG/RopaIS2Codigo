@@ -30,6 +30,7 @@ public class GUIProductoPorID extends JFrame implements GUI{
 		this.setTitle("Producto por ID");
 		JPanel jpanel=new JPanel();
 		JLabel jlabel=new JLabel("Identificador: ");
+		this.setLocationRelativeTo(null);
 		
 		final JTextField jtextID= new JTextField(5);
 		JButton JAcceptButton=new JButton("Aceptar");
@@ -50,8 +51,9 @@ public class GUIProductoPorID extends JFrame implements GUI{
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				String id=jtextID.getText();
+				TProducto tprod =new TProducto(null, Integer.parseInt(id), -1, -1, null, -1);
 				Controlador.getInstancia().setGUI(GUIProductoPorID.this);
-				Controlador.getInstancia().accion(Evento.PRODUCTO_POR_ID, Integer.parseInt(id));
+				Controlador.getInstancia().accion(Evento.PRODUCTO_POR_ID, tprod);
 				
 			}
 			
@@ -77,11 +79,11 @@ public class GUIProductoPorID extends JFrame implements GUI{
 			StringBuilder str= new StringBuilder();
 			TProducto tprod= (TProducto) datos;
 			str.append("Se ha encontrado el producto con ID: " + tprod.getIdProducto() + System.lineSeparator());
-			str.append("NOMBRE: " + tprod.getNombre() + " ID: " + tprod.getIdProducto() + " CANTIIDAD: " + tprod.getCantidad()
-			+ " TALLA: "+ tprod.getTalla() +  " CATEGORIA: " + tprod.getCategoria() + " IDMARCA: " + tprod.getIdMarca());
+			str.append("NOMBRE: " + tprod.getNombre() + "ID: " + tprod.getIdProducto() + "CANTIIDAD: " + tprod.getCantidad()
+			+ "TALLA: "+ tprod.getTalla() +  "CATEGORIA: " + tprod.getCategoria() + "IDMARCA: " + tprod.getIdMarca());
 			JOptionPane.showMessageDialog(null, str);
 			break;
-		case Evento.RES_PRODUCTO_POR_ID_KO:
+		case Evento.RES_BAJA_PRODUCTO_KO:
 			JOptionPane.showMessageDialog(null, "No se pudo encontrar el producto con ese ID");
 			break; 
 		}

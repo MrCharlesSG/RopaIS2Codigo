@@ -30,6 +30,7 @@ public class GUIListarProductos extends JFrame implements GUI{
 	public GUIListarProductos(){
 		setTitle("Listar Prodcutos");
 		JPanel panel=new JPanel();
+		this.setLocationRelativeTo(null);
 		
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");

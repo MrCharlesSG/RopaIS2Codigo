@@ -37,6 +37,7 @@ public class GUIListarMarcas extends JFrame implements GUI{
 		
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
+		this.setLocationRelativeTo(null);
 		
 		panel.add(aceptar);
 		panel.add(cancelar);

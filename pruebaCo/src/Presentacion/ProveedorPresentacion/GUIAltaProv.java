@@ -58,7 +58,7 @@ public class GUIAltaProv extends JFrame implements GUI{
 		JLabel lM5=new JLabel("Marca 5:");
 		final JTextField tM5= new JTextField(20);
 		*/
-		
+		this.setLocationRelativeTo(null);
 		//lista de marcas
 		this.updateLista();
 		JList<String> jListaMarcas = new JList<String>(this.modelo);

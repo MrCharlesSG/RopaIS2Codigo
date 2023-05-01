@@ -43,6 +43,7 @@ public class GUIModificarProv extends JFrame implements GUI{
 		JPanel panel= new JPanel();
 		this.setMinimumSize(new Dimension(500, 500));
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		this.setLocationRelativeTo(null);
 		
 		//Solo se permite modificar el nombre del proveedor
 		JLabel lID=new JLabel("Identificador: ");

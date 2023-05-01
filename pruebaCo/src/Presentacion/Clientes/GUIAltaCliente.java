@@ -19,6 +19,7 @@ public class GUIAltaCliente extends JFrame implements GUI{
 	public GUIAltaCliente() {
 		setTitle("Alta Cliente");
 		JPanel panel=new JPanel();
+		this.setLocationRelativeTo(null);
 		
 		JLabel lNombre=new JLabel("Nombre:");
 		final JTextField tNombre= new JTextField(20);

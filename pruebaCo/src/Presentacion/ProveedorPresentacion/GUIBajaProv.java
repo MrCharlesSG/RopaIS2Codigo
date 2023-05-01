@@ -43,6 +43,7 @@ public class GUIBajaProv extends JFrame implements GUI{
 		final JTextField jTextField=new JTextField(20);
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
+		this.setLocationRelativeTo(null);
 		
 		jpanel.add(jlabel);
 		jpanel.add(jTextField);

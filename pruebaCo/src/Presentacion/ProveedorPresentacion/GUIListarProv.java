@@ -46,6 +46,7 @@ public class GUIListarProv extends JFrame implements GUI{
 		this.setTitle("Lista de Proveedores");
 		this.setMinimumSize(new Dimension(500, 500));
 		JPanel panel=new JPanel();
+		this.setLocationRelativeTo(null);
 		
 		//añado un boton de cerrar
 		JButton cerrar =new JButton("Cerrar");

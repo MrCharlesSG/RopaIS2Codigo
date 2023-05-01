@@ -20,10 +20,11 @@ import Presentacion.GUI.GUI;
 public class GUIDevolverVenta extends JFrame implements GUI{
 	public GUIDevolverVenta() {
 		setTitle("Devolver producto");
+		this.setLocationRelativeTo(null);
 		JPanel panel=new JPanel();
 		JLabel lID=new JLabel("Identificador de venta:");
 		final JTextField tID= new JTextField(5);
-		
+		this.setLocationRelativeTo(null);
 		JLabel lID_PR=new JLabel("Identificador de producto:");
 		final JTextField tID_PR= new JTextField(5);
 		

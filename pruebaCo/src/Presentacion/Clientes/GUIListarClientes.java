@@ -19,6 +19,7 @@ public class GUIListarClientes extends JFrame implements GUI {
 	public GUIListarClientes(){
 		setTitle("Listar clientes");
 		JPanel panel=new JPanel();
+		this.setLocationRelativeTo(null);
 		
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");

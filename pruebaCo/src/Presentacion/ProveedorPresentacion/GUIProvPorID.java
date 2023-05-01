@@ -38,6 +38,7 @@ public class GUIProvPorID extends JFrame implements GUI{
 		this.setTitle("Producto por ID");
 		JPanel jpanel=new JPanel();
 		JLabel jlabel=new JLabel("Identificador: ");
+		this.setLocationRelativeTo(null);
 		
 		final JTextField jtextID= new JTextField(5);
 		JButton JAcceptButton=new JButton("Aceptar");

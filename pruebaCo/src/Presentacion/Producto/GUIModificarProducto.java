@@ -67,7 +67,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		NumberFormatter numberFormatter = new NumberFormatter(longFormat);
 		numberFormatter.setValueClass(Long.class); //optional, ensures you will always get a long value
 		numberFormatter.setAllowsInvalid(false); //this is the key!!
-		
+		this.setLocationRelativeTo(null);
 		this.setTitle("Modificar Producto");
 		JPanel jpanel=new JPanel();
 		jpanel.setLayout(new BoxLayout(jpanel, BoxLayout.Y_AXIS));

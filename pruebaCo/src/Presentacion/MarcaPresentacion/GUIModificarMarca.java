@@ -34,8 +34,12 @@ public class GUIModificarMarca extends JFrame implements GUI {
 			final JTextField tNombre= new JTextField(20);
 			JButton aceptar=new JButton("Aceptar:");
 			JButton cancelar=new JButton("Cancelar");
+			this.setLocationRelativeTo(null);
 			
 			panel.add(lId);
+			panel.add(lId);
+		
+			panel.add(lNombre);
 			panel.add(lNombre);
 			panel.add(aceptar);
 			panel.add(cancelar);
@@ -56,7 +60,7 @@ public class GUIModificarMarca extends JFrame implements GUI {
 					setVisible(false);
 				}
 			});
-			
+			setVisible(true);
 	}
 
 	@Override

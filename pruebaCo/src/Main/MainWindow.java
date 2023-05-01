@@ -45,6 +45,7 @@ public class MainWindow extends JPanel{
 			main.setBounds(400,400,600,300);
 			main.setVisible (true );
 			main.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+			main.setLocationRelativeTo(null);
 			
 			JPanel controlPanel = new ControlPanel();
 			main.add(controlPanel, BorderLayout.PAGE_START);

@@ -30,7 +30,7 @@ public class GUIModificarCliente extends JFrame implements GUI{
 	
 		public GUIModificarCliente() {
 			setTitle("Modificar cliente");
-			
+			this.setLocationRelativeTo(null);
 			JPanel panel=new JPanel();
 			
 			JTextArea desc=new JTextArea("Introduzca el dni y posteriormente los datos que desea modificar");
