@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.NumberFormatter;
 
+import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
@@ -131,11 +132,14 @@ public class GUIModificarProducto extends JFrame implements GUI{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				Controlador.getInstancia().setGUI(GUIModificarProducto.this);
-				Controlador.getInstancia().accion(Evento.MODIFICAR_PRODUCTO, new TProducto(
-						nombreT.getText(), Integer.parseInt(cantidadT.getText()), Integer.parseInt(tallaT.getText()),
-						Integer.parseInt(idT.getText()) ,categoriaT.getText(), Integer.parseInt(idMarcaT.getText())));
-				
+				try{
+					Controlador.getInstancia().setGUI(GUIModificarProducto.this);
+					Controlador.getInstancia().accion(Evento.MODIFICAR_PRODUCTO, new TProducto(
+							nombreT.getText(), Integer.parseInt(cantidadT.getText()), Integer.parseInt(tallaT.getText()),
+							Integer.parseInt(idT.getText()) ,categoriaT.getText(), Integer.parseInt(idMarcaT.getText())));
+				}catch(Exception e1){
+					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+				}
 			}
 			
 		});

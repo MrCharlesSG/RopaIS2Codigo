@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
@@ -50,10 +51,15 @@ public class GUIProductoPorID extends JFrame implements GUI{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				String id=jtextID.getText();
-				TProducto tprod =new TProducto(null, Integer.parseInt(id), -1, -1, null, -1);
-				Controlador.getInstancia().setGUI(GUIProductoPorID.this);
-				Controlador.getInstancia().accion(Evento.PRODUCTO_POR_ID, tprod);
+				try{
+					String id=jtextID.getText();
+					TProducto tprod =new TProducto(null, Integer.parseInt(id), -1, -1, null, -1);
+					Controlador.getInstancia().setGUI(GUIProductoPorID.this);
+					Controlador.getInstancia().accion(Evento.PRODUCTO_POR_ID, tprod);
+				}catch(Exception e1){
+					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+				}
+				
 				
 			}
 			

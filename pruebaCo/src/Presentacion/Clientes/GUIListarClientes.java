@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Main.Utils;
 import Negocio.Clientes.TCliente;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -33,8 +34,13 @@ public class GUIListarClientes extends JFrame implements GUI {
 			{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
-					Controlador.getInstancia().setGUI(GUIListarClientes.this);
-					Controlador.getInstancia().accion(Evento.LISTAR_CLIENTES,null);
+					try{
+						Controlador.getInstancia().setGUI(GUIListarClientes.this);
+						Controlador.getInstancia().accion(Evento.LISTAR_CLIENTES,null);
+					}catch(Exception e1){
+						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+					}
+					
 				}
 		});
 		cancelar.addActionListener(new ActionListener()

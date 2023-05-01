@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.Utils;
 import Negocio.Clientes.TCliente;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -36,9 +37,13 @@ public class GUIClientePorID extends JFrame implements GUI{
 			{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
-					int id=Integer.parseInt(tID.getText());
-					Controlador.getInstancia().setGUI(GUIClientePorID.this);
-					Controlador.getInstancia().accion(Evento.CLIENTE_POR_ID, new Integer(id));
+					try{
+						int id=Integer.parseInt(tID.getText());
+						Controlador.getInstancia().setGUI(GUIClientePorID.this);
+						Controlador.getInstancia().accion(Evento.CLIENTE_POR_ID, new Integer(id));
+					}catch(Exception e1){
+						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+					}
 				}
 		});
 		cancelar.addActionListener(new ActionListener()
