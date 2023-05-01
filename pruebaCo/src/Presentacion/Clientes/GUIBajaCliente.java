@@ -3,6 +3,7 @@ package Presentacion.Clientes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,11 +25,17 @@ public class GUIBajaCliente extends JFrame implements GUI{
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		this.setLocationRelativeTo(null);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		JPanel texto=new JPanel();
+		JPanel botones=new JPanel();
 		
-		panel.add(lID);
-		panel.add(tID);
-		panel.add(aceptar);
-		panel.add(cancelar);
+		texto.add(lID);
+		texto.add(tID);
+		botones.add(aceptar);
+		botones.add(cancelar);
+		panel.add(texto);
+		panel.add(botones);
+		
 		getContentPane().add(panel);
 		pack();
 		

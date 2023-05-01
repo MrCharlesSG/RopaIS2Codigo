@@ -3,6 +3,7 @@ package Presentacion.Clientes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -40,20 +41,26 @@ public class GUIAltaCliente extends JFrame implements GUI{
 		JButton premium=new JButton("Premium");
 		JButton no_premium=new JButton("No Premium");
 		JButton cancelar=new JButton("Cancelar");
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		JPanel texto=new JPanel();
+		JPanel botones=new JPanel();
 		
-		panel.add(lNombre);
-		panel.add(tNombre);
-		panel.add(lApellido1);
-		panel.add(tApellido1);
-		panel.add(lApellido2);
-		panel.add(tApellido2);
-		panel.add(lDNI);
-		panel.add(tDNI);
-		panel.add(ltlf);
-		panel.add(ttlf);
-		panel.add(premium);
-		panel.add(no_premium);
-		panel.add(cancelar);
+		texto.add(lNombre);
+		texto.add(tNombre);
+		texto.add(lApellido1);
+		texto.add(tApellido1);
+		texto.add(lApellido2);
+		texto.add(tApellido2);
+		texto.add(lDNI);
+		texto.add(tDNI);
+		texto.add(ltlf);
+		texto.add(ttlf);
+		botones.add(premium);
+		botones.add(no_premium);
+		botones.add(cancelar);
+		panel.add(texto);
+		panel.add(botones);
+		
 		getContentPane().add(panel);
 		pack();
 		
