@@ -305,7 +305,7 @@ public class Controlador {
             		gui.update(Evento.RES_ABRIR_VENTA_OK, saVenta.read(res));
             	}
             	else{
-            		gui.update(Evento.RES_ABRIR_VENTA_OK, null);
+            		gui.update(Evento.RES_ABRIR_VENTA_KO, null);
             	}
             	break;
             }
