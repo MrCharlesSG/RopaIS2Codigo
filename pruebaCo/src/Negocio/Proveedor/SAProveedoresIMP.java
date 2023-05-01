@@ -74,8 +74,9 @@ public class SAProveedoresIMP implements SAProveedores{
 		if(tProv!=null &&daoProveedor.read(tProv.getId())!=null&& ComprobadorSintactico.isName(tProv.getNombre()) && Controlador.getInstancia().marcasExisten(tProv.getMarca())){//Mirar si hay que comprobar que la marca existe o no
 			TProveedor leido = daoProveedor.readByName(tProv.getNombre());
 			
-			if(leido == null)
+			if(leido == null || leido.getId()==tProv.getId()) 
 				id = daoProveedor.update(tProv); 
+			
 		}
 		return id;
 		

@@ -283,7 +283,7 @@ public class Controlador {
             }
             case Evento.EMPLEADO_POR_ID:{
             	TEmpleado empl = saEmpleado.read((int)datos);
-	         	int res= empl==null ? Evento.RES_CLIENTE_POR_ID_KO : Evento.RES_CLIENTE_POR_ID_OK;
+	         	int res= empl==null ? Evento.KO : Evento.OK;
 	         	gui.update(res, empl);
 	        	break;
             }

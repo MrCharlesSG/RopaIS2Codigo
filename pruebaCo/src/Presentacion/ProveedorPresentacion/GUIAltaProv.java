@@ -45,20 +45,7 @@ public class GUIAltaProv extends JFrame implements GUI{
 		JPanel panel=new JPanel();
 		JLabel lNombre=new JLabel("Nombre:");
 		final JTextField tNombre= new JTextField(20);
-		/*
-		//Maximo va a haber 5 marcas por porveedor
-		JLabel lM1=new JLabel("Marca 1:");
-		final JTextField tM1= new JTextField(20);
-		JLabel lM2=new JLabel("Marca 2:");
-		final JTextField tM2= new JTextField(20);
-		JLabel lM3=new JLabel("Marca 3:");
-		final JTextField tM3= new JTextField(20);
-		JLabel lM4=new JLabel("Marca 4:");
-		final JTextField tM4= new JTextField(20);
-		JLabel lM5=new JLabel("Marca 5:");
-		final JTextField tM5= new JTextField(20);
-		*/
-		this.setLocationRelativeTo(null);
+		
 		//lista de marcas
 		this.updateLista();
 		JList<String> jListaMarcas = new JList<String>(this.modelo);
@@ -72,6 +59,7 @@ public class GUIAltaProv extends JFrame implements GUI{
 			{		
 				JFrame ventana = new JFrame("Añadir Marca a Proveedor");
 				ventana.setMinimumSize(new Dimension(200, 200));
+				ventana.setLocationRelativeTo(null);
 				JPanel panelV= new JPanel();
 				JPanel panelDatos= new JPanel();
 				JPanel panelBotones= new JPanel();
@@ -89,8 +77,13 @@ public class GUIAltaProv extends JFrame implements GUI{
 					{
 					ventana.setVisible(false);
 					try{
-						anadeALista(idTF.getText());
-						updateLista();
+						
+						if(anadeALista(idTF.getText())) {
+							updateLista();
+						}else {
+							throw new IllegalArgumentException();
+						}
+						
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 					}
@@ -110,7 +103,6 @@ public class GUIAltaProv extends JFrame implements GUI{
 				panelV.add(panelBotones, BorderLayout.SOUTH);
 				
 				ventana.add(panelV,BorderLayout.CENTER );
-				panelV.setVisible(true);
 				ventana.setVisible(true);
 			}
 
@@ -124,8 +116,8 @@ public class GUIAltaProv extends JFrame implements GUI{
 						setVisible(false);
 						
 						Controlador.getInstancia().accion(Evento.ALTA_PROVEEDOR, new TProveedor(tNombre.getText(),2, marcas, true ));
-					}catch(NumberFormatException e1){
-						Utils.showErrorMsg("Tienen que ser numeros");
+					}catch(Exception e1){
+						Utils.showErrorMsg("Error");
 					}
 				}
 
@@ -141,17 +133,8 @@ public class GUIAltaProv extends JFrame implements GUI{
 		primerosDatos.setLayout(new FlowLayout());
 		primerosDatos.add(lNombre);
 		primerosDatos.add(tNombre);
+	
 		
-		/*
-		panel.add(lM1);panel.add(tM1);
-		panel.add(lM2);panel.add(tM2);
-		
-		panel.add(lM3);panel.add(tM3);
-		
-		panel.add(lM4);panel.add(tM4);
-		
-		panel.add(lM5);panel.add(tM5);
-		*/
 		JPanel listaMarcasPanle = new JPanel();
 		listaMarcasPanle.setLayout(new FlowLayout());
 		JScrollPane scrollPane = new JScrollPane(jListaMarcas);
@@ -170,18 +153,25 @@ public class GUIAltaProv extends JFrame implements GUI{
 		this.add(panel, BorderLayout.CENTER);
 		setPreferredSize(new Dimension(300, 400));
 		setResizable(false);
+		this.setLocationRelativeTo(null);
 		pack();
 		
 	}
 	
 	private boolean anadeALista(String id) {
 		try {
-			this.marcas.add(Integer.parseInt(id));
-			return true;
-		}catch(NumberFormatException e1) {
-			Utils.showErrorMsg("Tienen que ser numeros");
-			return false;
-		}
+			ArrayList<Integer> aux= new ArrayList<Integer>();
+			int iD=Integer.parseInt(id);
+			aux.add(iD);
+			
+			if(Controlador.getInstancia().marcasExisten(aux)) {
+				this.marcas.add(iD);
+				return true;
+			}
+			
+			
+		}catch(NumberFormatException e1) {}
+		return false;
 	}
 
 	@Override

@@ -1,25 +1,40 @@
 package Presentacion.Empleado;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import Main.Utils;
+import Negocio.Empleado.TEmpleado;
+import Negocio.Proveedor.TProveedor;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 import Presentacion.ProveedorPresentacion.GUIListarProv;
 
 public class GUIListarEmpleados extends JFrame implements GUI{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	String[] header = { "Id", "Nombre", "Apellido 1", "Apellido 2", "DNI", "Teléfono", "Tiempo"};
+	private DefaultTableModel _dataTableModel;
 
 	public GUIListarEmpleados(){
 		initGUI();
@@ -30,10 +45,11 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 		Controlador.getInstancia().accion(Evento.LISTAR_EMPLEADO,null);
 	}
 
-	private void listaEmpleados(ArrayList<Object> datos){
-		this.setTitle("Lista de Empleados");
-		this.setMinimumSize(new Dimension(500, 500));
+	private void listaEmpleados(ArrayList<TEmpleado> datos){
+		setTitle("Listar Empleados");
+		this.setMinimumSize(new Dimension(520, 400));
 		JPanel panel=new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		
 		//añado un boton de cerrar
@@ -46,15 +62,39 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 			});
 		
 		//añado la lista
-		DefaultListModel<String> modelo = new DefaultListModel<>();
-		for (Object dato : datos) {
-		    modelo.addElement(dato.toString());
+		this._dataTableModel = new DefaultTableModel();
+		_dataTableModel.setColumnIdentifiers(header);;
+		_dataTableModel.setNumRows(datos.size());
+		int i=0;
+		for (TEmpleado m:datos) {
+			_dataTableModel.setValueAt(m.getID(), i, 0);
+			_dataTableModel.setValueAt(m.getNombre(), i, 1);
+			_dataTableModel.setValueAt(m.getApellido1(), i, 2);
+			_dataTableModel.setValueAt(m.getApellido2(), i, 3);
+			_dataTableModel.setValueAt(m.getDNI(), i, 4);
+			_dataTableModel.setValueAt(m.getTfno(), i, 5);
+			_dataTableModel.setValueAt(m.isTiempoCompleto()? "Completo":"Parcial", i, 6);
+			i++;
+	
 		}
-		JList<String> list = new JList<>(modelo);
-		
-		JScrollPane scrollPane = new JScrollPane(list);
-		scrollPane.setBorder(BorderFactory.createTitledBorder("Lista De Empleados: "));
-		panel.add(scrollPane);
+		JTable dataTable = new JTable(_dataTableModel) {
+			private static final long serialVersionUID = 1L;
+
+			// we override prepareRenderer to resize columns to fit to content
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+				Component component = super.prepareRenderer(renderer, row, column);
+				int rendererWidth = component.getPreferredSize().width;
+				TableColumn tableColumn = getColumnModel().getColumn(column);
+				tableColumn.setPreferredWidth(
+						Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+				return component;
+			}
+		};
+		JScrollPane tabelScroll = new JScrollPane(dataTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		panel.add(tabelScroll);
+
 		panel.add(cerrar);
 		getContentPane().add(panel);
 		pack();
@@ -69,7 +109,7 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 			Utils.showErrorMsg("No se ha podido listar los Empleados");
 		}
 		case Evento.OK:{
-			this.listaEmpleados((ArrayList<Object>)datos);
+			this.listaEmpleados((ArrayList<TEmpleado>)datos);
 		}
 		}
 	}

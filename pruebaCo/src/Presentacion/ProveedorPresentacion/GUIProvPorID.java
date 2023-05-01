@@ -1,13 +1,22 @@
 package Presentacion.ProveedorPresentacion;
 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import Main.Utils;
 import Negocio.Proveedor.TProveedor;
@@ -29,13 +38,15 @@ public class GUIProvPorID extends JFrame implements GUI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	String[] header = { "Id", "Nombre", "Marcas"};
+	private DefaultTableModel _dataTableModel;	
+	
 	public GUIProvPorID(){
 		initGUI();		
 	}
 
 	private void initGUI() {
-		this.setTitle("Producto por ID");
+		this.setTitle("Proveedor por ID");
 		JPanel jpanel=new JPanel();
 		JLabel jlabel=new JLabel("Identificador: ");
 		this.setLocationRelativeTo(null);
@@ -61,8 +72,7 @@ public class GUIProvPorID extends JFrame implements GUI{
 					setVisible(false);
 					Integer id=Integer.parseInt(jtextID.getText());
 					Controlador.getInstancia().accion(Evento.PROVEEDOR_POR_ID,id);
-				}catch(Exception e1){
-					Utils.showErrorMsg("El ID debe de ser un numero");
+				}catch(NumberFormatException e1){
 					setVisible(false);
 				}
 				
@@ -87,10 +97,71 @@ public class GUIProvPorID extends JFrame implements GUI{
 		case Evento.KO:{
 			Utils.showErrorMsg("No se pudo encontrar el proveedor con dicho ID");
 			setVisible(false);
+			break;
 		}case Evento.OK:{
-			Utils.showCorrectMsg("Esto son los datos del Proveedor:"+System.lineSeparator()+datos.toString());
+			listarProveedor((TProveedor)datos);
+			break;
 		}
 		}
+	}
+
+	private void listarProveedor(TProveedor datos) {
+		//Elimino todos los componentes
+		Container contentPane = getContentPane();
+
+		Component[] components = contentPane.getComponents();
+		for (Component component : components) {
+		    contentPane.remove(component);
+		}
+		
+		setTitle("Empleado por id");
+		this.setPreferredSize(new Dimension(500, 200));
+		JPanel panel=new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		this.setLocationRelativeTo(null);
+		
+		//añado un boton de cerrar
+		JButton cerrar =new JButton("Cerrar");
+		cerrar.addActionListener(new ActionListener()
+			{ public void actionPerformed(ActionEvent e)
+				{		
+					setVisible(false);
+				}
+			});
+		
+		//añado la lista
+		this._dataTableModel = new DefaultTableModel();
+		_dataTableModel.setColumnIdentifiers(header);;
+		_dataTableModel.setNumRows(1);
+		_dataTableModel.setValueAt(datos.getId(), 0, 0);
+		_dataTableModel.setValueAt(datos.getNombre(), 0, 1);
+		_dataTableModel.setValueAt(datos.getMarca(), 0, 2);
+	
+		
+		JTable dataTable = new JTable(_dataTableModel) {
+			private static final long serialVersionUID = 1L;
+
+			// we override prepareRenderer to resize columns to fit to content
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+				Component component = super.prepareRenderer(renderer, row, column);
+				int rendererWidth = component.getPreferredSize().width;
+				TableColumn tableColumn = getColumnModel().getColumn(column);
+				tableColumn.setPreferredWidth(
+						Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+				return component;
+			}
+		};
+		JScrollPane tabelScroll = new JScrollPane(dataTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		panel.add(tabelScroll);
+
+		panel.add(cerrar);
+		revalidate();
+		repaint();
+		getContentPane().add(panel);
+		pack();
+		setVisible(true);
 	}
 		
 }
