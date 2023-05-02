@@ -72,7 +72,7 @@ public class Controlador {
 				int res=saMarca.create(tMarca);
 				
 				if(res>0)
-					gui.update(Evento.RES_ALTA_MARCA_OK, new Integer(res));
+					gui.update(Evento.RES_ALTA_MARCA_OK, res);
 				else
 					gui.update(Evento.RES_ALTA_MARCA_KO, null);
 				break;
@@ -82,7 +82,7 @@ public class Controlador {
 				int res=saMarca.delete(idMarca);
 				
 				if(res>0)
-					gui.update(Evento.RES_BAJA_MARCA_OK, new Integer(res));
+					gui.update(Evento.RES_BAJA_MARCA_OK, res);
 				else
 					gui.update(Evento.RES_BAJA_MARCA_KO, null);
 				break;
@@ -120,7 +120,7 @@ public class Controlador {
 			case Evento.ALTA_PRODUCTO:{
 				int res=saProducto.create((TProducto) datos);
 				if(res>=0){
-					gui.update(Evento.OK, new Integer(res));
+					gui.update(Evento.OK,res);
 				}
 				else{
 					gui.update(Evento.KO, null);
@@ -130,7 +130,7 @@ public class Controlador {
 			case Evento.BAJA_PRODUCTO:{
 				int res=saProducto.delete(((TProducto) datos).getIdProducto());
 				if(res>=0){
-					gui.update(Evento.OK, new Integer(res));
+					gui.update(Evento.OK,res);
 				}
 				else{
 					gui.update(Evento.KO, null);
@@ -145,7 +145,7 @@ public class Controlador {
 			case Evento.MODIFICAR_PRODUCTO:{
 				int res=saProducto.update((TProducto)datos);
 				if(res>=0){
-					gui.update(Evento.OK,  new Integer(res));
+					gui.update(Evento.OK,res);
 				}
 				else{
 					gui.update(Evento.KO, null);

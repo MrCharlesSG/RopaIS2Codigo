@@ -133,10 +133,10 @@ public class DAOMarcaImp implements DAOMarca {
 				datos=scanner.nextLine().split(":");
 				if (marca.getID()==Integer.parseInt(datos[1])) {	
 					id=Integer.parseInt(datos[1]);
-					buffer.append(marca.getNombre()+":"+id+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
+					buffer.append(marca.getNombre()+":"+id+":"+datos[2]+":"+marca.getActivo()).append(System.lineSeparator());
 				}
 				else
-					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
+					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+marca.getActivo()).append(System.lineSeparator());
 			}
 			try(Writer w=new BufferedWriter(
 									new OutputStreamWriter(

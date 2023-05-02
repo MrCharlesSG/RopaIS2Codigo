@@ -1,3 +1,1 @@
-Pantalones azules: 1: 0: 1: pantalones: 1
-Camiseta blanca: 2: 0: 1: Camiseta: 1
-digfio: 3: 3: 20: k: 1
+Julian: 1: 0: 2: da: 1

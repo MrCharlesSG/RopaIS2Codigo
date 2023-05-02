@@ -65,7 +65,7 @@ public class GUIBajaMarca extends JFrame implements GUI{
 					setVisible(false);
 					int id=Integer.parseInt(tID.getText());
 					Controlador.getInstancia().setGUI(GUIBajaMarca.this);
-					Controlador.getInstancia().accion(Evento.BAJA_MARCA, new Integer(id));
+					Controlador.getInstancia().accion(Evento.BAJA_MARCA, id);
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 				}
@@ -86,10 +86,10 @@ public class GUIBajaMarca extends JFrame implements GUI{
 	public void update(int evento, Object datos) {
 	if( Evento.RES_BAJA_MARCA_OK==evento) {
 		Integer id= (Integer) datos;
-		JOptionPane.showMessageDialog(null,"Se ha dado de baja correctamente la marca con ID: "+id.intValue());
+		Utils.showCorrectMsg("La marca "+ id+ " se ha dado de alta.");
 	}
 	else if( Evento.RES_BAJA_MARCA_KO==evento) { 
-		JOptionPane.showMessageDialog(null, "No se pudo dar de baja la marca");	
+		Utils.showCorrectMsg( "No se pudo dar de baja la marca");	
 	}
 		
 	}

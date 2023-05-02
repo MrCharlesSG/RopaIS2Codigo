@@ -32,6 +32,7 @@ public class SAMarcaImp implements SAMarca {
 				id=daoMarca.create(marca);//hay que quitar el boolean
 			else {
 				if(!leido.getActivo()) {
+					marca.setID(leido.getID());
 					id=daoMarca.update(marca);
 				}
 			}
@@ -99,7 +100,7 @@ public class SAMarcaImp implements SAMarca {
 		if(ComprobadorSintactico.isPositive(ID)){
 			TMarca leido=daoMarca.read(ID);	
 			
-			if(leido!=null&&leido.getCantidad()==0&&leido.getActivo())
+			if(leido!=null&&leido.getActivo())
 				id=daoMarca.delete(ID);// hay hay que mirar los argumentos ...S
 			}
 		
