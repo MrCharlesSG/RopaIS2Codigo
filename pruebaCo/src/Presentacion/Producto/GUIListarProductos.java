@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.BoxLayout;
@@ -21,6 +22,7 @@ import javax.swing.table.TableColumn;
 
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.TProducto;
+import Negocio.Ventas.TVenta;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
@@ -52,6 +54,9 @@ public class GUIListarProductos extends JFrame implements GUI{
 	if( Evento.LISTAR_PRODUCTOS==evento)
 	{
 		Collection<TProducto>productos=(Collection<TProducto>) datos;
+		if(productos==null){
+			productos=new ArrayList<TProducto>();
+		}
 		this.listar(productos);
 		
 	}

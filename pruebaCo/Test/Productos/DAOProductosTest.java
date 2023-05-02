@@ -69,7 +69,7 @@ public class DAOProductosTest {
 			int updatee=dproducto.update(prod3);
 			assertEquals(4, updatee);
 
-			this.vaciarBaseDatos();
+		//this.vaciarBaseDatos();
 			
 
 		}

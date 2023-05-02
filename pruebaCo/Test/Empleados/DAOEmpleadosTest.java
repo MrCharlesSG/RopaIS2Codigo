@@ -92,7 +92,7 @@ public class DAOEmpleadosTest {
 			assert(!e.isActivo());
 		}
 		
-		vaciarBaseDatos();
+		//vaciarBaseDatos();
 	}
 	private void vaciarBaseDatos() {
 		try(Writer w=new BufferedWriter(

@@ -1,11 +1,2 @@
-<<<<<<< Updated upstream
 1:Xyon:false
 2:Tiberias:false
-=======
-1:Xyon:false
-2:Mnaoli:true:1
-3:Manoli:true
-4:Lambe:true:2:1
-5:Jalapeño:true:1
-6:KKK:true:1
->>>>>>> Stashed changes

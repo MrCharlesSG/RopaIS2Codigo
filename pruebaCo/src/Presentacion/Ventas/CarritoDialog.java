@@ -1,5 +1,6 @@
 package Presentacion.Ventas;
 
+import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -19,6 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
@@ -32,6 +36,8 @@ public class CarritoDialog extends Dialog {
 	/**
 	 * 
 	 */
+	String[] header = { "ID PRODUCTO","CANTIDAD"};
+	private DefaultTableModel _dataTableModel;
 	private static final long serialVersionUID = 1L;
 	private Map<Integer,Integer> carro;
 	private boolean status;
@@ -66,7 +72,33 @@ public class CarritoDialog extends Dialog {
 		JButton elim=new JButton("Eliminar");
 		elim.setToolTipText("Elimina n unidades de un producto");
 		JButton aceptar=new JButton("Aceptar");
-		
+		//añado la lista
+				this._dataTableModel = new DefaultTableModel(){
+					@Override
+					public boolean isCellEditable(int row, int column) {
+						return false;
+					}
+				};
+				_dataTableModel.setColumnIdentifiers(header);
+				this.updateTableModel();
+				JTable dataTable = new JTable(_dataTableModel) {
+					private static final long serialVersionUID = 1L;
+
+					// we override prepareRenderer to resize columns to fit to content
+					@Override
+					public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+						Component component = super.prepareRenderer(renderer, row, column);
+						int rendererWidth = component.getPreferredSize().width;
+						TableColumn tableColumn = getColumnModel().getColumn(column);
+						tableColumn.setPreferredWidth(
+								Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+						return component;
+					}
+				};
+				JScrollPane tabelScroll = new JScrollPane(dataTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+						JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		mainPanel.add(tabelScroll);
+
 		
 		
 		JPanel botones=new JPanel();
@@ -81,7 +113,12 @@ public class CarritoDialog extends Dialog {
 			try{
 				Integer id=Integer.parseInt(tprod.getText());
 				Integer cantidad=Integer.parseInt(tcant.getText());
-				carro.put(id,cantidad );
+				if(!carro.containsKey(id))
+					carro.put(id,cantidad );
+				else{
+					carro.put(id, carro.get(id)+cantidad);
+				}
+				updateTableModel();
 			}
 			catch(Exception e1){
 				Utils.showErrorMsg("Los parametros introducidos no son validos, intentelo de nuevo" );
@@ -104,6 +141,7 @@ public class CarritoDialog extends Dialog {
 					if(carro.get(Integer.parseInt(tprod.getText()))==0){
 						carro.remove(Integer.parseInt(tprod.getText()));
 					}
+					updateTableModel();
 				}
 			}catch(Exception e1){
 				Utils.showErrorMsg("Los parametros introducidos no son validos, intentelo de nuevo" );
@@ -129,6 +167,16 @@ public class CarritoDialog extends Dialog {
 		pack();
 		setResizable(false);
 		setVisible(false);
+	}
+	private void updateTableModel() {
+			_dataTableModel.setNumRows(carro.keySet().size());
+			int i=0;
+			for (int k :carro.keySet()) {
+				_dataTableModel.setValueAt(k, i, 0);
+				_dataTableModel.setValueAt(carro.get(k), i, 1);
+				i++;
+			}
+		
 	}
 	public boolean  open(TVenta datos) {
 		this.venta=datos;

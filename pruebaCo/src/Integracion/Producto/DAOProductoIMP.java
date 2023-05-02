@@ -250,17 +250,16 @@ public class DAOProductoIMP implements DAOProducto{
 		        splitArray = line.split(": ", 6);
 		        if(Integer.parseInt(splitArray[1]) == id){
 		        	sb.append(splitArray[0] + ": " + splitArray[1] + ": " + (Integer.parseInt(splitArray[2]) - cant) + ": "
-		        + splitArray[3] + ": " + splitArray[4] + ": " +splitArray[5]);
+		        + splitArray[3] + ": " + splitArray[4] + ": " +splitArray[5]+ System.lineSeparator());
 		        	found = true;
 		        }else{
 		        	sb.append(splitArray[0] + ": " + splitArray[1] + ": " + splitArray[2] + ": "
-		    		        + splitArray[3] + ": " + splitArray[4] + ": " +splitArray[5]);
+		    		        + splitArray[3] + ": " + splitArray[4] + ": " +splitArray[5]+ System.lineSeparator());
 		        }
-		        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		    }
+		    try(    BufferedWriter bw = new BufferedWriter(new FileWriter(f))){
 		        bw.append(sb);
 		        bw.flush();
-		        bw.close();
-		        br.close();
 		    }
 		}catch(Exception e){
 			return false;

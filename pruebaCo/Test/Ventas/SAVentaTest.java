@@ -15,6 +15,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import Negocio.Clientes.SAClientes;
+import Negocio.Clientes.TClientePremium;
+import Negocio.Empleado.SAEmpleado;
 import Negocio.FactoriaNegocio.FactoriaNegocioImp;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Ventas.SAVentas;
@@ -27,14 +30,15 @@ public class SAVentaTest {
 	private TVenta venta1=new TVenta(1, 1, 1, 10, 2, true);
 	private TVenta venta2=new TVenta(2, 1, 1, 15, 3, true);
 	private Collection<TVenta> mockCollec=new ArrayList<TVenta>();
-	
+	private  SAClientes sac=FactoriaNegocioImp.getInstance().generaSAClientes();
+	private SAEmpleado sae=FactoriaNegocioImp.getInstance().generaSAEmpleado();
 	
 	@Test
 	public void basicBehaviour_Test(){
 		int aux1, aux2, aux3;
 		this.vaciarBaseDatos();
 		//crear marca y leer por id
-		
+	
 		aux1=saVenta.create(venta1);
 		assertEquals(aux1, 1);
 		this.mockCollec.add(venta1);

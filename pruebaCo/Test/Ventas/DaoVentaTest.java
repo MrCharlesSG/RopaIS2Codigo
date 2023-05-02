@@ -63,7 +63,7 @@ public class DaoVentaTest {
         assert(ventas.equals(aux));
         
         
-        this.vaciarBaseDatos();
+      //  this.vaciarBaseDatos();
         
 
 		}

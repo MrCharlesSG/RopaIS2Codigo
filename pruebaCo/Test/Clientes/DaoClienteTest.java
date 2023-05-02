@@ -60,7 +60,7 @@ public class DaoClienteTest {
 		assert(aux.equals(clientes));
 
 		
-		vaciarBaseDatos();
+		//vaciarBaseDatos();
 		
 		
 		

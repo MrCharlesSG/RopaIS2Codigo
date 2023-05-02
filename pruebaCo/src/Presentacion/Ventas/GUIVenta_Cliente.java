@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -79,7 +80,11 @@ public class GUIVenta_Cliente extends JFrame implements GUI{
 	public void update(int evento, Object datos) {
 	if( Evento.VENTAS_DE_UN_CLIENTE==evento){
 		Collection<TVenta> ventas= (Collection<TVenta>) datos;
-		this.listar(ventas);
+		if(ventas==null){
+			ventas=new ArrayList<TVenta>();
+		}
+			
+			this.listar(ventas);
 	}
 	}
 	

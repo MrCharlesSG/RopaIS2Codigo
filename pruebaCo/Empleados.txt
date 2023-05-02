@@ -1,2 +1,2 @@
-1:SA:ho:la:123123:06655387S:true:true
-2:Juan:Maria:Lika:111111:11111111W:false:true
+1:Juan:Lucas:Malaquito:515151:5151Y:true:false
+2:Lamban:Joper:Lunin:33:2Y:false:false

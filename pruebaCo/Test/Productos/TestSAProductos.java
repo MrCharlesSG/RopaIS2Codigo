@@ -29,8 +29,8 @@ import Negocio.Producto.TProducto;
 	public class TestSAProductos {
 
 		private SAProducto saProducto = FactoriaNegocioImp.getInstance().generaSAProducto();//teneis que creaar este metodo 
-		private TProducto tPant = new TProducto("Pantalones azules", 10, 1,1,"pantalones",1);
-		private TProducto tCami = new TProducto("Camiseta blanca", 5, 1,2,"Camiseta",1);
+		private TProducto tPant = new TProducto("Pantalones azules", 30, 1,1,"pantalones",1);
+		private TProducto tCami = new TProducto("Camiseta blanca", 20, 1,2,"Camiseta",1);
 		
 		private Collection<TProducto> mockCollec = new ArrayList<TProducto>();
 		
@@ -86,7 +86,7 @@ import Negocio.Producto.TProducto;
 
 			assert(mockCollec.equals(readAllCollec));
 			
-			//eliminar las dos marcas creadas
+			//eliminar los dos productos creadas
 			aux1= saProducto.delete(1);
 			assertEquals("No se ha eliminado correctamente",1, aux1);
 			aux2 = saProducto.delete(2);

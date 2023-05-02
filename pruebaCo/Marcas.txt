@@ -1,3 +1,1 @@
-wuenas:1:1:true
-SANTI:2:1:true
-Manguito:3:0:true
+Santi:1:1:true

@@ -86,6 +86,7 @@ public class GUIVentaPorID extends JFrame implements GUI {
 	public void update(int evento, Object datos) {
 	if( Evento.RES_VENTA_POR_ID_OK==evento){
 		TVenta v=(TVenta) datos;
+		
 		mostrar(v);
 
 	}

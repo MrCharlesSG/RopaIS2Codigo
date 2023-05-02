@@ -7,6 +7,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -53,6 +54,9 @@ public class GUIListarMarcas extends JFrame implements GUI{
 	if( Evento.LISTAR_MARCAS==evento)
 	{
 		Collection<TMarca>marcas=(Collection<TMarca>) datos;
+		if(marcas==null)
+			marcas=new ArrayList<TMarca>();
+		
 		this.listar(marcas);
 		
 	}

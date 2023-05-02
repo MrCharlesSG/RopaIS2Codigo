@@ -79,7 +79,7 @@ public class SAEmpleadosTest {
 		assert(listaAux.size()==0);
 		a=sa.create(emp1);
 		assert(1==a);
-		this.vaciarBaseDatos();
+		//this.vaciarBaseDatos();
 	}
 	
 	private void vaciarBaseDatos() {
