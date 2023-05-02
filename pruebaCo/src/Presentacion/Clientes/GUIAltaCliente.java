@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Main.Utils;
+import Negocio.Clientes.TClienteNormal;
 import Negocio.Clientes.TClientePremium;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -22,49 +23,48 @@ public class GUIAltaCliente extends JFrame implements GUI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	private JTextField tNombre,tDNI, ttlf, tApellido1, tApellido2;
+	private JButton premium, noPremium;
 	public GUIAltaCliente() {
-		setTitle("Alta Cliente");
 		JPanel panel=new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		
-		JLabel lNombre=new JLabel("Nombre:");
-		final JTextField tNombre= new JTextField(20);
+		JPanel Nombre = new JPanel();
+		Nombre.add(new JLabel("Nombre:"));
+		Nombre.add(tNombre=new JTextField(20));
 		
-		JLabel lApellido1 = new JLabel("Primer apellido");
-		final JTextField tApellido1=new JTextField(20);
+		JPanel Apellido1= new JPanel();
+		Apellido1.add( new JLabel("Primer apellido"));
+		Apellido1.add(tApellido1=new JTextField(20));
 		
-		JLabel lApellido2 = new JLabel("Segundo apellido");		
-		final JTextField tApellido2 = new JTextField(20);
+		JPanel Apellido2 = new JPanel();
+		Apellido2.add( new JLabel("Segundo apellido"));		
+		Apellido2.add(tApellido2=new JTextField(20));
 		
-		JLabel lDNI=new JLabel("DNI");
-		final JTextField tDNI=new JTextField(9);
+		JPanel DNI = new JPanel();
+		DNI.add( new JLabel("DNI"));
+		DNI.add(tDNI= new JTextField(20));
 		
-		JLabel ltlf=new JLabel("Tlf");
-		final JTextField ttlf=new JTextField(9);
+		JPanel tlf = new JPanel();
+		tlf.add( new JLabel("Tlf"));
+		tlf.add( ttlf=new JTextField(20));
 		
-		JButton premium=new JButton("Premium");
-		JButton no_premium=new JButton("No Premium");
+		JPanel tiempo=new JPanel();
+		tiempo.add(premium=		new JButton("Premium"));
+		tiempo.add( noPremium=new JButton("No Premium"));
 		JButton cancelar=new JButton("Cancelar");
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		JPanel texto=new JPanel();
-		JPanel botones=new JPanel();
 		
-		texto.add(lNombre);
-		texto.add(tNombre);
-		texto.add(lApellido1);
-		texto.add(tApellido1);
-		texto.add(lApellido2);
-		texto.add(tApellido2);
-		texto.add(lDNI);
-		texto.add(tDNI);
-		texto.add(ltlf);
-		texto.add(ttlf);
-		botones.add(premium);
-		botones.add(no_premium);
-		botones.add(cancelar);
-		panel.add(texto);
-		panel.add(botones);
+		panel.add(Nombre);
+		panel.add(Apellido1);
+		panel.add(Apellido2);
+		panel.add(DNI);
+		panel.add(tlf);
+		panel.add(tiempo);
+		panel.add(cancelar);
+		getContentPane().add(panel);
+		pack();
 		
 		getContentPane().add(panel);
 		pack();
@@ -88,6 +88,26 @@ public class GUIAltaCliente extends JFrame implements GUI{
 					
 				}
 		});
+		
+		noPremium.addActionListener(new ActionListener()
+		{ public void actionPerformed(ActionEvent e)
+			{		
+				setVisible(false);
+				try{
+					String nombre= tNombre.getText();
+					String apellido1=tApellido1.getText();
+					String apellido2=tApellido2.getText();
+					String DNI= tDNI.getText();
+					int tlf= Integer.parseInt (ttlf.getText ());
+					TClienteNormal tc= new TClienteNormal (true, apellido1, apellido2, DNI, -1, nombre, tlf, false);
+					Controlador.getInstancia().setGUI(GUIAltaCliente.this);
+					Controlador.getInstancia().accion(Evento.ALTA_CLIENTE, tc);	
+				}catch(Exception e1){
+					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
+				}
+				
+			}
+	});
 		
 		cancelar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)

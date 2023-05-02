@@ -41,12 +41,13 @@ import Negocio.Producto.TProducto;
 			//crear un producto y lo lee por id y por nombre
 			SAMarca saMarca=FactoriaNegocio.getInstance().generaSAMarca();
 			TMarca marca=new TMarca("Santi",0,0,true);
-			saMarca.create(marca);
+			int marcaID=saMarca.create(marca);
+			tPant.setIdMarca(marcaID);
 			aux1=saProducto.create(tPant);
 			assertEquals("No se ha creado un producto correctamente",1, aux1);
 			this.mockCollec.add(tPant);
 			TProducto h=this.saProducto.read(1);
-			// siguiendo las diapositivas yo creo que read y readByName no se les pasa un TProducto por eso lo he dejado asi
+
 			assertEquals("No se ha leido correctamente por id de producto", this.tPant.getNombre(), h.getNombre());
 			assertEquals("No se ha leido correctamente por id de producto", this.tPant.getIdProducto(), h.getIdProducto());
 			TProducto tPAux = this.saProducto.readByName("Pantalones azules");
@@ -54,22 +55,16 @@ import Negocio.Producto.TProducto;
 			assertEquals("No se ha leido correctamente por id de producto", tPAux.getIdProducto(), this.tPant.getIdProducto());
 			
 			//crear un Producto con el mismo nombre y mismo id de marca
-			tPAux= new TProducto("Pantalones azules", 1, 1,0,"M",0);
+			tPAux= new TProducto("Pantalones azules", 1, 1,0,"M",marcaID);
 			aux3 = saProducto.create(tPAux);
 			assertEquals("Se ha creado un producto con el mismo nombre", -1, aux3);
-			//id marca diferente por lo que no deberia dar error
-			/*marca=new TMarca("paco",0,0,1);
-			saMarca.create(marca);
-			tPAux= new TProducto("Pantalones azules", 0, 1,2,"M",1);
-			aux3 = saProducto.create(tPAux);
-			assertEquals("Ha fallado algo al crear un producto con el mismo nombre pero con id de marca diff", aux3, 2);
-			*/
 			
 			//crear un producto existente
 			aux1=saProducto.create(tPant);
 			assertEquals("Se ha creado un producto ya existente",aux1 ,-1);
 			
 			//crear un segunda producto y lo leer por id y por nombre
+			tCami.setIdMarca(marcaID);
 			aux2=saProducto.create(tCami);
 			assertEquals("No se ha podido crear una segunda marca", 2, aux2);
 			h= this.saProducto.read(2);

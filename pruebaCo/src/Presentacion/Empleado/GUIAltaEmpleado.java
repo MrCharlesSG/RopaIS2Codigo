@@ -3,6 +3,7 @@ package Presentacion.Empleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,42 +24,45 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JTextField tNombre,tDNI, ttlf, tApellido1, tApellido2;
+	private JButton tc, tp;
 	public GUIAltaEmpleado() {
 		setTitle("Alta Empleado");
 		JPanel panel=new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		
-		JLabel lNombre=new JLabel("Nombre:");
-		final JTextField tNombre= new JTextField(20);
+		JPanel Nombre = new JPanel();
+		Nombre.add(new JLabel("Nombre:"));
+		Nombre.add(tNombre=new JTextField(20));
 		
-		JLabel lApellido1 = new JLabel("Primer apellido");
-		final JTextField tApellido1=new JTextField(20);
+		JPanel Apellido1= new JPanel();
+		Apellido1.add( new JLabel("Primer apellido"));
+		Apellido1.add(tApellido1=new JTextField(20));
 		
-		JLabel lApellido2 = new JLabel("Segundo apellido");		
-		final JTextField tApellido2 = new JTextField(20);
+		JPanel Apellido2 = new JPanel();
+		Apellido2.add( new JLabel("Segundo apellido"));		
+		Apellido2.add(tApellido2=new JTextField(20));
 		
-		JLabel lDNI=new JLabel("DNI");
-		final JTextField tDNI=new JTextField(9);
+		JPanel DNI = new JPanel();
+		DNI.add( new JLabel("DNI"));
+		DNI.add(tDNI= new JTextField(20));
 		
-		JLabel ltlf=new JLabel("Tlf");
-		final JTextField ttlf=new JTextField(9);
+		JPanel tlf = new JPanel();
+		tlf.add( new JLabel("Tlf"));
+		tlf.add( ttlf=new JTextField(20));
 		
-		JButton tc=new JButton("Tiempo Completo");
-		JButton tp=new JButton("Tiempo Parcial");
+		JPanel tiempo=new JPanel();
+		tiempo.add(tc=		new JButton("Tiempo Completo"));
+		tiempo.add( tp=new JButton("Tiempo Parcial"));
 		JButton cancelar=new JButton("Cancelar");
 		
-		panel.add(lNombre);
-		panel.add(tNombre);
-		panel.add(lApellido1);
-		panel.add(tApellido1);
-		panel.add(lApellido2);
-		panel.add(tApellido2);
-		panel.add(lDNI);
-		panel.add(tDNI);
-		panel.add(ltlf);
-		panel.add(ttlf);
-		panel.add(tc);
-		panel.add(tp);
+		panel.add(Nombre);
+		panel.add(Apellido1);
+		panel.add(Apellido2);
+		panel.add(DNI);
+		panel.add(tlf);
+		panel.add(tiempo);
 		panel.add(cancelar);
 		getContentPane().add(panel);
 		pack();

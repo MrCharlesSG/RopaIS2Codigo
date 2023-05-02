@@ -100,7 +100,7 @@ public class SAMarcaImp implements SAMarca {
 		if(ComprobadorSintactico.isPositive(ID)){
 			TMarca leido=daoMarca.read(ID);	
 			
-			if(leido!=null&&leido.getActivo())
+			if(leido!=null&&leido.getActivo() && leido.getCantidad()>0)
 				id=daoMarca.delete(ID);// hay hay que mirar los argumentos ...S
 			}
 		

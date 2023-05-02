@@ -26,24 +26,26 @@ public class SAProductoIMP implements SAProducto{
 
 	@Override
 	public int create(TProducto Tprod) {
-		TProducto TprodAux;
+		TProducto aux;
 		int id=-1;
 		if(ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria())){
-			TprodAux = dao.readByName(Tprod.getNombre());
+			aux = dao.readByName(Tprod.getNombre());
 
 			TMarca tMarca = saMarca.read(Tprod.getIdMarca());
-			if(((TprodAux == null)||(coinciden(Tprod,TprodAux)&&TprodAux.getCantidad()==0))&& tMarca != null){	
-				id=dao.create(Tprod);
-				saMarca.actualizarCantidad(Tprod.getIdMarca(),true);
+			if(tMarca!=null) {
+				if(aux==null) {
+					id=dao.create(Tprod);
+					saMarca.actualizarCantidad(Tprod.getIdMarca(),true);
+				}else if(aux.getCantidad()==0 && aux.getTalla()==Tprod.getTalla() && 
+						Tprod.getCategoria().equals(aux.getCategoria())){
+					Tprod.setIdProducto(aux.getIdProducto());
+					id=dao.update(Tprod);
+				}
+				
+				
 			}
 		}
 		return id;
-	}
-	
-	
-
-	private boolean coinciden(TProducto tprod, TProducto tprodAux) {
-		return tprod.getCategoria().equalsIgnoreCase(tprodAux.getCategoria())&&tprod.getTalla()==tprodAux.getTalla();
 	}
 
 
@@ -54,7 +56,6 @@ public class SAProductoIMP implements SAProducto{
 			TProducto Tprod = read(id);
 			if(Tprod!=null){
 				ID=dao.delete(Tprod.getIdProducto());
-				saMarca.actualizarCantidad(Tprod.getIdMarca(),false);
 			}
 		}
 		return ID;

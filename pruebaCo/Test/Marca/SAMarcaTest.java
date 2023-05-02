@@ -84,13 +84,11 @@ public class SAMarcaTest {
 		
 		//eliminar las dos marcas creadas
 		aux1= saMarca.delete(1);
-		assertEquals("No se ha eliminado correctamente",aux1, 1);
+		assertEquals("No se ha eliminado correctamente",aux1, -1);
 		aux2 = saMarca.delete(2);
-		assertEquals("No se ha eliminado correctamente", aux2, 2);
+		assertEquals("No se ha eliminado correctamente", aux2, -1);
 		
-		//readAll de 0 marcas activas
-		readAllCollec=this.saMarca.readAll();
-		assertEquals(readAllCollec.size(), 0);
+
 		
 		//Añadir 5 marcas
 	/*	String nombre= "Manolo";
