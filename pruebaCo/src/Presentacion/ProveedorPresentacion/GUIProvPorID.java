@@ -88,7 +88,7 @@ public class GUIProvPorID extends JFrame implements GUI{
 			}
 			
 		});
-		this.setVisible(true);
+		this.setVisible(false);
 	}
 
 	@Override
@@ -163,5 +163,9 @@ public class GUIProvPorID extends JFrame implements GUI{
 		pack();
 		setVisible(true);
 	}
-		
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
+	}
 }

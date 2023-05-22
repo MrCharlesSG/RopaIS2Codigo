@@ -5,15 +5,20 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 
-public class IGUIMarca extends JPanel {//probablemente sea mejor hacerlo singleton o algo
+import Presentacion.Controlador.Evento;
+import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
+import Presentacion.FactoriaPresentacion.FactoriaPresentacionImp;
+import Presentacion.GUI.GUI;
+
+public class IGUIMarca extends JPanel implements GUI{//probablemente sea mejor hacerlo singleton o algo
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	public IGUIMarca(){
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -33,35 +38,42 @@ public class IGUIMarca extends JPanel {//probablemente sea mejor hacerlo singlet
 		altaMarca.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					
-					FactoriaPresentacion.getInstance().generaGUIAltaMarca();
+				
+				FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_MARCA);
 				}
 		});
 		bajaMarca.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					FactoriaPresentacion.getInstance().generaGUIBajaMarca();
+				FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_MARCA);
 			}
 		});
 		listarMarca.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUIListarMarcas();
+			FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_MARCAS);
 		}
 		});
 		modificarMarca.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUIModificarMarca();
+			FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_MARCA);
 		}
 		});
 		marcaPorID.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUIMarcaPorID();
+			FactoriaPresentacion.getInstance().generaGUI(Evento.MARCA_PORID);
 		}
 		});
 		
 	}
 
+	@Override
+	public void update(int evento, Object datos){};
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
+	}
 }

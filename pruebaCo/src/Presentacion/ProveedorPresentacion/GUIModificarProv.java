@@ -48,7 +48,7 @@ public class GUIModificarProv extends JFrame implements GUI{
 	}
 	
 	public void initGUI(){
-		setTitle("Alta Proveedor");
+		setTitle("Modificar Proveedor");
 		JPanel panel=new JPanel();
 		JLabel lID = new JLabel("ID: ");
 		JTextField tID= new JTextField(3);
@@ -107,7 +107,7 @@ public class GUIModificarProv extends JFrame implements GUI{
 				panelV.add(panelBotones, BorderLayout.SOUTH);
 				
 				ventana.add(panelV,BorderLayout.CENTER );
-				ventana.setVisible(true);
+				ventana.setVisible(false);
 			}
 
 		
@@ -161,7 +161,7 @@ public class GUIModificarProv extends JFrame implements GUI{
 		this.add(panel, BorderLayout.CENTER);
 		setPreferredSize(new Dimension(400, 400));
 		setResizable(false);
-		this.setVisible(true);
+		this.setVisible(false);
 		pack();
 	}
 
@@ -202,6 +202,11 @@ public class GUIModificarProv extends JFrame implements GUI{
 			modelo.addElement(dato.toString());
 		}
 		
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 
 }

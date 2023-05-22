@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JToolBar;
+
+import Presentacion.Controlador.Evento;
+
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -44,7 +47,7 @@ public class ControlPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.openView(0);
+				MainWindow.openView(Evento.Mostrar_GUI_MARCA);
 			}
 			
 		});
@@ -57,7 +60,7 @@ public class ControlPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.openView(1);
+				MainWindow.openView(Evento.Mostrar_GUI_PRODUCTOS);
 			}
 			
 		});
@@ -70,7 +73,7 @@ public class ControlPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.openView(2);
+				MainWindow.openView(Evento.Mostrar_GUI_PROVEEDORES);
 			}
 			
 		});
@@ -80,7 +83,14 @@ public class ControlPanel extends JPanel {
 		cliente = new JButton();
 		cliente.setToolTipText("abrir menú clientes");
 		cliente.setText("Clientes");
-		cliente.addActionListener((e) -> MainWindow.openView(3));
+		cliente.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.openView(Evento.Mostrar_GUI_CLIENTES);
+			}
+			
+		});
 		_toolBar.add(cliente);
 		
 		//boton abrir menu empleados

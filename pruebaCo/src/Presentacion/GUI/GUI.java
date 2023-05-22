@@ -18,4 +18,6 @@ public interface GUI {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void update(int evento, Object datos);
+
+	public void setGUIVisible(boolean b);
 }

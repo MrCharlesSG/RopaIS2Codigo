@@ -63,7 +63,7 @@ public class GUIBajaCliente extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
-		setVisible(true);
+		setVisible(false);
 		
 		}
 
@@ -77,5 +77,10 @@ public class GUIBajaCliente extends JFrame implements GUI{
 		JOptionPane.showMessageDialog(null, "No se pudo dar de baja el cliente");	
 	}
 		
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

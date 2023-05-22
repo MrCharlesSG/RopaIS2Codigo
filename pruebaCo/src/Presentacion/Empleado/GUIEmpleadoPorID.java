@@ -67,7 +67,7 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
-		setVisible(true);
+		setVisible(false);
 	}
 
 	@Override
@@ -148,4 +148,10 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 		setVisible(true);
 		
 	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
+	}
+	
 }

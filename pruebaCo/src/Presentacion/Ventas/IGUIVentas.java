@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import Presentacion.Controlador.Controlador;
+import Presentacion.Controlador.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 import Presentacion.GUI.GUI;
 
@@ -34,7 +35,7 @@ public class IGUIVentas extends JPanel implements GUI{
 		altaV.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){	
-				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIAltaVenta());
+				FactoriaPresentacion.getInstance().generaGUI(Evento.ABRIR_VENTA);
 				}
 		});
 		
@@ -42,7 +43,7 @@ public class IGUIVentas extends JPanel implements GUI{
 			{ 
 			public void actionPerformed(ActionEvent e){		
 					
-				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIDevolverVenta());
+				FactoriaPresentacion.getInstance().generaGUI(Evento.CERRAR_VENTA);
 				}
 		});
 		
@@ -50,26 +51,26 @@ public class IGUIVentas extends JPanel implements GUI{
 		{ 
 			public void actionPerformed(ActionEvent e){		
 				//este no usa el set Gui porque no tiene botones y directamente llama al controlador
-				FactoriaPresentacion.getInstance().generaGUIListarVentas();
+				FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_VENTAS);
 		}
 		});
 		ventaPorID.addActionListener(new ActionListener()
 		{ 
 			public void actionPerformed(ActionEvent e){		
 				
-				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIVentaPorID());
+				FactoriaPresentacion.getInstance().generaGUI(Evento.VENTA_POR_ID);
 			}
 		});
 		ventasPorEmpleados.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIVenta_Empleado());
+				FactoriaPresentacion.getInstance().generaGUI(Evento.VENTAS_DE_UN_EMPLEADO);
 			}
 		});
 		ventasPorCliente.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIVenta_Cliente());
+				FactoriaPresentacion.getInstance().generaGUI(Evento.VENTA_POR_ID);
 			}
 		});
 		
@@ -84,9 +85,11 @@ public class IGUIVentas extends JPanel implements GUI{
 	}
 
 	@Override
-	public void update(int evento, Object datos) {
-		// TODO Auto-generated method stub
-		
+	public void update(int evento, Object datos) {}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 
 }

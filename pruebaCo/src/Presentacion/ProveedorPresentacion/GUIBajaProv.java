@@ -36,7 +36,7 @@ public class GUIBajaProv extends JFrame implements GUI{
 	}
 
 	private void initGUI() {
-		this.setTitle("Baja Producto");
+		this.setTitle("Baja Proveedor");
 		JPanel jpanel=new JPanel();
 		JLabel jlabel=new JLabel("ID del Proveedor: ");
 		final JTextField jTextField=new JTextField(20);
@@ -71,12 +71,10 @@ public class GUIBajaProv extends JFrame implements GUI{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				//MainWindow.setGUIEvent(new JPanel());
 			}
 			
 		});
-		setVisible(true);
-		//MainWindow.setGUIEvent(jpanel);
+		setVisible(false);
 	}
 
 	@Override
@@ -92,5 +90,10 @@ public class GUIBajaProv extends JFrame implements GUI{
 			break;
 		}
 		}
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

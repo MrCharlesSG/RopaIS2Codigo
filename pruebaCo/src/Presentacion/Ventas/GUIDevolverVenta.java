@@ -78,7 +78,7 @@ public class GUIDevolverVenta extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
-		setVisible(true);
+		setVisible(false);
 	}
 
 	@Override
@@ -93,5 +93,10 @@ public class GUIDevolverVenta extends JFrame implements GUI{
 		JOptionPane.showMessageDialog(null, "No se ha podido devolver este producto");
 
 	}
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

@@ -9,9 +9,11 @@ package Presentacion.ProveedorPresentacion;
 
 
 import Presentacion.Controlador.Controlador;
+import Presentacion.Controlador.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
+import Presentacion.GUI.GUI;
 
-	public class IGUIProv extends JPanel {
+	public class IGUIProv extends JPanel implements GUI{
 		
 		/**
 		 * 
@@ -33,7 +35,7 @@ import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 			altaProv.addActionListener(new ActionListener()
 				{ 
 				public void actionPerformed(ActionEvent e){	
-					Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIAltaProveedor());
+					FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_PROVEEDOR);
 					}
 			});
 			
@@ -41,29 +43,28 @@ import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 				{ 
 				public void actionPerformed(ActionEvent e){		
 						
-					Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIBajaProveedor());
+					FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_PROVEEDOR);
 					}
 			});
 			
 			listarProv.addActionListener(new ActionListener()
 			{ 
 				public void actionPerformed(ActionEvent e){		
-					//este no usa el set Gui porque no tiene botones y directamente llama al controlador
-					FactoriaPresentacion.getInstance().generaGUIListarProveedor();
+					FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_PROVEEDORES);
 			}
 			});
 			modificarProv.addActionListener(new ActionListener()
 			{ 
 				public void actionPerformed(ActionEvent e){		
 					
-					Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIModificarProveedor());
+					FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_PROVEEDOR);
 				}
 			});
 			provPorID.addActionListener(new ActionListener()
 			{ 
 				public void actionPerformed(ActionEvent e){		
 					
-					Controlador.getInstancia().setGUI(FactoriaPresentacion.getInstance().generaGUIProveedorPorID());
+					FactoriaPresentacion.getInstance().generaGUI(Evento.PROVEEDOR_POR_ID);
 				}
 			});
 			
@@ -73,6 +74,17 @@ import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 			this.add(modificarProv);
 			this.add(provPorID);
 			this.setVisible(false);
+		}
+
+		@Override
+		public void update(int evento, Object datos) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void setGUIVisible(boolean b) {
+			this.setVisible(b);
 		}
 		
 

@@ -27,6 +27,7 @@ public class GUIAltaCliente extends JFrame implements GUI{
 	private JTextField tNombre,tDNI, ttlf, tApellido1, tApellido2;
 	private JButton premium, noPremium;
 	public GUIAltaCliente() {
+	this.setTitle("AltaCliente");{
 		JPanel panel=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
@@ -100,8 +101,11 @@ public class GUIAltaCliente extends JFrame implements GUI{
 					String DNI= tDNI.getText();
 					int tlf= Integer.parseInt (ttlf.getText ());
 					TClienteNormal tc= new TClienteNormal (true, apellido1, apellido2, DNI, -1, nombre, tlf, false);
+					
 					Controlador.getInstancia().setGUI(GUIAltaCliente.this);
 					Controlador.getInstancia().accion(Evento.ALTA_CLIENTE, tc);	
+					
+					
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 				}
@@ -115,8 +119,9 @@ public class GUIAltaCliente extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
-		this.setVisible(true);
+		this.setVisible(false);
 	}
+}
 
 	@Override
 	public void update(int evento, Object datos) {
@@ -129,5 +134,10 @@ public class GUIAltaCliente extends JFrame implements GUI{
 		JOptionPane.showMessageDialog(null, "No se pudo dar de alta el cliente"); 
 		}
 		
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

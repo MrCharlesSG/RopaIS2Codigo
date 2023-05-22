@@ -4,9 +4,10 @@ public class Evento {
 	//GUI_Modulo
 	public static final int Mostrar_GUI_MARCA = 0;
 	public static final int Mostrar_GUI_PRODUCTOS = 1;
-	public static final int Mostrar_GUI_PROVEEDORES = 3;
-	public static final int Mostrar_GUI_CLIENTES=4;
-	public static final int Mostrar_GUI_VENTAS=7;
+	public static final int Mostrar_GUI_PROVEEDORES = 2;
+	public static final int Mostrar_GUI_CLIENTES=3;
+	public static final int Mostrar_GUI_EMPLEADOS = 4;
+	public static final int Mostrar_GUI_VENTAS=5;
 	
 	//Respuestas
 	public static final int KO = 10;

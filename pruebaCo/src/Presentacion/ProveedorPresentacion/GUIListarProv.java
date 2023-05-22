@@ -97,7 +97,7 @@ public class GUIListarProv extends JFrame implements GUI{
 		panel.add(cerrar);
 		getContentPane().add(panel);
 		pack();
-		setVisible(true);
+		setVisible(false);
 	}
 
 	@Override
@@ -111,5 +111,10 @@ public class GUIListarProv extends JFrame implements GUI{
 			this.listaProveedores((ArrayList<TProveedor>)datos);
 		}
 		}
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

@@ -8,9 +8,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Presentacion.Controlador.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
+import Presentacion.GUI.GUI;
 
-public class IGUICliente extends JPanel{
+public class IGUICliente extends JPanel implements GUI{
 	/**
 	 * 
 	 */
@@ -36,34 +38,42 @@ public class IGUICliente extends JPanel{
 			{ public void actionPerformed(ActionEvent e)
 				{		
 					
-					FactoriaPresentacion.getInstance().generaGUIAltaCliente();
+					FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_CLIENTE);
 				}
 		});
 		bajaCliente.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					FactoriaPresentacion.getInstance().generaGUIBajaCliente();
+				FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_CLIENTE);
 			}
 		});
 		listarCliente.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUIListarCliente();
+			FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_CLIENTES);
 		}
 		});
 		modificarCliente.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{	
-				FactoriaPresentacion.getInstance().generaGUIModificarCliente();
+			FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_CLIENTE);
 		}
 		});
 		clientePorID.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUIClientePorID();
+			FactoriaPresentacion.getInstance().generaGUI(Evento.CLIENTE_POR_ID);
 		}
 		});
 		
+	}
+
+	@Override
+	public void update(int evento, Object datos) {}
+
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }
 

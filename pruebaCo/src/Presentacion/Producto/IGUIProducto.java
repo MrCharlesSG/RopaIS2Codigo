@@ -6,9 +6,12 @@ package Presentacion.Producto;
 	import javax.swing.BoxLayout;
 	import javax.swing.JButton;
 	import javax.swing.JPanel;
-import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 
-	public class IGUIProducto extends JPanel {//probablemente sea mejor hacerlo singleton o algo
+import Presentacion.Controlador.Evento;
+import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
+import Presentacion.GUI.GUI;
+
+	public class IGUIProducto extends JPanel implements GUI{//probablemente sea mejor hacerlo singleton o algo
 		
 		/**
 		 * 
@@ -35,37 +38,50 @@ import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 				{ 
 				public void actionPerformed(ActionEvent e)
 					{		
-						FactoriaPresentacion.getInstance().generaGUIAltaProducto().setVisible(true);
+						FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_PRODUCTO);
 					}
 			});
 			
 			bajaProducto.addActionListener(new ActionListener()
 				{ public void actionPerformed(ActionEvent e)
 					{		
-						FactoriaPresentacion.getInstance().generaGUIBajaProducto().setVisible(true);
+						FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_PRODUCTO);
 				}
 			});
 			
 			listarProducto.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					FactoriaPresentacion.getInstance().generaGUIListarProducto().setVisible(true);
+					FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_PRODUCTOS);
 			}
 			});
 			modificarProducto.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					FactoriaPresentacion.getInstance().generaGUIModificarProducto().setVisible(true);
+					FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_PRODUCTO);
 			}
 			});
 			productoPorID.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					FactoriaPresentacion.getInstance().generaGUIProductoPorID().setVisible(true);
+					FactoriaPresentacion.getInstance().generaGUI(Evento.PRODUCTO_POR_ID);
 			}
 			});
 			
 		}
+
+		@Override
+		public void update(int evento, Object datos) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void setGUIVisible(boolean b) {
+			this.setVisible(b);
+		}
+		
+		
 
 	}
 	

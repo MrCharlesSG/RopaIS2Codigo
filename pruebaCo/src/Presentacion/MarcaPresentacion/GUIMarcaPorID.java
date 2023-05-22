@@ -25,6 +25,7 @@ import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.FactoriaPresentacion.FactoriaPresentacionImp;
 import Presentacion.GUI.GUI;
 
 /** 
@@ -88,7 +89,7 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 					setVisible(false);
 			}
 		});
-		setVisible(true);
+		setVisible(false);
 	}
 
 	@Override
@@ -161,5 +162,10 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 		getContentPane().add(panel);
 		pack();
 		setVisible(true);
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

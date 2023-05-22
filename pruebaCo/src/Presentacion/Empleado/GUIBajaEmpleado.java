@@ -56,7 +56,7 @@ public class GUIBajaEmpleado extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
-		setVisible(true);
+		setVisible(false);
 		
 		}
 
@@ -71,4 +71,10 @@ public class GUIBajaEmpleado extends JFrame implements GUI{
 	}
 		
 	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
+	}
+	
 }

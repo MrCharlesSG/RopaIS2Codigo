@@ -88,4 +88,9 @@ public class GUIBajaProducto extends JFrame implements GUI{
 			break; 
 		}
 	}
+
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
+	}
 }

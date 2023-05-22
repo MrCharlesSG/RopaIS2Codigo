@@ -164,4 +164,10 @@ public class GUIProductoPorID extends JFrame implements GUI{
 		pack();
 		setVisible(true);
 	}
+	
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
+	}
 }

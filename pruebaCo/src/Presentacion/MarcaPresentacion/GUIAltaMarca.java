@@ -6,13 +6,20 @@ package Presentacion.MarcaPresentacion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
+import Presentacion.FactoriaPresentacion.FactoriaPresentacionImp;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -73,7 +80,7 @@ public class GUIAltaMarca extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
-		this.setVisible(true);
+		this.setVisible(false);
 	}
 
 	@Override
@@ -88,4 +95,11 @@ public class GUIAltaMarca extends JFrame implements GUI{
 		}
 		
 	}
+
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
+	}
+	
+	
 }

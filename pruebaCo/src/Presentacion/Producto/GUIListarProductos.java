@@ -114,6 +114,11 @@ public class GUIListarProductos extends JFrame implements GUI{
 		panel.add(cerrar);
 		getContentPane().add(panel);
 		pack();
-		setVisible(true);
+		setVisible(false);
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

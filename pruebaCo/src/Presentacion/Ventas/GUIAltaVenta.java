@@ -79,7 +79,7 @@ public class GUIAltaVenta extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
-		setVisible(true);
+		setVisible(false);
 	}
 
 	@Override
@@ -109,5 +109,10 @@ public class GUIAltaVenta extends JFrame implements GUI{
 		JOptionPane.showMessageDialog(null,"No se han añadido correctamente los productos seleccionados en el carrito");
 	}
 	
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

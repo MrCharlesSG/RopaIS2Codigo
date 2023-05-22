@@ -2,13 +2,16 @@ package Main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Presentacion.Controlador.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
+import Presentacion.GUI.GUI;
 
 public class MainWindow extends JPanel{
 	
@@ -20,12 +23,22 @@ public class MainWindow extends JPanel{
 		private static JFrame main;
 		private static JPanel infoPanel;
 		private static JPanel eventPanel;
-		private static List<JPanel> listaIGguis;
+		private static List<JPanel> listaIGuis;
 		
 		
 		public MainWindow(){
-			listaIGguis= FactoriaPresentacion.getInstance().getIGUIs();
+			setListIGUIS();
 			initGUI();
+		}
+
+		private void setListIGUIS() {
+			listaIGuis = new ArrayList<JPanel>();
+			listaIGuis.add((JPanel) FactoriaPresentacion.getInstance().generaGUI(Evento.Mostrar_GUI_MARCA));
+			listaIGuis.add((JPanel) FactoriaPresentacion.getInstance().generaGUI(Evento.Mostrar_GUI_PRODUCTOS));
+			listaIGuis.add((JPanel) FactoriaPresentacion.getInstance().generaGUI(Evento.Mostrar_GUI_PROVEEDORES));
+			listaIGuis.add((JPanel) FactoriaPresentacion.getInstance().generaGUI(Evento.Mostrar_GUI_CLIENTES));
+			listaIGuis.add((JPanel) FactoriaPresentacion.getInstance().generaGUI(Evento.Mostrar_GUI_EMPLEADOS));
+			listaIGuis.add((JPanel) FactoriaPresentacion.getInstance().generaGUI(Evento.Mostrar_GUI_VENTAS));
 		}
 
 		private static void initGUI() {
@@ -60,17 +73,18 @@ public class MainWindow extends JPanel{
 		
 		static void openView(int num){
 			
-			for(int i=0; i<listaIGguis.size(); i++) {
+			for(int i=0; i<listaIGuis.size(); i++) {
 				if(num==i)
-					listaIGguis.get(i).setVisible(true);
+					listaIGuis.get(i).setVisible(true);
 				else
-					listaIGguis.get(i).setVisible(false);
+					listaIGuis.get(i).setVisible(false);
 			}
 			
 		}
 		
 		private static void setOptions(JPanel options) {
-			for(JPanel p:listaIGguis) {
+			for(JPanel p:listaIGuis) {
+				p.setVisible(false);
 				options.add(p);
 			}
 		}

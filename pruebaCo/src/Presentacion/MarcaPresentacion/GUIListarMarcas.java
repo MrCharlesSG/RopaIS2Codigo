@@ -24,6 +24,7 @@ import javax.swing.table.TableColumn;
 import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.FactoriaPresentacion.FactoriaPresentacionImp;
 import Presentacion.GUI.GUI;
 
 /** 
@@ -90,7 +91,6 @@ public class GUIListarMarcas extends JFrame implements GUI{
 			_dataTableModel.setValueAt(m.getCantidad(), i, 2);
 			_dataTableModel.setValueAt(m.getActivo(), i, 3);
 			i++;
-	
 		}
 		JTable dataTable = new JTable(_dataTableModel) {
 			private static final long serialVersionUID = 1L;
@@ -109,10 +109,14 @@ public class GUIListarMarcas extends JFrame implements GUI{
 		JScrollPane tabelScroll = new JScrollPane(dataTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(tabelScroll);
-
 		panel.add(cerrar);
 		getContentPane().add(panel);
 		pack();
-		setVisible(true);
+		setVisible(false);
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

@@ -7,9 +7,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Presentacion.Controlador.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
+import Presentacion.GUI.GUI;
 
-public class IGUIEmpleado extends JPanel{
+public class IGUIEmpleado extends JPanel implements GUI{
 	/**
 	 * 
 	 */
@@ -34,34 +36,44 @@ public class IGUIEmpleado extends JPanel{
 		{ public void actionPerformed(ActionEvent e)
 			{		
 				
-				FactoriaPresentacion.getInstance().generaGUIAltaEmpleado();
+				FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_EMPLEADO);
 			}
 	});
 	bajaEmpleado.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUIBajaEmpleado();
+				FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_EMPLEADO);
 		}
 	});
 	listarEmpleado.addActionListener(new ActionListener()
 	{ public void actionPerformed(ActionEvent e)
 		{		
-			FactoriaPresentacion.getInstance().generaGUIListarEmpleado();
+			FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_EMPLEADO);
 	}
 	});
 	modificarEmpleado.addActionListener(new ActionListener()
 	{ public void actionPerformed(ActionEvent e)
 		{	
-			FactoriaPresentacion.getInstance().generaGUIModificarEmpleado();
+			FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_EMPLEADO);
 	}
 	});
 	empleadoPorID.addActionListener(new ActionListener()
 	{ public void actionPerformed(ActionEvent e)
 		{		
-			FactoriaPresentacion.getInstance().generaGUIEmpleadoPorID();
+			FactoriaPresentacion.getInstance().generaGUI(Evento.EMPLEADO_POR_ID);
 	}
 	});
 	
 	}
 
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
+	}
+
+
+	@Override
+	public void update(int evento, Object datos) {}
+	
 }

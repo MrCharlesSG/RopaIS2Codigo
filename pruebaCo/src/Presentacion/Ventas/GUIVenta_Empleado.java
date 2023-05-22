@@ -75,7 +75,7 @@ public class GUIVenta_Empleado extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
-		setVisible(true);
+		setVisible(false);
 	}
 
 	@Override
@@ -150,5 +150,10 @@ public class GUIVenta_Empleado extends JFrame implements GUI{
 		this.setContentPane(panel);
 		pack();
 		setVisible(true);
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

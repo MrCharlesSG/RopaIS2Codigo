@@ -36,7 +36,7 @@ public class GUIAltaProv extends JFrame implements GUI{
 		marcas = new ArrayList<Integer>();
 		modelo = new DefaultListModel<>();
 		initGUI();	
-		setVisible(true);
+		setVisible(false);
 	}
 	
 	private void initGUI(){
@@ -102,7 +102,7 @@ public class GUIAltaProv extends JFrame implements GUI{
 				panelV.add(panelBotones, BorderLayout.SOUTH);
 				
 				ventana.add(panelV,BorderLayout.CENTER );
-				ventana.setVisible(true);
+				ventana.setVisible(false);
 			}
 
 		
@@ -195,5 +195,10 @@ public class GUIAltaProv extends JFrame implements GUI{
 			modelo.addElement(dato.toString());
 		}
 		
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

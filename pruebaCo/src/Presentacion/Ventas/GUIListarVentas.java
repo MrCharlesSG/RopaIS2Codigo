@@ -107,6 +107,11 @@ public class GUIListarVentas extends JFrame implements GUI{
 		panel.add(cerrar);
 		this.setContentPane(panel);
 		pack();
-		setVisible(true);
+		setVisible(false);
+	}
+	
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }

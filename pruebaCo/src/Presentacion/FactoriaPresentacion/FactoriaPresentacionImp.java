@@ -3,12 +3,16 @@
  */
 package Presentacion.FactoriaPresentacion;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import Presentacion.Clientes.GUIAltaCliente;
 import Presentacion.Clientes.GUIBajaCliente;
 import Presentacion.Clientes.GUIClientePorID;
 import Presentacion.Clientes.GUIListarClientes;
 import Presentacion.Clientes.GUIModificarCliente;
 import Presentacion.Clientes.IGUICliente;
+import Presentacion.Controlador.Evento;
 import Presentacion.Empleado.GUIAltaEmpleado;
 import Presentacion.Empleado.GUIBajaEmpleado;
 import Presentacion.Empleado.GUIEmpleadoPorID;
@@ -55,183 +59,83 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	
-	/*
-	 * GUI MARCA 
-	*/
-	//lo más probable es que no sea así pero bueno lo dejo hecho
-	public GUIAltaMarca generaGUIAltaMarca() {
-		return new GUIAltaMarca();
-	}
-	public GUIBajaMarca generaGUIBajaMarca() {
-		return new GUIBajaMarca();
-	}
-	public GUIListarMarcas generaGUIListarMarcas() {
-		return new GUIListarMarcas();
-	}
-	public GUIMarcaPorID generaGUIMarcaPorID() {
-		return new GUIMarcaPorID();
-	}
-	public GUIModificarMarca generaGUIModificarMarca() {
-		return new GUIModificarMarca();
-	}
-	@Override
-	public IGUIMarca generaIGUIMarca() {
-		return new IGUIMarca();
-	}
-	@Override
-	public void generaGUI() {
-		// TODO Auto-generated method stub
+	private static final Map<Integer, GUI> map = new HashMap<Integer, GUI>();
+	
+	FactoriaPresentacionImp(){
+		/*
+		 * MARCAS
+		 */
+		map.put(Evento.Mostrar_GUI_MARCA, new IGUIMarca());
+		map.put(Evento.ALTA_MARCA, new GUIAltaMarca());
+		map.put(Evento.BAJA_MARCA, new GUIBajaMarca());
+		map.put(Evento.LISTAR_MARCAS, new GUIListarMarcas());
+		map.put(Evento.MODIFICAR_MARCA, new GUIModificarMarca());
+		map.put(Evento.MARCA_PORID, new GUIMarcaPorID());
 		
+		/*
+		 * PRODUCTOS
+		 */
+		map.put(Evento.Mostrar_GUI_PRODUCTOS, new IGUIProducto());
+		map.put(Evento.ALTA_PRODUCTO, new GUIAltaProducto());
+		map.put(Evento.BAJA_PRODUCTO, new GUIBajaProducto());
+		map.put(Evento.LISTAR_PRODUCTOS, new GUIListarProductos());
+		map.put(Evento.MODIFICAR_PRODUCTO, new GUIModificarProducto());
+		map.put(Evento.PRODUCTO_POR_ID, new GUIProductoPorID());
+		
+		/*
+		 * PROVEEDORES
+		 */
+		
+		map.put(Evento.Mostrar_GUI_PROVEEDORES, new IGUIProv());
+		map.put(Evento.ALTA_PROVEEDOR, new GUIAltaProv());
+		map.put(Evento.BAJA_PROVEEDOR, new GUIBajaProv());
+		map.put(Evento.LISTAR_PROVEEDORES, new GUIListarProv());
+		map.put(Evento.MODIFICAR_PROVEEDOR, new GUIModificarProv());
+		map.put(Evento.PROVEEDOR_POR_ID, new GUIProvPorID());
+		
+		/*
+		 * CLIENTES
+		 */
+		
+		map.put(Evento.Mostrar_GUI_CLIENTES, new IGUICliente());
+		map.put(Evento.ALTA_CLIENTE, new GUIAltaCliente());
+		map.put(Evento.BAJA_CLIENTE, new GUIBajaCliente());
+		map.put(Evento.LISTAR_CLIENTES, new GUIListarClientes());
+		map.put(Evento.MODIFICAR_CLIENTE, new GUIModificarCliente());
+		map.put(Evento.CLIENTE_POR_ID, new GUIClientePorID());
+		
+		/*
+		 * EMPLEADOS
+		 */
+		
+		map.put(Evento.Mostrar_GUI_EMPLEADOS, new IGUIEmpleado());
+		map.put(Evento.ALTA_EMPLEADO, new GUIAltaEmpleado());
+		map.put(Evento.BAJA_EMPLEADO, new GUIBajaEmpleado());
+		map.put(Evento.LISTAR_EMPLEADO, new GUIListarEmpleados());
+		map.put(Evento.MODIFICAR_EMPLEADO, new GUIModificarEmpleado());
+		map.put(Evento.EMPLEADO_POR_ID, new GUIEmpleadoPorID());
+		
+		/*
+		 * VENTAS
+		 */
+		
+		map.put(Evento.Mostrar_GUI_VENTAS, new IGUIVentas());
+		map.put(Evento.ABRIR_VENTA, new GUIAltaVenta());
+		map.put(Evento.CERRAR_VENTA, new GUIDevolverVenta());
+		map.put(Evento.LISTAR_VENTAS, new GUIListarVentas());
+		map.put(Evento.VENTAS_DE_UN_CLIENTE, new GUIVenta_Cliente());
+		map.put(Evento.VENTAS_DE_UN_EMPLEADO, new GUIVenta_Empleado());
+		map.put(Evento.VENTA_POR_ID, new GUIVentaPorID());
 	}
 	
-	/*
-	 * GUI PRODUCTOS
-	*/
 	@Override
-	public GUIAltaProducto generaGUIAltaProducto() {
-		return new GUIAltaProducto();
+	public GUI generaGUI(Integer num) {
+		if(map.containsKey(num)){
+			GUI window = map.get(num);
+			window.setGUIVisible(true);
+			return window;
+		}
+		else
+			return null;
 	}
-	@Override
-	public GUIBajaProducto generaGUIBajaProducto() {
-		return new GUIBajaProducto();
-	}
-	@Override
-	public GUIListarProductos generaGUIListarProducto() {
-		return new GUIListarProductos();
-	}
-	@Override
-	public GUIProductoPorID generaGUIProductoPorID() {
-		return new GUIProductoPorID();
-	}
-	@Override
-	public GUIModificarProducto generaGUIModificarProducto() {
-		return new GUIModificarProducto();
-	}
-	
-	@Override
-	public IGUIProducto generaIGUIProducto() {
-		return new IGUIProducto();
-	}
-
-	/*
-	 * PROVEEDOR
-	 */
-	@Override
-	public IGUIProv generaIGUIProveedores() {
-		return new IGUIProv();
-	}
-	
-	@Override
-	public GUIAltaProv generaGUIAltaProveedor() {
-		return new GUIAltaProv();
-	}
-
-	@Override
-	public GUI generaGUIBajaProveedor() {
-		return new GUIBajaProv();
-	}
-
-	@Override
-	public GUI generaGUIListarProveedor() {
-		return new GUIListarProv();
-	}
-
-	@Override
-	public GUI generaGUIProveedorPorID() {
-		return new GUIProvPorID();
-	}
-
-	@Override
-	public GUI generaGUIModificarProveedor() {
-		return new GUIModificarProv();
-	}
-	
-	/*
-	 * CLIENTES
-	 */
-	@Override
-	public GUIAltaCliente generaGUIAltaCliente() {
-		return new GUIAltaCliente();
-	}
-	@Override
-	public GUIBajaCliente generaGUIBajaCliente() {
-		return new GUIBajaCliente();
-	}
-	@Override
-	public GUIListarClientes generaGUIListarCliente() {
-		return new GUIListarClientes();
-	}
-	@Override
-	public GUIClientePorID generaGUIClientePorID() {
-		return new GUIClientePorID();
-	}
-	@Override
-	public GUIModificarCliente generaGUIModificarCliente() {
-		return new GUIModificarCliente();
-	}
-	@Override
-	public IGUICliente generaIGUICliente() {
-		return new IGUICliente();
-	}
-	/*
-	 * EMPLEADOS
-	 */
-	@Override
-	public IGUIEmpleado generaIGUIEmpleado() {
-		return new IGUIEmpleado();
-	}
-	@Override
-	public GUIAltaEmpleado generaGUIAltaEmpleado() {
-		// TODO Auto-generated method stub
-		return new GUIAltaEmpleado();
-	}
-	@Override
-	public GUIBajaEmpleado generaGUIBajaEmpleado() {
-		return new GUIBajaEmpleado();
-	}
-	@Override
-	public GUIListarEmpleados generaGUIListarEmpleado() {
-		return new GUIListarEmpleados();
-	}
-	@Override
-	public GUIEmpleadoPorID generaGUIEmpleadoPorID() {
-		return new GUIEmpleadoPorID();
-	}
-	@Override
-	public GUIModificarEmpleado generaGUIModificarEmpleado() {
-		return new GUIModificarEmpleado();
-	}
-	/*
-	 * VENTAS
-	 */
-	@Override
-	public IGUIVentas generaIGUIVenta() {
-		return new IGUIVentas();
-	}
-	@Override
-	public GUIVenta_Empleado generaGUIVenta_Empleado() {
-		return new GUIVenta_Empleado();
-	}
-	@Override
-	public GUIVenta_Cliente generaGUIVenta_Cliente() {
-		return new GUIVenta_Cliente();
-	}
-	@Override
-	public GUIAltaVenta generaGUIAltaVenta() {
-		return new GUIAltaVenta();
-	}
-	@Override
-	public GUIDevolverVenta generaGUIDevolverVenta() {
-		return new GUIDevolverVenta();
-	}
-	@Override
-	public GUIListarVentas generaGUIListarVentas() {
-		return new GUIListarVentas();
-	}
-	@Override
-	public GUIVentaPorID generaGUIVentaPorID() {
-		return new GUIVentaPorID();
-	}
-
-
 }

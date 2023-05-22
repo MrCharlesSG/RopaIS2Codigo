@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import Main.Utils;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
+import Presentacion.FactoriaPresentacion.FactoriaPresentacionImp;
 import Presentacion.GUI.GUI;
 
 /** 
@@ -78,7 +79,7 @@ public class GUIBajaMarca extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
-		setVisible(true);
+		setVisible(false);
 		
 		}
 
@@ -92,5 +93,9 @@ public class GUIBajaMarca extends JFrame implements GUI{
 		Utils.showCorrectMsg( "No se pudo dar de baja la marca");	
 	}
 		
+	}
+	@Override
+	public void setGUIVisible(boolean b) {
+		this.setVisible(b);
 	}
 }
