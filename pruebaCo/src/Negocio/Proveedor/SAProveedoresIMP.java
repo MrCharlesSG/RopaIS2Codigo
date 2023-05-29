@@ -5,14 +5,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
+import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.Proveedores.DAOProveedores;
 import Negocio.ComprobadorSintactico;
+import Negocio.FactoriaNegocio.FactoriaNegocio;
+import Negocio.MarcaNegocio.SAMarca;
+import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 
 
 
 public class SAProveedoresIMP implements SAProveedores{
 
+	private SAMarca saMarca =FactoriaNegocio.getInstance().generaSAMarca();
+	
 	public int create(TProveedor tProv){
 		int id=-1;
 		
@@ -93,5 +99,17 @@ public class SAProveedoresIMP implements SAProveedores{
 		}
 		
 		
+	}
+	
+	public Collection<TProveedor> readByMarca(int id){
+		TProveedor prov = null;
+		TMarca marca = null;
+		if(ComprobadorSintactico.isPositive(id))
+			marca = saMarca.read(id);
+		if(marca != null && marca.getActivo()){
+			return FactoriaIntegracion.getInstance().generaDAOProveedor().readByMarca(id);
+		}else{
+			return null;
+		}
 	}
 }

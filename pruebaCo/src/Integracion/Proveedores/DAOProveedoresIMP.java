@@ -254,6 +254,35 @@ public class DAOProveedoresIMP implements DAOProveedores{
 			}
 		}
 	}
+
+	@Override
+	public Collection<TProveedor> readByMarca(int id) {
+		File file=new File(ARCHIVO);
+		Collection<TProveedor> provs=new ArrayList<TProveedor>();
+		String datos[];
+		boolean found = false;
+		try(Scanner scanner=new Scanner(file)) {//bufferreader
+			
+			while(scanner.hasNext()) {
+				
+				datos=scanner.nextLine().split(":");
+				ArrayList<Integer> lista= new ArrayList<Integer>();
+				for(int i=3; i<datos.length; i++){
+					if(Integer.parseInt(datos[i]) == id)
+						found = true;
+					lista.add(Integer.parseInt(datos[i]));
+				}
+				if(found){
+				provs.add( new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, Boolean.parseBoolean(datos[2] )));
+				}
+				found = false;
+			}
+			return provs;
+			
+		}catch (IOException e) {
+			return null;
+		}
+	}
 	
 
 }

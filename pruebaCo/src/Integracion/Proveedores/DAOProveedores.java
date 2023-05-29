@@ -16,4 +16,5 @@ public interface DAOProveedores {
     public Collection<TProveedor> readAll();
     public int update(TProveedor tProv);
     public TProveedor readByName(String nombre);
+	public Collection<TProveedor> readByMarca(int id);
 }
