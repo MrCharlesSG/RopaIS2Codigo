@@ -32,6 +32,8 @@ public class GUIAltaProducto extends JFrame implements GUI{
 	
 	private final JTextField tIDMarca;
 	
+	private final JTextField tPrecio;
+	
 	private JButton aceptar;
 	private JButton cancelar;
 
@@ -56,6 +58,10 @@ public class GUIAltaProducto extends JFrame implements GUI{
 		cant.add(new JLabel("Cantidad:"));
 		cant.add(tCant= new JTextField(20));
 		
+		JPanel precio = new JPanel();
+		precio.add(new JLabel("Precio"));
+		precio.add(tPrecio = new JTextField(20));
+		
 		JPanel IdMarca = new JPanel();
 		IdMarca.add(new JLabel("IDMarca:"));
 		IdMarca.add(tIDMarca= new JTextField(20));
@@ -69,6 +75,7 @@ public class GUIAltaProducto extends JFrame implements GUI{
 		panel.add(cat);
 		panel.add(cant);
 		panel.add(IdMarca);
+		panel.add(precio);
 		panel.add(okKo);
 		this.getContentPane().add(panel);
 		this.pack();
@@ -83,8 +90,12 @@ public class GUIAltaProducto extends JFrame implements GUI{
 						String cat = tCat.getText();
 						String cant = tCant.getText();
 						String IDMarca = tIDMarca.getText();
+						String precio = tPrecio.getText();
+						
 						//nombre: id: cantidad: talla: categoria: idMarca:
-						TProducto tP= new TProducto (nombre, Integer.parseInt(cant), Integer.parseInt(talla), -1, cat, Integer.parseInt(IDMarca));;
+						TProducto tP= new TProducto (nombre, Integer.parseInt(cant), Integer.parseInt(talla), -1, cat,
+								Integer.parseInt(IDMarca), Double.parseDouble(precio));;
+								
 						Controlador.getInstancia().setGUI(GUIAltaProducto.this);
 						Controlador.getInstancia().accion(Evento.ALTA_PRODUCTO, tP);
 					}catch(Exception e1){
@@ -118,6 +129,18 @@ public class GUIAltaProducto extends JFrame implements GUI{
 
 	@Override
 	public void setGUIVisible(boolean b) {
+		tPrecio.setText("");
+		tPrecio.repaint();
+		tNombre.setText("");
+		tNombre.repaint();
+		tTalla.setText("");
+		tTalla.repaint();
+		tCat.setText("");
+		tCat.repaint();
+		tCant.setText("");
+		tCant.repaint();
+		tIDMarca.setText("");
+		tIDMarca.repaint();
 		this.setVisible(b);
 	}
 }

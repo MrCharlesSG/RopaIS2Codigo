@@ -58,6 +58,9 @@ public class GUIModificarProducto extends JFrame implements GUI{
 	private JButton aceptar;
 	private JButton cancelar;
 	
+	private JPanel precio;
+	private JFormattedTextField precioT;
+	
 	private static final Dimension DIM = new Dimension(220, 20);
 	
 	public GUIModificarProducto(){
@@ -109,6 +112,13 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		categoria.add((categoriaT = new JTextField(20)));
 		jpanel.add(categoria);
 		
+		precio = new JPanel();
+		precio.add((new JLabel("Precio: ")));
+		precio.add((precioT = new JFormattedTextField(numberFormatter)));
+		precioT.setMaximumSize(DIM);
+		precioT.setMinimumSize(DIM);
+		precioT.setPreferredSize(DIM);
+		
 		idMarca = new JPanel();
 		idMarca.add((new JLabel("idMarca: ")));
 		idMarca.add((idMarcaT = new JFormattedTextField(numberFormatter)));
@@ -134,7 +144,8 @@ public class GUIModificarProducto extends JFrame implements GUI{
 					Controlador.getInstancia().setGUI(GUIModificarProducto.this);
 					Controlador.getInstancia().accion(Evento.MODIFICAR_PRODUCTO, new TProducto(
 							nombreT.getText(), Integer.parseInt(cantidadT.getText()), Integer.parseInt(tallaT.getText()),
-							Integer.parseInt(idT.getText()) ,categoriaT.getText(), Integer.parseInt(idMarcaT.getText())));
+							Integer.parseInt(idT.getText()) ,categoriaT.getText(),
+							Integer.parseInt(idMarcaT.getText()), Double.parseDouble(precioT.getText())));
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 				}

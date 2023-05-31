@@ -54,7 +54,7 @@ public class GUIBajaProducto extends JFrame implements GUI{
 				setVisible(false);
 				try{
 					String id=jTextField.getText();
-					TProducto tprod =new TProducto(null, -1, -1, Integer.parseInt(id), null, -1);
+					TProducto tprod =new TProducto(null, -1, -1, Integer.parseInt(id), null, -1, -1);
 					Controlador.getInstancia().setGUI(GUIBajaProducto.this);
 					Controlador.getInstancia().accion(Evento.BAJA_PRODUCTO, tprod);
 				}catch(Exception e1){

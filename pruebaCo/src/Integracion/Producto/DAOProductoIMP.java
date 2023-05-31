@@ -22,9 +22,15 @@ public class DAOProductoIMP implements DAOProducto{
 
 	static final String ARCHIVO= "Productos.txt";
 	
+	/*
+	 * (non-Javadoc)
+	 * @see Integracion.Producto.DAOProducto#create(Negocio.Producto.TProducto)
+	 * 
+	 * Create: creates new product entry with the given data and if the entry does not exist
+	 */
 	@Override
 	public int create(TProducto Tprod) {
-		String[] stringArray = new String[6];
+		String[] stringArray = new String[7];
 		//  nombre:  id: cantidad: talla: categoria: idMarca:
 		stringArray[0] = Tprod.getNombre();
 		stringArray[1] = Integer.toString(Tprod.getIdProducto());
@@ -32,6 +38,7 @@ public class DAOProductoIMP implements DAOProducto{
 		stringArray[3] = Integer.toString(Tprod.getTalla());
 		stringArray[4] = Tprod.getCategoria();
 		stringArray[5] = Integer.toString(Tprod.getIdMarca());
+		stringArray[7] = Double.toString(Tprod.getPrecio());
 		
 		File f =new File(ARCHIVO);
 		
@@ -40,13 +47,17 @@ public class DAOProductoIMP implements DAOProducto{
 		StringBuilder sb =new StringBuilder();
 		int id=-1;
 		boolean found =false;
+		//When no entries exist simply adds the ne entry
 		if(f.length()==0){
 			sb.append(stringArray[0] + ":" + 1 + ":" + stringArray[2] + ":" 
-			        + stringArray[3] + ":" + stringArray[4] + ":" + stringArray[5] + System.lineSeparator());
+			        + stringArray[3] + ":" + stringArray[4] + ":" + stringArray[5] + ":"
+			        + stringArray[6] + System.lineSeparator());
 			id=1;
 			found =true;
 		}
-
+		/*
+		 * ELSE: Start to iterate through the info and if no entry is found with same data as input adds it at the end
+		 */
 		else{
 			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 		
@@ -62,14 +73,17 @@ public class DAOProductoIMP implements DAOProducto{
 		        	}
 		        	//nombre: id: cantidad: talla: categoria: idMarca:
 		        	sb.append(splitArray[0] + ":" + splitArray[1] + ":" + splitArray[2] + ":" 
-		        			+ splitArray[3] + ":" + splitArray[4] + ":" + splitArray[5] + System.lineSeparator());
+		        			+ splitArray[3] + ":" + splitArray[4] + ":" + splitArray[5] + ":" 
+		        			+ splitArray[6] + System.lineSeparator());
 		        	id=(Integer.parseInt(splitArray[1]) + 1);
 		    	}
 		    }
 		    br.close();
+		    
 		    if(!found){
 		    	sb.append(stringArray[0] + ":" + id + ":" + stringArray[2] + ":" 
-				        + stringArray[3] + ":" + stringArray[4] + ":" + stringArray[5] + System.lineSeparator());
+				        + stringArray[3] + ":" + stringArray[4] + ":" + stringArray[5] + ":"
+		    			+ splitArray[6] + System.lineSeparator());
 		    }
 			}catch (Exception e) {
 				   return -1;
@@ -85,6 +99,12 @@ public class DAOProductoIMP implements DAOProducto{
 		return id;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see Integracion.Producto.DAOProducto#delete(int)
+	 * 
+	 * Delete: to "Delete" an entry, makes the variable "cantidad" = 0
+	 */
 	@Override
 	public int delete(int id) {
 		File f = new File(ARCHIVO);
@@ -98,13 +118,16 @@ public class DAOProductoIMP implements DAOProducto{
 			while((line = br.readLine()) !=null){
 				splitArray = line.split(":");
 				if(!splitArray[1].equals(Integer.toString(id)) ){
-					//nombre: id: cantidad: talla: categoria: idMarca:
+					//nombre: id: cantidad: talla: categoria: idMarca: precio
 					sb.append(splitArray[0] + ":" + splitArray[1] + ":" + splitArray[2] + ":" 
-							+ splitArray[3] + ":" + splitArray[4] + ":" + splitArray[5] + System.lineSeparator());
+							+ splitArray[3] + ":" + splitArray[4] + ":" + splitArray[5] + ":" 
+							+ splitArray[6] + System.lineSeparator());
 				}
+				// turns the quantity to 0
 				else if(splitArray[1].equals(Integer.toString(id))){
 					sb.append(splitArray[0] + ":" + splitArray[1] + ":" + 0 + ":" 
-							+ splitArray[3] + ":" + splitArray[4] + ":" + splitArray[5] + System.lineSeparator());
+							+ splitArray[3] + ":" + splitArray[4] + ":" + splitArray[5] + ":"
+							+ splitArray[6] + System.lineSeparator());
 				ID=id;
 				}
 			}
@@ -121,6 +144,12 @@ public class DAOProductoIMP implements DAOProducto{
 		return ID;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see Integracion.Producto.DAOProducto#read(int)
+	 * 
+	 * READ: returns an entry based on the given number ID
+	 */
 	@Override
 	public TProducto read(int id) {
 		
@@ -136,7 +165,9 @@ public class DAOProductoIMP implements DAOProducto{
 				splitArray = line.split(":", 6);
 				if(splitArray[1].equals(Integer.toString(id))){
 					//nombre: id: cantidad: talla: categoria: idMarca:
-					Tprod = new TProducto(splitArray[0], Integer.parseInt(splitArray[2]), Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), splitArray[4], Integer.parseInt(splitArray[5]));
+					Tprod = new TProducto(splitArray[0], Integer.parseInt(splitArray[2]), 
+							Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), 
+							splitArray[4], Integer.parseInt(splitArray[5]), Double.parseDouble(splitArray[6]));
 					found = true;
 				}
 				
@@ -147,7 +178,12 @@ public class DAOProductoIMP implements DAOProducto{
 		}
 		return Tprod;
 	}
-
+/*
+ * (non-Javadoc)
+ * @see Integracion.Producto.DAOProducto#readAll()
+ * 
+ * READALL; returns a collection with every entry
+ */
 	@Override
 	public Collection<TProducto> readAll() {
 
@@ -158,11 +194,13 @@ public class DAOProductoIMP implements DAOProducto{
 			String line;
 			String[] splitArray;
 			
+			//loop: iterates across all entries
 			while((line = br.readLine()) !=null){
 				if(!line.equalsIgnoreCase("")){
 				splitArray = line.split(":");
 				list.add(new TProducto(splitArray[0], Integer.parseInt(splitArray[2]),
-						Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), splitArray[4], Integer.parseInt(splitArray[5])));	
+						Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), splitArray[4], 
+						Integer.parseInt(splitArray[5]), Double.parseDouble(splitArray[6])));	
 			
 				}
 			}
@@ -172,7 +210,12 @@ public class DAOProductoIMP implements DAOProducto{
 		}
 		return list;
 	}
-
+/*
+ * (non-Javadoc)
+ * @see Integracion.Producto.DAOProducto#readByName(java.lang.String)
+ * 
+ * READBYNAME: returns a given entry based on the given name ID
+ */
 	@Override
 	public TProducto readByName(String name) {
 		File f = new File(ARCHIVO);
@@ -187,7 +230,9 @@ public class DAOProductoIMP implements DAOProducto{
 				splitArray = line.split(":", 6);
 				if(splitArray[0].equals(name)){
 					//nombre: id: cantidad: talla: categoria: idMarca:
-					Tprod = new TProducto(splitArray[0], Integer.parseInt(splitArray[2]), Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), splitArray[4], Integer.parseInt(splitArray[5]));
+					Tprod = new TProducto(splitArray[0], Integer.parseInt(splitArray[2]), 
+							Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), 
+							splitArray[4], Integer.parseInt(splitArray[5]), Double.parseDouble(splitArray[6]));
 					found = true;
 				}
 			}
@@ -198,6 +243,12 @@ public class DAOProductoIMP implements DAOProducto{
 		return Tprod;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see Integracion.Producto.DAOProducto#update(Negocio.Producto.TProducto)
+	 * 
+	 * UPDATE: updates the entry corresponding to the entry ID with the given information
+	 */
 	@Override
 	public int update(TProducto Tprod) {
 		String[] stringArray = new String[6];
@@ -208,6 +259,7 @@ public class DAOProductoIMP implements DAOProducto{
 		stringArray[3] = Integer.toString(Tprod.getTalla());
 		stringArray[4] = Tprod.getCategoria();
 		stringArray[5] = Integer.toString(Tprod.getIdMarca());
+		stringArray[6] = Double.toString(Tprod.getPrecio());
 		
 		File file =new File(ARCHIVO);
 		int id=-1;
@@ -222,12 +274,14 @@ public class DAOProductoIMP implements DAOProducto{
 		        //nombre: id: cantidad: talla: categoria: idMarca:
 		        	
 		        if(splitArray[1].equals(stringArray[1])){
-		        	buffer.append(stringArray[0] + ":" + splitArray[1] + ":" + stringArray[2]+":" + stringArray[3]
-		        			 + ":" + stringArray[4] + ":" + splitArray[5] + System.lineSeparator());
+		        	buffer.append(stringArray[0] + ":" + splitArray[1] + ":" + stringArray[2]+ ":" + stringArray[3]
+		        			 + ":" + stringArray[4] + ":" + splitArray[5] + ":"
+		        			 + stringArray[6] + System.lineSeparator());
 		        	 id=Tprod.getIdProducto();
 		        }else{
 		        	buffer.append(splitArray[0] + ":" + splitArray[1] + ":" + splitArray[2] + ":" 
-		       		        + splitArray[3] + ":" + splitArray[4] + ":" + splitArray[5] + System.lineSeparator());
+		       		        + splitArray[3] + ":" + splitArray[4] + ":" + splitArray[5] + ":"
+		        			+ splitArray[6] + System.lineSeparator());
 		       		        	
 		        }
 		    }
@@ -245,6 +299,12 @@ public class DAOProductoIMP implements DAOProducto{
 		}
 }
 
+	/*
+	 * (non-Javadoc)
+	 * @see Integracion.Producto.DAOProducto#restarCantidad(int, int)
+	 * 
+	 * RESTARCANTIDAD: deducts a given quantity from a given entry
+	 */
 	@Override
 	public boolean restarCantidad(int id, int cant) {
 		File f =new File(ARCHIVO);
@@ -260,11 +320,13 @@ public class DAOProductoIMP implements DAOProducto{
 		        splitArray = line.split(":", 6);
 		        if(Integer.parseInt(splitArray[1]) == id){
 		        	sb.append(splitArray[0] + ":" + splitArray[1] + ":" + (Integer.parseInt(splitArray[2]) - cant) + ":"
-		        + splitArray[3] + ":" + splitArray[4] + ":" +splitArray[5]+ System.lineSeparator());
+		        		+ splitArray[3] + ":" + splitArray[4] + ":" +splitArray[5] + ":"
+		        		+ splitArray[6] + System.lineSeparator());
 		        	found = true;
 		        }else{
 		        	sb.append(splitArray[0] + ":" + splitArray[1] + ":" + splitArray[2] + ":"
-		    		        + splitArray[3] + ":" + splitArray[4] + ":" +splitArray[5]+ System.lineSeparator());
+		    		        + splitArray[3] + ":" + splitArray[4] + ":" +splitArray[5]+ ":"
+		    		        + splitArray[6] + System.lineSeparator());
 		        }
 		    }
 		    try(    BufferedWriter bw = new BufferedWriter(new FileWriter(f))){

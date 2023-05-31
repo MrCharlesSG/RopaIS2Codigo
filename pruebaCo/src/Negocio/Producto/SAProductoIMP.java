@@ -92,7 +92,7 @@ public class SAProductoIMP implements SAProducto{
 			TProducto Tprod2;
 			Tprod2 = dao.read(Tprod.getIdProducto());
 			if(!(Tprod2.getIdProducto() == -1)){
-				dao.update(new TProducto(Tprod.getNombre(), Tprod.getCantidad(), Tprod.getTalla(), Tprod.getIdProducto(), Tprod.getCategoria(), Tprod.getIdMarca()));
+				dao.update(new TProducto(Tprod.getNombre(), Tprod.getCantidad(), Tprod.getTalla(), Tprod.getIdProducto(), Tprod.getCategoria(), Tprod.getIdMarca(), Tprod.getPrecio()));
 			}else{
 				return -1;
 			}

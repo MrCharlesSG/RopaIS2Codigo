@@ -41,7 +41,7 @@ public class GUIListarProductos extends JFrame implements GUI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String[] header = { "Nombre", "Id", "Categoria", "Talla", "Cantidad", " Id Marca"};
+	String[] header = { "Nombre", "Id", "Categoria", "Talla", "Cantidad", "Precio", " Id Marca"};
 	private DefaultTableModel _dataTableModel;
 	
 	public GUIListarProductos(){
@@ -90,6 +90,7 @@ public class GUIListarProductos extends JFrame implements GUI{
 			_dataTableModel.setValueAt(p.getTalla(), i, 3);
 			_dataTableModel.setValueAt(p.getCantidad(), i, 4);
 			_dataTableModel.setValueAt(p.getIdMarca(), i, 5);
+			_dataTableModel.setValueAt(p.getPrecio(), i, 6);
 			i++;
 		}
 		

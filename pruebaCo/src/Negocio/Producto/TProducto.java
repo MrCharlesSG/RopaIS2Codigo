@@ -10,14 +10,16 @@ public class TProducto {
 	private int idProducto;
 	private String nombre;
 	private int talla;
+	private double precio;
 	
-	public TProducto(String nombre, int cantidad, int talla, int idProducto, String categoria, int idMarca){
+	public TProducto(String nombre, int cantidad, int talla, int idProducto, String categoria, int idMarca, double precio){
 		this.cantidad = cantidad;
 		this.categoria =categoria;
 		this.idMarca = idMarca;
 		this.idProducto = idProducto;
 		this.nombre = nombre;
 		this.talla = talla;
+		this.precio = precio;
 	}
 	
 	public int getCantidad(){
@@ -68,6 +70,14 @@ public class TProducto {
 		this.talla = t;
 	}
 	
+	public double getPrecio() {
+		return this.precio;
+	}
+	
+	public void setPrecio(double num){
+		this.precio = num;
+	}
+	
 	@Override
 	public boolean equals(Object anObject ) {
 		TProducto a = (TProducto) anObject;
@@ -76,7 +86,8 @@ public class TProducto {
 				this.getIdMarca()==a.getIdMarca() &&
 				this.getTalla()==a.getTalla() &&
 				this.nombre.equals(a.getNombre())&&
-				this.talla == a.getTalla();
+				this.talla == a.getTalla() && 
+				this.precio == a.getPrecio();
 	
 	}
 }
