@@ -50,6 +50,9 @@ public class GUIModificarCliente extends JFrame implements GUI{
 			JLabel ltlf=new JLabel("Tlf");
 			final JTextField ttlf=new JTextField(9);
 			
+			JLabel lid= new JLabel("ID");
+			final JTextField tID = new JTextField(9);
+			
 			DefaultComboBoxModel<String> opciones=new DefaultComboBoxModel<>();
 			opciones.addElement("Premium");
 			opciones.addElement("Normal");
@@ -62,6 +65,8 @@ public class GUIModificarCliente extends JFrame implements GUI{
 			botones.add(ok);
 			botones.add(cancelar);
 			panel.add(desc);
+			panel.add(lid);
+			panel.add(tID);
 			panel.add(lDNI);
 			panel.add(tDNI);
 			panel.add(lNombre);
@@ -82,6 +87,7 @@ public class GUIModificarCliente extends JFrame implements GUI{
 					{		
 						setVisible(false);
 						try{
+							String id= tID.getText();
 							String nombre= tNombre.getText();
 							String apellido1=tApellido1.getText();
 							String apellido2=tApellido2.getText();
@@ -90,10 +96,10 @@ public class GUIModificarCliente extends JFrame implements GUI{
 							String tipo=(String) box.getSelectedItem();
 							TCliente tC;
 							if(tipo.equalsIgnoreCase("Premium")){
-								 tC= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
+								 tC= new TClientePremium (true, apellido1, apellido2, DNI, Integer.parseInt(id), nombre, tlf, true);
 							}
 							else{
-								 tC= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, false);
+								 tC= new TClientePremium (true, apellido1, apellido2, DNI, Integer.parseInt(id), nombre, tlf, false);
 							}
 							Controlador.getInstancia().setGUI(GUIModificarCliente.this);
 							Controlador.getInstancia().accion(Evento.MODIFICAR_CLIENTE, tC);

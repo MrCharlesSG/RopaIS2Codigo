@@ -5,13 +5,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 import Main.Utils;
+import Negocio.Clientes.TCliente;
 import Negocio.Clientes.TClienteNormal;
 import Negocio.Clientes.TClientePremium;
 import Presentacion.Controlador.Controlador;
@@ -53,8 +56,10 @@ public class GUIAltaCliente extends JFrame implements GUI{
 		tlf.add( ttlf=new JTextField(20));
 		
 		JPanel tiempo=new JPanel();
-		tiempo.add(premium=		new JButton("Premium"));
-		tiempo.add( noPremium=new JButton("No Premium"));
+		String[] opciones =new String[]{"Premium", "No premium"};
+		JComboBox<String> tipo= new JComboBox<String>(opciones);
+		tiempo.add(tipo);
+		JButton aceptar= new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		
 		panel.add(Nombre);
@@ -63,6 +68,7 @@ public class GUIAltaCliente extends JFrame implements GUI{
 		panel.add(DNI);
 		panel.add(tlf);
 		panel.add(tiempo);
+		panel.add(aceptar);
 		panel.add(cancelar);
 		getContentPane().add(panel);
 		pack();
@@ -70,7 +76,7 @@ public class GUIAltaCliente extends JFrame implements GUI{
 		getContentPane().add(panel);
 		pack();
 		
-		premium.addActionListener(new ActionListener()
+		aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
@@ -80,8 +86,16 @@ public class GUIAltaCliente extends JFrame implements GUI{
 						String apellido2=tApellido2.getText();
 						String DNI= tDNI.getText();
 						int tlf= Integer.parseInt (ttlf.getText ());
-						TClientePremium tCP= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
-						Controlador.getInstancia().setGUI(GUIAltaCliente.this);
+						String opc = (String) tipo.getSelectedItem();
+						TCliente tCP;
+						if(opc.equalsIgnoreCase("Premium")){
+							tCP= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
+							Controlador.getInstancia().setGUI(GUIAltaCliente.this);
+						}
+						else{
+							tCP=new TClienteNormal(true, apellido1, apellido2, DNI, -1, nombre, tlf, false);
+						}
+						
 						Controlador.getInstancia().accion(Evento.ALTA_CLIENTE, tCP);	
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
@@ -90,28 +104,7 @@ public class GUIAltaCliente extends JFrame implements GUI{
 				}
 		});
 		
-		noPremium.addActionListener(new ActionListener()
-		{ public void actionPerformed(ActionEvent e)
-			{		
-				setVisible(false);
-				try{
-					String nombre= tNombre.getText();
-					String apellido1=tApellido1.getText();
-					String apellido2=tApellido2.getText();
-					String DNI= tDNI.getText();
-					int tlf= Integer.parseInt (ttlf.getText ());
-					TClienteNormal tc= new TClienteNormal (true, apellido1, apellido2, DNI, -1, nombre, tlf, false);
-					
-					Controlador.getInstancia().setGUI(GUIAltaCliente.this);
-					Controlador.getInstancia().accion(Evento.ALTA_CLIENTE, tc);	
-					
-					
-				}catch(Exception e1){
-					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
-				}
-				
-			}
-	});
+		
 		
 		cancelar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)

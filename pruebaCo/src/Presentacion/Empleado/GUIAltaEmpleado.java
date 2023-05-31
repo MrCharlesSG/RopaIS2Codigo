@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Main.Utils;
+import Negocio.Empleado.TEmpleado;
 import Negocio.Empleado.TEmpleadoTC;
 import Negocio.Empleado.TEmpleadoTP;
 import Presentacion.Controlador.Controlador;
@@ -53,8 +55,10 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 		tlf.add( ttlf=new JTextField(20));
 		
 		JPanel tiempo=new JPanel();
-		tiempo.add(tc=		new JButton("Tiempo Completo"));
-		tiempo.add( tp=new JButton("Tiempo Parcial"));
+		String[] opciones =new String[]{"Parcial", "Completo"};
+		JComboBox<String> tipo= new JComboBox<String>(opciones);
+		tiempo.add(tipo);
+		JButton aceptar= new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		
 		panel.add(Nombre);
@@ -67,7 +71,7 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 		getContentPane().add(panel);
 		pack();
 		
-		tc.addActionListener(new ActionListener()
+		aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{
 					setVisible(false);
@@ -76,37 +80,26 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 					String apellido1=tApellido1.getText();
 					String apellido2=tApellido2.getText();
 					String DNI= tDNI.getText();
+					String tip= (String) tipo.getSelectedItem();
 					int tlf= Integer.parseInt (ttlf.getText ());
+					TEmpleado emp;
+					if(tip.equalsIgnoreCase("Parcial")){
+						emp=new TEmpleadoTP (nombre, apellido1, apellido2, DNI, tlf, -1,  false);
+					}
+					else{
+						emp=new TEmpleadoTC (nombre, apellido1, apellido2, DNI, tlf, -1,  true);
+					}
 					//String nombre, String apellido1, String apellido2, String DNI, int tfno, int ID, boolean activo
-					TEmpleadoTC tCP= new TEmpleadoTC (nombre, apellido1, apellido2, DNI, tlf, -1,  true);
+					
 					Controlador.getInstancia().setGUI(GUIAltaEmpleado.this);
-					Controlador.getInstancia().accion(Evento.ALTA_EMPLEADO, tCP);
+					Controlador.getInstancia().accion(Evento.ALTA_EMPLEADO, emp);
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 				}
 				}
 		});
 		
-		tp.addActionListener(new ActionListener()
-		{ public void actionPerformed(ActionEvent e)
-		{		
-			setVisible(false);
-			try{
-				String nombre= tNombre.getText();
-				String apellido1=tApellido1.getText();
-				String apellido2=tApellido2.getText();
-				String DNI= tDNI.getText();
-				int tlf= Integer.parseInt (ttlf.getText ());
-				//String nombre, String apellido1, String apellido2, String DNI, int tfno, int ID, boolean activo
-				TEmpleadoTP tCP= new TEmpleadoTP (nombre, apellido1, apellido2, DNI, tlf, -1,  true);
-				Controlador.getInstancia().setGUI(GUIAltaEmpleado.this);
-				Controlador.getInstancia().accion(Evento.ALTA_EMPLEADO, tCP);
-			}catch(Exception e1){
-				Utils.showErrorMsg("Los parametros introducidos son incorrectos");
-			}
-			
-		}
-});
+		
 		
 		cancelar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)

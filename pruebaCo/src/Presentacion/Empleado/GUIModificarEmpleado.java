@@ -52,6 +52,9 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 		JLabel ltlf=new JLabel("Tlf");
 		final JTextField ttlf=new JTextField(9);
 		
+		JLabel lid= new JLabel("ID");
+		final JTextField tID= new JTextField(9);
+		
 		DefaultComboBoxModel<String> opciones=new DefaultComboBoxModel<>();
 		opciones.addElement("Tiempo Parcial");
 		opciones.addElement("Tiempo Completo");
@@ -64,6 +67,8 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 		botones.add(ok);
 		botones.add(cancelar);
 		panel.add(desc);
+		panel.add(lid);
+		panel.add(tID);
 		panel.add(lDNI);
 		panel.add(tDNI);
 		panel.add(lNombre);
@@ -84,6 +89,7 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 				{		
 					setVisible(false);
 					try{
+						String id= tID.getText();
 						String nombre= tNombre.getText();
 						String apellido1=tApellido1.getText();
 						String apellido2=tApellido2.getText();
@@ -91,12 +97,12 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 						int tlf= Integer.parseInt (ttlf.getText ());
 						String tipo=(String) box.getSelectedItem();
 						TEmpleado t;
-						if(tipo.equalsIgnoreCase("Premium")){
+						if(tipo.equalsIgnoreCase("Tiempo Completo")){
 							//
-							 t= new TEmpleadoTC(nombre, apellido1, apellido2, DNI,tlf, -1, true);
+							 t= new TEmpleadoTC(nombre, apellido1, apellido2, DNI,tlf, Integer.parseInt(id), true);
 						}
 						else{
-							 t= new TEmpleadoTP(nombre, apellido1, apellido2, DNI, tlf, -1 , true);
+							 t= new TEmpleadoTP(nombre, apellido1, apellido2, DNI, tlf, Integer.parseInt(id) , true);
 						}
 						Controlador.getInstancia().setGUI(GUIModificarEmpleado.this);
 						Controlador.getInstancia().accion(Evento.MODIFICAR_EMPLEADO, t);	
