@@ -89,8 +89,8 @@ public class GUIListarProductos extends JFrame implements GUI{
 			_dataTableModel.setValueAt(p.getCategoria(), i, 2);
 			_dataTableModel.setValueAt(p.getTalla(), i, 3);
 			_dataTableModel.setValueAt(p.getCantidad(), i, 4);
-			_dataTableModel.setValueAt(p.getIdMarca(), i, 5);
-			_dataTableModel.setValueAt(p.getPrecio(), i, 6);
+			_dataTableModel.setValueAt(p.getPrecio(), i, 5);
+			_dataTableModel.setValueAt(p.getIdMarca(), i, 6);
 			i++;
 		}
 		

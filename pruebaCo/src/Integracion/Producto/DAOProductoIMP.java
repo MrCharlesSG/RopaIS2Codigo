@@ -38,7 +38,7 @@ public class DAOProductoIMP implements DAOProducto{
 		stringArray[3] = Integer.toString(Tprod.getTalla());
 		stringArray[4] = Tprod.getCategoria();
 		stringArray[5] = Integer.toString(Tprod.getIdMarca());
-		stringArray[7] = Double.toString(Tprod.getPrecio());
+		stringArray[6] = Double.toString(Tprod.getPrecio());
 		
 		File f =new File(ARCHIVO);
 		
