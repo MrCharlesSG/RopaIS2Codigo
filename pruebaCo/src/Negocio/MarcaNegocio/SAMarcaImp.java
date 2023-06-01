@@ -34,6 +34,7 @@ public class SAMarcaImp implements SAMarca {
 				id=daoMarca.create(marca);
 			else {
 				if(!leido.getActivo()) {
+				
 					marca.setID(leido.getID());
 					id=daoMarca.update(marca);
 				}
@@ -82,10 +83,10 @@ public class SAMarcaImp implements SAMarca {
 	*/
 	public int update( TMarca marca) {
 		int id=-1;
-		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();//yo lo dejaria como atributo de sa
+		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
 		if(ComprobadorSintactico.isPositive(marca.getID())){
 			TMarca leido=daoMarca.read(marca.getID());	
-			if(leido!=null && leido.getActivo())
+			if(leido!=null)
 				id=daoMarca.update(marca);
 			}
 		return id;
@@ -99,19 +100,19 @@ public class SAMarcaImp implements SAMarca {
 	*/
 	public int delete(int ID) {
 		int id=-1;
-		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();//yo lo dejaria como atributo de sa
+		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
 		if(ComprobadorSintactico.isPositive(ID)){
 			TMarca leido=daoMarca.read(ID);	
 			
 			if(leido!=null&&leido.getActivo()){
-				
+				// si la marca no es nula y esta activa 
 				DAOProducto daoprod= FactoriaIntegracion.getInstance().generaDAOProducto();
 				Collection<TProducto> productos= daoprod.readByMarca(ID);
 				if(productos.isEmpty())
-					id=daoMarca.delete(ID);// hay hay que mirar los argumentos ...
+					id=daoMarca.delete(ID);// si no hay productos asociados se borra simplemente 
 				else{
 					boolean inactivos=true;
-					for(TProducto p:productos){
+					for(TProducto p:productos){//si todos sus productos estan a 0(no estan activos) se puede borrar la marca
 						if(p.getCantidad()>0){
 							inactivos=false;
 						}
@@ -138,20 +139,6 @@ public class SAMarcaImp implements SAMarca {
 			marca=daoMarca.readByName(nombre);
 		return (marca!=null && marca.getActivo())? marca:null;
 		// end-user-code
-	}
-	
-	
-	public int actualizarCantidad(int ID,boolean aumento){
-		int id=-1;
-		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();	
-		
-		if(ComprobadorSintactico.isPositive(ID)){
-			TMarca leido=daoMarca.read(ID);
-			if(leido!=null)
-				id=daoMarca.actualizarCantidad(ID,aumento);
-		}
-			
-		return id;
 	}
 
 }

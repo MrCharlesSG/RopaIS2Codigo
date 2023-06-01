@@ -26,8 +26,8 @@ public class SAMarcaTest {
 		
 	private SAMarca saMarca = FactoriaNegocioImp.getInstance().generaSAMarca();
 	//String nombre, int ID, int cantidad, boolean activo
-	private TMarca tMJuli = new TMarca("Julian", 1, 0,true);
-	private TMarca tMAlmd = new TMarca("Almendra", 2, 0,true);
+	private TMarca tMJuli = new TMarca("Julian", 1,true);
+	private TMarca tMAlmd = new TMarca("Almendra", 2,true);
 	private Collection<TMarca> mockCollec = new ArrayList<TMarca>();
 	
 	@Test
@@ -46,7 +46,7 @@ public class SAMarcaTest {
 		assertEquals("No se ha leido correctamente por id de marca", tMAux.getID(), this.tMJuli.getID());
 		
 		//crear una marca con el mismo nombre
-		tMAux= new TMarca("Julian", 2, 1, true);
+		tMAux= new TMarca("Julian", 2, true);
 		aux3 = saMarca.create(tMAux);
 		assertEquals("Se ha creado una marca con el mismo nombre", aux3, -1);
 		
@@ -62,17 +62,7 @@ public class SAMarcaTest {
 		assertEquals("No se ha leido correctamente la 2da marca",h.getNombre(), this.tMAlmd.getNombre());
 		
 		//compruebo si el actualizar funciona 
-		int anterior=h.getCantidad();
-		saMarca.actualizarCantidad(h.getID(), true);
-		h=saMarca.read(h.getID());
-		assertEquals("No se ha incrementado correctamente la cantidad",h.getCantidad(), anterior+1);
-		
-		 anterior=h.getCantidad();
-		saMarca.actualizarCantidad(h.getID(), false);
-		h=saMarca.read(h.getID());
-		assertEquals("No se ha decrementado correctamente la cantidad",h.getCantidad(), anterior-1);
-		
-		
+	
 		h= this.saMarca.readByName("Almendra");
 		assertEquals("No se ha leido correctamente la 2da marca",h.getNombre(), this.tMAlmd.getNombre());
 		assertEquals("No se ha leido correctamente la 2da marca",h.getNombre(), this.tMAlmd.getNombre());
@@ -109,7 +99,7 @@ public class SAMarcaTest {
 		}*/
 
 		//crear marca sin nombre
-		assertEquals("Se ha creado una marca sin nombre", this.saMarca.create(new TMarca("", 2, 1, false)), -1);
+		assertEquals("Se ha creado una marca sin nombre", this.saMarca.create(new TMarca("", 2, false)), -1);
 		
 		//read de un id nulo
 		assertEquals("Se ha leido un id invalido", this.saMarca.read(100), null);

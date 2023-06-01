@@ -13,6 +13,4 @@ public interface SAProducto {
 	public Collection<TProducto> readAll();
 	public TProducto readByName(String string);
 	public int update(TProducto Tprod);
-	public boolean restarCantidad(int id, int cant);
-	boolean devolverCantidad(int id, int cant);
 }

@@ -63,7 +63,7 @@ public class GUIModificarMarca extends JFrame implements GUI {
 				{
 				try{
 					setVisible(false);
-					TMarca tmarca=new TMarca(tNombre.getText(),Integer.parseInt(tId.getText()), 0,true);
+					TMarca tmarca=new TMarca(tNombre.getText(),Integer.parseInt(tId.getText()),true);
 					Controlador.getInstancia().accion(Evento.MODIFICAR_MARCA, tmarca);
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");

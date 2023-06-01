@@ -65,5 +65,4 @@ public interface SAMarca {
 	*/
 	public TMarca readByName(String nombre);
 	
-	public int actualizarCantidad(int ID,boolean aumento);
 }

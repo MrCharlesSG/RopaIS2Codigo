@@ -28,7 +28,7 @@ public class DAOMarcaImp implements DAOMarca {
 	static final String ARCHIVO="Marcas.txt";
 	
 	/*
-	 * String nombre, int ID, int cantidad, boolean activo)
+	 * String nombre, int ID, boolean activo)
 	 * 0      1     2       3
 	 * nombre:id:cantidad:activo
 	 */
@@ -40,17 +40,17 @@ public class DAOMarcaImp implements DAOMarca {
 		int id=-1;
 		if(file.length()==0){
 			id=1;
-			buffer.append(marca.getNombre()+":"+id+":"+0+":"+true);
+			buffer.append(marca.getNombre()+":"+id+":"+true);
 		}
 		else{
 			try(Scanner scanner=new Scanner(file)) {//bufferreader
 				while(scanner.hasNext()) {
 					datos=scanner.nextLine().split(":");
-					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]);
+					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]);
 					buffer.append(System.lineSeparator());
 					id=Integer.parseInt(datos[1])+1;
 				}
-				buffer.append(marca.getNombre()+":"+id+":"+0+":"+true);
+				buffer.append(marca.getNombre()+":"+id+":"+true);
 				buffer.append(System.lineSeparator());
 			}catch (IOException e) {
 				return -1;
@@ -80,7 +80,7 @@ public class DAOMarcaImp implements DAOMarca {
 			while(sacanner.hasNextLine()){
 				datos=sacanner.nextLine().split(":");
 				
-				marca=new TMarca(datos[0],Integer.parseInt(datos[1]),Integer.parseInt(datos[2]), Boolean.parseBoolean(datos[3]));
+				marca=new TMarca(datos[0],Integer.parseInt(datos[1]), Boolean.parseBoolean(datos[2]));
 				marcas.add(marca);
 			}
 			return marcas;
@@ -105,7 +105,7 @@ public class DAOMarcaImp implements DAOMarca {
 				
 				int ID=Integer.parseInt(tokens[1]);
 				if (ID==id) {
-					marca=new TMarca(tokens[0],Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]), Boolean.parseBoolean(tokens[3]));
+					marca=new TMarca(tokens[0],Integer.parseInt(tokens[1]), Boolean.parseBoolean(tokens[2]));
 					encontrado=true;
 				}
 			}
@@ -133,10 +133,10 @@ public class DAOMarcaImp implements DAOMarca {
 				datos=scanner.nextLine().split(":");
 				if (marca.getID()==Integer.parseInt(datos[1])) {	
 					id=Integer.parseInt(datos[1]);
-					buffer.append(marca.getNombre()+":"+id+":"+datos[2]+":"+marca.getActivo()).append(System.lineSeparator());
+					buffer.append(marca.getNombre()+":"+id+ ":"+marca.getActivo()).append(System.lineSeparator());
 				}
 				else
-					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+marca.getActivo()).append(System.lineSeparator());
+					buffer.append(datos[0]+":"+datos[1]+":"+marca.getActivo()).append(System.lineSeparator());
 			}
 			try(Writer w=new BufferedWriter(
 									new OutputStreamWriter(
@@ -172,7 +172,7 @@ public class DAOMarcaImp implements DAOMarca {
 					datos[3]="false";
 					encontrado=true;
 				}
-				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
+				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]).append(System.lineSeparator());
 			}
 			try(Writer w=new BufferedWriter(
 									new OutputStreamWriter(
@@ -203,7 +203,7 @@ public class DAOMarcaImp implements DAOMarca {
 				String tokens[]=scanner.nextLine().split(":");
 				
 				if (tokens[0].equalsIgnoreCase(nombre)) {
-					 marca=new TMarca(tokens[0],Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]), Boolean.parseBoolean(tokens[3]));
+					 marca=new TMarca(tokens[0],Integer.parseInt(tokens[1]), Boolean.parseBoolean(tokens[2]));
 					encontrado=true;
 				}
 			}
@@ -211,37 +211,5 @@ public class DAOMarcaImp implements DAOMarca {
 		}catch(IOException e){
 			return null;
 		}
-	}
-
-	@Override
-	public int actualizarCantidad(int ID, boolean aumento) {
-		StringBuilder buffer=new StringBuilder();
-		File file=new File(ARCHIVO);
-		String datos[];
-		int id=-1;
-		int aum=aumento?1:-1;
-		try(Scanner scanner=new Scanner(file)) {//bufferreader
-		
-			while(scanner.hasNext()) {
-				datos=scanner.nextLine().split(":");
-				if (Integer.parseInt(datos[1])==ID) {	
-					aum+=Integer.parseInt(datos[2]);
-					buffer.append(datos[0]+":"+datos[1]+":"+aum+":"+datos[3]).append(System.lineSeparator());
-				}
-				else
-					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
-			}
-			try(Writer w=new BufferedWriter(
-									new OutputStreamWriter(
-									new FileOutputStream(ARCHIVO)))){
-				w.write(buffer.toString());
-				return id;
-				
-			}
-		}
-		catch (IOException e) {
-			return id;
-		}
-		
 	}
 }

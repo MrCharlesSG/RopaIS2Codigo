@@ -13,6 +13,5 @@ public interface DAOProducto {
 	public Collection<TProducto> readAll();
 	public TProducto readByName(String name);
 	public int update(TProducto Tprod);
-	public boolean restarCantidad(int id, int cant);
 	Collection<TProducto> readByMarca(int iD);
 }

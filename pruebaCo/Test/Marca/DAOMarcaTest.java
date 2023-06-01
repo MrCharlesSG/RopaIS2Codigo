@@ -20,7 +20,7 @@ import Negocio.MarcaNegocio.TMarca;
 
 public class DAOMarcaTest{
 	
-	private TMarca m1= new TMarca("Juan", 1, 0, true);
+	private TMarca m1= new TMarca("Juan", 1, true);
 	private DAOMarca dao = FactoriaIntegracion.getInstance().generaDAOMarca();
 	private Collection<TMarca> lista= new ArrayList<TMarca>();
 
@@ -40,13 +40,13 @@ public class DAOMarcaTest{
     	assert(maux.getCantidad()==1);
     	
     	maux=dao.readByName("Juan");
-    	m1=new TMarca("Juan", 1, 1, true);
+    	m1=new TMarca("Juan", 1, true);
     	assert(maux.equals(m1 ));
     	
     	res=dao.delete(m1.getID());
     	assert(res==1);
     	
-    	maux=new TMarca("Monica", 2, 0, true);
+    	maux=new TMarca("Monica", 2, true);
     	res=dao.create(maux);
     	assert(res==2);
     	
@@ -58,14 +58,14 @@ public class DAOMarcaTest{
     	
     	res=dao.delete(maux.getID());
     	assert(res==2);
-    	maux=new TMarca("Monica", 2, 0, false);
+    	maux=new TMarca("Monica", 2, false);
     	
     	
     	
     	lista.clear();
     	lista.add(m1);
     	lista.add(maux);
-    	maux=new TMarca("Juani", 3, 0, false);
+    	maux=new TMarca("Juani", 3, false);
     	res=dao.create(maux);
     	assert(res==3);
     	lista.add(maux);
@@ -75,7 +75,7 @@ public class DAOMarcaTest{
     	listaAux=dao.readAll();   	
     	assert(lista.equals(listaAux));
     	
-    	maux= new TMarca("Malaq", 3, 33, true);
+    	maux= new TMarca("Malaq", 3, true);
     	res= dao.update(maux);
     	assert(res==3);
     	

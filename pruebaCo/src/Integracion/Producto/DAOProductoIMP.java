@@ -124,7 +124,7 @@ public class DAOProductoIMP implements DAOProducto{
 							+ splitArray[6] + System.lineSeparator());
 				}
 				// turns the quantity to 0
-				else if(splitArray[1].equals(Integer.toString(id))){
+				else {
 					sb.append(splitArray[0] + ":" + splitArray[1] + ":" + 0 + ":" 
 							+ splitArray[3] + ":" + splitArray[4] + ":" + splitArray[5] + ":"
 							+ splitArray[6] + System.lineSeparator());
@@ -305,39 +305,7 @@ public class DAOProductoIMP implements DAOProducto{
 	 * 
 	 * RESTARCANTIDAD: deducts a given quantity from a given entry
 	 */
-	@Override
-	public boolean restarCantidad(int id, int cant) {
-		File f =new File(ARCHIVO);
-		
-		String[] splitArray = new String[6];
-		StringBuilder sb =new StringBuilder();
-		
-		boolean found =false;
-		
-		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
-		    String line;
-		    while ((line = br.readLine()) != null && !line.equals("")) {
-		        splitArray = line.split(":", 6);
-		        if(Integer.parseInt(splitArray[1]) == id){
-		        	sb.append(splitArray[0] + ":" + splitArray[1] + ":" + (Integer.parseInt(splitArray[2]) - cant) + ":"
-		        		+ splitArray[3] + ":" + splitArray[4] + ":" +splitArray[5] + ":"
-		        		+ splitArray[6] + System.lineSeparator());
-		        	found = true;
-		        }else{
-		        	sb.append(splitArray[0] + ":" + splitArray[1] + ":" + splitArray[2] + ":"
-		    		        + splitArray[3] + ":" + splitArray[4] + ":" +splitArray[5]+ ":"
-		    		        + splitArray[6] + System.lineSeparator());
-		        }
-		    }
-		    try(    BufferedWriter bw = new BufferedWriter(new FileWriter(f))){
-		        bw.append(sb);
-		        bw.flush();
-		    }
-		}catch(Exception e){
-			return false;
-		};
-		return found;
-	}
+	
 	@Override
 	public Collection<TProducto> readByMarca(int iD) {
 		File f = new File(ARCHIVO);

@@ -40,7 +40,7 @@ import Negocio.Producto.TProducto;
 			this.vaciarBaseDatos();
 			//crear un producto y lo lee por id y por nombre
 			SAMarca saMarca=FactoriaNegocio.getInstance().generaSAMarca();
-			TMarca marca=new TMarca("Santi",0,0,true);
+			TMarca marca=new TMarca("Santi",0,true);
 			int marcaID=saMarca.create(marca);
 			tPant.setIdMarca(marcaID);
 			aux1=saProducto.create(tPant);

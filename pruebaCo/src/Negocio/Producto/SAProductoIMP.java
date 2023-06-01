@@ -16,33 +16,24 @@ import Negocio.MarcaNegocio.TMarca;
 
 public class SAProductoIMP implements SAProducto{
 	
-	private DAOProducto dao;
-	private SAMarca saMarca;
-	public SAProductoIMP(){
-	 dao = FactoriaIntegracion.getInstance().generaDAOProducto();
-	 saMarca=FactoriaNegocio.getInstance().generaSAMarca();
-	}
-	
-
 	@Override
 	public int create(TProducto Tprod) {
 		TProducto aux;
 		int id=-1;
-		if(ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria())){
+		if(this.esValida(Tprod)){
+			DAOProducto dao = FactoriaIntegracion.getInstance().generaDAOProducto();
+			SAMarca saMarca=FactoriaNegocio.getInstance().generaSAMarca();
+			
 			aux = dao.readByName(Tprod.getNombre());
-
 			TMarca tMarca = saMarca.read(Tprod.getIdMarca());
-			if(tMarca!=null) {
+			if(tMarca!=null&&tMarca.getActivo()) {
 				if(aux==null) {
 					id=dao.create(Tprod);
-					saMarca.actualizarCantidad(Tprod.getIdMarca(),true);
-				}else if(aux.getCantidad()==0 && aux.getTalla()==Tprod.getTalla() && 
-						Tprod.getCategoria().equals(aux.getCategoria())){
+				}
+				else if(aux.getCantidad()==0){
 					Tprod.setIdProducto(aux.getIdProducto());
 					id=dao.update(Tprod);
 				}
-				
-				
 			}
 		}
 		return id;
@@ -53,6 +44,7 @@ public class SAProductoIMP implements SAProducto{
 	public int delete(int id) {
 		int ID=-1;
 		if(ComprobadorSintactico.isPositive(id)){
+			DAOProducto dao = FactoriaIntegracion.getInstance().generaDAOProducto();
 			TProducto Tprod = read(id);
 			if(Tprod!=null){
 				ID=dao.delete(Tprod.getIdProducto());
@@ -67,6 +59,7 @@ public class SAProductoIMP implements SAProducto{
 	public TProducto read(int id) {
 		TProducto Tprod = null;
 		if(ComprobadorSintactico.isPositive(id)){
+			DAOProducto dao = FactoriaIntegracion.getInstance().generaDAOProducto();
 			Tprod = dao.read(id);
 		}
 		return Tprod;
@@ -74,6 +67,7 @@ public class SAProductoIMP implements SAProducto{
 
 	@Override
 	public Collection<TProducto> readAll() {
+		DAOProducto dao = FactoriaIntegracion.getInstance().generaDAOProducto();
 		return dao.readAll();
 	}
 
@@ -81,6 +75,7 @@ public class SAProductoIMP implements SAProducto{
 	public TProducto readByName(String name) {
 		TProducto Tprod = null;
 		if(ComprobadorSintactico.isName(name)){
+			DAOProducto dao = FactoriaIntegracion.getInstance().generaDAOProducto();
 			Tprod = dao.readByName(name);
 		}
 		return Tprod;
@@ -88,34 +83,20 @@ public class SAProductoIMP implements SAProducto{
 
 	@Override
 	public int update(TProducto Tprod) {
+		int id=-1;
 		if(ComprobadorSintactico.isName(Tprod.getNombre())){
+			DAOProducto dao = FactoriaIntegracion.getInstance().generaDAOProducto();
 			TProducto Tprod2;
 			Tprod2 = dao.read(Tprod.getIdProducto());
-			if(!(Tprod2.getIdProducto() == -1)){
-				dao.update(new TProducto(Tprod.getNombre(), Tprod.getCantidad(), Tprod.getTalla(), Tprod.getIdProducto(), Tprod.getCategoria(), Tprod.getIdMarca(), Tprod.getPrecio()));
-			}else{
-				return -1;
-			}
+			if(Tprod2!=null)
+				id=dao.update(Tprod);
+			
 		}
-		return 0;
+		return id;
 	}
 
 
-	@Override
-	public boolean restarCantidad(int id, int cant) {
-		TProducto tProd = dao.read(id);
-		if(tProd!=null && (tProd.getCantidad() - cant) >= 0){
-			return dao.restarCantidad(id, cant);
-		}
-		return false;
+	private boolean esValida(TProducto Tprod){
+		return ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria());
 	}
-	@Override
-	public boolean devolverCantidad(int id, int cant){
-		TProducto tProd = dao.read(id);
-		if(tProd!=null){
-			return dao.restarCantidad(id, cant*-1);
-		}
-		return false;
-	}
-
 }
