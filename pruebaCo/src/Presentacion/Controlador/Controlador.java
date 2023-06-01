@@ -26,7 +26,7 @@ import Negocio.Producto.SAProducto;
  * @author sagog
  * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class Controlador {
+public abstract class Controlador {
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -41,4 +41,6 @@ public class Controlador {
 		}
 		return controlador;
 	}
+	public abstract void accion(int evento,Object datos) ;
+	public abstract void setGUI(GUI gui);
 }

@@ -332,10 +332,10 @@ public class ControladorIMP extends Controlador {
 
 		}
 	}
-	
+	// esto hay que quitarlo
 	public void setGUI(GUI gui){
 		this.gui=gui;
-	}
+	}/* aun no lo borro pero es que no se puede usar
 	public boolean marcasExisten(ArrayList<Integer> marcas) {
 		boolean existe=true;
 		if(marcas.size()!=0){
@@ -392,5 +392,5 @@ public class ControladorIMP extends Controlador {
 	}
 	public boolean restarProd(Integer id, Integer cant) {
 		return this.saProducto.restarCantidad(id, cant);
-	}
+	}*/
 }
