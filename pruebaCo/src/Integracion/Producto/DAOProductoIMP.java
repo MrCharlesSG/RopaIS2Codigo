@@ -338,5 +338,33 @@ public class DAOProductoIMP implements DAOProducto{
 		};
 		return found;
 	}
+	@Override
+	public Collection<TProducto> readByMarca(int iD) {
+		File f = new File(ARCHIVO);
+		ArrayList<TProducto> list = new ArrayList<TProducto>();
+		try(BufferedReader br = new BufferedReader(new FileReader(f))){
+			
+			String line;
+			String[] splitArray;
+			
+			while((line = br.readLine()) !=null){
+				if(!line.equalsIgnoreCase("")){
+				splitArray = line.split(":");
+			
+				TProducto producto=new TProducto(splitArray[0], Integer.parseInt(splitArray[2]),
+						Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), splitArray[4], Integer.parseInt(splitArray[5]),Integer.parseInt(splitArray[6]));	
+					if(producto.getIdMarca()==iD){
+						list.add(producto);
+					}
+				}
+			}
+		
+		}catch(Exception e){
+			return null;
+		}
+		return list;
+	}
+
+
 
 }

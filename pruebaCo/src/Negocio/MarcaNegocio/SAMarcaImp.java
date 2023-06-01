@@ -8,7 +8,9 @@ import java.util.Collection;
 
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.MarcaIntegracion.DAOMarca;
+import Integracion.Producto.DAOProducto;
 import Negocio.ComprobadorSintactico;
+import Negocio.Producto.TProducto;
 
 /** 
 * <!-- begin-UML-doc -->
@@ -29,7 +31,7 @@ public class SAMarcaImp implements SAMarca {
 			TMarca leido=daoMarca.readByName(marca.getNombre());
 			
 			if(leido==null)
-				id=daoMarca.create(marca);//hay que quitar el boolean
+				id=daoMarca.create(marca);
 			else {
 				if(!leido.getActivo()) {
 					marca.setID(leido.getID());
@@ -46,6 +48,7 @@ public class SAMarcaImp implements SAMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public Collection<TMarca> readAll() {
+		
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
 		Collection<TMarca> lista = new ArrayList<TMarca>();
 		Collection<TMarca> listaAux = daoMarca.readAll();
@@ -100,9 +103,25 @@ public class SAMarcaImp implements SAMarca {
 		if(ComprobadorSintactico.isPositive(ID)){
 			TMarca leido=daoMarca.read(ID);	
 			
-			if(leido!=null&&leido.getActivo() && leido.getCantidad()>0)
-				id=daoMarca.delete(ID);// hay hay que mirar los argumentos ...S
+			if(leido!=null&&leido.getActivo()){
+				
+				DAOProducto daoprod= FactoriaIntegracion.getInstance().generaDAOProducto();
+				Collection<TProducto> productos= daoprod.readByMarca(ID);
+				if(productos.isEmpty())
+					id=daoMarca.delete(ID);// hay hay que mirar los argumentos ...
+				else{
+					boolean inactivos=true;
+					for(TProducto p:productos){
+						if(p.getCantidad()>0){
+							inactivos=false;
+						}
+					}
+					
+					if(inactivos)// si resulta que todos estan inactivos se puede borrar la marca
+						daoMarca.delete(ID);
+				}
 			}
+		}
 		
 		return id;
 	}
