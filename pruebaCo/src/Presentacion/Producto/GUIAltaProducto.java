@@ -1,4 +1,5 @@
 package Presentacion.Producto;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,10 +37,12 @@ public class GUIAltaProducto extends JFrame implements GUI{
 	
 	private JButton aceptar;
 	private JButton cancelar;
+	
+	private JPanel panel;
 
 	public GUIAltaProducto() {
 		this.setTitle("Alta Producto");
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		JPanel nombre = new JPanel();
@@ -129,18 +132,7 @@ public class GUIAltaProducto extends JFrame implements GUI{
 
 	@Override
 	public void setGUIVisible(boolean b) {
-		tPrecio.setText("");
-		tPrecio.repaint();
-		tNombre.setText("");
-		tNombre.repaint();
-		tTalla.setText("");
-		tTalla.repaint();
-		tCat.setText("");
-		tCat.repaint();
-		tCant.setText("");
-		tCant.repaint();
-		tIDMarca.setText("");
-		tIDMarca.repaint();
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 }

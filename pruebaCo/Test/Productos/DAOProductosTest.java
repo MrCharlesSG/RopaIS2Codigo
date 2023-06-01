@@ -30,7 +30,7 @@ public class DAOProductosTest {
 			
 			assertEquals(null, res);
 			
-			TProducto tVaqueros=new TProducto("vaqueros", 0, 38, 1, "pantalones",0 );
+			TProducto tVaqueros=new TProducto("vaqueros", 0, 38, 1, "pantalones",0, 10);
 			
 			int id= dproducto.create(tVaqueros);
 			assertEquals(1, id);
@@ -48,9 +48,9 @@ public class DAOProductosTest {
 			
 			
 			Collection<TProducto> productos=new ArrayList<TProducto>();
-			TProducto prod1= new TProducto("vaqueros", 1, 38, 2, "pantalones", 0);
-			TProducto prod2= new TProducto("chandal", 1, 38, 3, "pantalones", 0);
-			TProducto prod3= new TProducto("cargos", 1, 38, 4, "pantalones", 0);
+			TProducto prod1= new TProducto("vaqueros", 1, 38, 2, "pantalones", 0, 10);
+			TProducto prod2= new TProducto("chandal", 1, 38, 3, "pantalones", 0, 20);
+			TProducto prod3= new TProducto("cargos", 1, 38, 4, "pantalones", 0, 30);
 			
 			dproducto.create(prod1);
 			dproducto.create(prod2);

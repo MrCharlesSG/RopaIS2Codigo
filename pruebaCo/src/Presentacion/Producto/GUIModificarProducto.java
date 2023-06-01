@@ -61,6 +61,8 @@ public class GUIModificarProducto extends JFrame implements GUI{
 	private JPanel precio;
 	private JFormattedTextField precioT;
 	
+	private JPanel jpanel;
+	
 	private static final Dimension DIM = new Dimension(220, 20);
 	
 	public GUIModificarProducto(){
@@ -71,7 +73,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		numberFormatter.setAllowsInvalid(false); //this is the key!!
 		this.setLocationRelativeTo(null);
 		this.setTitle("Modificar Producto");
-		JPanel jpanel=new JPanel();
+		jpanel=new JPanel();
 		jpanel.setLayout(new BoxLayout(jpanel, BoxLayout.Y_AXIS));
 		
 		jpanel.add(new JLabel("Introduzca el 'id' del producto a modificar."));
@@ -179,6 +181,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(jpanel);
 		this.setVisible(b);
 	}
 }

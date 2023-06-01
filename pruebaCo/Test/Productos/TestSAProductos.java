@@ -29,8 +29,8 @@ import Negocio.Producto.TProducto;
 	public class TestSAProductos {
 
 		private SAProducto saProducto = FactoriaNegocioImp.getInstance().generaSAProducto();//teneis que creaar este metodo 
-		private TProducto tPant = new TProducto("Pantalones azules", 30, 1,1,"pantalones",1);
-		private TProducto tCami = new TProducto("Camiseta blanca", 20, 1,2,"Camiseta",1);
+		private TProducto tPant = new TProducto("Pantalones azules", 30, 1,1,"pantalones",1, 10);
+		private TProducto tCami = new TProducto("Camiseta blanca", 20, 1,2,"Camiseta",1, 20);
 		
 		private Collection<TProducto> mockCollec = new ArrayList<TProducto>();
 		
@@ -55,7 +55,7 @@ import Negocio.Producto.TProducto;
 			assertEquals("No se ha leido correctamente por id de producto", tPAux.getIdProducto(), this.tPant.getIdProducto());
 			
 			//crear un Producto con el mismo nombre y mismo id de marca
-			tPAux= new TProducto("Pantalones azules", 1, 1,0,"M",marcaID);
+			tPAux= new TProducto("Pantalones azules", 1, 1,0,"M",marcaID, 40);
 			aux3 = saProducto.create(tPAux);
 			assertEquals("Se ha creado un producto con el mismo nombre", -1, aux3);
 			
@@ -109,11 +109,11 @@ import Negocio.Producto.TProducto;
 			}*/
 
 			//crear Producto sin nombre
-			assertEquals("Se ha creado una marca sin nombre", this.saProducto.create(new TProducto("", 2, 1,4,"M",0)), -1);
+			assertEquals("Se ha creado una marca sin nombre", this.saProducto.create(new TProducto("", 2, 1,4,"M",0, 20)), -1);
 			//crear producto sin talla
-			assertEquals("Se ha creado una marca sin nombre", this.saProducto.create(new TProducto("sudadera", 2, 1,4,"",0)), -1);
+			assertEquals("Se ha creado una marca sin nombre", this.saProducto.create(new TProducto("sudadera", 2, 1,4,"",0, 50)), -1);
 			//crear producto con id de marca no existente
-			assertEquals("Se ha creado una marca sin nombre", this.saProducto.create(new TProducto("sudadera", 2, 1,4,"M",50)), -1);
+			assertEquals("Se ha creado una marca sin nombre", this.saProducto.create(new TProducto("sudadera", 2, 1,4,"M",50, 60)), -1);
 			
 			//read de un id nulo
 			assertEquals("Se ha leido un id invalido",null, this.saProducto.read(100));

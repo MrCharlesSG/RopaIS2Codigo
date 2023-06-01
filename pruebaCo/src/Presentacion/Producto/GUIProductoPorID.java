@@ -41,9 +41,11 @@ public class GUIProductoPorID extends JFrame implements GUI{
 	String[] header = { "Nombre", "Id", "Categoria", "Talla", "Cantidad", " Id Marca"};
 	private DefaultTableModel _dataTableModel;
 	
+	private JPanel jpanel;
+	
 	public GUIProductoPorID(){
 		this.setTitle("Producto por ID");
-		JPanel jpanel=new JPanel();
+		jpanel=new JPanel();
 		JLabel jlabel=new JLabel("Identificador: ");
 		this.setLocationRelativeTo(null);
 		
@@ -168,6 +170,7 @@ public class GUIProductoPorID extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(jpanel);
 		this.setVisible(b);
 	}
 }

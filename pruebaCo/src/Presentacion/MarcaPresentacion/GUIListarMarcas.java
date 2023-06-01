@@ -117,6 +117,8 @@ public class GUIListarMarcas extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Controlador.getInstancia().setGUI(GUIListarMarcas.this);
+		Controlador.getInstancia().accion(Evento.LISTAR_MARCAS,null);
 		this.setVisible(b);
 	}
 }

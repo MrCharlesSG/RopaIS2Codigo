@@ -120,6 +120,8 @@ public class GUIListarProductos extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Controlador.getInstancia().setGUI(GUIListarProductos.this);
+		Controlador.getInstancia().accion(Evento.LISTAR_PRODUCTOS,null);
 		this.setVisible(b);
 	}
 }

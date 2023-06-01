@@ -6,8 +6,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 
@@ -90,6 +92,17 @@ public class Utils {
 		return correcto;
 	}
 	
+	
+	public static void refreshTextFields(JPanel panel){
+		for(Component c : panel.getComponents()){
+			if(c instanceof JTextField || c instanceof JFormattedTextField){
+				((JTextField) c).setText("");
+				c.repaint();
+			}else if(c instanceof JPanel){
+				refreshTextFields((JPanel) c);
+			}
+		}
+	}
 
 }
 

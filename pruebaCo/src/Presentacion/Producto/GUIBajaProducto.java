@@ -1,5 +1,6 @@
 package Presentacion.Producto;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,9 +32,11 @@ public class GUIBajaProducto extends JFrame implements GUI{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JPanel jpanel;
+	
 	public GUIBajaProducto(){
 		this.setTitle("Baja Producto");
-		JPanel jpanel=new JPanel();
+		jpanel=new JPanel();
 		this.setLocationRelativeTo(null);
 		JLabel jlabel=new JLabel("IDProducto: ");
 		final JTextField jTextField=new JTextField(20);
@@ -91,6 +94,7 @@ public class GUIBajaProducto extends JFrame implements GUI{
 
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(jpanel);
 		this.setVisible(b);
 	}
 }
