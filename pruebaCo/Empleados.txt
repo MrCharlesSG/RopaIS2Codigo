@@ -1,3 +1,0 @@
-1:Juan:Lucas:Malaquito:515151:5151Y:true:false
-2:Lamban:Joper:Lunin:33:2Y:false:false
-3:as:as:as:12:12345678u:true:true
