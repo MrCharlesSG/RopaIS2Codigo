@@ -58,7 +58,7 @@ public class GUIBajaProv extends JFrame implements GUI{
 				setVisible(false);
 				try{
 					int id=Integer.parseInt(jTextField.getText());
-					Controlador.getInstancia().accion(Evento.BAJA_PROVEEDOR, new TProveedor(null, id,null,true ));				
+					Controlador.getInstancia().accion(Evento.BAJA_PROVEEDOR, new TProveedor(null, id,true ));				
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 				}

@@ -3,6 +3,8 @@
  */
 package Negocio.MarcaNegocio;
 
+import java.util.ArrayList;
+
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
@@ -23,7 +25,7 @@ public class TMarca {
 	*/
 	private String Nombre;
 	private int cantidad;
-
+	private ArrayList<Integer> proveedores;
 	private boolean activo;
 	/** 
 	* <!-- begin-UML-doc -->
@@ -33,12 +35,21 @@ public class TMarca {
 	 * @param nombre2 
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public TMarca(String nombre, int ID, boolean activo) {
+	public TMarca(String nombre, int ID, int cantidad, boolean activo) {
 		this.Nombre=nombre;
 		this.IDMarca=ID;
 		this.activo=false;
 		this.activo=activo;
 	}
+	
+	public TMarca(String nombre, int ID, boolean activo, ArrayList<Integer> proveedores) {
+		this.Nombre=nombre;
+		this.IDMarca=ID;
+		this.activo=false;
+		this.activo=activo;
+		this.proveedores=proveedores;
+	}
+
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -109,7 +120,6 @@ public class TMarca {
 	public boolean equals(Object anObject ) {
 		TMarca a = (TMarca) anObject;
 		return this.activo==a.getActivo()&&
-				this.cantidad==a.getCantidad() &&
 				this.IDMarca==a.getID()&&
 				this.Nombre.equals(a.getNombre())
 				;

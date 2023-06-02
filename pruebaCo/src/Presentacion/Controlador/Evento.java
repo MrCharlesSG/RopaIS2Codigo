@@ -45,6 +45,9 @@ public class Evento {
 		public static final int MODIFICAR_PROVEEDOR = 904;
 		public static final int PROVEEDOR_POR_ID = 905;
 		public static final int LISTAR_PROVEEDORES = 906;
+		public static final int ADD_MARCA_TO_PROVEEDOR=913;
+		public static final int DELETE_MARCA_OF_PROVEEDOR=914;
+		public static final int LISTAR_PROVEEDORES_POR_MARCA=915;
 		//respuestas Proveedor
 		public static final int RES_ALTA_PROVEEDOR_OK = 907;
 		public static final int RES_ALTA_PROVEEDOR_KO = 908;

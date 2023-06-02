@@ -72,7 +72,6 @@ public class GUIListarProv extends JFrame implements GUI{
 		for (TProveedor m:datos) {
 			_dataTableModel.setValueAt(m.getId(), i, 0);
 			_dataTableModel.setValueAt(m.getNombre(), i, 1);
-			_dataTableModel.setValueAt(m.getMarca(), i, 2);
 			i++;
 	
 		}

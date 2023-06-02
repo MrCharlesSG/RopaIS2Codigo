@@ -38,11 +38,10 @@ public class GUIModificarProv extends JFrame implements GUI{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<Integer> marcas;	
+
 	private DefaultListModel<String> modelo;
 	
 	public GUIModificarProv(){
-		marcas = new ArrayList<Integer>();
 		modelo = new DefaultListModel<>();
 		initGUI();
 	}
@@ -55,10 +54,6 @@ public class GUIModificarProv extends JFrame implements GUI{
 		JLabel lNombre=new JLabel("Nombre (Nuevo): ");
 		JTextField tNombre= new JTextField(20);
 		this.setLocationRelativeTo(null);
-		
-		//lista de marcas
-		this.updateLista();
-		JList<String> jListaMarcas = new JList<String>(this.modelo);
 		
 		JButton masMarcas = new JButton("+ Marcas");
 		JButton aceptar=new JButton("Aceptar");
@@ -85,15 +80,9 @@ public class GUIModificarProv extends JFrame implements GUI{
 				{ public void actionPerformed(ActionEvent e)
 					{
 					ventana.setVisible(false);
-					try{
-						anadeALista(idTF.getText());
-						updateLista();
-					}catch(Exception e1){
-						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 					}
-						
-					}
-				});
+				}
+				);
 				
 				cancelarB.addActionListener(new ActionListener()
 				{ public void actionPerformed(ActionEvent e)
@@ -119,7 +108,7 @@ public class GUIModificarProv extends JFrame implements GUI{
 					try{
 						setVisible(false);
 						
-						Controlador.getInstancia().accion(Evento.MODIFICAR_PROVEEDOR, new TProveedor(tNombre.getText(),Integer.parseInt(tID.getText()), marcas, true ));
+						Controlador.getInstancia().accion(Evento.MODIFICAR_PROVEEDOR, new TProveedor(tNombre.getText(),Integer.parseInt(tID.getText()), true ));
 					}catch(NumberFormatException e1){
 						Utils.showErrorMsg("Tienen que ser numeros");
 					}
@@ -144,9 +133,6 @@ public class GUIModificarProv extends JFrame implements GUI{
 		
 		JPanel listaMarcasPanle = new JPanel();
 		listaMarcasPanle.setLayout(new FlowLayout());
-		JScrollPane scrollPane = new JScrollPane(jListaMarcas);
-		scrollPane.setBorder(BorderFactory.createTitledBorder("Lista De Marcas: "));
-		listaMarcasPanle.add(scrollPane);
 		JPanel botonesPanel = new JPanel();
 		botonesPanel.setLayout(new FlowLayout());
 		botonesPanel.add(masMarcas);
@@ -179,29 +165,6 @@ public class GUIModificarProv extends JFrame implements GUI{
 			break;
 		}
 		}
-	}
-	
-	private boolean anadeALista(String id) {
-		try {
-			ArrayList<Integer> aux= new ArrayList<Integer>();
-			int iD=Integer.parseInt(id);
-			aux.add(iD);
-			
-			if(Controlador.getInstancia().marcasExisten(aux)) {
-				this.marcas.add(iD);
-				return true;
-			}
-			
-		}catch(NumberFormatException e1) {}
-		return false;
-	}
-	
-	private void updateLista() {
-		modelo.clear();
-		for (Integer dato : this.marcas) {
-			modelo.addElement(dato.toString());
-		}
-		
 	}
 	
 	@Override

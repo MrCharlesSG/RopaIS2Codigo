@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Scanner;
 
 import Negocio.Proveedor.TProveedor;
+import Negocio.ProveedorMarca.TProveedorMarca;
 
 public class DAOProveedoresIMP implements DAOProveedores{
 
@@ -45,10 +46,7 @@ public class DAOProveedoresIMP implements DAOProveedores{
 			
 			//anado a los antiguos datos los nuevos
 			buffer.append((id)+":"+tProv.getNombre()+ ":"+ tProv.getActivo());
-			ArrayList<Integer> lista= tProv.getMarca();
-			for(int i=0; i<lista.size(); i++){
-				buffer.append(":"+lista.get(i));
-			}
+			
 				
 		}catch (IOException | NumberFormatException e) {
 			return -1;
@@ -87,9 +85,9 @@ public class DAOProveedoresIMP implements DAOProveedores{
 					buffer.append(System.lineSeparator());
 				}else{
 					buffer.append(datos[0]+":"+datos[1]+":"+ false);
-					for(int i=3; i<datos.length; i++){
+					/*for(int i=3; i<datos.length; i++){
 						buffer.append(":"+datos[i]);
-					}
+					}*///deveria eliminar tambien sus marcas
 					buffer.append(System.lineSeparator());
 					encontrado=true;
 					activo=Boolean.parseBoolean(datos[2]);
@@ -138,11 +136,8 @@ public class DAOProveedoresIMP implements DAOProveedores{
 					datos=scanner.nextLine().split(":");
 					if(id==Integer.parseInt(datos[0])){
 						encontrado=true;
-						ArrayList<Integer> lista= new ArrayList<Integer>();
-						for(int i=3; i<datos.length; i++){
-							lista.add(Integer.parseInt(datos[i]));
-						}
-						prov= new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, Boolean.parseBoolean(datos[2]));
+
+						prov= new TProveedor(datos[1], Integer.parseInt(datos[0]),Boolean.parseBoolean(datos[2]));
 					}
 				}
 				return prov;
@@ -164,11 +159,7 @@ public class DAOProveedoresIMP implements DAOProveedores{
 			while(scanner.hasNext()) {
 				
 				datos=scanner.nextLine().split(":");
-				ArrayList<Integer> lista= new ArrayList<Integer>();
-				for(int i=3; i<datos.length; i++){
-					lista.add(Integer.parseInt(datos[i]));
-				}
-				provs.add( new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, Boolean.parseBoolean(datos[2] )));
+				provs.add( new TProveedor(datos[1], Integer.parseInt(datos[0]),Boolean.parseBoolean(datos[2] )));
 			}
 			return provs;
 			
@@ -190,21 +181,16 @@ public class DAOProveedoresIMP implements DAOProveedores{
 				
 			
 				datos=scanner.nextLine().split(":");
-				if(Integer.parseInt(datos[0])==tProv.getId()){
+				if(Integer.parseInt(datos[0])==tProv.getId())
 					buffer.append(tProv.getId()+":"+tProv.getNombre()+ ":"+ tProv.getActivo());
-					
-					ArrayList<Integer> lista= tProv.getMarca();
-					for(int i=0; i<lista.size(); i++){
-						buffer.append(":"+lista.get(i));
-					}
-					buffer.append(System.lineSeparator());
-				}else{
+				else
 					buffer.append(datos[0]+":"+datos[1]+ ":"+ datos[2]);
-					for(int i=3; i<datos.length; i++){
-						buffer.append(":"+datos[i]);
-					}
-					buffer.append(System.lineSeparator());
+					
+				
+				for(int i=3; i<datos.length; i++){
+					buffer.append(":"+datos[i]);
 				}
+				buffer.append(System.lineSeparator());
 			}
 		}catch (IOException e) {
 			return -1;
@@ -240,15 +226,10 @@ public class DAOProveedoresIMP implements DAOProveedores{
 					datos=scanner.nextLine().split(":");
 					if(nombre.equals(datos[1])){
 						encontrado=true;
-						ArrayList<Integer> lista= new ArrayList<Integer>();
-						for(int i=3; i<datos.length; i++){
-							lista.add(Integer.parseInt(datos[i]));
-						}
-						prov= new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, Boolean.parseBoolean(datos[2]));
+						prov= new TProveedor(datos[1], Integer.parseInt(datos[0]),Boolean.parseBoolean(datos[2]));
 					}
 				}
 				return prov;
-				
 			}catch (IOException e) {
 				return null;
 			}
@@ -261,27 +242,115 @@ public class DAOProveedoresIMP implements DAOProveedores{
 		Collection<TProveedor> provs=new ArrayList<TProveedor>();
 		String datos[];
 		boolean found = false;
-		try(Scanner scanner=new Scanner(file)) {//bufferreader
+		try(Scanner scanner=new Scanner(file)) {
 			
 			while(scanner.hasNext()) {
 				
 				datos=scanner.nextLine().split(":");
-				ArrayList<Integer> lista= new ArrayList<Integer>();
-				for(int i=3; i<datos.length; i++){
+				int i=3;
+				//Miro si entre sus marcas esta
+				while(i<datos.length && !found) {
 					if(Integer.parseInt(datos[i]) == id)
 						found = true;
-					lista.add(Integer.parseInt(datos[i]));
 				}
 				if(found){
-				provs.add( new TProveedor(datos[1], Integer.parseInt(datos[0]), lista, Boolean.parseBoolean(datos[2] )));
+					provs.add( new TProveedor(datos[1], Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[2] )));
+					found = false;
 				}
-				found = false;
 			}
 			return provs;
 			
 		}catch (IOException e) {
 			return null;
 		}
+	}
+	
+	@Override
+	public int addMarca(TProveedorMarca pm) {
+		StringBuilder buffer=new StringBuilder();
+		File file=new File(ARCHIVO);
+		String datos[];
+		int idFinal=-1;
+		
+		
+		try(Scanner scanner=new Scanner(file)) {
+			//recojo los antiguos datos
+			while(scanner.hasNext()) {
+				
+			
+				datos=scanner.nextLine().split(":");
+				for(int i=0; i<datos.length; i++ ) {
+					buffer.append(datos[i]);
+					if(i!=datos.length-1)
+						buffer.append(":");
+					
+				}
+				if(Integer.parseInt(datos[0])==pm.getIdProveedor()) {
+					buffer.append(":"+pm.getIdMarca());
+					idFinal=Integer.parseInt(datos[0]);
+				}					
+				buffer.append(System.lineSeparator());
+			}
+		}catch (IOException e) {
+			return -1;
+		}
+		
+			
+		try(Writer w=new BufferedWriter(
+									new OutputStreamWriter(
+									new FileOutputStream(ARCHIVO)))){
+			w.write(buffer.toString());
+		}catch (IOException e) {
+			return -1;
+		}
+		return idFinal;
+	}
+	//EL formato ser: id, nombre, activo, id marcas 
+	@Override
+	public int deleteMarca(TProveedorMarca pm) {
+		StringBuilder buffer=new StringBuilder();
+		File file=new File(ARCHIVO);
+		String datos[];
+		int idFinal=-1, idAct;
+		
+		
+		try(Scanner scanner=new Scanner(file)) {
+			//recojo los antiguos datos
+			while(scanner.hasNext()) {
+				
+			
+				datos=scanner.nextLine().split(":");
+				idAct=Integer.parseInt(datos[0]);
+				//Añado datos de siempre
+				for(int i=0; i<3; i++ )  {
+					buffer.append(datos[i]);
+					if(i!=2)
+						buffer.append(":");
+					
+				}
+				//Añado todas las marcas menos la marca pm.getIdM del provedor pm.getIdP
+				for(int i=3; i< datos.length; i++) {
+					if(idAct!=pm.getIdProveedor() && Integer.parseInt(datos[i])!=pm.getIdMarca()) 
+						buffer.append(":"+datos[i]);
+					else
+						idFinal=idAct;
+				}
+				
+				buffer.append(System.lineSeparator());
+			}
+		}catch (IOException e) {
+			return -1;
+		}
+		
+			
+		try(Writer w=new BufferedWriter(
+									new OutputStreamWriter(
+									new FileOutputStream(ARCHIVO)))){
+			w.write(buffer.toString());
+		}catch (IOException e) {
+			return -1;
+		}
+		return idFinal;
 	}
 	
 

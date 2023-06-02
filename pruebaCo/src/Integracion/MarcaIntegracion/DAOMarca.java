@@ -4,6 +4,9 @@
 package Integracion.MarcaIntegracion;
 
 import Negocio.MarcaNegocio.TMarca;
+import Negocio.ProveedorMarca.TProveedorMarca;
+
+import java.util.ArrayList;
 import java.util.Collection;
 
 /** 
@@ -66,4 +69,11 @@ public interface DAOMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public TMarca readByName(String nombre);
+	
+	public Collection<TMarca> readMarcaByProveedor(int idProveedor);
+	
+	public int addProveedor(TProveedorMarca pm);
+	
+	public int deleteProveedor(TProveedorMarca pm);
+	
 }

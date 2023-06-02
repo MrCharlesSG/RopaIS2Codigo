@@ -135,7 +135,6 @@ public class GUIProvPorID extends JFrame implements GUI{
 		_dataTableModel.setNumRows(1);
 		_dataTableModel.setValueAt(datos.getId(), 0, 0);
 		_dataTableModel.setValueAt(datos.getNombre(), 0, 1);
-		_dataTableModel.setValueAt(datos.getMarca(), 0, 2);
 	
 		
 		JTable dataTable = new JTable(_dataTableModel) {

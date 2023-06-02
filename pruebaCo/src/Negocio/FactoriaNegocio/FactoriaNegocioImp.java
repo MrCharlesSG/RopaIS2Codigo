@@ -64,7 +64,7 @@ public class FactoriaNegocioImp extends FactoriaNegocio {
 	public TProveedor generaTProveedor(String[] datos) {
 		if(datos.length==2){
 			try{
-				return new TProveedor(datos[1], Integer.parseInt(datos[0]), null, true);
+				return new TProveedor(datos[1], Integer.parseInt(datos[0]), true);
 			}catch(NumberFormatException e1){
 				return null;
 			}

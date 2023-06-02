@@ -29,11 +29,9 @@ public class GUIAltaProv extends JFrame implements GUI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Integer> marcas;	
 	private DefaultListModel<String> modelo;
 	
 	public GUIAltaProv() {
-		marcas = new ArrayList<Integer>();
 		modelo = new DefaultListModel<>();
 		initGUI();	
 		setVisible(false);
@@ -45,9 +43,6 @@ public class GUIAltaProv extends JFrame implements GUI{
 		JLabel lNombre=new JLabel("Nombre:");
 		final JTextField tNombre= new JTextField(20);
 		
-		//lista de marcas
-		this.updateLista();
-		JList<String> jListaMarcas = new JList<String>(this.modelo);
 		
 		JButton masMarcas = new JButton("+ Marcas");
 		JButton aceptar=new JButton("Aceptar");
@@ -75,18 +70,7 @@ public class GUIAltaProv extends JFrame implements GUI{
 				{ public void actionPerformed(ActionEvent e)
 					{
 					ventana.setVisible(false);
-					try{
-						
-						if(anadeALista(idTF.getText())) {
-							updateLista();
-						}else {
-							throw new IllegalArgumentException();
-						}
-						
-					}catch(Exception e1){
-						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
-					}
-						
+					
 					}
 				});
 				
@@ -114,7 +98,7 @@ public class GUIAltaProv extends JFrame implements GUI{
 					try{
 						setVisible(false);
 						
-						Controlador.getInstancia().accion(Evento.ALTA_PROVEEDOR, new TProveedor(tNombre.getText(),2, marcas, true ));
+						Controlador.getInstancia().accion(Evento.ALTA_PROVEEDOR, new TProveedor(tNombre.getText(),2, true ));
 					}catch(Exception e1){
 						Utils.showErrorMsg("Error");
 					}
@@ -136,9 +120,6 @@ public class GUIAltaProv extends JFrame implements GUI{
 		
 		JPanel listaMarcasPanle = new JPanel();
 		listaMarcasPanle.setLayout(new FlowLayout());
-		JScrollPane scrollPane = new JScrollPane(jListaMarcas);
-		scrollPane.setBorder(BorderFactory.createTitledBorder("Lista De Marcas: "));
-		listaMarcasPanle.add(scrollPane);
 		JPanel botonesPanel = new JPanel();
 		botonesPanel.setLayout(new FlowLayout());
 		botonesPanel.add(masMarcas);
@@ -156,22 +137,6 @@ public class GUIAltaProv extends JFrame implements GUI{
 		pack();
 		
 	}
-	
-	private boolean anadeALista(String id) {
-		try {
-			ArrayList<Integer> aux= new ArrayList<Integer>();
-			int iD=Integer.parseInt(id);
-			aux.add(iD);
-			
-			if(Controlador.getInstancia().marcasExisten(aux)) {
-				this.marcas.add(iD);
-				return true;
-			}
-			
-			
-		}catch(NumberFormatException e1) {}
-		return false;
-	}
 
 	@Override
 	public void update(int evento, Object datos) {
@@ -187,14 +152,6 @@ public class GUIAltaProv extends JFrame implements GUI{
 			break;
 		}
 		}
-	}
-	
-	private void updateLista() {
-		modelo.clear();
-		for (Integer dato : this.marcas) {
-			modelo.addElement(dato.toString());
-		}
-		
 	}
 	
 	@Override
