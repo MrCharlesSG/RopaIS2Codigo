@@ -27,7 +27,7 @@ public class GUIListarClientes extends JFrame implements GUI {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String[] header = { "ID","NOMBRE", "APELLIDO1", "APELLIDO2","DNI", "TELEFONO","PREMIUM","ACTIVO"};
+	String[] header = { "ID","NOMBRE", "APELLIDO1", "APELLIDO2","DNI", "TELEFONO","PREMIUM","ACTIVO","CODIGO POSTAL","DESCUENTO", "POBLACION"};
 	private DefaultTableModel _dataTableModel;
 	
 	public GUIListarClientes(){
@@ -71,7 +71,7 @@ public class GUIListarClientes extends JFrame implements GUI {
 				return false;
 			}
 		};
-		_dataTableModel.setColumnIdentifiers(header);;
+		_dataTableModel.setColumnIdentifiers(header);
 		_dataTableModel.setNumRows(clientes.size());
 		int i=0;
 		for(TCliente c:clientes){
@@ -83,6 +83,16 @@ public class GUIListarClientes extends JFrame implements GUI {
 			_dataTableModel.setValueAt(c.getTelefono(), i, 5);
 			_dataTableModel.setValueAt(c.getPremium(), i, 6);
 			_dataTableModel.setValueAt(c.getActivo(), i, 7);
+			
+			
+			if(c.getPremium()){
+				_dataTableModel.setValueAt(c.get_codigo(), i, 8);
+				_dataTableModel.setValueAt(c.get_descuento()+"%", i, 9);
+			}
+			else{
+				_dataTableModel.setValueAt(c.get_poblacion(), i, 10);
+			}
+			
 			i++;
 		}
 		JTable dataTable = new JTable(_dataTableModel) {

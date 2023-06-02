@@ -27,6 +27,11 @@ public class DAOClientesIMP implements DAOClientes {
 		int id=-1;
 		if(file.length()==0){
 			buffer.append((1)+":"+cliente.getNombre()+" "+cliente.getApellido1()+" "+cliente.getApellido2()+":"+cliente.getDNI()+":"+cliente.getTelefono()+":"+cliente.getPremium()+":1");
+			if(cliente.getPremium()){
+				buffer.append((":"+cliente.get_codigo()));
+			}
+			else
+				buffer.append((":")+cliente.get_poblacion());
 			id=1;
 		}
 		else{
@@ -40,11 +45,18 @@ public class DAOClientesIMP implements DAOClientes {
 						id=Integer.parseInt(datos[0]);
 						datos[5]="1";
 					}
-					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]+":"+datos[4]+":"+datos[5]).append(System.lineSeparator());
+					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]+":"+datos[4]+":"+datos[5]+":"+datos[6]).append(System.lineSeparator());
+					
 					if(!encontrado)id=Integer.parseInt(datos[0])+1;//no me deja ponerlo fuera pero bueno
 				}
 				if(!encontrado)
 					buffer.append(id+":"+cliente.getNombre()+" "+cliente.getApellido1()+" "+cliente.getApellido2()+":"+cliente.getDNI()+":"+cliente.getTelefono()+":"+cliente.getPremium()+":1");
+					if(cliente.getPremium()){
+						buffer.append(":"+cliente.get_codigo());
+					}
+					else{
+						buffer.append(":" +cliente.get_poblacion());
+					}
 			}catch (IOException e) {
 				return id;
 			}
@@ -73,11 +85,11 @@ public class DAOClientesIMP implements DAOClientes {
 				
 					
 				if(datos[4].equalsIgnoreCase("true")){
-					cliente=new TClientePremium(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]));
+					cliente=new TClientePremium(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]),Integer.parseInt(datos[6]));
 					clientes.add(cliente);
 				}
 				else{
-					cliente=new TClienteNormal(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]),datos[4],Integer.parseInt(datos[5]));
+					cliente=new TClienteNormal(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]),datos[4],Integer.parseInt(datos[5]),datos[6]);
 					clientes.add(cliente);			
 				}
 			}	
@@ -102,11 +114,10 @@ public class DAOClientesIMP implements DAOClientes {
 				int ID=Integer.parseInt(datos[0]);
 				if (ID==id) {
 					if(datos[4].equalsIgnoreCase("true")){
-						cliente=new TClientePremium(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]));
+						cliente=new TClientePremium(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]), Integer.parseInt(datos[6]));
 					}
 					else{
-						cliente=new TClienteNormal(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]));
-					
+						cliente=new TClienteNormal(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]), datos[6]);
 					}
 				}
 			
@@ -129,10 +140,18 @@ public class DAOClientesIMP implements DAOClientes {
 				datos=scanner.nextLine().split(":");
 				if (cliente.getDNI().equalsIgnoreCase(datos[2])) {	
 					id=Integer.parseInt(datos[0]);
-					buffer.append(id+":"+cliente.getNombre()+" "+cliente.getApellido1()+" "+cliente.getApellido2()+ ":"+cliente.getDNI()+":"+cliente.getTelefono()+":"+cliente.getPremium()+":"+datos[5]).append(System.lineSeparator());
+					buffer.append(id+":"+cliente.getNombre()+" "+cliente.getApellido1()+" "+cliente.getApellido2()+ ":"+cliente.getDNI()+":"+cliente.getTelefono()+":"+cliente.getPremium()+":"+datos[5]);
+					if(cliente.getPremium()){
+						buffer.append(":"+ cliente.get_codigo());
+					}
+					else{
+						buffer.append(":"+cliente.get_poblacion());
+					}
+					buffer.append(System.lineSeparator());
 				}
-				else
-					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]+":"+datos[4]+":"+datos[5]).append(System.lineSeparator());
+				else{
+					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]+":"+datos[4]+":"+datos[5]+":"+datos[6]).append(System.lineSeparator());
+				}		
 			}
 			try(Writer w=new BufferedWriter(
 									new OutputStreamWriter(
@@ -162,7 +181,7 @@ public class DAOClientesIMP implements DAOClientes {
 					datos[5]="0";
 					id=Integer.parseInt(datos[0]);
 				}
-				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]+":"+datos[4]+":"+datos[5]).append(System.lineSeparator());
+				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]+":"+datos[4]+":"+datos[5]+":"+datos[6]).append(System.lineSeparator());
 			}
 			try(Writer w=new BufferedWriter(
 									new OutputStreamWriter(
@@ -186,9 +205,9 @@ public class DAOClientesIMP implements DAOClientes {
 				String datos[]=scanner.nextLine().split(":");
 				if (datos[2].equalsIgnoreCase(dni)) {
 					if(datos[4].equalsIgnoreCase("true"))
-						cliente=new TClientePremium(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]));
+						cliente=new TClientePremium(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]),Integer.parseInt(datos[6]));
 					else
-						cliente=new TClienteNormal(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]));
+						cliente=new TClienteNormal(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]),datos[6]);
 						encontrado=true;
 				}
 			}

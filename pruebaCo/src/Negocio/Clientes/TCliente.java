@@ -122,4 +122,16 @@ public abstract class TCliente {
 	
 	}
 	
+	public int get_codigo(){
+		return -1;
+	}
+	
+	public int get_descuento(){
+		return -1;
+	}
+	
+	public String get_poblacion(){
+		return " ";
+	}
+	
 }

@@ -2,9 +2,12 @@ package Presentacion.Clientes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -56,9 +59,36 @@ public class GUIAltaCliente extends JFrame implements GUI{
 		tlf.add( ttlf=new JTextField(20));
 		
 		JPanel tiempo=new JPanel();
-		String[] opciones =new String[]{"Premium", "No premium"};
-		JComboBox<String> tipo= new JComboBox<String>(opciones);
+		JCheckBox tipo= new JCheckBox("Premium",false);
+		
+		JLabel lcodigo=new JLabel("Codigo Postal");
+		JTextField tcodigo= new JTextField(9);
+		tcodigo.setEnabled(false);
+		
+		JLabel lpoblacion=new JLabel("Poblacion");
+		JTextField tpoblacion= new JTextField(12);
+		
+		
+		tipo.addItemListener(new ItemListener(){
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(tipo.isSelected()){
+					tcodigo.setEnabled(true);
+					tpoblacion.setEnabled(false);
+				}
+				
+				else{
+					tcodigo.setEnabled(false);
+					tpoblacion.setEnabled(true);
+				}
+			}
+			
+		});
+		
 		tiempo.add(tipo);
+		
+		
 		JButton aceptar= new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		
@@ -68,8 +98,15 @@ public class GUIAltaCliente extends JFrame implements GUI{
 		panel.add(DNI);
 		panel.add(tlf);
 		panel.add(tiempo);
+		
+		panel.add(lcodigo);
+		panel.add(tcodigo);
+		panel.add(lpoblacion);
+		panel.add(tpoblacion);
+		
 		panel.add(aceptar);
 		panel.add(cancelar);
+		
 		getContentPane().add(panel);
 		pack();
 		
@@ -86,16 +123,18 @@ public class GUIAltaCliente extends JFrame implements GUI{
 						String apellido2=tApellido2.getText();
 						String DNI= tDNI.getText();
 						int tlf= Integer.parseInt (ttlf.getText ());
-						String opc = (String) tipo.getSelectedItem();
+						//String opc = (String) tipo.getSelectedItem();
 						TCliente tCP;
-						if(opc.equalsIgnoreCase("Premium")){
-							tCP= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, true);
-							Controlador.getInstancia().setGUI(GUIAltaCliente.this);
+						if(tipo.isSelected()){
+							int codigo= Integer.parseInt(tcodigo.getText());
+							tCP= new TClientePremium (true, apellido1, apellido2, DNI, -1, nombre, tlf, true,codigo);
+							
 						}
 						else{
-							tCP=new TClienteNormal(true, apellido1, apellido2, DNI, -1, nombre, tlf, false);
+							String poblacion= tpoblacion.getText();
+							tCP=new TClienteNormal(true, apellido1, apellido2, DNI, -1, nombre, tlf, false,poblacion);
 						}
-						
+						Controlador.getInstancia().setGUI(GUIAltaCliente.this);
 						Controlador.getInstancia().accion(Evento.ALTA_CLIENTE, tCP);	
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");

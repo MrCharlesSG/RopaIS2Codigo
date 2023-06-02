@@ -67,7 +67,12 @@ public class SAClientesIMP implements SAClientes {
 	}
 	
 	private boolean esValido(TCliente cliente){
-		return cliente!=null&&ComprobadorSintactico.isName(cliente.getNombre())&&ComprobadorSintactico.isName(cliente.getApellido1())
-				&&ComprobadorSintactico.isName(cliente.getApellido2())&&ComprobadorSintactico.isDNI(cliente.getDNI());
+		if(cliente.getPremium())
+			return cliente!=null&&ComprobadorSintactico.isName(cliente.getNombre())&&ComprobadorSintactico.isName(cliente.getApellido1())
+				&&ComprobadorSintactico.isName(cliente.getApellido2())&&ComprobadorSintactico.isDNI(cliente.getDNI()) && ComprobadorSintactico.isPositive(cliente.get_codigo());
+		else{
+			return cliente!=null&&ComprobadorSintactico.isName(cliente.getNombre())&&ComprobadorSintactico.isName(cliente.getApellido1())
+					&&ComprobadorSintactico.isName(cliente.getApellido2())&&ComprobadorSintactico.isDNI(cliente.getDNI()) && ComprobadorSintactico.isName(cliente.get_poblacion());
+		}
 	}
 }
