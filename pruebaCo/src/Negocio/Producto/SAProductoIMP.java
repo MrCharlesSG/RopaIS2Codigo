@@ -94,8 +94,15 @@ public class SAProductoIMP implements SAProducto{
 		}
 		return id;
 	}
-
-
+	@Override
+	public boolean restarCantidad(int id, int cant) {
+		DAOProducto dao = FactoriaIntegracion.getInstance().generaDAOProducto();
+		TProducto tProd = dao.read(id);
+		if(tProd!=null && (tProd.getCantidad() - cant) >= 0){
+			return dao.restarCantidad(id, cant);
+		}
+		return false;
+	}
 	private boolean esValida(TProducto Tprod){
 		return ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria());
 	}
