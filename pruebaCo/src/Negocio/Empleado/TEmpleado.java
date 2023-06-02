@@ -111,4 +111,20 @@ public abstract class TEmpleado {
 	
 	}
 	
+	public int get_horas(){
+		return -1;
+	}
+	
+	public int get_precio_hora(){
+		return -1;
+	}
+	
+	public int get_salario(){
+		return -1;
+	}
+	
+	public int get_bonus(){
+		return -1;
+	}
+	
 }

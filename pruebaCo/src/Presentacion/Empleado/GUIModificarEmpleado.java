@@ -2,6 +2,8 @@ package Presentacion.Empleado;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -60,6 +62,49 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 		opciones.addElement("Tiempo Completo");
 		JComboBox<String>box=new JComboBox<>(opciones);
 		
+		
+		JLabel lsalario= new JLabel("Salario");
+		JTextField tsalario = new JTextField(9);
+		tsalario.setEnabled(false);
+		
+		JLabel lbonus= new JLabel("Bonus");
+		JTextField tbonus= new JTextField(9);
+		tbonus.setEnabled(false);
+		
+		JLabel lhoras= new JLabel("Horas");
+		JTextField thoras= new JTextField(9);
+		
+		JLabel lprecio_hora= new JLabel("Precio/hora");
+		JTextField tprecio_hora= new JTextField(9);
+		
+		box.addItemListener(new ItemListener(){
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				String opc= (String) box.getSelectedItem();
+				if(opc.equalsIgnoreCase("Tiempo Parcial")){
+					thoras.setEnabled(true);
+					tprecio_hora.setEnabled(true);
+					tsalario.setEnabled(false);
+					tbonus.setEnabled(false);
+				}
+				else{
+					thoras.setEnabled(false);
+					tprecio_hora.setEnabled(false);
+					tsalario.setEnabled(true);
+					tbonus.setEnabled(true);
+				}
+				
+			}
+			
+		});
+		
+		
+		
+		
+		
+		
+		
 		JButton ok=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		
@@ -80,6 +125,14 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 		panel.add(ltlf);
 		panel.add(ttlf);
 		panel.add(box);
+		panel.add(lsalario);
+		panel.add(tsalario);
+		panel.add(lbonus);
+		panel.add(tbonus);
+		panel.add(lhoras);
+		panel.add(thoras);
+		panel.add(lprecio_hora);
+		panel.add(tprecio_hora);
 		panel.add(botones);
 		getContentPane().add(panel);
 		pack();
@@ -98,11 +151,14 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 						String tipo=(String) box.getSelectedItem();
 						TEmpleado t;
 						if(tipo.equalsIgnoreCase("Tiempo Completo")){
-							//
-							 t= new TEmpleadoTC(nombre, apellido1, apellido2, DNI,tlf, Integer.parseInt(id), true);
+							int salario = Integer.parseInt(tsalario.getText());
+							int bonus = Integer.parseInt(tbonus.getText());
+							 t= new TEmpleadoTC(nombre, apellido1, apellido2, DNI,tlf, Integer.parseInt(id), true,salario, bonus);
 						}
 						else{
-							 t= new TEmpleadoTP(nombre, apellido1, apellido2, DNI, tlf, Integer.parseInt(id) , true);
+							int horas= Integer.parseInt(thoras.getText());
+							int precio_hora =Integer.parseInt(tprecio_hora.getText());
+							 t= new TEmpleadoTP(nombre, apellido1, apellido2, DNI, tlf, Integer.parseInt(id) , true, horas, precio_hora);
 						}
 						Controlador.getInstancia().setGUI(GUIModificarEmpleado.this);
 						Controlador.getInstancia().accion(Evento.MODIFICAR_EMPLEADO, t);	

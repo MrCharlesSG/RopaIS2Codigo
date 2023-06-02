@@ -22,21 +22,17 @@ import Negocio.Ventas.TVenta;
 import Presentacion.GUI.GUI;
 
 public class ControladorIMP extends Controlador {
-	private SAMarca saMarca; 
-	private SAProducto saProducto;
-	private SAProveedores saProveedor;
-	private SAClientes saCliente;
-	private SAEmpleado saEmpleado;
+	
+	
+	
+	
+	
 	private GUI gui;
-	private SAVentas saVenta;
+	
 	
 	public ControladorIMP(){
-		this.saMarca=FactoriaNegocio.getInstance().generaSAMarca();
-		this.saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
-		this.saProducto= FactoriaNegocio.getInstance().generaSAProducto();
-		this.saEmpleado = FactoriaNegocio.getInstance().generaSAEmpleado();
-		this.saCliente=FactoriaNegocio.getInstance().generaSAClientes();
-		this.saVenta = FactoriaNegocio.getInstance().generaSAVentas();
+		
+		
 	}
 	
 	public void accion(int evento,Object datos) {
@@ -45,6 +41,7 @@ public class ControladorIMP extends Controlador {
 			 * MARCA
 			 */
 			case Evento.ALTA_MARCA:{
+				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				TMarca tMarca=(TMarca)datos;
 				int res=saMarca.create(tMarca);
 				
@@ -55,6 +52,7 @@ public class ControladorIMP extends Controlador {
 				break;
 			}
 			case Evento.BAJA_MARCA:{
+				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				int idMarca=(int) datos;
 				int res=saMarca.delete(idMarca);
 				
@@ -65,11 +63,13 @@ public class ControladorIMP extends Controlador {
 				break;
 			}
 			case Evento.LISTAR_MARCAS:{
+				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				Collection<TMarca>marcas=saMarca.readAll();
 				gui.update(Evento.LISTAR_MARCAS, marcas);
 				break;
 			}
 			case Evento.MARCA_PORID:{
+				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				TMarca marca=saMarca.read((int)datos);
 				if(marca==null){
 					gui.update(Evento.KO, null);
@@ -81,6 +81,7 @@ public class ControladorIMP extends Controlador {
 				break;
 			}
 			case Evento.MODIFICAR_MARCA:{
+				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				int res=saMarca.update((TMarca) datos);
 				
 				if(res>0)
@@ -95,6 +96,7 @@ public class ControladorIMP extends Controlador {
 			 * PRODUCTO
 			 */
 			case Evento.ALTA_PRODUCTO:{
+				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				int res=saProducto.create((TProducto) datos);
 				if(res>=0){
 					gui.update(Evento.OK,res);
@@ -105,6 +107,7 @@ public class ControladorIMP extends Controlador {
 				break;
 			}
 			case Evento.BAJA_PRODUCTO:{
+				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				int res=saProducto.delete(((TProducto) datos).getIdProducto());
 				if(res>=0){
 					gui.update(Evento.OK,res);
@@ -115,11 +118,13 @@ public class ControladorIMP extends Controlador {
 				break;
 			}
 			case Evento.LISTAR_PRODUCTOS:{
+				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				Collection<TProducto>productos=saProducto.readAll();
 				gui.update(Evento.LISTAR_PRODUCTOS, productos);
 				break;
 			}
 			case Evento.MODIFICAR_PRODUCTO:{
+				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				int res=saProducto.update((TProducto)datos);
 				if(res>=0){
 					gui.update(Evento.OK,res);
@@ -130,6 +135,7 @@ public class ControladorIMP extends Controlador {
 				break;
 			}
 			case Evento.PRODUCTO_POR_ID:{
+				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				TProducto producto=saProducto.read((Integer)datos);
 				if(producto.getIdMarca() != -1)
 					gui.update(Evento.OK, producto);
@@ -142,7 +148,8 @@ public class ControladorIMP extends Controlador {
 			 * PROVEEDORES
 			 */
 			case Evento.ALTA_PROVEEDOR:{
-				int res=this.saProveedor.create((TProveedor)datos);
+				SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
+				int res=saProveedor.create((TProveedor)datos);
 				if(res>0){
 					gui.update(Evento.OK, res);
 				}
@@ -152,6 +159,7 @@ public class ControladorIMP extends Controlador {
 				break;
             }
             case Evento.BAJA_PROVEEDOR:{
+            	SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
                 int res = saProveedor.delete(((TProveedor)datos).getId());
 
                 if(res > 0)
@@ -161,6 +169,7 @@ public class ControladorIMP extends Controlador {
                 break;
             }
             case Evento.LISTAR_PROVEEDORES:{
+            	SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
                 Collection<TProveedor>proveedores = saProveedor.readAll();
                 if(proveedores!= null && proveedores instanceof ArrayList){
                 	gui.update(Evento.OK, proveedores);
@@ -170,13 +179,15 @@ public class ControladorIMP extends Controlador {
                 break;
             }
             case Evento.PROVEEDOR_POR_ID:{
+            	SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
             	    TProveedor proveedor = saProveedor.read((int)datos);
             	    int res= proveedor==null ? Evento.KO : Evento.OK;
             	    gui.update(res, proveedor);
                 break;
             }
             case Evento.MODIFICAR_PROVEEDOR:{
-                	int res = this.saProveedor.update((TProveedor)datos);
+            	SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
+                	int res = saProveedor.update((TProveedor)datos);
                 	if( res>0){
                 		gui.update(Evento.OK, datos);
                 	}else{
@@ -185,7 +196,8 @@ public class ControladorIMP extends Controlador {
                 break;
             }
             case Evento.LISTA_MARCAS_DE_PROVEEDOR:{
-            	Collection<TMarca> res=this.saMarca.readByProveedor((int)datos);
+            	SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
+            	Collection<TMarca> res=saMarca.readByProveedor((int)datos);
             	if(res.size()>0) {
             		gui.update(Evento.OK, res);
             	}else {
@@ -194,7 +206,8 @@ public class ControladorIMP extends Controlador {
             	break;
             }
             case Evento.ADD_MARCA_TO_PROVEEDOR:{
-            	int res=this.saProveedor.addMarcaToProveedor((TProveedorMarca)datos);
+            	SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
+            	int res=saProveedor.addMarcaToProveedor((TProveedorMarca)datos);
             	if(res>0) {
             		gui.update(Evento.OK, res);
             	}else{
@@ -206,8 +219,8 @@ public class ControladorIMP extends Controlador {
 			 * CLIENTES
 			 */
 			case Evento.ALTA_CLIENTE:{
-				
-				 int res=this.saCliente.create((TCliente)datos);
+				SAClientes saCliente = FactoriaNegocio.getInstance().generaSAClientes();
+				 int res= saCliente.create((TCliente)datos);
 				 if(res>0){
 					gui.update(Evento.RES_ALTA_CLIENTE_OK, new Integer(res));
 				}
@@ -218,6 +231,7 @@ public class ControladorIMP extends Controlador {
 				break;
             }
             case Evento.BAJA_CLIENTE:{
+            	SAClientes saCliente = FactoriaNegocio.getInstance().generaSAClientes();
                   int idcliente=(int) datos;
                   int res = saCliente.delete(idcliente);
                   if(res > 0)
@@ -227,17 +241,20 @@ public class ControladorIMP extends Controlador {
                 break;
             }
             case Evento.LISTAR_CLIENTES:{
+              SAClientes saCliente = FactoriaNegocio.getInstance().generaSAClientes();
               Collection<TCliente>clientes= saCliente.readAll();
               gui.update(Evento.LISTAR_CLIENTES, clientes);
                break;
             }
             case Evento.CLIENTE_POR_ID:{
-            	    TCliente cliente = saCliente.read((int)datos);
+            	   SAClientes saCliente = FactoriaNegocio.getInstance().generaSAClientes();
+            	   TCliente cliente = saCliente.read((int)datos);
             	   int res= cliente==null ? Evento.RES_CLIENTE_POR_ID_KO : Evento.RES_CLIENTE_POR_ID_OK;
             	   gui.update(res, cliente);
                 break;
             }
             case Evento.MODIFICAR_CLIENTE:{
+            	    SAClientes saCliente = FactoriaNegocio.getInstance().generaSAClientes();
                 	int res=saCliente.update((TCliente)datos);
                 	if(res>0)
                 		gui.update(Evento.RES_MODIFICAR_CLIENTE_OK, res);
@@ -249,7 +266,8 @@ public class ControladorIMP extends Controlador {
              * EMPLEADOS
              */
             case Evento.ALTA_EMPLEADO:{
-            	int res = this.saEmpleado.create((TEmpleado)datos);
+            	SAEmpleado saEmpleado= FactoriaNegocio.getInstance().generaSAEmpleado();
+            	int res = saEmpleado.create((TEmpleado)datos);
             	if(res>0) {
             		gui.update(Evento.OK, res);
             	}else {
@@ -258,7 +276,8 @@ public class ControladorIMP extends Controlador {
             	break;
             }
             case Evento.BAJA_EMPLEADO:{
-            	int res = this.saEmpleado.delete((int)datos);
+            	SAEmpleado saEmpleado= FactoriaNegocio.getInstance().generaSAEmpleado();
+            	int res = saEmpleado.delete((int)datos);
             	if(res==(int)datos) {
             		gui.update(Evento.OK, res);
             	}else {
@@ -267,7 +286,8 @@ public class ControladorIMP extends Controlador {
             	break;
             }
             case Evento.MODIFICAR_EMPLEADO:{
-            	int res = this.saEmpleado.update((TEmpleado)datos);
+            	SAEmpleado saEmpleado= FactoriaNegocio.getInstance().generaSAEmpleado();
+            	int res = saEmpleado.update((TEmpleado)datos);
             	if(res>0) {
             		gui.update(Evento.OK, (TEmpleado)datos);
             	}else {
@@ -276,13 +296,15 @@ public class ControladorIMP extends Controlador {
             	break;
             }
             case Evento.EMPLEADO_POR_ID:{
+            	SAEmpleado saEmpleado= FactoriaNegocio.getInstance().generaSAEmpleado();
             	TEmpleado empl = saEmpleado.read((int)datos);
 	         	int res= empl==null ? Evento.KO : Evento.OK;
 	         	gui.update(res, empl);
 	        	break;
             }
             case Evento.LISTAR_EMPLEADO:{
-            	Collection<TEmpleado> lista = this.saEmpleado.readAll();
+            	SAEmpleado saEmpleado= FactoriaNegocio.getInstance().generaSAEmpleado();
+            	Collection<TEmpleado> lista = saEmpleado.readAll();
             	if(lista!= null && lista instanceof ArrayList){
                 	gui.update(Evento.OK, lista);
                 }else{
@@ -294,6 +316,7 @@ public class ControladorIMP extends Controlador {
              * VENTAS
              */
             case Evento.ABRIR_VENTA:{
+            	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
             	int res=saVenta.create((TVenta)datos);
             	if(res>0){
             		gui.update(Evento.RES_ABRIR_VENTA_OK, saVenta.read(res));
@@ -304,6 +327,7 @@ public class ControladorIMP extends Controlador {
             	break;
             }
             case Evento.CERRAR_VENTA:{
+            	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
             	int res=saVenta.update((TVenta)datos,false);
             	if(res>0){
             		gui.update(Evento.RES_CERRAR_VENTA_OK, null);
@@ -314,6 +338,7 @@ public class ControladorIMP extends Controlador {
             	break;
             }
             case Evento.VENTA_POR_ID:{
+            	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
             	TVenta venta=saVenta.read((int)datos);
 				if(venta==null){
 					gui.update(Evento.RES_VENTA_POR_ID_KO, null);
@@ -324,11 +349,13 @@ public class ControladorIMP extends Controlador {
             	break;
             }
             case Evento.LISTAR_VENTAS:{
+            	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
             	Collection<TVenta>ventas=saVenta.readAll();
 				gui.update(Evento.LISTAR_VENTAS, ventas);
             	break;
             }
             case Evento.DEVOLUCION_VENTA:{
+            	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
             	int res=saVenta.devolucionVenta((List<Integer>)datos);
             	if(res>0){
             		gui.update(Evento.RES_DEVOLUCION_VENTA_OK,res);
@@ -339,11 +366,13 @@ public class ControladorIMP extends Controlador {
             	break;
             }
             case Evento.VENTAS_DE_UN_CLIENTE:{
+            	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
             	Collection<TVenta>ventas=saVenta.readByCliente((Integer)datos);
             	gui.update(Evento.VENTAS_DE_UN_CLIENTE, ventas);
             	break;
             }
             case Evento.VENTAS_DE_UN_EMPLEADO:{
+            	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
             	Collection<TVenta>ventas=saVenta.readByEmpleado((Integer)datos);
             	gui.update(Evento.VENTAS_DE_UN_EMPLEADO, ventas);
             	break;

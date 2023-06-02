@@ -2,6 +2,8 @@ package Presentacion.Empleado;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -57,7 +59,55 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 		JPanel tiempo=new JPanel();
 		String[] opciones =new String[]{"Parcial", "Completo"};
 		JComboBox<String> tipo= new JComboBox<String>(opciones);
+		
+		JLabel lsalario= new JLabel("Salario");
+		JTextField tsalario = new JTextField(9);
+		tsalario.setEnabled(false);
+		
+		JLabel lbonus= new JLabel("Bonus");
+		JTextField tbonus= new JTextField(9);
+		tbonus.setEnabled(false);
+		
+		JLabel lhoras= new JLabel("Horas");
+		JTextField thoras= new JTextField(9);
+		
+		JLabel lprecio_hora= new JLabel("Precio/hora");
+		JTextField tprecio_hora= new JTextField(9);
+		
+		tipo.addItemListener(new ItemListener(){
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				String opc= (String) tipo.getSelectedItem();
+				if(opc.equalsIgnoreCase("Parcial")){
+					thoras.setEnabled(true);
+					tprecio_hora.setEnabled(true);
+					tsalario.setEnabled(false);
+					tbonus.setEnabled(false);
+				}
+				else{
+					thoras.setEnabled(false);
+					tprecio_hora.setEnabled(false);
+					tsalario.setEnabled(true);
+					tbonus.setEnabled(true);
+				}
+				
+			}
+			
+		});
+		
+		
+		
 		tiempo.add(tipo);
+		tiempo.add(lsalario);
+		tiempo.add(tsalario);
+		tiempo.add(lbonus);
+		tiempo.add(tbonus);
+		tiempo.add(lhoras);
+		tiempo.add(thoras);
+		tiempo.add(lprecio_hora);
+		tiempo.add(tprecio_hora);
+		
 		JButton aceptar= new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		
@@ -84,10 +134,14 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 					int tlf= Integer.parseInt (ttlf.getText ());
 					TEmpleado emp;
 					if(tip.equalsIgnoreCase("Parcial")){
-						emp=new TEmpleadoTP (nombre, apellido1, apellido2, DNI, tlf, -1,  false);
+						int horas= Integer.parseInt(thoras.getText());
+						int precio_hora =Integer.parseInt(tprecio_hora.getText());
+						emp=new TEmpleadoTP (nombre, apellido1, apellido2, DNI, tlf, -1,  false, horas, precio_hora);
 					}
 					else{
-						emp=new TEmpleadoTC (nombre, apellido1, apellido2, DNI, tlf, -1,  true);
+						int salario = Integer.parseInt(tsalario.getText());
+						int bonus = Integer.parseInt(tbonus.getText());
+						emp=new TEmpleadoTC (nombre, apellido1, apellido2, DNI, tlf, -1,  true, salario, bonus);
 					}
 					//String nombre, String apellido1, String apellido2, String DNI, int tfno, int ID, boolean activo
 					

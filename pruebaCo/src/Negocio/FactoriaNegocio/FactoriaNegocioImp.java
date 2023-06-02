@@ -80,12 +80,14 @@ public class FactoriaNegocioImp extends FactoriaNegocio {
 
 	@Override
 	public TEmpleado generaTEmpleado(String[] datos) {//String nombre , String apellido1, String apellido2, String DNI, int tfno, int ID, boolean tiempoCompleto
-		TEmpleado empl= null;
-		try{
+		/*
+		 * TEmpleado empl= null;
+		 * 
+		 * try{
 			if(datos.length==7){
 				boolean tiempo = Boolean.parseBoolean(datos[6]);
 				if(tiempo){
-					empl= new TEmpleadoTC(datos[0], datos[1], datos[2], datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), true);
+					empl= new TEmpleadoTC(datos[0], datos[1], datos[2], datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), true, Integer.parseInt(datos[8]));
 				}else{
 					empl= new TEmpleadoTP(datos[0], datos[1], datos[2], datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), true);
 				}
@@ -94,6 +96,8 @@ public class FactoriaNegocioImp extends FactoriaNegocio {
 			return null;
 		}
 		return empl;
+		 */
+		return null;
 	}
 
 	@Override

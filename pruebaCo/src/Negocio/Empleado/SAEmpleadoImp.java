@@ -88,8 +88,17 @@ public class SAEmpleadoImp implements SAEmpleado {
 	}
 	
 	private boolean comprobadorTEmpleado(TEmpleado empl) {
-		return empl!=null && ComprobadorSintactico.isName(empl.getNombre()) && ComprobadorSintactico.isName(empl.getApellido1())
-				&& ComprobadorSintactico.isName(empl.getApellido2()) && ComprobadorSintactico.isDNI(empl.getDNI());
+		if(empl.isTiempoCompleto()){
+			return empl!=null && ComprobadorSintactico.isName(empl.getNombre()) && ComprobadorSintactico.isName(empl.getApellido1())
+					&& ComprobadorSintactico.isName(empl.getApellido2()) && ComprobadorSintactico.isDNI(empl.getDNI()) && ComprobadorSintactico.isPositive(empl.get_salario())
+					&& ComprobadorSintactico.isPositive(empl.get_bonus());
+		}
+		else{
+			return empl!=null && ComprobadorSintactico.isName(empl.getNombre()) && ComprobadorSintactico.isName(empl.getApellido1())
+					&& ComprobadorSintactico.isName(empl.getApellido2()) && ComprobadorSintactico.isDNI(empl.getDNI()) && ComprobadorSintactico.isPositive(empl.get_horas())
+					&& ComprobadorSintactico.isPositive(empl.get_precio_hora());
+		}
+		
 	}
 
 }

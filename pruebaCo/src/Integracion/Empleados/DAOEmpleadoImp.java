@@ -37,6 +37,14 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 			buffer.append(":"+empleado.getDNI());
 			buffer.append(":"+empleado.isTiempoCompleto());			
 			buffer.append(":"+empleado.isActivo());
+			if(empleado.isTiempoCompleto()){
+				buffer.append(":"+empleado.get_salario());
+				buffer.append(":"+empleado.get_bonus());
+			}
+			else{
+				buffer.append(":"+empleado.get_horas());
+				buffer.append(":"+empleado.get_precio_hora());
+			}
 			
 		}
 		else{
@@ -63,6 +71,14 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 				buffer.append(":"+empleado.getDNI());
 				buffer.append(":"+empleado.isTiempoCompleto());			
 				buffer.append(":"+empleado.isActivo());
+				if(empleado.isTiempoCompleto()){
+					buffer.append(":"+empleado.get_salario());
+					buffer.append(":"+empleado.get_bonus());
+				}
+				else{
+					buffer.append(":"+empleado.get_horas());
+					buffer.append(":"+empleado.get_precio_hora());
+				}
 				
 			}catch (IOException | NumberFormatException e) {
 				return -1;
@@ -95,9 +111,9 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 				//ID:Nombre:Apellido1:Apellido2:TFNO:DNI:tiempoCompleto:Activo
 				
 				if(Boolean.parseBoolean(datos[6])){
-					aux= new TEmpleadoTC(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]));
+					aux= new TEmpleadoTC(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]));
 				}else{
-					aux= new TEmpleadoTP(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]));
+					aux= new TEmpleadoTP(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]));
 				}
 				lista.add(aux);
 			}
@@ -122,9 +138,9 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 				encontrado=Integer.parseInt(datos[0])==id;
 				if(encontrado){
 					if(Boolean.parseBoolean(datos[6])){
-						aux= new TEmpleadoTC(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]));
+						aux= new TEmpleadoTC(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]));
 					}else{
-						aux= new TEmpleadoTP(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]));
+						aux= new TEmpleadoTP(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]));
 					}
 				}
 				
@@ -163,6 +179,15 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 					buffer.append(":"+empleado.getDNI());
 					buffer.append(":"+empleado.isTiempoCompleto());			
 					buffer.append(":"+empleado.isActivo());
+					
+					if(empleado.isTiempoCompleto()){
+						buffer.append(":"+empleado.get_salario());
+						buffer.append(":"+empleado.get_bonus());
+					}
+					else{
+						buffer.append(":"+empleado.get_horas());
+						buffer.append(":"+empleado.get_precio_hora());
+					}
 				}
 				buffer.append(System.lineSeparator());
 				
@@ -252,9 +277,9 @@ public class DAOEmpleadoImp implements DAOEmpleado {
 				encontrado=datos[5].equals(dni);
 				if(encontrado){
 					if(Boolean.parseBoolean(datos[6])){
-						aux= new TEmpleadoTC(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]));
+						aux= new TEmpleadoTC(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]));
 					}else{
-						aux= new TEmpleadoTP(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]));
+						aux= new TEmpleadoTP(datos[1], datos[2], datos[3], datos[5], Integer.parseInt(datos[4]),Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]));
 					}								
 				}				
 			}
