@@ -88,8 +88,7 @@ public class GUIListarMarcas extends JFrame implements GUI{
 		for (TMarca m:marcas) {
 			_dataTableModel.setValueAt(m.getID(), i, 0);
 			_dataTableModel.setValueAt(m.getNombre(), i, 1);
-			_dataTableModel.setValueAt(m.getCantidad(), i, 2);
-			_dataTableModel.setValueAt(m.getActivo(), i, 3);
+			_dataTableModel.setValueAt(m.getActivo(), i, 2);
 			i++;
 		}
 		JTable dataTable = new JTable(_dataTableModel) {

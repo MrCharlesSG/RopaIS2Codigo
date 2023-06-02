@@ -269,7 +269,7 @@ public class DAOProveedoresIMP implements DAOProveedores{
 	public int addMarca(TProveedorMarca pm) {
 		StringBuilder buffer=new StringBuilder();
 		File file=new File(ARCHIVO);
-		String datos[];
+		String datos[], linea;
 		int idFinal=-1;
 		
 		
@@ -277,14 +277,9 @@ public class DAOProveedoresIMP implements DAOProveedores{
 			//recojo los antiguos datos
 			while(scanner.hasNext()) {
 				
-			
-				datos=scanner.nextLine().split(":");
-				for(int i=0; i<datos.length; i++ ) {
-					buffer.append(datos[i]);
-					if(i!=datos.length-1)
-						buffer.append(":");
-					
-				}
+				linea = scanner.nextLine();
+				datos=linea.split(":");
+				buffer.append(linea);
 				if(Integer.parseInt(datos[0])==pm.getIdProveedor()) {
 					buffer.append(":"+pm.getIdMarca());
 					idFinal=Integer.parseInt(datos[0]);

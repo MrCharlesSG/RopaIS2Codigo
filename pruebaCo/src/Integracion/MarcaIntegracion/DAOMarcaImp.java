@@ -32,7 +32,7 @@ public class DAOMarcaImp implements DAOMarca {
 	/*
 	 * String nombre, int ID, boolean activo, proveedores)
 	 * 0      1     2       3                     4
-	 * nombre:id:cantidad:activo:proveedores
+	 * nombre:id:activo:proveedores
 	 */
 	
 	public int create(TMarca marca) {
@@ -86,11 +86,7 @@ public class DAOMarcaImp implements DAOMarca {
 		try(Scanner sacanner=new Scanner(file)){
 			while(sacanner.hasNextLine()){
 				datos=sacanner.nextLine().split(":");
-				ArrayList<Integer> lista= new ArrayList<Integer>();
-				for(int i=4; i<datos.length; i++){
-					lista.add(Integer.parseInt(datos[i]));
-				}
-				marca=new TMarca(datos[0],Integer.parseInt(datos[1]), Boolean.parseBoolean(datos[2]), lista);
+				marca=new TMarca(datos[0],Integer.parseInt(datos[1]), Boolean.parseBoolean(datos[2]));
 				marcas.add(marca);
 			}
 			return marcas;
@@ -115,11 +111,7 @@ public class DAOMarcaImp implements DAOMarca {
 				
 				int ID=Integer.parseInt(tokens[1]);
 				if (ID==id) {
-					ArrayList<Integer> lista= new ArrayList<Integer>();
-					for(int i=4; i<tokens.length; i++){
-						lista.add(Integer.parseInt(tokens[i]));
-					}
-					marca=new TMarca(tokens[0],Integer.parseInt(tokens[1]), Boolean.parseBoolean(tokens[2]), lista);
+					marca=new TMarca(tokens[0],Integer.parseInt(tokens[1]), Boolean.parseBoolean(tokens[2]));
 					encontrado=true;
 				}
 			}
@@ -147,14 +139,11 @@ public class DAOMarcaImp implements DAOMarca {
 				datos=scanner.nextLine().split(":");
 				if (marca.getID()==Integer.parseInt(datos[1])) {	
 					id=Integer.parseInt(datos[1]);
-					buffer.append(marca.getNombre()+":"+id+ ":"+marca.getActivo()).append(System.lineSeparator());
+					buffer.append(marca.getNombre()+":"+id+ ":"+marca.getActivo());
 				}
 				else
-					buffer.append(datos[0]+":"+datos[1]+":"+marca.getActivo()).append(System.lineSeparator());
+					buffer.append(datos[0]+":"+datos[1]+":"+marca.getActivo());
 				
-				for(int i=4; i<datos.length; i++){
-					buffer.append(":"+datos[i]);
-				}
 				buffer.append(System.lineSeparator());
 			}
 			try(Writer w=new BufferedWriter(
@@ -222,11 +211,7 @@ public class DAOMarcaImp implements DAOMarca {
 				String tokens[]=scanner.nextLine().split(":");
 				
 				if (tokens[0].equalsIgnoreCase(nombre)) {
-					ArrayList<Integer> lista= new ArrayList<Integer>();
-					for(int i=4; i<tokens.length; i++){
-						lista.add(Integer.parseInt(tokens[i]));
-					}
-					marca=new TMarca(tokens[0],Integer.parseInt(tokens[1]), Boolean.parseBoolean(tokens[2]), lista);
+					marca=new TMarca(tokens[0],Integer.parseInt(tokens[1]), Boolean.parseBoolean(tokens[2]));
 					encontrado=true;
 				}
 			}
@@ -246,14 +231,14 @@ public class DAOMarcaImp implements DAOMarca {
 			while(scanner.hasNext()) {
 				
 				datos=scanner.nextLine().split(":");
-				int i=4;
+				int i=3;
 				//Miro si entre sus proveedores esta
 				while(i<datos.length && !found) {
 					if(Integer.parseInt(datos[i]) == idProveedor)
 						found = true;
 				}
 				if(found){
-					marcas.add( new TMarca(datos[0], Integer.parseInt(datos[1]), Boolean.parseBoolean(datos[3] )));
+					marcas.add( new TMarca(datos[0], Integer.parseInt(datos[1]), Boolean.parseBoolean(datos[2] )));
 					found = false;
 				}
 			}
@@ -264,19 +249,87 @@ public class DAOMarcaImp implements DAOMarca {
 		}
 	}
 	
-	/*
-	 * String nombre, int ID, boolean activo, proveedores)
-	 * 0      1     2       3                     4
-	 * nombre:id:cantidad:activo:proveedores
-	 */
+
 	@Override
 	public int addProveedor(TProveedorMarca pm) {
-		// TODO Auto-generated method stub
-		return 0;
+		StringBuilder buffer=new StringBuilder();
+		File file=new File(ARCHIVO);
+		String datos[], linea;
+		int idFinal=-1;
+		
+		
+		try(Scanner scanner=new Scanner(file)) {
+			//recojo los antiguos datos
+			while(scanner.hasNext()) {
+				
+				linea=scanner.nextLine();
+				datos=linea.split(":");
+				buffer.append(linea);
+				if(Integer.parseInt(datos[0])==pm.getIdMarca()) {
+					buffer.append(":"+pm.getIdProveedor());
+					idFinal=Integer.parseInt(datos[0]);
+				}					
+				buffer.append(System.lineSeparator());
+			}
+		}catch (IOException e) {
+			return -1;
+		}
+		
+			
+		try(Writer w=new BufferedWriter(
+									new OutputStreamWriter(
+									new FileOutputStream(ARCHIVO)))){
+			w.write(buffer.toString());
+		}catch (IOException e) {
+			return -1;
+		}
+		return idFinal;
 	}
+	
 	@Override
 	public int deleteProveedor(TProveedorMarca pm) {
-		// TODO Auto-generated method stub
-		return 0;
+		StringBuilder buffer=new StringBuilder();
+		File file=new File(ARCHIVO);
+		String datos[];
+		int idFinal=-1, idAct;
+		
+		
+		try(Scanner scanner=new Scanner(file)) {
+			//recojo los antiguos datos
+			while(scanner.hasNext()) {
+				
+			
+				datos=scanner.nextLine().split(":");
+				idAct=Integer.parseInt(datos[0]);
+				//Añado datos de siempre
+				for(int i=0; i<3; i++ )  {
+					buffer.append(datos[i]);
+					if(i!=2)
+						buffer.append(":");
+					
+				}
+				//Añado todas las marcas menos el provedor pm.getId de la Pmarca pm.getIdM
+				for(int i=3; i< datos.length; i++) {
+					if(idAct!=pm.getIdMarca() && Integer.parseInt(datos[i])!=pm.getIdProveedor()) 
+						buffer.append(":"+datos[i]);
+					else
+						idFinal=idAct;
+				}
+				
+				buffer.append(System.lineSeparator());
+			}
+		}catch (IOException e) {
+			return -1;
+		}
+		
+			
+		try(Writer w=new BufferedWriter(
+									new OutputStreamWriter(
+									new FileOutputStream(ARCHIVO)))){
+			w.write(buffer.toString());
+		}catch (IOException e) {
+			return -1;
+		}
+		return idFinal;
 	}
 }

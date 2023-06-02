@@ -17,8 +17,6 @@ import Presentacion.Controlador.Controlador;
 
 
 public class SAProveedoresIMP implements SAProveedores{
-
-	private SAMarca saMarca =FactoriaNegocio.getInstance().generaSAMarca();
 	
 	public int create(TProveedor tProv){
 		int id=-1;
@@ -32,6 +30,7 @@ public class SAProveedoresIMP implements SAProveedores{
 				id = daoProveedor.create(tProv); 
 			}else{
 				if(!leido.getActivo()){
+					tProv.setId(leido.getId());
 					id=daoProveedor.update(tProv);
 				}
 			}
@@ -114,8 +113,8 @@ public class SAProveedoresIMP implements SAProveedores{
 		Collection<TProveedor> prov = new ArrayList<TProveedor>();
 		TMarca marca = null;
 		if(ComprobadorSintactico.isPositive(id))
-			marca = saMarca.read(id);
-		if(marca != null && marca.getActivo()){
+			marca = FactoriaNegocio.getInstance().generaSAMarca().read(id);
+		if(marca != null){
 			prov=FactoriaIntegracion.getInstance().generaDAOProveedor().readByMarca(id);
 		}
 		return prov;

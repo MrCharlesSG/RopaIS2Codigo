@@ -183,6 +183,15 @@ public class ControladorIMP extends Controlador {
                 	}
                 break;
             }
+            case Evento.LISTA_MARCAS_DE_PROVEEDOR:{
+            	Collection<TProveedor> res=this.saProveedor.readByMarca((int)datos);
+            	if(res.size()>0) {
+            		gui.update(Evento.OK, res);
+            	}else {
+            		gui.update(Evento.KO, res);
+            	}
+            	break;
+            }
             /*
 			 * CLIENTES
 			 */

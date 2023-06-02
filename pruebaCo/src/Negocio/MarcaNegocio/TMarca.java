@@ -24,8 +24,6 @@ public class TMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private String Nombre;
-	private int cantidad;
-	private ArrayList<Integer> proveedores;
 	private boolean activo;
 	/** 
 	* <!-- begin-UML-doc -->
@@ -42,12 +40,11 @@ public class TMarca {
 		this.activo=activo;
 	}
 	
-	public TMarca(String nombre, int ID, boolean activo, ArrayList<Integer> proveedores) {
+	public TMarca(String nombre, int ID, boolean activo) {
 		this.Nombre=nombre;
 		this.IDMarca=ID;
 		this.activo=false;
 		this.activo=activo;
-		this.proveedores=proveedores;
 	}
 
 
@@ -112,9 +109,6 @@ public class TMarca {
 		return activo;
 	}
 	
-	public int getCantidad(){
-		return this.cantidad;
-	}
 	
 	@Override
 	public boolean equals(Object anObject ) {

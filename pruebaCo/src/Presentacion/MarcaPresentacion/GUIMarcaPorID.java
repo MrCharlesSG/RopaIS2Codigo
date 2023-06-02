@@ -135,8 +135,7 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 		_dataTableModel.setNumRows(1);
 			_dataTableModel.setValueAt(datos.getID(), 0, 0);
 			_dataTableModel.setValueAt(datos.getNombre(), 0, 1);
-			_dataTableModel.setValueAt(datos.getCantidad(), 0, 2);
-			_dataTableModel.setValueAt(datos.getActivo(), 0, 3);
+			_dataTableModel.setValueAt(datos.getActivo(), 0, 2);
 
 		JTable dataTable = new JTable(_dataTableModel) {
 			private static final long serialVersionUID = 1L;

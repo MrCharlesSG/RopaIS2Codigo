@@ -5,6 +5,9 @@ package Negocio.MarcaNegocio;
 
 import java.util.Collection;
 
+import Negocio.Proveedor.TProveedor;
+import Negocio.ProveedorMarca.TProveedorMarca;
+
 /** 
 * <!-- begin-UML-doc -->
 * <!-- end-UML-doc -->
@@ -64,5 +67,11 @@ public interface SAMarca {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public TMarca readByName(String nombre);
+	
+    public Collection<TMarca> readByProveedor(int idProv);
+    
+    public int addProveedorToMarca(TProveedorMarca pm);
+    
+    public int deleteProveedorOfMarca(TProveedorMarca pm);
 	
 }

@@ -36,8 +36,8 @@ import Presentacion.ProveedorPresentacion.GUIAddMarcaToProveedor;
 import Presentacion.ProveedorPresentacion.GUIAltaProv;
 import Presentacion.ProveedorPresentacion.GUIBajaProv;
 import Presentacion.ProveedorPresentacion.GUIDeleteMarcaOfProveedor;
+import Presentacion.ProveedorPresentacion.GUIListarMarcasDeProveedor;
 import Presentacion.ProveedorPresentacion.GUIListarProv;
-import Presentacion.ProveedorPresentacion.GUIListarProveedoresPorMarca;
 import Presentacion.ProveedorPresentacion.GUIModificarProv;
 import Presentacion.ProveedorPresentacion.GUIProvPorID;
 import Presentacion.ProveedorPresentacion.IGUIProv;
@@ -97,7 +97,7 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 		map.put(Evento.PROVEEDOR_POR_ID, new GUIProvPorID());
 		map.put(Evento.ADD_MARCA_TO_PROVEEDOR, new GUIAddMarcaToProveedor());
 		map.put(Evento.DELETE_MARCA_OF_PROVEEDOR, new GUIDeleteMarcaOfProveedor());
-		map.put(Evento.LISTAR_PROVEEDORES_POR_MARCA, new GUIListarProveedoresPorMarca());
+		map.put(Evento.LISTA_MARCAS_DE_PROVEEDOR, new GUIListarMarcasDeProveedor());
 		
 		/*
 		 * CLIENTES
