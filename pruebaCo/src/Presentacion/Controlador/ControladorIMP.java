@@ -16,6 +16,7 @@ import Negocio.Producto.SAProducto;
 import Negocio.Producto.TProducto;
 import Negocio.Proveedor.SAProveedores;
 import Negocio.Proveedor.TProveedor;
+import Negocio.ProveedorMarca.TProveedorMarca;
 import Negocio.Ventas.SAVentas;
 import Negocio.Ventas.TVenta;
 import Presentacion.GUI.GUI;
@@ -184,10 +185,19 @@ public class ControladorIMP extends Controlador {
                 break;
             }
             case Evento.LISTA_MARCAS_DE_PROVEEDOR:{
-            	Collection<TProveedor> res=this.saProveedor.readByMarca((int)datos);
+            	Collection<TMarca> res=this.saMarca.readByProveedor((int)datos);
             	if(res.size()>0) {
             		gui.update(Evento.OK, res);
             	}else {
+            		gui.update(Evento.KO, res);
+            	}
+            	break;
+            }
+            case Evento.ADD_MARCA_TO_PROVEEDOR:{
+            	int res=this.saProveedor.addMarcaToProveedor((TProveedorMarca)datos);
+            	if(res>0) {
+            		gui.update(Evento.OK, res);
+            	}else{
             		gui.update(Evento.KO, res);
             	}
             	break;

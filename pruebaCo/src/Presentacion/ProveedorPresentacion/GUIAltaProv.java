@@ -44,53 +44,9 @@ public class GUIAltaProv extends JFrame implements GUI{
 		final JTextField tNombre= new JTextField(20);
 		
 		
-		JButton masMarcas = new JButton("+ Marcas");
 		JButton aceptar=new JButton("Aceptar");
 		JButton cancelar=new JButton("Cancelar");
 		
-		masMarcas.addActionListener(new ActionListener()
-		{ public void actionPerformed(ActionEvent e)
-			{		
-				JFrame ventana = new JFrame("Añadir Marca a Proveedor");
-				ventana.setMinimumSize(new Dimension(200, 200));
-				ventana.setLocationRelativeTo(null);
-				JPanel panelV= new JPanel();
-				JPanel panelDatos= new JPanel();
-				JPanel panelBotones= new JPanel();
-				//datos
-				JLabel idL= new JLabel("ID: ");
-				JTextField idTF = new JTextField(10);
-				panelDatos.add(idL);
-				panelDatos.add(idTF);
-				//botones
-				JButton aceptarB= new JButton("Aceptar");
-				JButton cancelarB= new JButton("Cancelar");
-				
-				aceptarB.addActionListener(new ActionListener()
-				{ public void actionPerformed(ActionEvent e)
-					{
-					ventana.setVisible(false);
-					
-					}
-				});
-				
-				cancelarB.addActionListener(new ActionListener()
-				{ public void actionPerformed(ActionEvent e)
-					{		
-						ventana.setVisible(false);
-					}
-				});
-				panelBotones.add(aceptarB);
-				panelBotones.add(cancelarB);
-				panelV.add(panelDatos, BorderLayout.NORTH);
-				panelV.add(panelBotones, BorderLayout.SOUTH);
-				
-				ventana.add(panelV,BorderLayout.CENTER );
-				ventana.setVisible(false);
-			}
-
-		
-	});
 		
 		aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
@@ -122,7 +78,6 @@ public class GUIAltaProv extends JFrame implements GUI{
 		listaMarcasPanle.setLayout(new FlowLayout());
 		JPanel botonesPanel = new JPanel();
 		botonesPanel.setLayout(new FlowLayout());
-		botonesPanel.add(masMarcas);
 		botonesPanel.add(aceptar);
 		botonesPanel.add(cancelar);
 		

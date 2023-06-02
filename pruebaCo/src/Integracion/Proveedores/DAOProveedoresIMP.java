@@ -252,6 +252,7 @@ public class DAOProveedoresIMP implements DAOProveedores{
 				while(i<datos.length && !found) {
 					if(Integer.parseInt(datos[i]) == id)
 						found = true;
+					i++;
 				}
 				if(found){
 					provs.add( new TProveedor(datos[1], Integer.parseInt(datos[0]), Boolean.parseBoolean(datos[2] )));

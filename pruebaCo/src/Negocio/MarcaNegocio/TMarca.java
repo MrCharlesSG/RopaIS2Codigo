@@ -119,4 +119,13 @@ public class TMarca {
 				;
 	
 	}
+	
+	@Override
+	public String toString() {
+	    StringBuilder buffer = new StringBuilder();
+	    buffer.append(" ID: "+ IDMarca+ "|| Nombre: "+Nombre);
+
+	    
+	    return buffer.toString();
+	}
 }

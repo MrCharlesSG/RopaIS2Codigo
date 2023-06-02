@@ -236,6 +236,7 @@ public class DAOMarcaImp implements DAOMarca {
 				while(i<datos.length && !found) {
 					if(Integer.parseInt(datos[i]) == idProveedor)
 						found = true;
+					i++;
 				}
 				if(found){
 					marcas.add( new TMarca(datos[0], Integer.parseInt(datos[1]), Boolean.parseBoolean(datos[2] )));
@@ -265,9 +266,9 @@ public class DAOMarcaImp implements DAOMarca {
 				linea=scanner.nextLine();
 				datos=linea.split(":");
 				buffer.append(linea);
-				if(Integer.parseInt(datos[0])==pm.getIdMarca()) {
+				if(Integer.parseInt(datos[1])==pm.getIdMarca()) {
 					buffer.append(":"+pm.getIdProveedor());
-					idFinal=Integer.parseInt(datos[0]);
+					idFinal=Integer.parseInt(datos[1]);
 				}					
 				buffer.append(System.lineSeparator());
 			}
