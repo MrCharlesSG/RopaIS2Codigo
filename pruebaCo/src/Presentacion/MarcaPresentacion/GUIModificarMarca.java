@@ -26,7 +26,7 @@ public class GUIModificarMarca extends JFrame implements GUI {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private JPanel panel;
 	/**
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -34,7 +34,7 @@ public class GUIModificarMarca extends JFrame implements GUI {
 	*/
 	public GUIModificarMarca() {
 			setTitle("Modificar Marca");
-			JPanel panel=new JPanel();
+			panel=new JPanel();
 			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 			JLabel lId=new JLabel("Identificador:");
 			final JTextField tId= new JTextField(10);
@@ -94,6 +94,7 @@ public class GUIModificarMarca extends JFrame implements GUI {
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 }

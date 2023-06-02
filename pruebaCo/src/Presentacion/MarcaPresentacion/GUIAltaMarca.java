@@ -32,7 +32,7 @@ public class GUIAltaMarca extends JFrame implements GUI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private JPanel panel;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -40,7 +40,7 @@ public class GUIAltaMarca extends JFrame implements GUI{
 	*/
 	public GUIAltaMarca() {
 		setTitle("Alta Marca");
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		JLabel lNombre=new JLabel("Nombre:");
 		final JTextField tNombre= new JTextField(20);
@@ -98,6 +98,7 @@ public class GUIAltaMarca extends JFrame implements GUI{
 
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 	

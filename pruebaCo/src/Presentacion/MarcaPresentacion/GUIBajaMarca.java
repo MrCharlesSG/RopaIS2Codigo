@@ -30,6 +30,8 @@ public class GUIBajaMarca extends JFrame implements GUI{
 	/**
 	 * 
 	 */
+	
+	private JPanel panel;
 	private static final long serialVersionUID = 1L;
 
 	/** 
@@ -39,7 +41,7 @@ public class GUIBajaMarca extends JFrame implements GUI{
 	*/
 	public GUIBajaMarca() {
 		setTitle("Baja de Marca");
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		JLabel lID=new JLabel("Identificador:");
 		final JTextField tID= new JTextField(5);
@@ -96,6 +98,7 @@ public class GUIBajaMarca extends JFrame implements GUI{
 	}
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 }

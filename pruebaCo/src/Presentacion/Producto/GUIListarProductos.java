@@ -46,7 +46,7 @@ public class GUIListarProductos extends JFrame implements GUI{
 	
 	public GUIListarProductos(){
 		Controlador.getInstancia().setGUI(GUIListarProductos.this);
-		Controlador.getInstancia().accion(Evento.LISTAR_PRODUCTOS,null);
+		listar(new ArrayList<TProducto>());
 	}
 
 	@Override
@@ -57,8 +57,21 @@ public class GUIListarProductos extends JFrame implements GUI{
 		if(productos==null){
 			productos=new ArrayList<TProducto>();
 		}
-		this.listar(productos);
 		
+		_dataTableModel.setColumnIdentifiers(header);;
+		_dataTableModel.setNumRows(productos.size());
+		int i=0;
+		for (TProducto p: productos) {
+			_dataTableModel.setValueAt(p.getNombre(), i, 0);
+			_dataTableModel.setValueAt(p.getIdProducto(), i, 1);
+			_dataTableModel.setValueAt(p.getCategoria(), i, 2);
+			_dataTableModel.setValueAt(p.getTalla(), i, 3);
+			_dataTableModel.setValueAt(p.getCantidad(), i, 4);
+			_dataTableModel.setValueAt(p.getPrecio(), i, 5);
+			_dataTableModel.setValueAt(p.getIdMarca(), i, 6);
+			i++;
+		
+		}
 	}
 		
 	}

@@ -40,11 +40,16 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 	* <!-- end-UML-doc -->
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	
+	private JPanel panel;
 	String[] header = { "Id", "Nombre", "Cantidad", "Activo"};
 	private DefaultTableModel _dataTableModel;
 	
 	public GUIMarcaPorID() {
+		initGUI();
+	}
+	
+	private void initGUI(){
+		setVisible(false);
 		setTitle("Marca por ID");
 		JPanel panel=new JPanel();
 		
@@ -89,7 +94,6 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 					setVisible(false);
 			}
 		});
-		setVisible(false);
 	}
 
 	@Override
@@ -127,6 +131,11 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 			{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
+					Component[] components = contentPane.getComponents();
+					for (Component component : components) {
+					    contentPane.remove(component);
+					}
+					initGUI();
 				}
 			});
 		

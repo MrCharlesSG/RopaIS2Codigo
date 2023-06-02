@@ -47,7 +47,8 @@ public class GUIListarMarcas extends JFrame implements GUI{
 	private DefaultTableModel _dataTableModel;
 	public GUIListarMarcas() {
 		Controlador.getInstancia().setGUI(GUIListarMarcas.this);
-		Controlador.getInstancia().accion(Evento.LISTAR_MARCAS,null);
+		this.listar(new ArrayList<TMarca>());
+		
 	}
 
 	@Override
@@ -57,9 +58,16 @@ public class GUIListarMarcas extends JFrame implements GUI{
 		Collection<TMarca>marcas=(Collection<TMarca>) datos;
 		if(marcas==null)
 			marcas=new ArrayList<TMarca>();
-		
-		this.listar(marcas);
-		
+
+		_dataTableModel.setColumnIdentifiers(header);;
+		_dataTableModel.setNumRows(marcas.size());
+		int i=0;
+		for (TMarca m:marcas) {
+			_dataTableModel.setValueAt(m.getID(), i, 0);
+			_dataTableModel.setValueAt(m.getNombre(), i, 1);
+			_dataTableModel.setValueAt(m.getActivo(), i, 2);
+			i++;
+		}
 	}
 		
 	}

@@ -44,6 +44,24 @@ public class GUIProductoPorID extends JFrame implements GUI{
 	private JPanel jpanel;
 	
 	public GUIProductoPorID(){
+		initGUI();
+	}
+
+	@Override
+	public void update(int evento, Object datos) {
+		switch(evento){
+		case Evento.KO:{
+			Utils.showErrorMsg("No se pudo encontrar el producto con dicho ID");
+			setVisible(false);
+			break;
+		}case Evento.OK:{
+			listarProducto((TProducto)datos);
+			break;
+		}
+		}
+	}
+	
+	private void initGUI(){
 		this.setTitle("Producto por ID");
 		jpanel=new JPanel();
 		JLabel jlabel=new JLabel("Identificador: ");
@@ -88,22 +106,6 @@ public class GUIProductoPorID extends JFrame implements GUI{
 			}
 			
 		});
-		
-		
-	}
-
-	@Override
-	public void update(int evento, Object datos) {
-		switch(evento){
-		case Evento.KO:{
-			Utils.showErrorMsg("No se pudo encontrar el producto con dicho ID");
-			setVisible(false);
-			break;
-		}case Evento.OK:{
-			listarProducto((TProducto)datos);
-			break;
-		}
-		}
 	}
 
 	private void listarProducto(TProducto datos) {
@@ -126,7 +128,12 @@ public class GUIProductoPorID extends JFrame implements GUI{
 		cerrar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					setVisible(false);
+				setVisible(false);
+				Component[] components = contentPane.getComponents();
+				for (Component component : components) {
+				    contentPane.remove(component);
+				}
+				initGUI();
 				}
 			});
 	
