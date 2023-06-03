@@ -99,7 +99,8 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 		map.put(Evento.DELETE_MARCA_OF_PROVEEDOR, new GUIDeleteMarcaOfProveedor());
 		map.put(Evento.LISTA_MARCAS_DE_PROVEEDOR, new GUIListarMarcasDeProveedor());
 		map.put(Evento.ADD_MARCA_TO_PROVEEDOR, new GUIAddMarcaToProveedor());
-		
+		map.put(Evento.DELETE_MARCA_OF_PROVEEDOR, new GUIDeleteMarcaOfProveedor());
+
 		/*
 		 * CLIENTES
 		 */

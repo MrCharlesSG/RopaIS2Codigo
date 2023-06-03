@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Main.Utils;
 import Negocio.ProveedorMarca.TProveedorMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -69,8 +70,12 @@ public class GUIAddMarcaToProveedor extends JFrame implements GUI {
 
 	@Override
 	public void update(int evento, Object datos) {
-		// TODO Auto-generated method stub
-
+		setVisible(false);
+		if(evento== Evento.OK) {
+			Utils.showCorrectMsg(datos.toString());
+		}else {
+			Utils.showErrorMsg("No se ha dado de alta");
+		}
 	}
 
 	@Override

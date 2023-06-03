@@ -110,7 +110,7 @@ public class SAProveedoresIMP implements SAProveedores{
 	}
 	
 	public Collection<TProveedor> readByMarca(int id){
-		Collection<TProveedor> prov = new ArrayList<TProveedor>();
+		Collection<TProveedor> prov = null;
 		TMarca marca = null;
 		if(ComprobadorSintactico.isPositive(id))
 			marca = FactoriaNegocio.getInstance().generaSAMarca().read(id);
@@ -149,7 +149,7 @@ public class SAProveedoresIMP implements SAProveedores{
 		if(marca!=null && prov!=null && prov.getActivo() && marca.getActivo()) {
 			//Si las marcas no tienen ya ese proveedor o viceversa, en principio si uno no lo contiene el otro tampoco debería
 			//No me fio del metodo contains de las Collections, he modificado el equals para q solo mire nombre y id
-			if(!daoProv.readByMarca(marca.getID()).contains(prov) && !daoMarca.readMarcaByProveedor(prov.getId()).contains(marca)) {
+			if(daoProv.readByMarca(marca.getID()).contains(prov) && daoMarca.readMarcaByProveedor(prov.getId()).contains(marca)) {
 				res = daoProv.deleteMarca(pm);
 				daoMarca.deleteProveedor(pm);
 			}

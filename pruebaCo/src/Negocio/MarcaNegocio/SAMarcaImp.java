@@ -152,7 +152,7 @@ public class SAMarcaImp implements SAMarca {
 
 	@Override
 	public Collection<TMarca> readByProveedor(int idProv) {
-		Collection<TMarca> marcas = new ArrayList<TMarca>();
+		Collection<TMarca> marcas =null;
 		TProveedor prov = null;
 		if(ComprobadorSintactico.isPositive(idProv))
 			prov = FactoriaNegocio.getInstance().generaSAProveedor().read(idProv);
@@ -196,7 +196,7 @@ public class SAMarcaImp implements SAMarca {
 		if(marca!=null && prov!=null && prov.getActivo() && marca.getActivo()) {
 			//Si las marcas no tienen ya ese proveedor o viceversa, en principio si uno no lo contiene el otro tampoco debería
 			//No me fio del metodo contains de las Collections, he modificado el equals para q solo mire nombre y id
-			if(!daoProv.readByMarca(marca.getID()).contains(prov) && !daoMarca.readMarcaByProveedor(prov.getId()).contains(marca)) {
+			if(daoProv.readByMarca(marca.getID()).contains(prov) && daoMarca.readMarcaByProveedor(prov.getId()).contains(marca)) {
 				daoProv.deleteMarca(pm);
 				res = daoMarca.deleteProveedor(pm);
 			}

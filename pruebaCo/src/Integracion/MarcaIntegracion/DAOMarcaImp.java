@@ -301,7 +301,7 @@ public class DAOMarcaImp implements DAOMarca {
 				
 			
 				datos=scanner.nextLine().split(":");
-				idAct=Integer.parseInt(datos[0]);
+				idAct=Integer.parseInt(datos[1]);
 				//Añado datos de siempre
 				for(int i=0; i<3; i++ )  {
 					buffer.append(datos[i]);
@@ -311,7 +311,7 @@ public class DAOMarcaImp implements DAOMarca {
 				}
 				//Añado todas las marcas menos el provedor pm.getId de la Pmarca pm.getIdM
 				for(int i=3; i< datos.length; i++) {
-					if(idAct!=pm.getIdMarca() && Integer.parseInt(datos[i])!=pm.getIdProveedor()) 
+					if(idAct!=pm.getIdMarca() || Integer.parseInt(datos[i])!=pm.getIdProveedor()) 
 						buffer.append(":"+datos[i]);
 					else
 						idFinal=idAct;

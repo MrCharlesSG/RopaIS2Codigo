@@ -198,7 +198,7 @@ public class ControladorIMP extends Controlador {
             case Evento.LISTA_MARCAS_DE_PROVEEDOR:{
             	SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
             	Collection<TMarca> res=saMarca.readByProveedor((int)datos);
-            	if(res.size()>0) {
+            	if(res!=null) {
             		gui.update(Evento.OK, res);
             	}else {
             		gui.update(Evento.KO, res);
@@ -208,6 +208,16 @@ public class ControladorIMP extends Controlador {
             case Evento.ADD_MARCA_TO_PROVEEDOR:{
             	SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
             	int res=saProveedor.addMarcaToProveedor((TProveedorMarca)datos);
+            	if(res>0) {
+            		gui.update(Evento.OK, res);
+            	}else{
+            		gui.update(Evento.KO, res);
+            	}
+            	break;
+            }            
+            case Evento.DELETE_MARCA_OF_PROVEEDOR:{
+            	SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
+            	int res=saProveedor.deleteMarcaOfProveedor((TProveedorMarca)datos);
             	if(res>0) {
             		gui.update(Evento.OK, res);
             	}else{

@@ -32,12 +32,20 @@ import Presentacion.GUI.GUI;
 			JButton modificarProv=new JButton("Modificar proveedor");
 			JButton provPorID=new JButton("Proveedor por ID");
 			JButton marcasDeProv=new JButton("Marcas de Proveedor");
-			JButton addMarcaToProv = new JButton("Add Marca");
+			JButton addMarcaToProv = new JButton("Add Marca to Proveedor");
+			JButton deleteMarcaToProv = new JButton("Delete Marca of Proveedor");
 			
 			marcasDeProv.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){	
 				FactoriaPresentacion.getInstance().generaGUI(Evento.LISTA_MARCAS_DE_PROVEEDOR);
+				}
+			});
+			
+			deleteMarcaToProv.addActionListener(new ActionListener()
+			{ 
+			public void actionPerformed(ActionEvent e){	
+				FactoriaPresentacion.getInstance().generaGUI(Evento.DELETE_MARCA_OF_PROVEEDOR);
 				}
 			});
 			
@@ -91,6 +99,7 @@ import Presentacion.GUI.GUI;
 			this.add(provPorID);
 			this.add(marcasDeProv);
 			this.add(addMarcaToProv);
+			this.add(deleteMarcaToProv);
 			this.setVisible(false);
 		}
 

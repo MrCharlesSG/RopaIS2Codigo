@@ -326,7 +326,7 @@ public class DAOProveedoresIMP implements DAOProveedores{
 				}
 				//Añado todas las marcas menos la marca pm.getIdM del provedor pm.getIdP
 				for(int i=3; i< datos.length; i++) {
-					if(idAct!=pm.getIdProveedor() && Integer.parseInt(datos[i])!=pm.getIdMarca()) 
+					if(idAct!=pm.getIdProveedor() || Integer.parseInt(datos[i])!=pm.getIdMarca()) 
 						buffer.append(":"+datos[i]);
 					else
 						idFinal=idAct;
