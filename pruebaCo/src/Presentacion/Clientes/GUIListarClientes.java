@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.BoxLayout;
@@ -17,9 +18,11 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import Negocio.Clientes.TCliente;
+import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
+import Presentacion.MarcaPresentacion.GUIListarMarcas;
 
 
 public class GUIListarClientes extends JFrame implements GUI {
@@ -32,14 +35,42 @@ public class GUIListarClientes extends JFrame implements GUI {
 	
 	public GUIListarClientes(){
 		Controlador.getInstancia().setGUI(GUIListarClientes.this);
-		Controlador.getInstancia().accion(Evento.LISTAR_CLIENTES,null);
+		listar(new ArrayList<TCliente>());
 	}
 	@Override
 	public void update(int evento, Object datos) {
 		if( Evento.LISTAR_CLIENTES==evento)
 		{
 			Collection<TCliente>clientes=(Collection<TCliente>) datos;
-			this.listar(clientes);
+			
+			if(clientes==null)
+				clientes=new ArrayList<TCliente>();
+			
+			_dataTableModel.setColumnIdentifiers(header);
+			_dataTableModel.setNumRows(clientes.size());
+			int i=0;
+			for(TCliente c:clientes){
+				_dataTableModel.setValueAt(c.getID(), i, 0);
+				_dataTableModel.setValueAt(c.getNombre(), i, 1);
+				_dataTableModel.setValueAt(c.getApellido1(), i, 2);
+				_dataTableModel.setValueAt(c.getApellido2(), i, 3);
+				_dataTableModel.setValueAt(c.getDNI(), i, 4);
+				_dataTableModel.setValueAt(c.getTelefono(), i, 5);
+				_dataTableModel.setValueAt(c.getPremium(), i, 6);
+				_dataTableModel.setValueAt(c.getActivo(), i, 7);
+
+				
+				if(c.getPremium()){
+					_dataTableModel.setValueAt(c.get_codigo(), i, 8);
+					_dataTableModel.setValueAt(c.get_descuento()+"%", i, 9);
+				}
+				else{
+					_dataTableModel.setValueAt(c.get_poblacion(), i, 10);
+				}
+				
+				i++;
+				
+			}
 		}
 	}
 	private void listar(Collection<TCliente> clientes) {
@@ -122,6 +153,8 @@ public class GUIListarClientes extends JFrame implements GUI {
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Controlador.getInstancia().setGUI(GUIListarClientes.this);
+		Controlador.getInstancia().accion(Evento.LISTAR_CLIENTES,null);
 		this.setVisible(b);
 	}
 }

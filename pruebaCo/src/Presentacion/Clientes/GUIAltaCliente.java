@@ -30,11 +30,13 @@ public class GUIAltaCliente extends JFrame implements GUI{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private JPanel panel;
+	
 	private JTextField tNombre,tDNI, ttlf, tApellido1, tApellido2;
 	private JButton premium, noPremium;
 	public GUIAltaCliente() {
 	this.setTitle("AltaCliente");{
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		
@@ -170,6 +172,7 @@ public class GUIAltaCliente extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 }

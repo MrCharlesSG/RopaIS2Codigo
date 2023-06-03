@@ -24,6 +24,8 @@ public class GUIDeleteMarcaOfProveedor extends JFrame implements GUI {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JPanel panel;
+	
 	public GUIDeleteMarcaOfProveedor() {
 		initGUI();
 	}
@@ -31,7 +33,7 @@ public class GUIDeleteMarcaOfProveedor extends JFrame implements GUI {
 	private void initGUI() {
 		setTitle("Delete Marca Of Proveedor");
 		this.setMinimumSize(new Dimension(500, 500));
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		JLabel idPL = new JLabel("ID-> Prov");
@@ -80,6 +82,7 @@ public class GUIDeleteMarcaOfProveedor extends JFrame implements GUI {
 
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		setVisible(b);
 	}
 

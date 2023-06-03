@@ -29,12 +29,14 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private JPanel panel;
 
 	public GUIModificarEmpleado() {
 		setTitle("Modificar empleado");
 		this.setLocationRelativeTo(null);
 		
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		
 		JTextArea desc=new JTextArea("Introduzca el dni y posteriormente los datos que desea modificar");
 		
@@ -196,6 +198,7 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 	

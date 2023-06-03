@@ -41,6 +41,8 @@ public class GUIModificarProv extends JFrame implements GUI{
 
 	private DefaultListModel<String> modelo;
 	
+	private JPanel panel;
+	
 	public GUIModificarProv(){
 		modelo = new DefaultListModel<>();
 		initGUI();
@@ -48,7 +50,7 @@ public class GUIModificarProv extends JFrame implements GUI{
 	
 	public void initGUI(){
 		setTitle("Modificar Proveedor");
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		JLabel lID = new JLabel("ID: ");
 		JTextField tID= new JTextField(3);
 		JLabel lNombre=new JLabel("Nombre (Nuevo): ");
@@ -169,6 +171,7 @@ public class GUIModificarProv extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 

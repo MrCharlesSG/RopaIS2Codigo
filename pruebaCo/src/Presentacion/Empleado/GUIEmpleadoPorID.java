@@ -33,6 +33,10 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 	String[] header = { "Id", "Nombre", "Apellido 1", "Apellido 2", "DNI", "Teléfono", "Tiempo"};
 	private DefaultTableModel _dataTableModel;
 	public GUIEmpleadoPorID() {
+		initGUI();
+	}
+	
+	private void initGUI(){
 		setTitle("Empleado por ID");
 		JPanel panel=new JPanel();
 		JLabel lID=new JLabel("Identificador:");
@@ -51,12 +55,13 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 		aceptar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					setVisible(false);
 					try{
+						setVisible(false);
 						int id=Integer.parseInt(tID.getText());
 						Controlador.getInstancia().setGUI(GUIEmpleadoPorID.this);
 						Controlador.getInstancia().accion(Evento.EMPLEADO_POR_ID, id);	
 					}catch(Exception e1){
+						e1.printStackTrace();
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 					}
 				}
@@ -103,11 +108,14 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 		cerrar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					setVisible(false);
+				setVisible(false);
+				Component[] components = contentPane.getComponents();
+				for (Component component : components) {
+				    contentPane.remove(component);
+				}
+				initGUI();
 				}
 			});
-		
-		datos.getApellido1();
 		
 		//añado la lista
 		this._dataTableModel = new DefaultTableModel();

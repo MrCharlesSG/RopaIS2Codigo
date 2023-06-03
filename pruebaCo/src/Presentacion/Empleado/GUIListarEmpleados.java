@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.table.TableColumn;
 
 import Main.Utils;
 import Negocio.Empleado.TEmpleado;
+import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
@@ -37,7 +39,7 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 	
 	private void initGUI() {
 		Controlador.getInstancia().setGUI(GUIListarEmpleados.this);
-		Controlador.getInstancia().accion(Evento.LISTAR_EMPLEADO,null);
+		this.listaEmpleados(new ArrayList<TEmpleado>());
 	}
 
 	private void listaEmpleados(ArrayList<TEmpleado> datos){
@@ -104,13 +106,33 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 			Utils.showErrorMsg("No se ha podido listar los Empleados");
 		}
 		case Evento.OK:{
-			this.listaEmpleados((ArrayList<TEmpleado>)datos);
+			
+			Collection<TEmpleado>emp=(Collection<TEmpleado>) datos;
+			if(emp==null)
+				emp=new ArrayList<TEmpleado>();
+			
+			_dataTableModel.setColumnIdentifiers(header);;
+			_dataTableModel.setNumRows(emp.size());
+			int i=0;
+			for (TEmpleado m:emp) {
+				_dataTableModel.setValueAt(m.getID(), i, 0);
+				_dataTableModel.setValueAt(m.getNombre(), i, 1);
+				_dataTableModel.setValueAt(m.getApellido1(), i, 2);
+				_dataTableModel.setValueAt(m.getApellido2(), i, 3);
+				_dataTableModel.setValueAt(m.getDNI(), i, 4);
+				_dataTableModel.setValueAt(m.getTfno(), i, 5);
+				_dataTableModel.setValueAt(m.isTiempoCompleto()? "Completo":"Parcial", i, 6);
+				i++;
+		
+			}
 		}
 		}
 	}
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Controlador.getInstancia().setGUI(GUIListarEmpleados.this);
+		Controlador.getInstancia().accion(Evento.LISTAR_EMPLEADO, null);
 		this.setVisible(b);
 	}
 	

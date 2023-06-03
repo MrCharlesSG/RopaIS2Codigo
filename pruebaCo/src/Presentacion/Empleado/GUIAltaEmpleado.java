@@ -30,9 +30,11 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 
 	private JTextField tNombre,tDNI, ttlf, tApellido1, tApellido2;
 	private JButton tc, tp;
+	private JPanel panel;
+	
 	public GUIAltaEmpleado() {
 		setTitle("Alta Empleado");
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		
@@ -118,6 +120,7 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 		panel.add(tlf);
 		panel.add(tiempo);
 		panel.add(cancelar);
+		panel.add(aceptar);
 		getContentPane().add(panel);
 		pack();
 		
@@ -179,6 +182,7 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 	

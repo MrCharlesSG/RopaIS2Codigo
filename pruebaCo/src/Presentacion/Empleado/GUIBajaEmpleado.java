@@ -20,10 +20,12 @@ public class GUIBajaEmpleado extends JFrame implements GUI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private JPanel panel;
 
 	public GUIBajaEmpleado() {
 		setTitle("Baja de Empleado");
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		JLabel lID=new JLabel("Identificador:");
 		final JTextField tID= new JTextField(5);
 		JButton aceptar=new JButton("Aceptar");
@@ -74,6 +76,7 @@ public class GUIBajaEmpleado extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 	

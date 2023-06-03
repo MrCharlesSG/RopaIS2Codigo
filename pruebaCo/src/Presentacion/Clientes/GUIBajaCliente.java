@@ -21,10 +21,12 @@ public class GUIBajaCliente extends JFrame implements GUI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private JPanel panel;
 
 	public GUIBajaCliente() {
 		setTitle("Baja de Cliente");
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		JLabel lID=new JLabel("Identificador:");
 		final JTextField tID= new JTextField(5);
 		JButton aceptar=new JButton("Aceptar");
@@ -81,6 +83,7 @@ public class GUIBajaCliente extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 }

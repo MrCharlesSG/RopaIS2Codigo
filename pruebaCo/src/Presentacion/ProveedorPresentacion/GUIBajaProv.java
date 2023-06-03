@@ -29,6 +29,8 @@ public class GUIBajaProv extends JFrame implements GUI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private JPanel jpanel;
 
 	public GUIBajaProv(){
 		
@@ -37,7 +39,7 @@ public class GUIBajaProv extends JFrame implements GUI{
 
 	private void initGUI() {
 		this.setTitle("Baja Proveedor");
-		JPanel jpanel=new JPanel();
+		jpanel=new JPanel();
 		JLabel jlabel=new JLabel("ID del Proveedor: ");
 		final JTextField jTextField=new JTextField(20);
 		JButton aceptar=new JButton("Aceptar");
@@ -94,6 +96,7 @@ public class GUIBajaProv extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(jpanel);
 		this.setVisible(b);
 	}
 }

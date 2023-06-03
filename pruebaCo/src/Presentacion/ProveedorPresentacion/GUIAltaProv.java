@@ -31,6 +31,8 @@ public class GUIAltaProv extends JFrame implements GUI{
 	private static final long serialVersionUID = 1L;
 	private DefaultListModel<String> modelo;
 	
+	private JPanel panel;
+	
 	public GUIAltaProv() {
 		modelo = new DefaultListModel<>();
 		initGUI();	
@@ -39,7 +41,7 @@ public class GUIAltaProv extends JFrame implements GUI{
 	
 	private void initGUI(){
 		setTitle("Alta Proveedor");
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		JLabel lNombre=new JLabel("Nombre:");
 		final JTextField tNombre= new JTextField(20);
 		
@@ -111,6 +113,7 @@ public class GUIAltaProv extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 }

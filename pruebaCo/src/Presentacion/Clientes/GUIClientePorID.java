@@ -1,6 +1,7 @@
 package Presentacion.Clientes;
 
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,18 +24,26 @@ import Negocio.Clientes.TCliente;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
+import Presentacion.MarcaPresentacion.GUIMarcaPorID;
 
 public class GUIClientePorID extends JFrame implements GUI{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private JPanel panel;
+	
 	String[] header = { "ID","NOMBRE", "APELLIDO1", "APELLIDO2","DNI", "TELEFONO","PREMIUM","ACTIVO"};
 	private DefaultTableModel _dataTableModel;
 	
 	public GUIClientePorID() {
+		initGUI();
+	}
+	
+	private void initGUI(){
 		setTitle("Cliente por ID");
-		JPanel panel=new JPanel();
+		panel=new JPanel();
 		JLabel lID=new JLabel("Identificador:");
 		final JTextField tID= new JTextField(5);
 		JButton aceptar=new JButton("Aceptar");
@@ -58,6 +67,7 @@ public class GUIClientePorID extends JFrame implements GUI{
 				{		
 					setVisible(false);
 					try{
+						setVisible(false);
 						int id=Integer.parseInt(tID.getText());
 						Controlador.getInstancia().setGUI(GUIClientePorID.this);
 						Controlador.getInstancia().accion(Evento.CLIENTE_POR_ID, new Integer(id));
@@ -89,6 +99,8 @@ public class GUIClientePorID extends JFrame implements GUI{
 	}
 	}
 	private void mostrar(TCliente c) {
+		Container contentPane = getContentPane();
+		
 		setTitle("Mostrar cliente");
 		this.setMinimumSize(new Dimension(600, 50));
 		this.setPreferredSize(new Dimension(600,200));
@@ -101,7 +113,12 @@ public class GUIClientePorID extends JFrame implements GUI{
 		cerrar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					setVisible(false);
+				setVisible(false);
+				Component[] components = contentPane.getComponents();
+				for (Component component : components) {
+				    contentPane.remove(component);
+				}
+				initGUI();
 				}
 			});
 		
@@ -156,6 +173,7 @@ public class GUIClientePorID extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 }

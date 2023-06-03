@@ -5,6 +5,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -23,6 +25,7 @@ import Negocio.Proveedor.TProveedor;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
+import Presentacion.MarcaPresentacion.GUIMarcaPorID;
 
 
 /** 
@@ -41,13 +44,15 @@ public class GUIProvPorID extends JFrame implements GUI{
 	String[] header = { "Id", "Nombre", "Marcas"};
 	private DefaultTableModel _dataTableModel;	
 	
+	private JPanel jpanel;
+	
 	public GUIProvPorID(){
 		initGUI();		
 	}
 
 	private void initGUI() {
 		this.setTitle("Proveedor por ID");
-		JPanel jpanel=new JPanel();
+		jpanel=new JPanel();
 		JLabel jlabel=new JLabel("Identificador: ");
 		this.setLocationRelativeTo(null);
 		
@@ -70,8 +75,9 @@ public class GUIProvPorID extends JFrame implements GUI{
 			public void actionPerformed(ActionEvent e) {
 				try{
 					setVisible(false);
-					Integer id=Integer.parseInt(jtextID.getText());
-					Controlador.getInstancia().accion(Evento.PROVEEDOR_POR_ID,id);
+					int id=Integer.parseInt(jtextID.getText());
+					Controlador.getInstancia().setGUI(GUIProvPorID.this);
+					Controlador.getInstancia().accion(Evento.PROVEEDOR_POR_ID, new Integer(id));
 				}catch(NumberFormatException e1){
 					setVisible(false);
 				}
@@ -99,7 +105,8 @@ public class GUIProvPorID extends JFrame implements GUI{
 			setVisible(false);
 			break;
 		}case Evento.OK:{
-			listarProveedor((TProveedor)datos);
+			
+			listarProveedor((TProveedor) datos);
 			break;
 		}
 		}
@@ -125,7 +132,12 @@ public class GUIProvPorID extends JFrame implements GUI{
 		cerrar.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-					setVisible(false);
+				setVisible(false);
+				Component[] components = contentPane.getComponents();
+				for (Component component : components) {
+				    contentPane.remove(component);
+				}
+				initGUI();
 				}
 			});
 		
@@ -165,6 +177,7 @@ public class GUIProvPorID extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
+		Utils.refreshTextFields(jpanel);
 		this.setVisible(b);
 	}
 }
