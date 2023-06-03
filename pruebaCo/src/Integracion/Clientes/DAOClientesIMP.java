@@ -167,19 +167,19 @@ public class DAOClientesIMP implements DAOClientes {
 	}
 
 	@Override
-	public int delete(TCliente cliente) {
+	public int delete( int id) {
 		StringBuilder buffer=new StringBuilder();
 		File file=new File(ARCHIVO);
 		String datos[];
-		int id=-1;
+		int ID=-1;
 		try(Scanner scanner=new Scanner(file)) {//bufferreader
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
 			
-				if (Integer.parseInt(datos[0])==cliente.getID()) {
+				if (Integer.parseInt(datos[0])==id) {
 				
 					datos[5]="0";
-					id=Integer.parseInt(datos[0]);
+					ID=Integer.parseInt(datos[0]);
 				}
 				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]+":"+datos[4]+":"+datos[5]+":"+datos[6]).append(System.lineSeparator());
 			}
@@ -187,11 +187,11 @@ public class DAOClientesIMP implements DAOClientes {
 									new OutputStreamWriter(
 									new FileOutputStream(ARCHIVO)))){
 				w.write(buffer.toString());
-				return id;
+				return ID;
 			}
 		}
 		catch (IOException e) {
-			return id;
+			return ID;
 		}
 	}
 

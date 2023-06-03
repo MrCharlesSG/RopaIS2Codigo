@@ -20,7 +20,7 @@ public interface DAOClientes {
 	public int update(TCliente cliente);
 
  
-	public int delete(TCliente cliente);
+	public int delete(int id);
 
 	 
 	public TCliente readByName(String dni);

@@ -5,7 +5,9 @@ import java.util.Collection;
 
 import Integracion.Empleados.DAOEmpleado;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
+import Integracion.Ventas.DAOVentas;
 import Negocio.ComprobadorSintactico;
+import Negocio.Ventas.TVenta;
 
 public class SAEmpleadoImp implements SAEmpleado {
 
@@ -21,6 +23,7 @@ public class SAEmpleadoImp implements SAEmpleado {
 				id = daoEmpleado.create(empl); 
 			}else{
 				if(!leido.isActivo()){
+					empl.setID(leido.getID());
 					id=daoEmpleado.update(empl);
 				}
 			}
@@ -31,7 +34,21 @@ public class SAEmpleadoImp implements SAEmpleado {
 	@Override
 	public int delete(int id) {
 		if(ComprobadorSintactico.isPositive(id)){
-			return FactoriaIntegracion.getInstance().generaDAOEmpleado().delete(id);
+			DAOEmpleado daoEmpleado = FactoriaIntegracion.getInstance().generaDAOEmpleado();
+			DAOVentas daoVenta=FactoriaIntegracion.getInstance().generaDAOVentas();
+			TEmpleado leido=daoEmpleado.read(id);
+			
+			if(leido!=null&&leido.isActivo()) {
+				Collection<TVenta> ventas=daoVenta.readByEmpleado(id);
+				boolean inactivas=true;
+				
+				for(TVenta v:ventas) {
+					if(v.get_activo())inactivas=false;
+				}
+				
+				if(inactivas)
+					return daoEmpleado.delete(id);
+			}
 		}
 		return -1;
 	}

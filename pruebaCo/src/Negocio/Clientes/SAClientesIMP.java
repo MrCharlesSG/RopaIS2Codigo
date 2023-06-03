@@ -3,8 +3,12 @@ package Negocio.Clientes;
 import java.util.Collection;
 
 import Integracion.Clientes.DAOClientes;
+import Integracion.Empleados.DAOEmpleado;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
+import Integracion.Ventas.DAOVentas;
 import Negocio.ComprobadorSintactico;
+import Negocio.Empleado.TEmpleado;
+import Negocio.Ventas.TVenta;
 
 
 public class SAClientesIMP implements SAClientes {
@@ -49,13 +53,24 @@ public class SAClientesIMP implements SAClientes {
 
 	@Override
 	public int delete(int ID) {
-		int id=-1;
 		if(ComprobadorSintactico.isPositive(ID)){
-			TCliente cliente=daoClientes.read(ID);
-			if(cliente!=null&&cliente.getActivo())
-				id=daoClientes.delete(cliente);
+			DAOClientes daocliente = FactoriaIntegracion.getInstance().generaDAOClientes();
+			DAOVentas daoVenta=FactoriaIntegracion.getInstance().generaDAOVentas();
+			TCliente leido=daocliente.read(ID);
+			
+			if(leido!=null&&leido.getActivo()) {
+				Collection<TVenta> ventas=daoVenta.readByEmpleado(ID);
+				boolean inactivas=true;
+				
+				for(TVenta v:ventas) {
+					if(v.get_activo())inactivas=false;
+				}
+				
+				if(inactivas)
+					return daocliente.delete(ID);
+			}
 		}
-		return id;
+		return -1;
 	}
 
 	@Override
