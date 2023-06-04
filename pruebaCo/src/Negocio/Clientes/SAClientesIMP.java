@@ -44,9 +44,10 @@ public class SAClientesIMP implements SAClientes {
 	@Override
 	public int update(TCliente cliente) {
 		int id=-1;
-		TCliente leido=daoClientes.readByName(cliente.getDNI());
+		//TCliente leido=daoClientes.readByName(cliente.getDNI());
+		TCliente leido=daoClientes.read(cliente.getID());
 		if(esValido(cliente)&&leido!=null)
-			id=daoClientes.update(leido);
+			id=daoClientes.update(cliente);
 		return id;
 	}
 
@@ -59,7 +60,8 @@ public class SAClientesIMP implements SAClientes {
 			TCliente leido=daocliente.read(ID);
 			
 			if(leido!=null&&leido.getActivo()) {
-				Collection<TVenta> ventas=daoVenta.readByEmpleado(ID);
+				/*
+				 * Collection<TVenta> ventas=daoVenta.readByEmpleado(ID);
 				boolean inactivas=true;
 				
 				for(TVenta v:ventas) {
@@ -67,6 +69,7 @@ public class SAClientesIMP implements SAClientes {
 				}
 				
 				if(inactivas)
+				 */
 					return daocliente.delete(ID);
 			}
 		}

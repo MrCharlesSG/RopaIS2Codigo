@@ -49,7 +49,7 @@ public class DAOClientesIMP implements DAOClientes {
 					
 					if(!encontrado)id=Integer.parseInt(datos[0])+1;//no me deja ponerlo fuera pero bueno
 				}
-				if(!encontrado)
+				if(!encontrado){
 					buffer.append(id+":"+cliente.getNombre()+" "+cliente.getApellido1()+" "+cliente.getApellido2()+":"+cliente.getDNI()+":"+cliente.getTelefono()+":"+cliente.getPremium()+":1");
 					if(cliente.getPremium()){
 						buffer.append(":"+cliente.get_codigo());
@@ -57,6 +57,7 @@ public class DAOClientesIMP implements DAOClientes {
 					else{
 						buffer.append(":" +cliente.get_poblacion());
 					}
+				}	
 			}catch (IOException e) {
 				return id;
 			}
@@ -119,6 +120,7 @@ public class DAOClientesIMP implements DAOClientes {
 					else{
 						cliente=new TClienteNormal(Integer.parseInt(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]), datos[4],Integer.parseInt(datos[5]), datos[6]);
 					}
+					encontrado=true;
 				}
 			
 			}
@@ -138,7 +140,7 @@ public class DAOClientesIMP implements DAOClientes {
 		
 			while(scanner.hasNext()) {
 				datos=scanner.nextLine().split(":");
-				if (cliente.getDNI().equalsIgnoreCase(datos[2])) {	
+				if (cliente.getID()== Integer.parseInt(datos[0])) {	
 					id=Integer.parseInt(datos[0]);
 					buffer.append(id+":"+cliente.getNombre()+" "+cliente.getApellido1()+" "+cliente.getApellido2()+ ":"+cliente.getDNI()+":"+cliente.getTelefono()+":"+cliente.getPremium()+":"+datos[5]);
 					if(cliente.getPremium()){
