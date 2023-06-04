@@ -91,6 +91,16 @@ public class ControladorIMP extends Controlador {
 			
 				break;
 			}
+			case Evento.ADD_PROVEEDOR_TO_MARCA:{
+				SAMarca saMarca=FactoriaNegocio.getInstance().generaSAMarca();
+				int res=saMarca.addProveedorToMarca((TProveedorMarca)datos);
+				if(res>0){
+					gui.update(Evento.OK, res);
+				}
+				else{
+					gui.update(Evento.KO, res);
+				}
+			}
 			
 			/*
 			 * PRODUCTO

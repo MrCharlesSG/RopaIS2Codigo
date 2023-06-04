@@ -25,6 +25,7 @@ import Presentacion.MarcaPresentacion.GUIBajaMarca;
 import Presentacion.MarcaPresentacion.GUIListarMarcas;
 import Presentacion.MarcaPresentacion.GUIMarcaPorID;
 import Presentacion.MarcaPresentacion.GUIModificarMarca;
+import Presentacion.MarcaPresentacion.GUIaddProveedorToMarca;
 import Presentacion.MarcaPresentacion.IGUIMarca;
 import Presentacion.Producto.GUIAltaProducto;
 import Presentacion.Producto.GUIBajaProducto;
@@ -74,6 +75,7 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 		map.put(Evento.LISTAR_MARCAS, new GUIListarMarcas());
 		map.put(Evento.MODIFICAR_MARCA, new GUIModificarMarca());
 		map.put(Evento.MARCA_PORID, new GUIMarcaPorID());
+		map.put(Evento.ADD_PROVEEDOR_TO_MARCA, new GUIaddProveedorToMarca());
 		
 		/*
 		 * PRODUCTOS
