@@ -37,7 +37,7 @@ public class ControladorIMP extends Controlador {
 	}
 	
 	public void accion(int evento,Object datos) {
-		gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+		//gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 		switch(evento){
 			/*
 			 * MARCA
