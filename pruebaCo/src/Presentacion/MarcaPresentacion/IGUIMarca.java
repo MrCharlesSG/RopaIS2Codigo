@@ -29,6 +29,8 @@ public class IGUIMarca extends JPanel implements GUI{//probablemente sea mejor h
 		JButton marcaPorID=new JButton("Marca por ID");
 		JButton listarPorProveedor = new JButton("Marca por Proveedor");
 		JButton addProvToMarca=new JButton("Add Proveedor to Marca");
+		JButton deleteProvToMarca=new JButton("Delete Proveedor to Marca");
+
 		
 		this.add(altaMarca);
 		this.add(bajaMarca);
@@ -37,8 +39,23 @@ public class IGUIMarca extends JPanel implements GUI{//probablemente sea mejor h
 		this.add(marcaPorID);
 		this.add(addProvToMarca);
 		this.add(listarPorProveedor);
+		this.add(deleteProvToMarca);
 		this.setVisible(false);
 		
+		deleteProvToMarca.addActionListener(new ActionListener()
+		{ public void actionPerformed(ActionEvent e)
+			{		
+			
+			FactoriaPresentacion.getInstance().generaGUI(Evento.DELETE_PROVEEDOR_OF_MARCA);
+			}
+		});
+		listarPorProveedor.addActionListener(new ActionListener()
+		{ public void actionPerformed(ActionEvent e)
+			{		
+			
+			FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_MARCA_POR_PROVEEDORES);
+			}
+		});
 		altaMarca.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		

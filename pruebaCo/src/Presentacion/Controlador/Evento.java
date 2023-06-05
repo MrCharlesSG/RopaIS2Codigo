@@ -24,6 +24,7 @@ public class Evento {
 	public static final int OCULTAR_GUI_BIBLIOTECA = 108;
 	public static final int ADD_PROVEEDOR_TO_MARCA=109;
 	public static final int LISTAR_MARCA_POR_PROVEEDORES=110;
+	public static final int DELETE_PROVEEDOR_OF_MARCA=111;
 	
 	public static final int RES_ALTA_MARCA_OK= 401;
 	public static final int RES_ALTA_MARCA_KO= 402;

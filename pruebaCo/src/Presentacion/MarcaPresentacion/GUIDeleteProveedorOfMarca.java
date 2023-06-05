@@ -1,4 +1,4 @@
-package Presentacion.ProveedorPresentacion;
+package Presentacion.MarcaPresentacion;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -16,9 +16,9 @@ import Negocio.ProveedorMarca.TProveedorMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
+import Presentacion.ProveedorPresentacion.GUIDeleteMarcaOfProveedor;
 
-public class GUIDeleteMarcaOfProveedor extends JFrame implements GUI {
-
+public class GUIDeleteProveedorOfMarca extends JFrame implements GUI {
 	/**
 	 * 
 	 */
@@ -26,12 +26,12 @@ public class GUIDeleteMarcaOfProveedor extends JFrame implements GUI {
 
 	private JPanel panel;
 	
-	public GUIDeleteMarcaOfProveedor() {
+	public GUIDeleteProveedorOfMarca() {
 		initGUI();
 	}
 
 	private void initGUI() {
-		setTitle("Delete Marca Of Proveedor");
+		setTitle("Delete Proveedor Of Marca");
 		this.setMinimumSize(new Dimension(500, 500));
 		panel=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -56,8 +56,8 @@ public class GUIDeleteMarcaOfProveedor extends JFrame implements GUI {
 				{ public void actionPerformed(ActionEvent e)
 						{		
 							setVisible(false);
-							Controlador.getInstancia().setGUI(GUIDeleteMarcaOfProveedor.this);
-							Controlador.getInstancia().accion(Evento.DELETE_MARCA_OF_PROVEEDOR,
+							Controlador.getInstancia().setGUI(GUIDeleteProveedorOfMarca.this);
+							Controlador.getInstancia().accion(Evento.DELETE_PROVEEDOR_OF_MARCA,
 									new TProveedorMarca(Integer.parseInt(jtP.getText()), Integer.parseInt(jtM.getText())));
 						}
 				});
@@ -85,5 +85,4 @@ public class GUIDeleteMarcaOfProveedor extends JFrame implements GUI {
 		Utils.refreshTextFields(panel);
 		setVisible(b);
 	}
-
 }

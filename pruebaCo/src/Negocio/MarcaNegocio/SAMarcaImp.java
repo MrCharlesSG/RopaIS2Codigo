@@ -161,7 +161,7 @@ public class SAMarcaImp implements SAMarca {
 		if(prov != null && prov.getActivo()){
 			DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
 			DAOMarca dm = FactoriaIntegracion.getInstance().generaDAOMarca();
-			Collection<TProveedorMarca> lpm = dpm.readProveedorMarcaPorMarca(idProv);
+			Collection<TProveedorMarca> lpm = dpm.readProveedorMarcaPorProveedor(idProv);
 			for(TProveedorMarca pm: lpm) {
 				if(pm.isActivo()) {
 					TMarca auxp = dm.read(pm.getIdMarca());

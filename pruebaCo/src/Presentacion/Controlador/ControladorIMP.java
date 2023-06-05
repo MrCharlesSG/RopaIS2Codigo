@@ -19,6 +19,7 @@ import Negocio.Proveedor.TProveedor;
 import Negocio.ProveedorMarca.TProveedorMarca;
 import Negocio.Ventas.SAVentas;
 import Negocio.Ventas.TVenta;
+import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 import Presentacion.GUI.GUI;
 
 public class ControladorIMP extends Controlador {
@@ -36,6 +37,7 @@ public class ControladorIMP extends Controlador {
 	}
 	
 	public void accion(int evento,Object datos) {
+		gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 		switch(evento){
 			/*
 			 * MARCA
@@ -101,6 +103,27 @@ public class ControladorIMP extends Controlador {
 					gui.update(Evento.KO, res);
 				}
 			}
+			case Evento.LISTAR_MARCA_POR_PROVEEDORES:{
+            	SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
+            	Collection<TMarca> res= saMarca.readByProveedor((int)datos);
+            	if(res!=null) {
+            		gui.update(Evento.OK, res);
+            	}else {
+            		gui.update(Evento.KO, res);
+            	}
+            	break;
+            }
+                      
+            case Evento.DELETE_PROVEEDOR_OF_MARCA:{
+            	SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
+            	int res=saMarca.deleteProveedorOfMarca((TProveedorMarca)datos);
+            	if(res>0) {
+            		gui.update(Evento.OK, res);
+            	}else{
+            		gui.update(Evento.KO, res);
+            	}
+            	break;
+            }
 			
 			/*
 			 * PRODUCTO
