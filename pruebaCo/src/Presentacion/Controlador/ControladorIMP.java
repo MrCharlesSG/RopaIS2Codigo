@@ -37,7 +37,7 @@ public class ControladorIMP extends Controlador {
 	}
 	
 	public void accion(int evento,Object datos) {
-		//gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+		
 		switch(evento){
 			/*
 			 * MARCA
@@ -46,7 +46,7 @@ public class ControladorIMP extends Controlador {
 				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				TMarca tMarca=(TMarca)datos;
 				int res=saMarca.create(tMarca);
-				
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(res>0)
 					gui.update(Evento.RES_ALTA_MARCA_OK, res);
 				else
@@ -57,7 +57,7 @@ public class ControladorIMP extends Controlador {
 				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				int idMarca=(int) datos;
 				int res=saMarca.delete(idMarca);
-				
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(res>0)
 					gui.update(Evento.RES_BAJA_MARCA_OK, res);
 				else
@@ -67,12 +67,15 @@ public class ControladorIMP extends Controlador {
 			case Evento.LISTAR_MARCAS:{
 				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				Collection<TMarca>marcas=saMarca.readAll();
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				gui.update(Evento.LISTAR_MARCAS, marcas);
 				break;
 			}
 			case Evento.MARCA_PORID:{
 				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				TMarca marca=saMarca.read((int)datos);
+				
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(marca==null){
 					gui.update(Evento.KO, null);
 				}
@@ -85,7 +88,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.MODIFICAR_MARCA:{
 				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				int res=saMarca.update((TMarca) datos);
-				
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(res>0)
 					gui.update(Evento.RES_MODIFICAR_MARCA_OK, new Integer(res));
 				else
@@ -96,6 +99,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.ADD_PROVEEDOR_TO_MARCA:{
 				SAMarca saMarca=FactoriaNegocio.getInstance().generaSAMarca();
 				int res=saMarca.addProveedorToMarca((TProveedorMarca)datos);
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(res>0){
 					gui.update(Evento.OK, res);
 				}
@@ -106,6 +110,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.LISTAR_MARCA_POR_PROVEEDORES:{
             	SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
             	Collection<TMarca> res= saMarca.readByProveedor((int)datos);
+            	gui=FactoriaPresentacion.getInstance().generaGUI(evento);
             	if(res!=null) {
             		gui.update(Evento.OK, res);
             	}else {
@@ -117,6 +122,7 @@ public class ControladorIMP extends Controlador {
             case Evento.DELETE_PROVEEDOR_OF_MARCA:{
             	SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
             	int res=saMarca.deleteProveedorOfMarca((TProveedorMarca)datos);
+            	gui=FactoriaPresentacion.getInstance().generaGUI(evento);
             	if(res>0) {
             		gui.update(Evento.OK, res);
             	}else{
@@ -131,6 +137,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.ALTA_PRODUCTO:{
 				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				int res=saProducto.create((TProducto) datos);
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(res>=0){
 					gui.update(Evento.OK,res);
 				}
@@ -142,6 +149,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.BAJA_PRODUCTO:{
 				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				int res=saProducto.delete(((TProducto) datos).getIdProducto());
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(res>=0){
 					gui.update(Evento.OK,res);
 				}
@@ -154,11 +162,13 @@ public class ControladorIMP extends Controlador {
 				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				Collection<TProducto>productos=saProducto.readAll();
 				gui.update(Evento.LISTAR_PRODUCTOS, productos);
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				break;
 			}
 			case Evento.MODIFICAR_PRODUCTO:{
 				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				int res=saProducto.update((TProducto)datos);
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(res>=0){
 					gui.update(Evento.OK,res);
 				}
@@ -170,6 +180,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.PRODUCTO_POR_ID:{
 				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				TProducto producto=saProducto.read((Integer)datos);
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(producto.getIdMarca() != -1)
 					gui.update(Evento.OK, producto);
 				else
@@ -183,6 +194,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.ALTA_PROVEEDOR:{
 				SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
 				int res=saProveedor.create((TProveedor)datos);
+				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(res>0){
 					gui.update(Evento.OK, res);
 				}
@@ -194,6 +206,7 @@ public class ControladorIMP extends Controlador {
             case Evento.BAJA_PROVEEDOR:{
             	SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
                 int res = saProveedor.delete(((TProveedor)datos).getId());
+                gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 
                 if(res > 0)
                     gui.update(Evento.OK, res);
@@ -417,6 +430,7 @@ public class ControladorIMP extends Controlador {
             case Evento.VENTAS_DE_UN_EMPLEADO:{
             	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
             	Collection<TVenta>ventas=saVenta.readByEmpleado((Integer)datos);
+            	//gui=FactoriaPresentacion.getInstance().generaGUI(Evento.VENTAS_DE_UN_EMPLEADO);
             	gui.update(Evento.VENTAS_DE_UN_EMPLEADO, ventas);
             	break;
             }

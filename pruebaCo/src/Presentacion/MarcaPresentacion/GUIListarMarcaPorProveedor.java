@@ -57,7 +57,7 @@ public class GUIListarMarcaPorProveedor extends JFrame implements GUI {
 		{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
-					Controlador.getInstancia().setGUI(GUIListarMarcaPorProveedor.this);
+					//Controlador.getInstancia().setGUI(GUIListarMarcaPorProveedor.this);
 					Controlador.getInstancia().accion(Evento.LISTAR_MARCA_POR_PROVEEDORES,Integer.parseInt(jtId.getText()));
 				}
 		});

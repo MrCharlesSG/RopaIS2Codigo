@@ -67,7 +67,6 @@ public class GUIAltaMarca extends JFrame implements GUI{
 					setVisible(false);
 					String nombre= tNombre.getText();
 					TMarca tM= new TMarca (nombre,-1, true);
-					Controlador.getInstancia().setGUI(GUIAltaMarca.this);
 					Controlador.getInstancia().accion(Evento.ALTA_MARCA, tM);
 				}catch(Exception e1){
 				Utils.showErrorMsg("Los parametros introducidos son incorrectos");

@@ -41,7 +41,7 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private JPanel panel;
-	String[] header = { "Id", "Nombre", "Cantidad", "Activo"};
+	String[] header = { "Id", "Nombre", "Activo"};
 	private DefaultTableModel _dataTableModel;
 	
 	public GUIMarcaPorID() {
@@ -80,7 +80,6 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 				try{
 					setVisible(false);
 					int id=Integer.parseInt(tID.getText());
-					Controlador.getInstancia().setGUI(GUIMarcaPorID.this);
 					Controlador.getInstancia().accion(Evento.MARCA_PORID, new Integer(id));
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");

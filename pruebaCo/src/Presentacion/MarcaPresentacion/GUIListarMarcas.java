@@ -43,10 +43,9 @@ public class GUIListarMarcas extends JFrame implements GUI{
 	* <!-- end-UML-doc -->
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	String[] header = { "Id", "Nombre", "Cantidad", "Activo"};
+	String[] header = { "Id", "Nombre", "Activo"};
 	private DefaultTableModel _dataTableModel;
 	public GUIListarMarcas() {
-		Controlador.getInstancia().setGUI(GUIListarMarcas.this);
 		this.listar(new ArrayList<TMarca>());
 		
 	}
@@ -124,8 +123,8 @@ public class GUIListarMarcas extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		Controlador.getInstancia().setGUI(GUIListarMarcas.this);
-		Controlador.getInstancia().accion(Evento.LISTAR_MARCAS,null);
+		//Controlador.getInstancia().setGUI(GUIListarMarcas.this);
+		//Controlador.getInstancia().accion(Evento.LISTAR_MARCAS,null);
 		this.setVisible(b);
 	}
 }

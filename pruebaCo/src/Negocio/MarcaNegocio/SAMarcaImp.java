@@ -114,25 +114,30 @@ public class SAMarcaImp implements SAMarca {
 				//Revisamos que no queden productos
 				DAOProducto daoprod= FactoriaIntegracion.getInstance().generaDAOProducto();
 				Collection<TProducto> productos= daoprod.readByMarca(ID);
-				boolean inactivos=true;
-				for(TProducto p:productos){//si todos sus productos estan a 0(no estan activos) se puede borrar la marca
-					if(p.getCantidad()>0){
-						inactivos=false;
-					}
-				}
-				if(inactivos) {
-					DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
-					Collection<TProveedorMarca> lpm = dpm.readProveedorMarcaPorMarca(id);
-					//Elimino todos los provvedorMarca con dicha marca
-					for(TProveedorMarca pm: lpm) {
-						if(pm.isActivo()) {
-							dpm.delete(pm);
+				if(productos!=null) {
+					boolean inactivos=true;
+					for(TProducto p:productos){//si todos sus productos estan a 0(no estan activos) se puede borrar la marca
+						if(p.getCantidad()>0){
+							inactivos=false;
 						}
 					}
-					//elimino de daoMarca			
-					id=daoMarca.delete(ID);
-					
+					if(inactivos) {
+						DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
+						Collection<TProveedorMarca> lpm = dpm.readProveedorMarcaPorMarca(id);
+						if(lpm!=null) {
+						//Elimino todos los provvedorMarca con dicha marca
+						for(TProveedorMarca pm: lpm) {
+							if(pm.isActivo()) {
+								dpm.delete(pm);
+							}
+						}
+						//elimino de daoMarca			
+						id=daoMarca.delete(ID);
+						}
+						
+					}
 				}
+				
 			}
 		}
 		return id;

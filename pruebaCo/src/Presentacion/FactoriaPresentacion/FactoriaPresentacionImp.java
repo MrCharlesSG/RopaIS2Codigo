@@ -74,11 +74,11 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 		map.put(Evento.ALTA_MARCA, new GUIAltaMarca());
 		map.put(Evento.BAJA_MARCA, new GUIBajaMarca());
 		map.put(Evento.LISTAR_MARCAS, new GUIListarMarcas());
-		map.put(Evento.MODIFICAR_MARCA, new GUIModificarMarca());
+		//map.put(Evento.MODIFICAR_MARCA, new GUIModificarMarca());
 		map.put(Evento.MARCA_PORID, new GUIMarcaPorID());
-		map.put(Evento.ADD_PROVEEDOR_TO_MARCA, new GUIaddProveedorToMarca());
-		map.put(Evento.DELETE_PROVEEDOR_OF_MARCA, new GUIDeleteMarcaOfProveedor());
-		map.put(Evento.LISTAR_MARCA_POR_PROVEEDORES, new GUIListarMarcaPorProveedor());
+	//	map.put(Evento.ADD_PROVEEDOR_TO_MARCA, new GUIaddProveedorToMarca());
+	//	map.put(Evento.DELETE_PROVEEDOR_OF_MARCA, new GUIDeleteMarcaOfProveedor());
+	//	map.put(Evento.LISTAR_MARCA_POR_PROVEEDORES, new GUIListarMarcaPorProveedor());
 
 		/*
 		 * PRODUCTOS
@@ -95,14 +95,14 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 		 */
 		
 		map.put(Evento.Mostrar_GUI_PROVEEDORES, new IGUIProv());
-		map.put(Evento.ALTA_PROVEEDOR, new GUIAltaProv());
-		map.put(Evento.BAJA_PROVEEDOR, new GUIBajaProv());
-		map.put(Evento.LISTAR_PROVEEDORES, new GUIListarProv());
-		map.put(Evento.MODIFICAR_PROVEEDOR, new GUIModificarProv());
-		map.put(Evento.PROVEEDOR_POR_ID, new GUIProvPorID());
-		map.put(Evento.ADD_MARCA_TO_PROVEEDOR, new GUIAddMarcaToProveedor());
-		map.put(Evento.DELETE_MARCA_OF_PROVEEDOR, new GUIDeleteMarcaOfProveedor());
-		map.put(Evento.LISTAR_PROVEEDORES_POR_MARCA, new GUIListarProveedoresPorMarca());
+	//	map.put(Evento.ALTA_PROVEEDOR, new GUIAltaProv());
+	//	map.put(Evento.BAJA_PROVEEDOR, new GUIBajaProv());
+	//	map.put(Evento.LISTAR_PROVEEDORES, new GUIListarProv());
+	//	map.put(Evento.MODIFICAR_PROVEEDOR, new GUIModificarProv());
+	//	map.put(Evento.PROVEEDOR_POR_ID, new GUIProvPorID());
+	//	map.put(Evento.ADD_MARCA_TO_PROVEEDOR, new GUIAddMarcaToProveedor());
+	//	map.put(Evento.DELETE_MARCA_OF_PROVEEDOR, new GUIDeleteMarcaOfProveedor());
+	//	map.put(Evento.LISTAR_PROVEEDORES_POR_MARCA, new GUIListarProveedoresPorMarca());
 
 		/*
 		 * CLIENTES

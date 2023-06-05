@@ -67,7 +67,6 @@ public class GUIBajaMarca extends JFrame implements GUI{
 				try{
 					setVisible(false);
 					int id=Integer.parseInt(tID.getText());
-					Controlador.getInstancia().setGUI(GUIBajaMarca.this);
 					Controlador.getInstancia().accion(Evento.BAJA_MARCA, id);
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
