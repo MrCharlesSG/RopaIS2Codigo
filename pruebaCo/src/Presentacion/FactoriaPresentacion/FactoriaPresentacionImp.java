@@ -48,6 +48,7 @@ import Presentacion.MarcaPresentacion.IGUIMarca;
 import Presentacion.Producto.GUIAltaProducto;
 import Presentacion.Producto.GUIBajaProducto;
 import Presentacion.Producto.GUIListarProductos;
+import Presentacion.Producto.GUIListarProductosDeMarca;
 import Presentacion.Producto.GUIModificarProducto;
 import Presentacion.Producto.GUIProductoPorID;
 import Presentacion.Producto.IGUIProducto;
@@ -132,6 +133,9 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 		}
 		case Evento.PRODUCTO_POR_ID:{
 			return new GUIProductoPorID();
+		}
+		case Evento.LISTAR_PRODUCTOS_POR_MARCA:{
+			return new GUIListarProductosDeMarca();
 		}
 		
 		/*

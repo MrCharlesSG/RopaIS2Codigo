@@ -42,7 +42,7 @@ public class DAOProductoIMP implements DAOProducto{
 		
 		File f =new File(ARCHIVO);
 		
-		String[] splitArray = new String[6];
+		String[] splitArray = new String[7];
 		splitArray[1] = "-1";
 		StringBuilder sb =new StringBuilder();
 		int id=-1;
@@ -162,9 +162,10 @@ public class DAOProductoIMP implements DAOProducto{
 			boolean found = false;
 			
 			while((line = br.readLine()) !=null && !found){
-				splitArray = line.split(":", 6);
+				splitArray = line.split(":");
 				if(splitArray[1].equals(Integer.toString(id))){
-					//nombre: id: cantidad: talla: categoria: idMarca:
+					//nombre: id: cantidad: talla: categoria: idMarca: precio
+					// 0       1      2       3       4          5     6
 					Tprod = new TProducto(splitArray[0], Integer.parseInt(splitArray[2]), 
 							Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), 
 							splitArray[4], Integer.parseInt(splitArray[5]), Double.parseDouble(splitArray[6]));
@@ -227,7 +228,7 @@ public class DAOProductoIMP implements DAOProducto{
 			boolean found = false;
 			
 			while((line = br.readLine()) !=null && !found){
-				splitArray = line.split(":", 6);
+				splitArray = line.split(":");
 				if(splitArray[0].equals(name)){
 					//nombre: id: cantidad: talla: categoria: idMarca:
 					Tprod = new TProducto(splitArray[0], Integer.parseInt(splitArray[2]), 
@@ -251,7 +252,7 @@ public class DAOProductoIMP implements DAOProducto{
 	 */
 	@Override
 	public int update(TProducto Tprod) {
-		String[] stringArray = new String[6];
+		String[] stringArray = new String[7];
 		//nombre: id: cantidad: talla: categoria: idMarca:
 		stringArray[0] = Tprod.getNombre();
 		stringArray[1] = Integer.toString(Tprod.getIdProducto());
@@ -274,8 +275,8 @@ public class DAOProductoIMP implements DAOProducto{
 		        //nombre: id: cantidad: talla: categoria: idMarca:
 		        	
 		        if(splitArray[1].equals(stringArray[1])){
-		        	buffer.append(stringArray[0] + ":" + splitArray[1] + ":" + stringArray[2]+ ":" + stringArray[3]
-		        			 + ":" + stringArray[4] + ":" + splitArray[5] + ":"
+		        	buffer.append(stringArray[0] + ":" + stringArray[1] + ":" + stringArray[2]+ ":" + stringArray[3]
+		        			 + ":" + stringArray[4] + ":" + stringArray[5] + ":"
 		        			 + stringArray[6] + System.lineSeparator());
 		        	 id=Tprod.getIdProducto();
 		        }else{
@@ -320,7 +321,7 @@ public class DAOProductoIMP implements DAOProducto{
 				splitArray = line.split(":");
 			
 				TProducto producto=new TProducto(splitArray[0], Integer.parseInt(splitArray[2]),
-						Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), splitArray[4], Integer.parseInt(splitArray[5]),Integer.parseInt(splitArray[6]));	
+						Integer.parseInt(splitArray[3]), Integer.parseInt(splitArray[1]), splitArray[4], Integer.parseInt(splitArray[5]),Double.parseDouble(splitArray[6]));	
 					if(producto.getIdMarca()==iD){
 						list.add(producto);
 					}
@@ -336,7 +337,7 @@ public class DAOProductoIMP implements DAOProducto{
 	public boolean restarCantidad(int id, int cant) {
 		File f =new File(ARCHIVO);
 
-		String[] splitArray = new String[6];
+		String[] splitArray = new String[7];
 		StringBuilder sb =new StringBuilder();
 
 		boolean found =false;
@@ -344,7 +345,7 @@ public class DAOProductoIMP implements DAOProducto{
 		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 		    String line;
 		    while ((line = br.readLine()) != null && !line.equals("")) {
-		        splitArray = line.split(":", 6);
+		        splitArray = line.split(":");
 		        if(Integer.parseInt(splitArray[1]) == id){
 		        	sb.append(splitArray[0] + ":" + splitArray[1] + ":" + (Integer.parseInt(splitArray[2]) - cant) + ":"
 		        		+ splitArray[3] + ":" + splitArray[4] + ":" +splitArray[5] + ":"

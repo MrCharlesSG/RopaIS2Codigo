@@ -120,7 +120,7 @@ public class GUIAltaProducto extends JFrame implements GUI{
 		switch(evento){
 		case Evento.OK:
 			Integer id= (Integer) datos;
-			JOptionPane.showMessageDialog(null,"Se ha dado de alta correctamente el producto");
+			JOptionPane.showMessageDialog(null,"Se ha dado de alta correctamente el producto con identificador"+id);
 			break;
 		case Evento.KO:
 			JOptionPane.showMessageDialog(null, "No se pudo dar de alta el producto correctamente");

@@ -14,4 +14,5 @@ public interface SAProducto {
 	public TProducto readByName(String string);
 	public int update(TProducto Tprod);
 	boolean restarCantidad(int id, int cant);
+	public Collection<TProducto> productosPorMarca(int id);
 }

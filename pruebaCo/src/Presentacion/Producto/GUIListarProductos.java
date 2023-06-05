@@ -47,6 +47,7 @@ public class GUIListarProductos extends JFrame implements GUI{
 	public GUIListarProductos(){
 		
 		listar(new ArrayList<TProducto>());
+		
 	}
 
 	@Override
@@ -72,6 +73,7 @@ public class GUIListarProductos extends JFrame implements GUI{
 			i++;
 		
 		}
+		this.setVisible(true);
 	}
 		
 	}
@@ -133,8 +135,8 @@ public class GUIListarProductos extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		//Controlador.getInstancia().setGUI(GUIListarProductos.this);
+		
 		Controlador.getInstancia().accion(Evento.LISTAR_PRODUCTOS,null);
-		this.setVisible(b);
+		this.setVisible(false);
 	}
 }

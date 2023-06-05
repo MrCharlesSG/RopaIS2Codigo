@@ -1,3 +1,1 @@
-Pantalones azules:1:0:1:pantalones:1
-Camiseta blanca:2:0:1:Camiseta:1
-asa:3:1179:1:sa:1
+w:1:1:1:q:1:11.0

@@ -1,9 +1,6 @@
-// @author Dokt0r;
+
 
 package Negocio.Producto;
-
-import Negocio.Producto.SAProducto;
-import Negocio.Producto.TProducto;
 
 import java.util.Collection;
 
@@ -45,8 +42,8 @@ public class SAProductoIMP implements SAProducto{
 		int ID=-1;
 		if(ComprobadorSintactico.isPositive(id)){
 			DAOProducto dao = FactoriaIntegracion.getInstance().generaDAOProducto();
-			TProducto Tprod = read(id);
-			if(Tprod!=null){
+			TProducto Tprod = dao.read(id);
+			if(Tprod!=null&&Tprod.getCantidad()>0){
 				ID=dao.delete(Tprod.getIdProducto());
 			}
 		}
@@ -88,8 +85,17 @@ public class SAProductoIMP implements SAProducto{
 			DAOProducto dao = FactoriaIntegracion.getInstance().generaDAOProducto();
 			TProducto Tprod2;
 			Tprod2 = dao.read(Tprod.getIdProducto());
-			if(Tprod2!=null)
-				id=dao.update(Tprod);
+			
+			if(Tprod2!=null) {
+				
+				SAMarca saMarca=FactoriaNegocio.getInstance().generaSAMarca();
+				TMarca tMarca = saMarca.read(Tprod.getIdMarca());
+				
+				if(tMarca!=null&&tMarca.getActivo())
+					id=dao.update(Tprod);
+				
+			}
+				
 			
 		}
 		return id;
@@ -105,5 +111,12 @@ public class SAProductoIMP implements SAProducto{
 	}
 	private boolean esValida(TProducto Tprod){
 		return ComprobadorSintactico.isName(Tprod.getNombre()) && ComprobadorSintactico.isPositive(Tprod.getTalla()) && ComprobadorSintactico.isName(Tprod.getCategoria());
+	}
+
+
+	@Override
+	public Collection<TProducto> productosPorMarca(int id) {
+		DAOProducto dao = FactoriaIntegracion.getInstance().generaDAOProducto();
+		return dao.readByMarca(id);
 	}
 }

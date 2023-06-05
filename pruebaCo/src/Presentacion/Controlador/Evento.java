@@ -41,6 +41,7 @@ public class Evento {
 	public static final int MODIFICAR_PRODUCTO = 705;
 	public static final int PRODUCTO_POR_ID = 706;
 	public static final int VENTA_POR_PRODUCTO = 707;
+	public static final int LISTAR_PRODUCTOS_POR_MARCA= 708;
 	
 		//Proveedor
 		public static final int ALTA_PROVEEDOR = 901;

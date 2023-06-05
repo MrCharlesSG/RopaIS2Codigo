@@ -160,8 +160,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.LISTAR_PRODUCTOS:{
 				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				Collection<TProducto>productos=saProducto.readAll();
-				
-				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+				gui.update(evento, productos);
 				break;
 			}
 			case Evento.MODIFICAR_PRODUCTO:{
@@ -184,6 +183,12 @@ public class ControladorIMP extends Controlador {
 					gui.update(Evento.OK, producto);
 				else
 					gui.update(Evento.KO, producto);
+				break;
+			}
+			case Evento.LISTAR_PRODUCTOS_POR_MARCA:{
+				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
+				Collection<TProducto>productos=saProducto.productosPorMarca((int) datos);
+				gui.update(evento, productos);
 				break;
 			}
 			

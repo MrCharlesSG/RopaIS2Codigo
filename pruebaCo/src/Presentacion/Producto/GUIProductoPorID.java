@@ -177,7 +177,6 @@ public class GUIProductoPorID extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(jpanel);
 		this.setVisible(b);
 	}
 }

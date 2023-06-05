@@ -120,6 +120,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		precioT.setMaximumSize(DIM);
 		precioT.setMinimumSize(DIM);
 		precioT.setPreferredSize(DIM);
+		jpanel.add(precio);
 		
 		idMarca = new JPanel();
 		idMarca.add((new JLabel("idMarca: ")));
@@ -143,11 +144,11 @@ public class GUIModificarProducto extends JFrame implements GUI{
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				try{
-					
+					String prec = precioT.getText();
 					Controlador.getInstancia().accion(Evento.MODIFICAR_PRODUCTO, new TProducto(
 							nombreT.getText(), Integer.parseInt(cantidadT.getText()), Integer.parseInt(tallaT.getText()),
 							Integer.parseInt(idT.getText()) ,categoriaT.getText(),
-							Integer.parseInt(idMarcaT.getText()), Double.parseDouble(precioT.getText())));
+							Integer.parseInt(idMarcaT.getText()), Double.parseDouble(prec)));
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 				}
