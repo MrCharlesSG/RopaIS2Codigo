@@ -113,7 +113,6 @@ public class GUIAltaProv extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 }

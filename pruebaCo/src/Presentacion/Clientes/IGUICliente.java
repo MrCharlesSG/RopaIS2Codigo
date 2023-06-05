@@ -38,32 +38,37 @@ public class IGUICliente extends JPanel implements GUI{
 			{ public void actionPerformed(ActionEvent e)
 				{		
 					
-					FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_CLIENTE);
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_CLIENTE);
+				gui.setGUIVisible(true);
 				}
 		});
 		bajaCliente.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-				FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_CLIENTE);
-			}
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_CLIENTE);
+				gui.setGUIVisible(true);
+				}
 		});
 		listarCliente.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-			FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_CLIENTES);
-		}
+			GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_CLIENTES);
+			gui.setGUIVisible(true);
+			}
 		});
 		modificarCliente.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{	
-			FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_CLIENTE);
-		}
+			GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_CLIENTE);
+			gui.setGUIVisible(true);
+			}
 		});
 		clientePorID.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-			FactoriaPresentacion.getInstance().generaGUI(Evento.CLIENTE_POR_ID);
-		}
+			GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.CLIENTE_POR_ID);
+			gui.setGUIVisible(true);
+			}
 		});
 		
 	}

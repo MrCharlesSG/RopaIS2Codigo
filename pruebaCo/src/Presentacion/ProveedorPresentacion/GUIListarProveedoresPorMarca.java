@@ -83,7 +83,6 @@ public class GUIListarProveedoresPorMarca extends JFrame implements GUI  {
 
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(panel);
 		setVisible(b);
 	}
 

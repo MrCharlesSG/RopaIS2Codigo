@@ -40,7 +40,7 @@ public class GUIListarProv extends JFrame implements GUI{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
-	String[] header = { "Id", "Nombre", "Marcas"};
+	String[] header = { "Id", "Nombre"};
 	private DefaultTableModel _dataTableModel;
 	public GUIListarProv(){
 		initGUI();
@@ -123,15 +123,15 @@ public class GUIListarProv extends JFrame implements GUI{
 				_dataTableModel.setValueAt(m.getNombre(), i, 1);
 				i++;
 		}
+			this.setVisible(true);
 		}
 		}
 	}
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(panel);
-		
+			
 		Controlador.getInstancia().accion(Evento.LISTAR_PROVEEDORES,null);
-		this.setVisible(b);
+	
 	}
 }

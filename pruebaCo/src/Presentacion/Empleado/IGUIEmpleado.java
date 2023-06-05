@@ -36,32 +36,37 @@ public class IGUIEmpleado extends JPanel implements GUI{
 		{ public void actionPerformed(ActionEvent e)
 			{		
 				
-				FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_EMPLEADO);
+			GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_EMPLEADO);
+			gui.setGUIVisible(true);
 			}
 	});
 	bajaEmpleado.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-				FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_EMPLEADO);
-		}
+			GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_EMPLEADO);
+			gui.setGUIVisible(true);
+			}
 	});
 	listarEmpleado.addActionListener(new ActionListener()
 	{ public void actionPerformed(ActionEvent e)
 		{		
-			FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_EMPLEADO);
-	}
+		GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_EMPLEADO);
+		gui.setGUIVisible(true);
+		}
 	});
 	modificarEmpleado.addActionListener(new ActionListener()
 	{ public void actionPerformed(ActionEvent e)
 		{	
-			FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_EMPLEADO);
-	}
+		GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_EMPLEADO);
+		gui.setGUIVisible(true);
+		}
 	});
 	empleadoPorID.addActionListener(new ActionListener()
 	{ public void actionPerformed(ActionEvent e)
 		{		
-			FactoriaPresentacion.getInstance().generaGUI(Evento.EMPLEADO_POR_ID);
-	}
+		GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.EMPLEADO_POR_ID);
+		gui.setGUIVisible(true);
+		}
 	});
 	
 	}

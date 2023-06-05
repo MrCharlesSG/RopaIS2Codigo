@@ -38,57 +38,65 @@ import Presentacion.GUI.GUI;
 			marcasDeProv.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){	
-				FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_PROVEEDORES_POR_MARCA);
-				}
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_PROVEEDORES_POR_MARCA);
+				gui.setGUIVisible(true);
+			}
 			});
 			
 			deleteMarcaToProv.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){	
-				FactoriaPresentacion.getInstance().generaGUI(Evento.DELETE_MARCA_OF_PROVEEDOR);
-				}
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.DELETE_MARCA_OF_PROVEEDOR);
+				gui.setGUIVisible(true);	
+			}
 			});
 			
 			addMarcaToProv.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){	
-				FactoriaPresentacion.getInstance().generaGUI(Evento.ADD_MARCA_TO_PROVEEDOR);
-				}
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.ADD_MARCA_TO_PROVEEDOR);
+				gui.setGUIVisible(true);	
+			}
 			});
 			
 			altaProv.addActionListener(new ActionListener()
 				{ 
 				public void actionPerformed(ActionEvent e){	
-					FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_PROVEEDOR);
-					}
+					GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_PROVEEDOR);
+					gui.setGUIVisible(true);	
+				}
 			});
 			
 			bajaProv.addActionListener(new ActionListener()
 				{ 
 				public void actionPerformed(ActionEvent e){		
 						
-					FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_PROVEEDOR);
-					}
+					GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_PROVEEDOR);
+					gui.setGUIVisible(true);	
+				}
 			});
 			
 			listarProv.addActionListener(new ActionListener()
 			{ 
 				public void actionPerformed(ActionEvent e){		
-					FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_PROVEEDORES);
-			}
+					GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_PROVEEDORES);
+					gui.setGUIVisible(true);
+				}
 			});
 			modificarProv.addActionListener(new ActionListener()
 			{ 
 				public void actionPerformed(ActionEvent e){		
 					
-					FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_PROVEEDOR);
+					GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_PROVEEDOR);
+					gui.setGUIVisible(true);
 				}
 			});
 			provPorID.addActionListener(new ActionListener()
 			{ 
 				public void actionPerformed(ActionEvent e){		
 					
-					FactoriaPresentacion.getInstance().generaGUI(Evento.PROVEEDOR_POR_ID);
+					GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.PROVEEDOR_POR_ID);
+					gui.setGUIVisible(true);
 				}
 			});
 			

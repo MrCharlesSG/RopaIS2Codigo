@@ -35,42 +35,48 @@ public class IGUIVentas extends JPanel implements GUI{
 		altaV.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){	
-				FactoriaPresentacion.getInstance().generaGUI(Evento.ABRIR_VENTA);
-				}
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.ABRIR_VENTA);
+				gui.setGUIVisible(true);
+			}
 		});
 		
 		devol.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){		
 					
-				FactoriaPresentacion.getInstance().generaGUI(Evento.CERRAR_VENTA);
-				}
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.CERRAR_VENTA);
+				gui.setGUIVisible(true);	
+			}
 		});
 		
 		listarC.addActionListener(new ActionListener()
 		{ 
 			public void actionPerformed(ActionEvent e){		
 				//este no usa el set Gui porque no tiene botones y directamente llama al controlador
-				FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_VENTAS);
-		}
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_VENTAS);
+				gui.setGUIVisible(true);
+			}
 		});
 		ventaPorID.addActionListener(new ActionListener()
 		{ 
 			public void actionPerformed(ActionEvent e){		
 				
-				FactoriaPresentacion.getInstance().generaGUI(Evento.VENTA_POR_ID);
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.VENTA_POR_ID);
+				gui.setGUIVisible(true);
 			}
 		});
 		ventasPorEmpleados.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FactoriaPresentacion.getInstance().generaGUI(Evento.VENTAS_DE_UN_EMPLEADO);
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.VENTAS_DE_UN_EMPLEADO);
+				gui.setGUIVisible(true);
 			}
 		});
 		ventasPorCliente.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FactoriaPresentacion.getInstance().generaGUI(Evento.VENTA_POR_ID);
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.VENTA_POR_ID);
+				gui.setGUIVisible(true);
 			}
 		});
 		
