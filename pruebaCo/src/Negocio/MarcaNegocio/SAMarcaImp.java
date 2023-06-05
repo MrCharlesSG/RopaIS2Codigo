@@ -8,6 +8,7 @@ import java.util.Collection;
 
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.MarcaIntegracion.DAOMarca;
+import Integracion.MarcaProveedores.DAOProveedorMarca;
 import Integracion.Producto.DAOProducto;
 import Integracion.Proveedores.DAOProveedores;
 import Negocio.ComprobadorSintactico;
@@ -120,14 +121,15 @@ public class SAMarcaImp implements SAMarca {
 					}
 				}
 				if(inactivos) {
-					// si resulta que todos estan inactivos o no hay ninguno
-					//Eliminar de los proveedores la marca
-					DAOProveedores daoProv=FactoriaIntegracion.getInstance().generaDAOProveedor();
-					Collection<TProveedor> proveedores = daoProv.readByMarca(id);
-					for(TProveedor p: proveedores) {
-						daoProv.deleteMarca(new TProveedorMarca(p.getId(), id));
+					DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
+					Collection<TProveedorMarca> lpm = dpm.readProveedorMarcaPorMarca(id);
+					//Elimino todos los provvedorMarca con dicha marca
+					for(TProveedorMarca pm: lpm) {
+						if(pm.isActivo()) {
+							dpm.delete(pm);
+						}
 					}
-					//Eliminamos Marca					
+					//elimino de daoMarca			
 					id=daoMarca.delete(ID);
 					
 				}
@@ -152,55 +154,55 @@ public class SAMarcaImp implements SAMarca {
 
 	@Override
 	public Collection<TMarca> readByProveedor(int idProv) {
-		Collection<TMarca> marcas =null;
+		Collection<TMarca> marcas =new ArrayList<TMarca>();
 		TProveedor prov = null;
 		if(ComprobadorSintactico.isPositive(idProv))
 			prov = FactoriaNegocio.getInstance().generaSAProveedor().read(idProv);
 		if(prov != null && prov.getActivo()){
-			marcas=FactoriaIntegracion.getInstance().generaDAOMarca().readMarcaByProveedor(idProv);
+			DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
+			DAOMarca dm = FactoriaIntegracion.getInstance().generaDAOMarca();
+			Collection<TProveedorMarca> lpm = dpm.readProveedorMarcaPorMarca(idProv);
+			for(TProveedorMarca pm: lpm) {
+				if(pm.isActivo()) {
+					TMarca auxp = dm.read(pm.getIdMarca());
+					if(auxp!=null && auxp.getActivo()) {
+						marcas.add(auxp);
+					}
+				}
+			}
 		}
-		return marcas;
+		return marcas.size()>0? marcas:null;
 	}
 
 	@Override
 	public int addProveedorToMarca(TProveedorMarca pm) {
 		int res=-1;
-		DAOProveedores daoProv=FactoriaIntegracion.getInstance().generaDAOProveedor();
-		DAOMarca daoMarca =FactoriaIntegracion.getInstance().generaDAOMarca();
-		
-		TProveedor prov =daoProv.read(pm.getIdProveedor());
-		TMarca marca = daoMarca.read(pm.getIdMarca());
+		DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
+		TProveedor prov =FactoriaIntegracion.getInstance().generaDAOProveedor().read(pm.getIdProveedor());
+		TMarca marca = FactoriaIntegracion.getInstance().generaDAOMarca().read(pm.getIdMarca());
 		//Si las marcas y proveedores existen y estan activas
 		if(marca!=null && prov!=null && prov.getActivo() && marca.getActivo()) {
-			//Si las marcas no tienen ya ese proveedor o viceversa, en principio si uno no lo contiene el otro tampoco debería
-			//No me fio del metodo contains de las Collections, he modificado el equals para q solo mire nombre y id
-			if(!daoProv.readByMarca(marca.getID()).contains(prov) && !daoMarca.readMarcaByProveedor(prov.getId()).contains(marca)) {
-				daoProv.addMarca(pm);
-				res = daoMarca.addProveedor(pm);
-			}
 			
+			if(dpm.read(pm)!=null) {
+				pm.setActivo(true);
+				res=dpm.update(pm);
+			}else if(dpm.read(pm).isActivo()) {
+				res=-1;	
+			}
+			else {
+				res=dpm.create(pm);
+			}
 		}
-		
-		
 		return res;
 	}
 
 	@Override
 	public int deleteProveedorOfMarca(TProveedorMarca pm) {
 		int res=-1;
-		DAOProveedores daoProv=FactoriaIntegracion.getInstance().generaDAOProveedor();
-		DAOMarca daoMarca =FactoriaIntegracion.getInstance().generaDAOMarca();
-		TProveedor prov =daoProv.read(pm.getIdProveedor());
-		TMarca marca = daoMarca.read(pm.getIdMarca());
-		//Si las marcas y proveedores existen y estan activas
-		if(marca!=null && prov!=null && prov.getActivo() && marca.getActivo()) {
-			//Si las marcas no tienen ya ese proveedor o viceversa, en principio si uno no lo contiene el otro tampoco debería
-			//No me fio del metodo contains de las Collections, he modificado el equals para q solo mire nombre y id
-			if(daoProv.readByMarca(marca.getID()).contains(prov) && daoMarca.readMarcaByProveedor(prov.getId()).contains(marca)) {
-				daoProv.deleteMarca(pm);
-				res = daoMarca.deleteProveedor(pm);
-			}
-			
+		DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
+		TProveedorMarca pmaux=dpm.read(pm);
+		if(pmaux!=null && pmaux.isActivo()) {
+			res=dpm.delete(pm);
 		}
 		return res;
 	}

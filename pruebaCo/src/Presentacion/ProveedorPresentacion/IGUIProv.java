@@ -31,14 +31,14 @@ import Presentacion.GUI.GUI;
 			JButton listarProv=new JButton("Listar proveedor");
 			JButton modificarProv=new JButton("Modificar proveedor");
 			JButton provPorID=new JButton("Proveedor por ID");
-			JButton marcasDeProv=new JButton("Marcas de Proveedor");
+			JButton marcasDeProv=new JButton("Proveedores Por Marca");
 			JButton addMarcaToProv = new JButton("Add Marca to Proveedor");
 			JButton deleteMarcaToProv = new JButton("Delete Marca of Proveedor");
 			
 			marcasDeProv.addActionListener(new ActionListener()
 			{ 
 			public void actionPerformed(ActionEvent e){	
-				FactoriaPresentacion.getInstance().generaGUI(Evento.LISTA_MARCAS_DE_PROVEEDOR);
+				FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_PROVEEDORES_POR_MARCA);
 				}
 			});
 			

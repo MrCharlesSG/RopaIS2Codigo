@@ -220,7 +220,7 @@ public class DAOMarcaImp implements DAOMarca {
 			return null;
 		}
 	}
-	@Override
+	/*@Override
 	public Collection<TMarca> readMarcaByProveedor(int idProveedor) {
 		File file=new File(ARCHIVO);
 		Collection<TMarca> marcas=new ArrayList<TMarca>();
@@ -249,88 +249,7 @@ public class DAOMarcaImp implements DAOMarca {
 			return null;
 		}
 	}
-	
+	*/
 
-	@Override
-	public int addProveedor(TProveedorMarca pm) {
-		StringBuilder buffer=new StringBuilder();
-		File file=new File(ARCHIVO);
-		String datos[], linea;
-		int idFinal=-1;
-		
-		
-		try(Scanner scanner=new Scanner(file)) {
-			//recojo los antiguos datos
-			while(scanner.hasNext()) {
-				
-				linea=scanner.nextLine();
-				datos=linea.split(":");
-				buffer.append(linea);
-				if(Integer.parseInt(datos[1])==pm.getIdMarca()) {
-					buffer.append(":"+pm.getIdProveedor());
-					idFinal=Integer.parseInt(datos[1]);
-				}					
-				buffer.append(System.lineSeparator());
-			}
-		}catch (IOException e) {
-			return -1;
-		}
-		
-			
-		try(Writer w=new BufferedWriter(
-									new OutputStreamWriter(
-									new FileOutputStream(ARCHIVO)))){
-			w.write(buffer.toString());
-		}catch (IOException e) {
-			return -1;
-		}
-		return idFinal;
-	}
 	
-	@Override
-	public int deleteProveedor(TProveedorMarca pm) {
-		StringBuilder buffer=new StringBuilder();
-		File file=new File(ARCHIVO);
-		String datos[];
-		int idFinal=-1, idAct;
-		
-		
-		try(Scanner scanner=new Scanner(file)) {
-			//recojo los antiguos datos
-			while(scanner.hasNext()) {
-				
-			
-				datos=scanner.nextLine().split(":");
-				idAct=Integer.parseInt(datos[1]);
-				//Añado datos de siempre
-				for(int i=0; i<3; i++ )  {
-					buffer.append(datos[i]);
-					if(i!=2)
-						buffer.append(":");
-					
-				}
-				//Añado todas las marcas menos el provedor pm.getId de la Pmarca pm.getIdM
-				for(int i=3; i< datos.length; i++) {
-					if(idAct!=pm.getIdMarca() || Integer.parseInt(datos[i])!=pm.getIdProveedor()) 
-						buffer.append(":"+datos[i]);
-					else
-						idFinal=idAct;
-				}
-				
-				buffer.append(System.lineSeparator());
-			}
-		}catch (IOException e) {
-			return -1;
-		}
-		
-			
-		try(Writer w=new BufferedWriter(
-									new OutputStreamWriter(
-									new FileOutputStream(ARCHIVO)))){
-			w.write(buffer.toString());
-		}catch (IOException e) {
-			return -1;
-		}
-		return idFinal;
-	}
 }

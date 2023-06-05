@@ -205,9 +205,9 @@ public class ControladorIMP extends Controlador {
                 	}
                 break;
             }
-            case Evento.LISTA_MARCAS_DE_PROVEEDOR:{
-            	SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
-            	Collection<TMarca> res=saMarca.readByProveedor((int)datos);
+            case Evento.LISTAR_PROVEEDORES_POR_MARCA:{
+            	SAProveedores saProveedores = FactoriaNegocio.getInstance().generaSAProveedor();
+            	Collection<TProveedor> res= saProveedores.readByMarca((int)datos);
             	if(res!=null) {
             		gui.update(Evento.OK, res);
             	}else {

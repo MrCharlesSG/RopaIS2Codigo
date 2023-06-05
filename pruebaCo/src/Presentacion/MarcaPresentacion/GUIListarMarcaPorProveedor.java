@@ -1,4 +1,4 @@
-package Presentacion.ProveedorPresentacion;
+package Presentacion.MarcaPresentacion;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -17,8 +17,9 @@ import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
+import Presentacion.ProveedorPresentacion.GUIListarProveedoresPorMarca;
 
-public class GUIListarMarcasDeProveedor extends JFrame implements GUI  {
+public class GUIListarMarcaPorProveedor extends JFrame implements GUI {
 
 	/**
 	 * 
@@ -27,12 +28,12 @@ public class GUIListarMarcasDeProveedor extends JFrame implements GUI  {
 	
 	private JPanel panel;
 	
-	public GUIListarMarcasDeProveedor() {
+	public GUIListarMarcaPorProveedor() {
 		initGUI();
 	}
-
+	
 	private void initGUI() {
-		setTitle("Listar Marcas de Proveedor");
+		setTitle("Listar Marcas por Proveedor");
 		setTitle("Listar Proveedores");
 		this.setMinimumSize(new Dimension(500, 500));
 		panel=new JPanel();
@@ -56,8 +57,8 @@ public class GUIListarMarcasDeProveedor extends JFrame implements GUI  {
 		{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
-					Controlador.getInstancia().setGUI(GUIListarMarcasDeProveedor.this);
-					Controlador.getInstancia().accion(Evento.LISTA_MARCAS_DE_PROVEEDOR,Integer.parseInt(jtId.getText()));
+					Controlador.getInstancia().setGUI(GUIListarMarcaPorProveedor.this);
+					Controlador.getInstancia().accion(Evento.LISTAR_MARCA_POR_PROVEEDORES,Integer.parseInt(jtId.getText()));
 				}
 		});
 		panel.add(idLabel);
@@ -86,5 +87,6 @@ public class GUIListarMarcasDeProveedor extends JFrame implements GUI  {
 		Utils.refreshTextFields(panel);
 		setVisible(b);
 	}
+
 
 }

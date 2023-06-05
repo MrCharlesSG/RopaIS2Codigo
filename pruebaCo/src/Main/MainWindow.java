@@ -43,7 +43,7 @@ public class MainWindow extends JPanel{
 
 		private static void initGUI() {
 			main= new JFrame("Tienda Ropa");
-			main.setBounds(400,400,600,300);
+			main.setBounds(400,400,600,350);
 			main.setVisible (true );
 			main.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 			main.setLocationRelativeTo(null);

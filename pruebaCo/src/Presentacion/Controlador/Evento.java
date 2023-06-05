@@ -23,6 +23,7 @@ public class Evento {
 	public static final int MOSTRAR_GUI_BIBLIOTECA = 107;
 	public static final int OCULTAR_GUI_BIBLIOTECA = 108;
 	public static final int ADD_PROVEEDOR_TO_MARCA=109;
+	public static final int LISTAR_MARCA_POR_PROVEEDORES=110;
 	
 	public static final int RES_ALTA_MARCA_OK= 401;
 	public static final int RES_ALTA_MARCA_KO= 402;
@@ -48,7 +49,7 @@ public class Evento {
 		public static final int LISTAR_PROVEEDORES = 906;
 		public static final int ADD_MARCA_TO_PROVEEDOR=913;
 		public static final int DELETE_MARCA_OF_PROVEEDOR=914;
-		public static final int LISTA_MARCAS_DE_PROVEEDOR=915;
+		public static final int LISTAR_PROVEEDORES_POR_MARCA=915;
 		//respuestas Proveedor
 		public static final int RES_ALTA_PROVEEDOR_OK = 907;
 		public static final int RES_ALTA_PROVEEDOR_KO = 908;

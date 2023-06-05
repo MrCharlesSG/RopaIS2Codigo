@@ -70,10 +70,6 @@ public interface DAOMarca {
 	*/
 	public TMarca readByName(String nombre);
 	
-	public Collection<TMarca> readMarcaByProveedor(int idProveedor);
-	
-	public int addProveedor(TProveedorMarca pm);
-	
-	public int deleteProveedor(TProveedorMarca pm);
+	//public Collection<TMarca> readMarcaByProveedor(int idProveedor);
 	
 }

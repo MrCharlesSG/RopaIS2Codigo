@@ -20,7 +20,7 @@ public class DAOProveedoresIMP implements DAOProveedores{
 	 * (non-Javadoc)
 	 * @see Integracion.Proveedores.DAOProveedores#create(Negocio.Proveedor.TProveedor)
 	 * 
-	 * EL formato ser: id, nombre, activo, id marcas 
+	 * EL formato ser: id, nombre, activo
 	 */
 	@Override
 	public int create(TProveedor tProv) {
@@ -37,9 +37,6 @@ public class DAOProveedoresIMP implements DAOProveedores{
 			
 				datos=scanner.nextLine().split(":");
 				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]);
-				for(int i=3; i<datos.length; i++){
-					buffer.append(":"+datos[i]);
-				}
 				id=Integer.parseInt(datos[0])+1;
 				buffer.append(System.lineSeparator());
 			}
@@ -79,15 +76,9 @@ public class DAOProveedoresIMP implements DAOProveedores{
 				datos=scanner.nextLine().split(":");
 				if(id!=Integer.parseInt(datos[0])){
 					buffer.append(datos[0]+":"+datos[1]+":"+ datos[2]);
-					for(int i=3; i<datos.length; i++){
-						buffer.append(":"+datos[i]);
-					}
 					buffer.append(System.lineSeparator());
 				}else{
 					buffer.append(datos[0]+":"+datos[1]+":"+ false);
-					/*for(int i=3; i<datos.length; i++){
-						buffer.append(":"+datos[i]);
-					}*///deveria eliminar tambien sus marcas
 					buffer.append(System.lineSeparator());
 					encontrado=true;
 					activo=Boolean.parseBoolean(datos[2]);
@@ -185,11 +176,7 @@ public class DAOProveedoresIMP implements DAOProveedores{
 					buffer.append(tProv.getId()+":"+tProv.getNombre()+ ":"+ tProv.getActivo());
 				else
 					buffer.append(datos[0]+":"+datos[1]+ ":"+ datos[2]);
-					
 				
-				for(int i=3; i<datos.length; i++){
-					buffer.append(":"+datos[i]);
-				}
 				buffer.append(System.lineSeparator());
 			}
 		}catch (IOException e) {
@@ -235,7 +222,8 @@ public class DAOProveedoresIMP implements DAOProveedores{
 			}
 		}
 	}
-
+}
+/*
 	@Override
 	public Collection<TProveedor> readByMarca(int id) {
 		File file=new File(ARCHIVO);
@@ -265,89 +253,5 @@ public class DAOProveedoresIMP implements DAOProveedores{
 			return null;
 		}
 	}
+*/	
 	
-	@Override
-	public int addMarca(TProveedorMarca pm) {
-		StringBuilder buffer=new StringBuilder();
-		File file=new File(ARCHIVO);
-		String datos[], linea;
-		int idFinal=-1;
-		
-		
-		try(Scanner scanner=new Scanner(file)) {
-			//recojo los antiguos datos
-			while(scanner.hasNext()) {
-				
-				linea = scanner.nextLine();
-				datos=linea.split(":");
-				buffer.append(linea);
-				if(Integer.parseInt(datos[0])==pm.getIdProveedor()) {
-					buffer.append(":"+pm.getIdMarca());
-					idFinal=Integer.parseInt(datos[0]);
-				}					
-				buffer.append(System.lineSeparator());
-			}
-		}catch (IOException e) {
-			return -1;
-		}
-		
-			
-		try(Writer w=new BufferedWriter(
-									new OutputStreamWriter(
-									new FileOutputStream(ARCHIVO)))){
-			w.write(buffer.toString());
-		}catch (IOException e) {
-			return -1;
-		}
-		return idFinal;
-	}
-	//EL formato ser: id, nombre, activo, id marcas 
-	@Override
-	public int deleteMarca(TProveedorMarca pm) {
-		StringBuilder buffer=new StringBuilder();
-		File file=new File(ARCHIVO);
-		String datos[];
-		int idFinal=-1, idAct;
-		
-		
-		try(Scanner scanner=new Scanner(file)) {
-			//recojo los antiguos datos
-			while(scanner.hasNext()) {
-				
-			
-				datos=scanner.nextLine().split(":");
-				idAct=Integer.parseInt(datos[0]);
-				//Añado datos de siempre
-				for(int i=0; i<3; i++ )  {
-					buffer.append(datos[i]);
-					if(i!=2)
-						buffer.append(":");
-					
-				}
-				//Añado todas las marcas menos la marca pm.getIdM del provedor pm.getIdP
-				for(int i=3; i< datos.length; i++) {
-					if(idAct!=pm.getIdProveedor() || Integer.parseInt(datos[i])!=pm.getIdMarca()) 
-						buffer.append(":"+datos[i]);
-					else
-						idFinal=idAct;
-				}
-				
-				buffer.append(System.lineSeparator());
-			}
-		}catch (IOException e) {
-			return -1;
-		}
-		
-			
-		try(Writer w=new BufferedWriter(
-									new OutputStreamWriter(
-									new FileOutputStream(ARCHIVO)))){
-			w.write(buffer.toString());
-		}catch (IOException e) {
-			return -1;
-		}
-		return idFinal;
-	}
-	
-
-}
