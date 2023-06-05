@@ -32,8 +32,6 @@ public class ControladorIMP extends Controlador {
 	
 	
 	public ControladorIMP(){
-		
-		
 	}
 	
 	public void accion(int evento,Object datos) {
@@ -161,7 +159,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.LISTAR_PRODUCTOS:{
 				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				Collection<TProducto>productos=saProducto.readAll();
-				gui.update(Evento.LISTAR_PRODUCTOS, productos);
+				//gui.update(Evento.LISTAR_PRODUCTOS, productos);
 				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				break;
 			}
@@ -194,7 +192,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.ALTA_PROVEEDOR:{
 				SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
 				int res=saProveedor.create((TProveedor)datos);
-				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+			//	gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				if(res>0){
 					gui.update(Evento.OK, res);
 				}
@@ -206,7 +204,7 @@ public class ControladorIMP extends Controlador {
             case Evento.BAJA_PROVEEDOR:{
             	SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
                 int res = saProveedor.delete(((TProveedor)datos).getId());
-                gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+             //   gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 
                 if(res > 0)
                     gui.update(Evento.OK, res);
