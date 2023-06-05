@@ -25,8 +25,8 @@ import Negocio.Clientes.TClientePremium;
 
 public class SaClienteTest {
 	private SAClientes saCliente=FactoriaNegocioImp.getInstance().generaSAClientes();
-    private TCliente tDani=new TClienteNormal(true, "Diaz", "Diaz", "12234324A", 1, "Dani", 613456987, false);;
-    private TCliente tPablo= new TClientePremium(true, "Gonzalez", "Gonzalez", "43267896E", 2, "Pablo", 654798654, true);
+    private TCliente tDani=new TClienteNormal(true, "Diaz", "Diaz", "12234324A", 1, "Dani", 613456987, false,"Madrid");;
+    private TCliente tPablo= new TClientePremium(true, "Gonzalez", "Gonzalez", "43267896E", 2, "Pablo", 654798654, true,28050);
     private Collection<TCliente> mockCollec=new ArrayList<TCliente>();
 	@Test
     public void basicBehaviuor(){

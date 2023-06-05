@@ -30,7 +30,7 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String[] header = { "Id", "Nombre", "Apellido 1", "Apellido 2", "DNI", "Teléfono", "Tiempo"};
+	String[] header = { "Id", "Nombre", "Apellido 1", "Apellido 2", "DNI", "Teléfono","Activo", "Tiempo", "Horas", "Precio/Hora", "Salario", "Bonus"};
 	private DefaultTableModel _dataTableModel;
 
 	public GUIListarEmpleados(){
@@ -70,8 +70,18 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 			_dataTableModel.setValueAt(m.getApellido2(), i, 3);
 			_dataTableModel.setValueAt(m.getDNI(), i, 4);
 			_dataTableModel.setValueAt(m.getTfno(), i, 5);
-			_dataTableModel.setValueAt(m.isTiempoCompleto()? "Completo":"Parcial", i, 6);
+			_dataTableModel.setValueAt(m.isActivo(), i, 6);
+			_dataTableModel.setValueAt(m.isTiempoCompleto()? "Completo":"Parcial", i, 7);
+			if(m.isTiempoCompleto()){
+				_dataTableModel.setValueAt(m.get_salario(), i, 10);
+				_dataTableModel.setValueAt(m.get_bonus(), i, 11);
+			}
+			else{
+				_dataTableModel.setValueAt(m.get_horas(), i, 8);
+				_dataTableModel.setValueAt(m.get_precio_hora(), i, 9);
+			}
 			i++;
+			
 	
 		}
 		JTable dataTable = new JTable(_dataTableModel) {
@@ -111,7 +121,7 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 			if(emp==null)
 				emp=new ArrayList<TEmpleado>();
 			
-			_dataTableModel.setColumnIdentifiers(header);;
+			_dataTableModel.setColumnIdentifiers(header);
 			_dataTableModel.setNumRows(emp.size());
 			int i=0;
 			for (TEmpleado m:emp) {
@@ -121,7 +131,16 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 				_dataTableModel.setValueAt(m.getApellido2(), i, 3);
 				_dataTableModel.setValueAt(m.getDNI(), i, 4);
 				_dataTableModel.setValueAt(m.getTfno(), i, 5);
-				_dataTableModel.setValueAt(m.isTiempoCompleto()? "Completo":"Parcial", i, 6);
+				_dataTableModel.setValueAt(m.isActivo(), i, 6);
+				_dataTableModel.setValueAt(m.isTiempoCompleto()? "Completo":"Parcial", i, 7);
+				if(m.isTiempoCompleto()){
+					_dataTableModel.setValueAt(m.get_salario(), i, 10);
+					_dataTableModel.setValueAt(m.get_bonus(), i, 11);
+				}
+				else{
+					_dataTableModel.setValueAt(m.get_horas(), i, 8);
+					_dataTableModel.setValueAt(m.get_precio_hora(), i, 9);
+				}
 				i++;
 		
 			}

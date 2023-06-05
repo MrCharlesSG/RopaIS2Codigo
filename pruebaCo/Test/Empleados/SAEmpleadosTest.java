@@ -21,8 +21,8 @@ public class SAEmpleadosTest {
 	private SAEmpleado sa=FactoriaNegocio.getInstance().generaSAEmpleado();
 	private String d1="51541411Y", d2="22222222Y";
 	private Collection<TEmpleado> lista=new ArrayList<TEmpleado>();
-	private TEmpleado emp1=new TEmpleadoTC("Juan", "Lucas", "Malaquito", d1, 515151, 1, true );
-	private TEmpleado emp2=new TEmpleadoTP("Manuel", "Antonio", "Manguito", d2, 5151251, 2, true );
+	private TEmpleado emp1=new TEmpleadoTC("Juan", "Lucas", "Malaquito", d1, 515151, 1, true, 1300, 200);
+	private TEmpleado emp2=new TEmpleadoTP("Manuel", "Antonio", "Manguito", d2, 5151251, 2, true, 50, 12 );
 	
 	@Test
 	public void test(){
@@ -58,10 +58,10 @@ public class SAEmpleadosTest {
 		assert(lista.equals(listaAux));
 		
 		//Update
-		emp1=new TEmpleadoTC("Iñaqui", "Wito", "Maquina", d1, 515151, 1, true );
+		emp1=new TEmpleadoTC("Iñaqui", "Wito", "Maquina", d1, 515151, 1, true,  1300, 250 );
 		a=sa.update(emp1);
 		assert(a==1);
-		emp2= new TEmpleadoTP("Lamban", "Pretorico", "Manguito", d2, 5151251, 2, true );
+		emp2= new TEmpleadoTP("Lamban", "Pretorico", "Manguito", d2, 5151251, 2, true, 40, 28 );
 		a=sa.update(emp2);
 		assert(a==2);
 		lista.clear();
@@ -76,7 +76,7 @@ public class SAEmpleadosTest {
 		a=sa.delete(1);
 		assert(1==a);
 		listaAux=sa.readAll();
-		assert(listaAux.size()==0);
+		assert(listaAux.size()==2);
 		a=sa.create(emp1);
 		assert(1==a);
 		//this.vaciarBaseDatos();

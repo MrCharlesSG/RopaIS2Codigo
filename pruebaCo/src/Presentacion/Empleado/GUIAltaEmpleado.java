@@ -119,8 +119,9 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 		panel.add(DNI);
 		panel.add(tlf);
 		panel.add(tiempo);
-		panel.add(cancelar);
 		panel.add(aceptar);
+		panel.add(cancelar);
+		
 		getContentPane().add(panel);
 		pack();
 		

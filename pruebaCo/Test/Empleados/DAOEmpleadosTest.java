@@ -32,14 +32,14 @@ public class DAOEmpleadosTest {
 		//Leer na
 		assert(dao.read(1)==null);
 		//crear1 empleado
-		TEmpleado emp1=new TEmpleadoTC("Juan", "Lucas", "Malaquito", "5151Y", 515151, 1, true );
+		TEmpleado emp1=new TEmpleadoTC("Juan", "Lucas", "Malaquito", "5151Y", 515151, 1, true, 1200, 100 );
 		lista.add(emp1);
 		int res = dao.create(emp1);
 		assertEquals("No se ha creado la marca correctamente",res,1);
 		assert(dao.read(2)==null);
 		
 		//Crear 2 empleados
-		TEmpleado emp2=new TEmpleadoTP("Manuel", "Antonio", "Manguito", "2Y", 5151251, 2, true );
+		TEmpleado emp2=new TEmpleadoTP("Manuel", "Antonio", "Manguito", "2Y", 5151251, 2, true,50, 10 );
 		lista.add(emp2);
 		res = dao.create(emp2);
 		assertEquals("No se ha creado la marca correctamente",res,2);
@@ -77,7 +77,7 @@ public class DAOEmpleadosTest {
 		assert(dao.readByName("2Y").equals(emp2) && dao.read(2).equals(emp2));
 		
 		//modificar todo
-		emp2= new TEmpleadoTP("Lamban", "Joper", "Lunin", "2Y", 33, 2, true ); 
+		emp2= new TEmpleadoTP("Lamban", "Joper", "Lunin", "2Y", 33, 2, true,20, 12 ); 
 		aux=dao.update(emp2);
 		assert(dao.readByName("2Y").equals(emp2) && dao.read(2).equals(emp2));
 		TEmpleado la = dao.read(emp2.getID());

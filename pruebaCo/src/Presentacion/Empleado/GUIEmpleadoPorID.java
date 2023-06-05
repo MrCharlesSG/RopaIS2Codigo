@@ -30,7 +30,7 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String[] header = { "Id", "Nombre", "Apellido 1", "Apellido 2", "DNI", "Teléfono", "Tiempo"};
+	String[] header = { "Id", "Nombre", "Apellido 1", "Apellido 2", "DNI", "Teléfono","Activo", "Tiempo","Horas", "Precio/Hora", "Salario", "Bonus"};
 	private DefaultTableModel _dataTableModel;
 	public GUIEmpleadoPorID() {
 		initGUI();
@@ -97,7 +97,7 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 			contentPane.remove(component);
 		}
 		
-		setTitle("Proveedor por id");
+		setTitle("Empleado por id");
 		this.setPreferredSize(new Dimension(520, 200));
 		JPanel panel=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -127,8 +127,17 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 		_dataTableModel.setValueAt(datos.getApellido2(), 0, 3);
 		_dataTableModel.setValueAt(datos.getDNI(), 0, 4);
 		_dataTableModel.setValueAt(datos.getTfno(), 0, 5);
-		_dataTableModel.setValueAt(datos.isTiempoCompleto()? "Completo":"Parcial", 0, 6);
-	
+		_dataTableModel.setValueAt(datos.isActivo(), 0, 6);
+		_dataTableModel.setValueAt(datos.isTiempoCompleto()? "Completo":"Parcial", 0, 7);
+		if(datos.isTiempoCompleto()){
+			_dataTableModel.setValueAt(datos.get_salario(), 0, 10);
+			_dataTableModel.setValueAt(datos.get_bonus(), 0, 11);
+		}
+		else{
+			_dataTableModel.setValueAt(datos.get_horas(), 0, 8);
+			_dataTableModel.setValueAt(datos.get_precio_hora(), 0, 9);
+		}
+		
 		
 		JTable dataTable = new JTable(_dataTableModel) {
 			private static final long serialVersionUID = 1L;

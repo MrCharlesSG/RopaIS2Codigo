@@ -34,7 +34,7 @@ public class GUIClientePorID extends JFrame implements GUI{
 	
 	private JPanel panel;
 	
-	String[] header = { "ID","NOMBRE", "APELLIDO1", "APELLIDO2","DNI", "TELEFONO","PREMIUM","ACTIVO"};
+	String[] header = { "ID","NOMBRE", "APELLIDO1", "APELLIDO2","DNI", "TELEFONO","PREMIUM","ACTIVO", "CODIGO POSTAL","DESCUENTO", "POBLACION"};
 	private DefaultTableModel _dataTableModel;
 	
 	public GUIClientePorID() {
@@ -101,6 +101,12 @@ public class GUIClientePorID extends JFrame implements GUI{
 	private void mostrar(TCliente c) {
 		Container contentPane = getContentPane();
 		
+		Component[] components = contentPane.getComponents();
+		for (Component component : components) {
+			contentPane.remove(component);
+		}
+		
+		
 		setTitle("Mostrar cliente");
 		this.setMinimumSize(new Dimension(600, 50));
 		this.setPreferredSize(new Dimension(600,200));
@@ -146,6 +152,13 @@ public class GUIClientePorID extends JFrame implements GUI{
 			_dataTableModel.setValueAt(c.getTelefono(), i, 5);
 			_dataTableModel.setValueAt(c.getPremium(), i, 6);
 			_dataTableModel.setValueAt(c.getActivo(), i, 7);
+			if(c.getPremium()){
+				_dataTableModel.setValueAt(c.get_codigo(), i, 8);
+				_dataTableModel.setValueAt(c.get_descuento()+"%", i, 9);
+			}
+			else{
+				_dataTableModel.setValueAt(c.get_poblacion(), i, 10);
+			}
 			
 		JTable dataTable = new JTable(_dataTableModel) {
 			private static final long serialVersionUID = 1L;
@@ -166,14 +179,15 @@ public class GUIClientePorID extends JFrame implements GUI{
 		panel.add(tabelScroll);
 
 		panel.add(cerrar);
-		this.setContentPane(panel);
+		revalidate();
+		repaint();
+		getContentPane().add(panel);
 		pack();
 		setVisible(true);
 	}
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 }

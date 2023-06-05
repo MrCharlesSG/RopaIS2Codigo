@@ -21,9 +21,9 @@ public class IGUIEmpleado extends JPanel implements GUI{
 	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	JButton altaEmpleado=new JButton("Alta de empleado");
 	JButton bajaEmpleado=new JButton("Baja de empleado");
-	JButton listarEmpleado=new JButton("Listar empleado");
+	JButton listarEmpleado=new JButton("Listar empleados");
 	JButton modificarEmpleado=new JButton("Modificar empleado");
-	JButton empleadoPorID=new JButton("empleado por ID");
+	JButton empleadoPorID=new JButton("Empleado por ID");
 	
 	this.add(altaEmpleado);
 	this.add(bajaEmpleado);

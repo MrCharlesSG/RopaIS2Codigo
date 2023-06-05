@@ -23,8 +23,8 @@ public class SAEmpleadoImp implements SAEmpleado {
 				id = daoEmpleado.create(empl); 
 			}else{
 				if(!leido.isActivo()){
-					empl.setID(leido.getID());
-					id=daoEmpleado.update(empl);
+					leido.setActivo(true);
+					id=daoEmpleado.update(leido);
 				}
 			}
 		}
@@ -35,11 +35,12 @@ public class SAEmpleadoImp implements SAEmpleado {
 	public int delete(int id) {
 		if(ComprobadorSintactico.isPositive(id)){
 			DAOEmpleado daoEmpleado = FactoriaIntegracion.getInstance().generaDAOEmpleado();
-			DAOVentas daoVenta=FactoriaIntegracion.getInstance().generaDAOVentas();
+			//DAOVentas daoVenta=FactoriaIntegracion.getInstance().generaDAOVentas();
 			TEmpleado leido=daoEmpleado.read(id);
 			
 			if(leido!=null&&leido.isActivo()) {
-				Collection<TVenta> ventas=daoVenta.readByEmpleado(id);
+				/*
+				 * Collection<TVenta> ventas=daoVenta.readByEmpleado(id);
 				boolean inactivas=true;
 				
 				for(TVenta v:ventas) {
@@ -47,7 +48,9 @@ public class SAEmpleadoImp implements SAEmpleado {
 				}
 				
 				if(inactivas)
-					return daoEmpleado.delete(id);
+				 */
+				
+				return daoEmpleado.delete(id);
 			}
 		}
 		return -1;
@@ -67,16 +70,10 @@ public class SAEmpleadoImp implements SAEmpleado {
 
 	@Override
 	public Collection<TEmpleado> readAll() {
-		Collection<TEmpleado> lista= new ArrayList<TEmpleado>();
+		
 		Collection<TEmpleado> aux = FactoriaIntegracion.getInstance().generaDAOEmpleado().readAll();
-		if(aux!=null){
-			for(TEmpleado p:aux){
-				if(p.isActivo()){
-					lista.add(p);
-				}
-			}
-		}
-		return lista;
+		
+		return aux;
 	}
 
 	@Override
@@ -85,7 +82,7 @@ public class SAEmpleadoImp implements SAEmpleado {
 		
 		DAOEmpleado daoEmpl = FactoriaIntegracion.getInstance().generaDAOEmpleado();
 		if(this.comprobadorTEmpleado(empl)&&daoEmpl.read(empl.getID())!=null){
-			TEmpleado leido = daoEmpl.readByName(empl.getDNI());
+			TEmpleado leido = daoEmpl.read(empl.getID());
 			
 			if(leido != null)
 				id = daoEmpl.update(empl); 

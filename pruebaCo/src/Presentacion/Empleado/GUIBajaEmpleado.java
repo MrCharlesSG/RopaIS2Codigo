@@ -46,7 +46,7 @@ public class GUIBajaEmpleado extends JFrame implements GUI{
 					try{
 						int id=Integer.parseInt(tID.getText());
 						Controlador.getInstancia().setGUI(GUIBajaEmpleado.this);
-						Controlador.getInstancia().accion(Evento.BAJA_CLIENTE, id);
+						Controlador.getInstancia().accion(Evento.BAJA_EMPLEADO, id);
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 					}

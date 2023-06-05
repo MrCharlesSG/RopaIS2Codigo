@@ -111,6 +111,7 @@ public abstract class TCliente {
 	@Override
 	public boolean equals(Object anObject ) {
 		TCliente a = (TCliente) anObject;
+		
 		return this.Apellido1.equals(a.getApellido1()) &&
 				this.Apellido2.equals(a.getApellido2()) &&
 				this.Active==a.getActivo() &&
