@@ -93,6 +93,7 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 					setVisible(false);
 			}
 		});
+		setVisible(false);
 	}
 
 	@Override

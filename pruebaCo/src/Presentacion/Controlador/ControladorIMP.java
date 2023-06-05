@@ -45,6 +45,7 @@ public class ControladorIMP extends Controlador {
 				TMarca tMarca=(TMarca)datos;
 				int res=saMarca.create(tMarca);
 				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+				
 				if(res>0)
 					gui.update(Evento.RES_ALTA_MARCA_OK, res);
 				else
@@ -435,10 +436,7 @@ public class ControladorIMP extends Controlador {
 
 		}
 	}
-	// esto hay que quitarlo
-	public void setGUI(GUI gui){
-		this.gui=gui;
-	}/* aun no lo borro pero es que no se puede usar
+	/* aun no lo borro pero es que no se puede usar
 	public boolean marcasExisten(ArrayList<Integer> marcas) {
 		boolean existe=true;
 		if(marcas.size()!=0){

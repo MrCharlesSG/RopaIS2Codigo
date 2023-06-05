@@ -3,9 +3,26 @@
  */
 package Presentacion.FactoriaPresentacion;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import Negocio.Clientes.SAClientes;
+import Negocio.Clientes.TCliente;
+import Negocio.Empleado.SAEmpleado;
+import Negocio.Empleado.TEmpleado;
+import Negocio.FactoriaNegocio.FactoriaNegocio;
+import Negocio.MarcaNegocio.SAMarca;
+import Negocio.MarcaNegocio.TMarca;
+import Negocio.Producto.SAProducto;
+import Negocio.Producto.TProducto;
+import Negocio.Proveedor.SAProveedores;
+import Negocio.Proveedor.TProveedor;
+import Negocio.ProveedorMarca.TProveedorMarca;
+import Negocio.Ventas.SAVentas;
+import Negocio.Ventas.TVenta;
 import Presentacion.Clientes.GUIAltaCliente;
 import Presentacion.Clientes.GUIBajaCliente;
 import Presentacion.Clientes.GUIClientePorID;
@@ -58,95 +75,166 @@ import Presentacion.Ventas.IGUIVentas;
  * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class FactoriaPresentacionImp extends FactoriaPresentacion {
-	/** 
-	* (non-Javadoc)
-	* @see FactoriaPresentacion#generaGUI()
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	
-	private static final Map<Integer, GUI> map = new HashMap<Integer, GUI>();
 	
 	FactoriaPresentacionImp(){
+	}
+	
+	@Override
+	public GUI generaGUI(Integer evento) {
+		switch(evento) {
+		case Evento.Mostrar_GUI_MARCA:{
+			return new IGUIMarca();
+		}
+		case Evento.ALTA_MARCA:{
+	
+			return new GUIAltaMarca();
+		}
+		case Evento.BAJA_MARCA:{
+			return new GUIBajaMarca();
+		}
+		case Evento.LISTAR_MARCAS:{
+			return new GUIListarMarcas();
+		}
+		case Evento.MARCA_PORID:{
+			return new GUIMarcaPorID();
+		}
+		case Evento.MODIFICAR_MARCA:{
+			return new GUIModificarMarca();
+		}
+		case Evento.ADD_PROVEEDOR_TO_MARCA:{
+			return new GUIaddProveedorToMarca();
+		}
+		case Evento.LISTAR_MARCA_POR_PROVEEDORES:{
+			return new GUIListarProveedoresPorMarca();// esta es asi??
+	    }
+	              
+	    case Evento.DELETE_PROVEEDOR_OF_MARCA:{
+	    	return new GUIDeleteMarcaOfProveedor();
+	    }
+		
 		/*
-		 * MARCAS
+		 * PRODUCTO
 		 */
-		map.put(Evento.Mostrar_GUI_MARCA, new IGUIMarca());
-		map.put(Evento.ALTA_MARCA, new GUIAltaMarca());
-		map.put(Evento.BAJA_MARCA, new GUIBajaMarca());
-		map.put(Evento.LISTAR_MARCAS, new GUIListarMarcas());
-		map.put(Evento.MODIFICAR_MARCA, new GUIModificarMarca());
-		map.put(Evento.MARCA_PORID, new GUIMarcaPorID());
-		map.put(Evento.ADD_PROVEEDOR_TO_MARCA, new GUIaddProveedorToMarca());
-		map.put(Evento.DELETE_PROVEEDOR_OF_MARCA, new GUIDeleteMarcaOfProveedor());
-		map.put(Evento.LISTAR_MARCA_POR_PROVEEDORES, new GUIListarMarcaPorProveedor());
-
-		/*
-		 * PRODUCTOS
-		 */
-		map.put(Evento.Mostrar_GUI_PRODUCTOS, new IGUIProducto());
-		map.put(Evento.ALTA_PRODUCTO, new GUIAltaProducto());
-		map.put(Evento.BAJA_PRODUCTO, new GUIBajaProducto());
-		map.put(Evento.LISTAR_PRODUCTOS, new GUIListarProductos());
-		map.put(Evento.MODIFICAR_PRODUCTO, new GUIModificarProducto());
-		map.put(Evento.PRODUCTO_POR_ID, new GUIProductoPorID());
+	    case Evento.Mostrar_GUI_PRODUCTOS:{
+	    	return new IGUIProducto();
+	    }	
+		case Evento.ALTA_PRODUCTO:{
+			return new GUIAltaProducto();
+		}
+		case Evento.BAJA_PRODUCTO:{
+			return new GUIBajaProducto();
+		}
+		case Evento.LISTAR_PRODUCTOS:{
+			return new GUIListarProductos();
+		}
+		case Evento.MODIFICAR_PRODUCTO:{
+			return new GUIModificarProducto();
+		}
+		case Evento.PRODUCTO_POR_ID:{
+			return new GUIProductoPorID();
+		}
 		
 		/*
 		 * PROVEEDORES
 		 */
-		
-		map.put(Evento.Mostrar_GUI_PROVEEDORES, new IGUIProv());
-		map.put(Evento.ALTA_PROVEEDOR, new GUIAltaProv());
-		map.put(Evento.BAJA_PROVEEDOR, new GUIBajaProv());
-		map.put(Evento.LISTAR_PROVEEDORES, new GUIListarProv());
-		map.put(Evento.MODIFICAR_PROVEEDOR, new GUIModificarProv());
-		map.put(Evento.PROVEEDOR_POR_ID, new GUIProvPorID());
-		map.put(Evento.ADD_MARCA_TO_PROVEEDOR, new GUIAddMarcaToProveedor());
-		map.put(Evento.DELETE_MARCA_OF_PROVEEDOR, new GUIDeleteMarcaOfProveedor());
-		map.put(Evento.LISTAR_PROVEEDORES_POR_MARCA, new GUIListarProveedoresPorMarca());
-
-		/*
+		case Evento.Mostrar_GUI_PROVEEDORES:{
+			return new IGUIProv();
+		}
+		case Evento.ALTA_PROVEEDOR:{
+			return new GUIAltaProv();
+	    }
+	    case Evento.BAJA_PROVEEDOR:{
+	    	return new GUIBajaProv();
+	    }
+	    case Evento.LISTAR_PROVEEDORES:{
+	    	return new GUIListarProv();
+	    }
+	    case Evento.PROVEEDOR_POR_ID:{
+	    	return new GUIProvPorID();
+	    }
+	    case Evento.MODIFICAR_PROVEEDOR:{
+	    	return new GUIModificarProv();
+	    }
+	    case Evento.LISTAR_PROVEEDORES_POR_MARCA:{
+	    	return new GUIListarProveedoresPorMarca();
+	    }
+	    case Evento.ADD_MARCA_TO_PROVEEDOR:{
+	    	return new GUIAddMarcaToProveedor();
+	    }            
+	    case Evento.DELETE_MARCA_OF_PROVEEDOR:{
+	    	return new GUIDeleteMarcaOfProveedor();
+	    }
+	    /*
 		 * CLIENTES
 		 */
+	    case Evento.Mostrar_GUI_CLIENTES:{
+	    	return new IGUICliente();
+	    }
+		case Evento.ALTA_CLIENTE:{
+			return new GUIAltaCliente();
 		
-		map.put(Evento.Mostrar_GUI_CLIENTES, new IGUICliente());
-		map.put(Evento.ALTA_CLIENTE, new GUIAltaCliente());
-		map.put(Evento.BAJA_CLIENTE, new GUIBajaCliente());
-		map.put(Evento.LISTAR_CLIENTES, new GUIListarClientes());
-		map.put(Evento.MODIFICAR_CLIENTE, new GUIModificarCliente());
-		map.put(Evento.CLIENTE_POR_ID, new GUIClientePorID());
-		
-		/*
-		 * EMPLEADOS
-		 */
-		
-		map.put(Evento.Mostrar_GUI_EMPLEADOS, new IGUIEmpleado());
-		map.put(Evento.ALTA_EMPLEADO, new GUIAltaEmpleado());
-		map.put(Evento.BAJA_EMPLEADO, new GUIBajaEmpleado());
-		map.put(Evento.LISTAR_EMPLEADO, new GUIListarEmpleados());
-		map.put(Evento.MODIFICAR_EMPLEADO, new GUIModificarEmpleado());
-		map.put(Evento.EMPLEADO_POR_ID, new GUIEmpleadoPorID());
-		
-		/*
-		 * VENTAS
-		 */
-		
-		map.put(Evento.Mostrar_GUI_VENTAS, new IGUIVentas());
-		map.put(Evento.ABRIR_VENTA, new GUIAltaVenta());
-		map.put(Evento.CERRAR_VENTA, new GUIDevolverVenta());
-		map.put(Evento.LISTAR_VENTAS, new GUIListarVentas());
-		map.put(Evento.VENTAS_DE_UN_CLIENTE, new GUIVenta_Cliente());
-		map.put(Evento.VENTAS_DE_UN_EMPLEADO, new GUIVenta_Empleado());
-		map.put(Evento.VENTA_POR_ID, new GUIVentaPorID());
-	}
-	
-	@Override
-	public GUI generaGUI(Integer num) {
-		if(map.containsKey(num)){
-			GUI window = map.get(num);
-			window.setGUIVisible(true);
-			return window;
+	    }
+	    case Evento.BAJA_CLIENTE:{
+	    	return new GUIBajaCliente();
+	    }
+	    case Evento.LISTAR_CLIENTES:{
+	    	return new GUIListarClientes();
+	    }
+	    case Evento.CLIENTE_POR_ID:{
+	    	return new GUIClientePorID();
+	    }
+	    case Evento.MODIFICAR_CLIENTE:{
+	    	return new GUIModificarCliente();
+	    }
+	    /*
+	     * EMPLEADOS
+	     */
+	    case Evento.Mostrar_GUI_EMPLEADOS:{
+	    	return new IGUIEmpleado();
+	    }
+	    case Evento.ALTA_EMPLEADO:{
+	    	return new GUIAltaEmpleado();
+	    }
+	    case Evento.BAJA_EMPLEADO:{
+	    	return new GUIBajaEmpleado();
+	    }
+	    case Evento.MODIFICAR_EMPLEADO:{
+	    	return new GUIModificarEmpleado();
+	    }
+	    case Evento.EMPLEADO_POR_ID:{
+	    	return new GUIEmpleadoPorID();
+	    }
+	    case Evento.LISTAR_EMPLEADO:{
+	    	return new GUIListarEmpleados();
+	    }
+	    /*
+	     * VENTAS
+	     */
+	    case Evento.Mostrar_GUI_VENTAS:{
+	    	return new IGUIVentas();
+	    }
+	    case Evento.ABRIR_VENTA:{
+	    	return new GUIAltaVenta();
+	    }
+	    case Evento.VENTA_POR_ID:{
+	    	return new GUIVentaPorID();
+	    }
+	    case Evento.LISTAR_VENTAS:{
+	    	return new GUIListarVentas();
+	    }
+	    case Evento.DEVOLUCION_VENTA:{
+	    	return new GUIDevolverVenta();
+	    }
+	    case Evento.VENTAS_DE_UN_CLIENTE:{
+	    	return new GUIVenta_Cliente();
+	    }
+	    case Evento.VENTAS_DE_UN_EMPLEADO:{
+	    	return new GUIVenta_Empleado();
+	    }
+
 		}
-		else
-			return null;
+		return null;
+	
+
 	}
 }

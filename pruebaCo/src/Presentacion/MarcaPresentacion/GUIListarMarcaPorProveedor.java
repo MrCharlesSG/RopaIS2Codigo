@@ -17,7 +17,6 @@ import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
-import Presentacion.ProveedorPresentacion.GUIListarProveedoresPorMarca;
 
 public class GUIListarMarcaPorProveedor extends JFrame implements GUI {
 
@@ -57,7 +56,6 @@ public class GUIListarMarcaPorProveedor extends JFrame implements GUI {
 		{ public void actionPerformed(ActionEvent e)
 				{		
 					setVisible(false);
-					//Controlador.getInstancia().setGUI(GUIListarMarcaPorProveedor.this);
 					Controlador.getInstancia().accion(Evento.LISTAR_MARCA_POR_PROVEEDORES,Integer.parseInt(jtId.getText()));
 				}
 		});
@@ -66,6 +64,7 @@ public class GUIListarMarcaPorProveedor extends JFrame implements GUI {
 		panel.add(aceptar);
 		panel.add(cerrar);
 		this.add(panel);
+		this.setVisible(false);
 	}
 	
 	
@@ -84,7 +83,6 @@ public class GUIListarMarcaPorProveedor extends JFrame implements GUI {
 
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(panel);
 		setVisible(b);
 	}
 

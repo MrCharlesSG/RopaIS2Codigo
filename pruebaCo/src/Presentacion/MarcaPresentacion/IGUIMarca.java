@@ -5,13 +5,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Presentacion.Controlador.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
-import Presentacion.FactoriaPresentacion.FactoriaPresentacionImp;
 import Presentacion.GUI.GUI;
 
 public class IGUIMarca extends JPanel implements GUI{//probablemente sea mejor hacerlo singleton o algo
@@ -46,52 +43,60 @@ public class IGUIMarca extends JPanel implements GUI{//probablemente sea mejor h
 		{ public void actionPerformed(ActionEvent e)
 			{		
 			
-			FactoriaPresentacion.getInstance().generaGUI(Evento.DELETE_PROVEEDOR_OF_MARCA);
+			GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.DELETE_PROVEEDOR_OF_MARCA);
+			gui.setGUIVisible(true);
 			}
 		});
 		listarPorProveedor.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
 			
-			FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_MARCA_POR_PROVEEDORES);
+			GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_MARCA_POR_PROVEEDORES);
+			gui.setGUIVisible(true);
 			}
 		});
 		altaMarca.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
 				
-				FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_MARCA);
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.ALTA_MARCA);
+				gui.setGUIVisible(true);
 				}
 		});
 		bajaMarca.addActionListener(new ActionListener()
 			{ public void actionPerformed(ActionEvent e)
 				{		
-				FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_MARCA);
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.BAJA_MARCA);
+				gui.setGUIVisible(true);
 			}
 		});
 		listarMarca.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-			FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_MARCAS);
+			GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.LISTAR_MARCAS);
+			gui.setGUIVisible(true);
 		}
 		});
 		modificarMarca.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-			FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_MARCA);
+			GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.MODIFICAR_MARCA);
+			gui.setGUIVisible(true);
 		}
 		});
 		marcaPorID.addActionListener(new ActionListener()
 		{ public void actionPerformed(ActionEvent e)
 			{		
-			FactoriaPresentacion.getInstance().generaGUI(Evento.MARCA_PORID);
+			GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.MARCA_PORID);
+			gui.setGUIVisible(true);
 		}
 		});
 		
 		addProvToMarca.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e){
-				FactoriaPresentacion.getInstance().generaGUI(Evento.ADD_PROVEEDOR_TO_MARCA);
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.ADD_PROVEEDOR_TO_MARCA);
+				gui.setGUIVisible(true);
 			}
 		});
 	}
@@ -99,8 +104,4 @@ public class IGUIMarca extends JPanel implements GUI{//probablemente sea mejor h
 	@Override
 	public void update(int evento, Object datos){};
 	
-	@Override
-	public void setGUIVisible(boolean b) {
-		this.setVisible(b);
-	}
 }

@@ -84,6 +84,7 @@ public class GUIAltaMarca extends JFrame implements GUI{
 
 	@Override
 	public void update(int evento, Object datos) {
+		
 		if(Evento.RES_ALTA_MARCA_OK==evento){
 		Integer id= (Integer) datos;
 		JOptionPane.showMessageDialog(null,"Alta de marca con ID: "+id.intValue());
@@ -97,9 +98,10 @@ public class GUIAltaMarca extends JFrame implements GUI{
 
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(panel);
 		this.setVisible(b);
+		
 	}
+
 	
 	
 }

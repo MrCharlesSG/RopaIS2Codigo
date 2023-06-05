@@ -177,10 +177,10 @@ public class DAOMarcaImp implements DAOMarca {
 				datos=scanner.nextLine().split(":");
 			
 				if (Integer.parseInt(datos[1])==id) {
-					datos[3]="false";
+					datos[2]="false";
 					encontrado=true;
 				}
-				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
+				buffer.append(datos[0]+":"+datos[1]+":"+datos[2]).append(System.lineSeparator());
 			}
 			try(Writer w=new BufferedWriter(
 									new OutputStreamWriter(

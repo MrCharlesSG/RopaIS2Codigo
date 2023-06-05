@@ -24,7 +24,6 @@ import javax.swing.table.TableColumn;
 import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
-import Presentacion.FactoriaPresentacion.FactoriaPresentacionImp;
 import Presentacion.GUI.GUI;
 
 /** 
@@ -67,6 +66,7 @@ public class GUIListarMarcas extends JFrame implements GUI{
 			_dataTableModel.setValueAt(m.getActivo(), i, 2);
 			i++;
 		}
+		this.setVisible(true);
 	}
 		
 	}
@@ -123,8 +123,8 @@ public class GUIListarMarcas extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		//Controlador.getInstancia().setGUI(GUIListarMarcas.this);
-		//Controlador.getInstancia().accion(Evento.LISTAR_MARCAS,null);
-		this.setVisible(b);
+		
+		Controlador.getInstancia().accion(Evento.LISTAR_MARCAS, null);
+		
 	}
 }
