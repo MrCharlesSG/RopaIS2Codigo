@@ -136,7 +136,7 @@ public class GUIModificarCliente extends JFrame implements GUI{
 								String poblacion= tpoblacion.getText();
 								 tC= new TClienteNormal (true, apellido1, apellido2, DNI, Integer.parseInt(id), nombre, tlf, false, poblacion);
 							}
-							Controlador.getInstancia().setGUI(GUIModificarCliente.this);
+							
 							Controlador.getInstancia().accion(Evento.MODIFICAR_CLIENTE, tC);
 						}catch(Exception e1){
 							Utils.showErrorMsg("Los parametros introducidos son incorrectos");

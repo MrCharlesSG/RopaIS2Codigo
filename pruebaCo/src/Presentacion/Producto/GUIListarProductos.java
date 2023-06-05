@@ -45,7 +45,7 @@ public class GUIListarProductos extends JFrame implements GUI{
 	private DefaultTableModel _dataTableModel;
 	
 	public GUIListarProductos(){
-		Controlador.getInstancia().setGUI(GUIListarProductos.this);
+		
 		listar(new ArrayList<TProducto>());
 	}
 

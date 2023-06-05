@@ -30,7 +30,7 @@ public class GUIListarVentas extends JFrame implements GUI{
 	
 	public GUIListarVentas() {
 		this.setLocationRelativeTo(null);
-		Controlador.getInstancia().setGUI(GUIListarVentas.this);
+		
 		Controlador.getInstancia().accion(Evento.LISTAR_VENTAS,null);
 	}
 

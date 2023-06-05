@@ -55,7 +55,6 @@ public class GUIaddProveedorToMarca extends JFrame implements GUI{
 			{ public void actionPerformed(ActionEvent e)
 					{		
 						setVisible(false);
-						Controlador.getInstancia().setGUI(GUIaddProveedorToMarca.this);;
 						Controlador.getInstancia().accion(Evento.ADD_PROVEEDOR_TO_MARCA,
 								new TProveedorMarca(Integer.parseInt(jTextProveedor.getText()), Integer.parseInt(jTextMarca.getText())));
 					}

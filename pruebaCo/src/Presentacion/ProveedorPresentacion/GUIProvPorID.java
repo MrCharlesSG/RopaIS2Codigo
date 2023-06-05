@@ -76,7 +76,7 @@ public class GUIProvPorID extends JFrame implements GUI{
 				try{
 					setVisible(false);
 					int id=Integer.parseInt(jtextID.getText());
-					Controlador.getInstancia().setGUI(GUIProvPorID.this);
+					
 					Controlador.getInstancia().accion(Evento.PROVEEDOR_POR_ID, new Integer(id));
 				}catch(NumberFormatException e1){
 					setVisible(false);

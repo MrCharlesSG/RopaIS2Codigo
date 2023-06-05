@@ -158,7 +158,6 @@ public class CarritoDialog extends Dialog {
 				tprod.setText(null);
 				tcant.setText(null);
 				venta.setProductos(carro);
-				Controlador.getInstancia().setGUI((GUI) CarritoDialog.this.getParent());
 				Controlador.getInstancia().accion(Evento.CERRAR_VENTA, venta);
 			}
 	});

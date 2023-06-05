@@ -35,7 +35,7 @@ public class ControladorIMP extends Controlador {
 	}
 	
 	public void accion(int evento,Object datos) {
-		
+		gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 		switch(evento){
 			/*
 			 * MARCA
@@ -44,7 +44,7 @@ public class ControladorIMP extends Controlador {
 				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				TMarca tMarca=(TMarca)datos;
 				int res=saMarca.create(tMarca);
-				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+				
 				
 				if(res>0)
 					gui.update(Evento.RES_ALTA_MARCA_OK, res);
@@ -56,7 +56,7 @@ public class ControladorIMP extends Controlador {
 				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				int idMarca=(int) datos;
 				int res=saMarca.delete(idMarca);
-				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+				
 				if(res>0)
 					gui.update(Evento.RES_BAJA_MARCA_OK, res);
 				else
@@ -66,7 +66,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.LISTAR_MARCAS:{
 				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				Collection<TMarca>marcas=saMarca.readAll();
-				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+				
 				gui.update(Evento.LISTAR_MARCAS, marcas);
 				break;
 			}
@@ -74,7 +74,7 @@ public class ControladorIMP extends Controlador {
 				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				TMarca marca=saMarca.read((int)datos);
 				
-				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+				
 				if(marca==null){
 					gui.update(Evento.KO, null);
 				}
@@ -87,7 +87,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.MODIFICAR_MARCA:{
 				SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
 				int res=saMarca.update((TMarca) datos);
-				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+				
 				if(res>0)
 					gui.update(Evento.RES_MODIFICAR_MARCA_OK, new Integer(res));
 				else
@@ -98,7 +98,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.ADD_PROVEEDOR_TO_MARCA:{
 				SAMarca saMarca=FactoriaNegocio.getInstance().generaSAMarca();
 				int res=saMarca.addProveedorToMarca((TProveedorMarca)datos);
-				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+			
 				if(res>0){
 					gui.update(Evento.OK, res);
 				}
@@ -109,7 +109,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.LISTAR_MARCA_POR_PROVEEDORES:{
             	SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
             	Collection<TMarca> res= saMarca.readByProveedor((int)datos);
-            	gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+            	
             	if(res!=null) {
             		gui.update(Evento.OK, res);
             	}else {
@@ -121,7 +121,7 @@ public class ControladorIMP extends Controlador {
             case Evento.DELETE_PROVEEDOR_OF_MARCA:{
             	SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
             	int res=saMarca.deleteProveedorOfMarca((TProveedorMarca)datos);
-            	gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+            	
             	if(res>0) {
             		gui.update(Evento.OK, res);
             	}else{
@@ -136,7 +136,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.ALTA_PRODUCTO:{
 				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				int res=saProducto.create((TProducto) datos);
-				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+				
 				if(res>=0){
 					gui.update(Evento.OK,res);
 				}
@@ -148,7 +148,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.BAJA_PRODUCTO:{
 				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				int res=saProducto.delete(((TProducto) datos).getIdProducto());
-				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+				
 				if(res>=0){
 					gui.update(Evento.OK,res);
 				}
@@ -160,7 +160,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.LISTAR_PRODUCTOS:{
 				SAProducto saProducto= FactoriaNegocio.getInstance().generaSAProducto();
 				Collection<TProducto>productos=saProducto.readAll();
-				//gui.update(Evento.LISTAR_PRODUCTOS, productos);
+				
 				gui=FactoriaPresentacion.getInstance().generaGUI(evento);
 				break;
 			}
@@ -193,7 +193,7 @@ public class ControladorIMP extends Controlador {
 			case Evento.ALTA_PROVEEDOR:{
 				SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
 				int res=saProveedor.create((TProveedor)datos);
-			//	gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+			
 				if(res>0){
 					gui.update(Evento.OK, res);
 				}
@@ -205,7 +205,7 @@ public class ControladorIMP extends Controlador {
             case Evento.BAJA_PROVEEDOR:{
             	SAProveedores saProveedor=FactoriaNegocio.getInstance().generaSAProveedor();
                 int res = saProveedor.delete(((TProveedor)datos).getId());
-             //   gui=FactoriaPresentacion.getInstance().generaGUI(evento);
+             
 
                 if(res > 0)
                     gui.update(Evento.OK, res);
@@ -429,69 +429,12 @@ public class ControladorIMP extends Controlador {
             case Evento.VENTAS_DE_UN_EMPLEADO:{
             	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
             	Collection<TVenta>ventas=saVenta.readByEmpleado((Integer)datos);
-            	//gui=FactoriaPresentacion.getInstance().generaGUI(Evento.VENTAS_DE_UN_EMPLEADO);
+            	
             	gui.update(Evento.VENTAS_DE_UN_EMPLEADO, ventas);
             	break;
             }
 
 		}
 	}
-	/* aun no lo borro pero es que no se puede usar
-	public boolean marcasExisten(ArrayList<Integer> marcas) {
-		boolean existe=true;
-		if(marcas.size()!=0){
-			//SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();
-			Collection<TMarca> listam = saMarca.readAll();
-			int i=0;
-			while(existe && i<marcas.size() ){
-				existe=false;
-				for(TMarca t: listam){
-					if(t.getID()==marcas.get(i)){
-						existe=true;
-					}
-				}
-				i++;
-			}
-		}
-		return existe;
-	}
-	public boolean clienteExiste(int id_cliente) {
-		boolean existe=true;
-		
-		if(saCliente.read(id_cliente)==null)
-			existe=false;
-		return existe;
-	}
-	public boolean empleadoExiste(int id_empleado) {
-		boolean existe=true;
-		if(saEmpleado.read(id_empleado)==null)
-			existe=false;
-		return existe;
-	}
-	public boolean productosExisten(Map<Integer, Integer> productos) {
-		boolean existe=true;
-		if(productos.keySet().size()!=0){
-			Collection<TProducto> listap = saProducto.readAll();
-			for(int id: productos.keySet()){
-			existe=false;
-				for(TProducto p:listap){
-					if(p.getIdProducto()==id&&p.getCantidad()<productos.get(id))
-						return false;//existe el producto pero se ha seleccionado demasiada cantidad
-					if(p.getIdProducto()==id){
-						existe=true;
-					}
-				}
-				if(!existe)//si sale del for sin que cambie existe a true es q no existe ese prod
-					return false;
-			}
-			
-		}
-		return existe;
-	}
-	public boolean devolverProd(Integer id, Integer cant) {
-		return this.saProducto.devolverCantidad(id, cant);
-	}
-	public boolean restarProd(Integer id, Integer cant) {
-		return this.saProducto.restarCantidad(id, cant);
-	}*/
+
 }

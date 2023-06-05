@@ -143,7 +143,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				try{
-					Controlador.getInstancia().setGUI(GUIModificarProducto.this);
+					
 					Controlador.getInstancia().accion(Evento.MODIFICAR_PRODUCTO, new TProducto(
 							nombreT.getText(), Integer.parseInt(cantidadT.getText()), Integer.parseInt(tallaT.getText()),
 							Integer.parseInt(idT.getText()) ,categoriaT.getText(),

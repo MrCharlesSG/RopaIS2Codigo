@@ -69,7 +69,7 @@ public class GUIClientePorID extends JFrame implements GUI{
 					try{
 						setVisible(false);
 						int id=Integer.parseInt(tID.getText());
-						Controlador.getInstancia().setGUI(GUIClientePorID.this);
+					
 						Controlador.getInstancia().accion(Evento.CLIENTE_POR_ID, new Integer(id));
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");

@@ -42,5 +42,4 @@ public abstract class Controlador {
 		return controlador;
 	}
 	public abstract void accion(int evento,Object datos) ;
-	public abstract void setGUI(GUI gui);
 }

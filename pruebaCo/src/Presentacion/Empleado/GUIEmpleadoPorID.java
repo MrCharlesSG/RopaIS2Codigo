@@ -58,7 +58,6 @@ public class GUIEmpleadoPorID extends JFrame implements GUI{
 					try{
 						setVisible(false);
 						int id=Integer.parseInt(tID.getText());
-						Controlador.getInstancia().setGUI(GUIEmpleadoPorID.this);
 						Controlador.getInstancia().accion(Evento.EMPLEADO_POR_ID, id);	
 					}catch(Exception e1){
 						e1.printStackTrace();

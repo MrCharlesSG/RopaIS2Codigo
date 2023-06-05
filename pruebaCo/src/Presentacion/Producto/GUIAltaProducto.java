@@ -97,9 +97,7 @@ public class GUIAltaProducto extends JFrame implements GUI{
 						
 						//nombre: id: cantidad: talla: categoria: idMarca:
 						TProducto tP= new TProducto (nombre, Integer.parseInt(cant), Integer.parseInt(talla), -1, cat,
-								Integer.parseInt(IDMarca), Double.parseDouble(precio));;
-								
-						Controlador.getInstancia().setGUI(GUIAltaProducto.this);
+								Integer.parseInt(IDMarca), Double.parseDouble(precio));
 						Controlador.getInstancia().accion(Evento.ALTA_PRODUCTO, tP);
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
@@ -113,7 +111,7 @@ public class GUIAltaProducto extends JFrame implements GUI{
 					setVisible(false);
 			}
 		});
-		
+		setVisible(false);
 	
 }
 
@@ -132,7 +130,6 @@ public class GUIAltaProducto extends JFrame implements GUI{
 
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 }

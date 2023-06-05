@@ -47,7 +47,7 @@ public class GUIListarProv extends JFrame implements GUI{
 	}
 	
 	private void initGUI() {
-		Controlador.getInstancia().setGUI(GUIListarProv.this);
+		
 		listaProveedores(new ArrayList<TProveedor>());
 	}
 
@@ -130,7 +130,7 @@ public class GUIListarProv extends JFrame implements GUI{
 	@Override
 	public void setGUIVisible(boolean b) {
 		Utils.refreshTextFields(panel);
-		Controlador.getInstancia().setGUI(GUIListarProv.this);
+		
 		Controlador.getInstancia().accion(Evento.LISTAR_PROVEEDORES,null);
 		this.setVisible(b);
 	}

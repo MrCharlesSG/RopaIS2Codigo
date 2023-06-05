@@ -64,7 +64,7 @@ public class GUIDevolverVenta extends JFrame implements GUI{
 					datos.add(id);
 					datos.add(id_pr);
 					datos.add(cantidad);
-					Controlador.getInstancia().setGUI(GUIDevolverVenta.this);
+					
 					Controlador.getInstancia().accion(Evento.DEVOLUCION_VENTA, datos);
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");

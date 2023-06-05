@@ -60,7 +60,7 @@ public class GUIVenta_Cliente extends JFrame implements GUI{
 					try{
 						setVisible(false);
 						int id=Integer.parseInt(tID.getText());
-						Controlador.getInstancia().setGUI(GUIVenta_Cliente.this);
+						
 						Controlador.getInstancia().accion(Evento.VENTAS_DE_UN_CLIENTE, new Integer(id));
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");

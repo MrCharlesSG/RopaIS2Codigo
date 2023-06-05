@@ -52,7 +52,7 @@ public class GUIBajaCliente extends JFrame implements GUI{
 					setVisible(false);
 					try{
 						int id=Integer.parseInt(tID.getText());
-						Controlador.getInstancia().setGUI(GUIBajaCliente.this);
+						
 						Controlador.getInstancia().accion(Evento.BAJA_CLIENTE, new Integer(id));
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");

@@ -162,7 +162,6 @@ public class GUIModificarEmpleado extends JFrame implements GUI {
 							int precio_hora =Integer.parseInt(tprecio_hora.getText());
 							 t= new TEmpleadoTP(nombre, apellido1, apellido2, DNI, tlf, Integer.parseInt(id) , true, horas, precio_hora);
 						}
-						Controlador.getInstancia().setGUI(GUIModificarEmpleado.this);
 						Controlador.getInstancia().accion(Evento.MODIFICAR_EMPLEADO, t);	
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");

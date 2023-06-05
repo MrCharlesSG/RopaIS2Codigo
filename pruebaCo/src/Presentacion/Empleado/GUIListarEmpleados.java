@@ -38,7 +38,6 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 	}
 	
 	private void initGUI() {
-		Controlador.getInstancia().setGUI(GUIListarEmpleados.this);
 		this.listaEmpleados(new ArrayList<TEmpleado>());
 	}
 
@@ -150,7 +149,7 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		Controlador.getInstancia().setGUI(GUIListarEmpleados.this);
+		
 		Controlador.getInstancia().accion(Evento.LISTAR_EMPLEADO, null);
 		this.setVisible(b);
 	}

@@ -149,7 +149,7 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 					}
 					//String nombre, String apellido1, String apellido2, String DNI, int tfno, int ID, boolean activo
 					
-					Controlador.getInstancia().setGUI(GUIAltaEmpleado.this);
+					
 					Controlador.getInstancia().accion(Evento.ALTA_EMPLEADO, emp);
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
@@ -183,7 +183,7 @@ public class GUIAltaEmpleado extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(panel);
+		
 		this.setVisible(b);
 	}
 	

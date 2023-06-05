@@ -102,6 +102,11 @@ public class IGUIMarca extends JPanel implements GUI{//probablemente sea mejor h
 	}
 
 	@Override
-	public void update(int evento, Object datos){};
+	public void update(int evento, Object datos){}
+
+	@Override
+	public void setGUIVisible(boolean b) {
+		
+	};
 	
 }

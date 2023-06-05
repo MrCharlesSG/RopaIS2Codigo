@@ -34,7 +34,7 @@ public class GUIListarClientes extends JFrame implements GUI {
 	private DefaultTableModel _dataTableModel;
 	
 	public GUIListarClientes(){
-		Controlador.getInstancia().setGUI(GUIListarClientes.this);
+	
 		listar(new ArrayList<TCliente>());
 	}
 	@Override
@@ -153,7 +153,7 @@ public class GUIListarClientes extends JFrame implements GUI {
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		Controlador.getInstancia().setGUI(GUIListarClientes.this);
+		
 		Controlador.getInstancia().accion(Evento.LISTAR_CLIENTES,null);
 		this.setVisible(b);
 	}

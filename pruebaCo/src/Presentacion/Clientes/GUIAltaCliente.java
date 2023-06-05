@@ -136,7 +136,7 @@ public class GUIAltaCliente extends JFrame implements GUI{
 							String poblacion= tpoblacion.getText();
 							tCP=new TClienteNormal(true, apellido1, apellido2, DNI, -1, nombre, tlf, false,poblacion);
 						}
-						Controlador.getInstancia().setGUI(GUIAltaCliente.this);
+						
 						Controlador.getInstancia().accion(Evento.ALTA_CLIENTE, tCP);	
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");

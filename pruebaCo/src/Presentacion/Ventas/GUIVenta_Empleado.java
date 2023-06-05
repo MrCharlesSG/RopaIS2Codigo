@@ -61,7 +61,7 @@ public class GUIVenta_Empleado extends JFrame implements GUI{
 				try{
 					setVisible(false);
 					int id=Integer.parseInt(tID.getText());
-					Controlador.getInstancia().setGUI(GUIVenta_Empleado.this);
+					
 					Controlador.getInstancia().accion(Evento.VENTAS_DE_UN_EMPLEADO, new Integer(id));
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");

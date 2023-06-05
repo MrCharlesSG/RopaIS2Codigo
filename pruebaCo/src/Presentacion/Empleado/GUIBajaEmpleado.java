@@ -45,7 +45,6 @@ public class GUIBajaEmpleado extends JFrame implements GUI{
 					setVisible(false);
 					try{
 						int id=Integer.parseInt(tID.getText());
-						Controlador.getInstancia().setGUI(GUIBajaEmpleado.this);
 						Controlador.getInstancia().accion(Evento.BAJA_EMPLEADO, id);
 					}catch(Exception e1){
 						Utils.showErrorMsg("Los parametros introducidos son incorrectos");
@@ -76,7 +75,6 @@ public class GUIBajaEmpleado extends JFrame implements GUI{
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(panel);
 		this.setVisible(b);
 	}
 	

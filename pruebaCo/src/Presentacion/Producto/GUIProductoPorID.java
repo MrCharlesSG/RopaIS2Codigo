@@ -87,7 +87,7 @@ public class GUIProductoPorID extends JFrame implements GUI{
 				setVisible(false);
 				try{
 					String id=jtextID.getText();
-					Controlador.getInstancia().setGUI(GUIProductoPorID.this);
+					
 					Controlador.getInstancia().accion(Evento.PRODUCTO_POR_ID, Integer.parseInt(id));
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");

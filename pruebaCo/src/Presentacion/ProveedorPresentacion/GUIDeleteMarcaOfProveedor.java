@@ -56,7 +56,7 @@ public class GUIDeleteMarcaOfProveedor extends JFrame implements GUI {
 				{ public void actionPerformed(ActionEvent e)
 						{		
 							setVisible(false);
-							Controlador.getInstancia().setGUI(GUIDeleteMarcaOfProveedor.this);
+						
 							Controlador.getInstancia().accion(Evento.DELETE_MARCA_OF_PROVEEDOR,
 									new TProveedorMarca(Integer.parseInt(jtP.getText()), Integer.parseInt(jtM.getText())));
 						}

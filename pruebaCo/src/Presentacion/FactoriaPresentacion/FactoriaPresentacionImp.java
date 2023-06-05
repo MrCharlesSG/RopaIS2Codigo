@@ -216,6 +216,9 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 	    case Evento.ABRIR_VENTA:{
 	    	return new GUIAltaVenta();
 	    }
+	    case Evento.CERRAR_VENTA:{
+	    	return new GUIAltaVenta();// diria que este es asi 
+	    }
 	    case Evento.VENTA_POR_ID:{
 	    	return new GUIVentaPorID();
 	    }
