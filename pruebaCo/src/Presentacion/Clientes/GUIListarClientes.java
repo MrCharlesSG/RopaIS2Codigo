@@ -71,6 +71,7 @@ public class GUIListarClientes extends JFrame implements GUI {
 				i++;
 				
 			}
+			this.setVisible(true);
 		}
 	}
 	private void listar(Collection<TCliente> clientes) {
@@ -155,6 +156,6 @@ public class GUIListarClientes extends JFrame implements GUI {
 	public void setGUIVisible(boolean b) {
 		
 		Controlador.getInstancia().accion(Evento.LISTAR_CLIENTES,null);
-		this.setVisible(b);
+	
 	}
 }

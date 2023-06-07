@@ -143,6 +143,7 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 				i++;
 		
 			}
+			this.setVisible(true);
 		}
 		}
 	}
@@ -151,7 +152,7 @@ public class GUIListarEmpleados extends JFrame implements GUI{
 	public void setGUIVisible(boolean b) {
 		
 		Controlador.getInstancia().accion(Evento.LISTAR_EMPLEADO, null);
-		this.setVisible(b);
+		
 	}
 	
 }
