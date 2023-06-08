@@ -186,6 +186,7 @@ public class SAMarcaImp implements SAMarca {
 			if(aux==null) {
 				res= dpm.create(pm);
 			}else if(!aux.isActivo()) {
+				pm.setActivo(true);
 				res= dpm.update(pm);
 			}
 		}

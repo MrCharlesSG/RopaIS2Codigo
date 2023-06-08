@@ -146,6 +146,7 @@ public class SAProveedoresIMP implements SAProveedores{
 			if(aux==null) {
 				res= dpm.create(pm);
 			}else if(!aux.isActivo()) {
+				pm.setActivo(true);
 				res= dpm.update(pm);
 			}		
 		}
