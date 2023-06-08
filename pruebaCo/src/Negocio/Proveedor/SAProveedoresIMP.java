@@ -5,15 +5,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
-import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.MarcaProveedores.DAOProveedorMarca;
 import Integracion.Proveedores.DAOProveedores;
 import Negocio.ComprobadorSintactico;
 import Negocio.FactoriaNegocio.FactoriaNegocio;
-import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.ProveedorMarca.TProveedorMarca;
-import Presentacion.Controlador.Controlador;
 
 
 
@@ -145,16 +142,12 @@ public class SAProveedoresIMP implements SAProveedores{
 		TMarca marca = FactoriaIntegracion.getInstance().generaDAOMarca().read(pm.getIdMarca());
 		//Si las marcas y proveedores existen y estan activas
 		if(marca!=null && prov!=null && prov.getActivo() && marca.getActivo()) {
-			
-			if(dpm.read(pm)!=null && !dpm.read(pm).isActivo()) {
-				pm.setActivo(true);
-				res=dpm.update(pm);
-			}else if(dpm.read(pm)!=null && dpm.read(pm).isActivo()) {
-				res=-1;	
-			}
-			else {
-				res=dpm.create(pm);
-			}			
+			TProveedorMarca aux= dpm.read(pm);
+			if(aux==null) {
+				res= dpm.create(pm);
+			}else if(!aux.isActivo()) {
+				res= dpm.update(pm);
+			}		
 		}
 		return res;
 	}

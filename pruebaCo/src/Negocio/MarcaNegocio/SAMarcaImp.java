@@ -58,11 +58,9 @@ public class SAMarcaImp implements SAMarca {
 		DAOMarca daoMarca = FactoriaIntegracion.getInstance().generaDAOMarca();
 		Collection<TMarca> lista = new ArrayList<TMarca>();
 		Collection<TMarca> listaAux = daoMarca.readAll();
-		if(listaAux!=null) {
-			for(TMarca m:listaAux) {
-				if(m.getActivo()) {
-					lista.add(m);
-				}
+		for(TMarca m:listaAux) {
+			if(m.getActivo()) {
+				lista.add(m);
 			}
 		}
 		return lista;
@@ -115,30 +113,26 @@ public class SAMarcaImp implements SAMarca {
 				// si la marca no es nula y esta activa 			
 				//Revisamos que no queden productos
 				DAOProducto daoprod= FactoriaIntegracion.getInstance().generaDAOProducto();
-				
 				Collection<TProducto> productos= daoprod.readByMarca(ID);
 				boolean inactivos=true;
-				if(productos!=null) {
-					for(TProducto p:productos){//si todos sus productos estan a 0(no estan activos) se puede borrar la marca
-						if(p.getCantidad()>0){
-							inactivos=false;
-						}
+				for(TProducto p:productos){//si todos sus productos estan a 0(no estan activos) se puede borrar la marca
+					if(p.getCantidad()>0){
+						inactivos=false;
 					}
 				}
 				if(inactivos) {
+					DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
+					Collection<TProveedorMarca> lpm = dpm.readProveedorMarcaPorMarca(id);
+					//Elimino todos los provvedorMarca con dicha marca
+					for(TProveedorMarca pm: lpm) {
+						if(pm.isActivo()) {
+							dpm.delete(pm);
+						}
+					}
+					//elimino de daoMarca			
+					id=daoMarca.delete(ID);
 					
-						DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
-						Collection<TProveedorMarca> lpm = dpm.readProveedorMarcaPorMarca(id);
-						
-						//Elimino todos los provvedorMarca con dicha marca
-						for(TProveedorMarca pm: lpm) {
-							if(pm.isActivo()) {
-								dpm.delete(pm);
-							}
-						}
-						//elimino de daoMarca			
-						id=daoMarca.delete(ID);
-						}
+				}
 			}
 		}
 		return id;
@@ -188,15 +182,11 @@ public class SAMarcaImp implements SAMarca {
 		TMarca marca = FactoriaIntegracion.getInstance().generaDAOMarca().read(pm.getIdMarca());
 		//Si las marcas y proveedores existen y estan activas
 		if(marca!=null && prov!=null && prov.getActivo() && marca.getActivo()) {
-			
-			if(dpm.read(pm)!=null) {
-				pm.setActivo(true);
-				res=dpm.update(pm);
-			}else if(dpm.read(pm).isActivo()) {
-				res=-1;	
-			}
-			else {
-				res=dpm.create(pm);
+			TProveedorMarca aux= dpm.read(pm);
+			if(aux==null) {
+				res= dpm.create(pm);
+			}else if(!aux.isActivo()) {
+				res= dpm.update(pm);
 			}
 		}
 		return res;
