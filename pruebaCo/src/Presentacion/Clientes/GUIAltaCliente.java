@@ -63,13 +63,18 @@ public class GUIAltaCliente extends JFrame implements GUI{
 		JPanel tiempo=new JPanel();
 		JCheckBox tipo= new JCheckBox("Premium",false);
 		
+		JPanel panel_codigo= new JPanel();
 		JLabel lcodigo=new JLabel("Codigo Postal");
 		JTextField tcodigo= new JTextField(9);
 		tcodigo.setEnabled(false);
+		panel_codigo.add(lcodigo);
+		panel_codigo.add(tcodigo);
 		
+		JPanel panel_poblacion= new JPanel();
 		JLabel lpoblacion=new JLabel("Poblacion");
 		JTextField tpoblacion= new JTextField(12);
-		
+		panel_poblacion.add(lpoblacion);
+		panel_poblacion.add(tpoblacion);
 		
 		tipo.addItemListener(new ItemListener(){
 
@@ -101,10 +106,9 @@ public class GUIAltaCliente extends JFrame implements GUI{
 		panel.add(tlf);
 		panel.add(tiempo);
 		
-		panel.add(lcodigo);
-		panel.add(tcodigo);
-		panel.add(lpoblacion);
-		panel.add(tpoblacion);
+		panel.add(panel_codigo);
+		
+		panel.add(panel_poblacion);
 		
 		panel.add(aceptar);
 		panel.add(cancelar);
