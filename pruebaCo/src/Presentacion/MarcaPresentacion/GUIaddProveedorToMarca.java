@@ -23,7 +23,7 @@ public class GUIaddProveedorToMarca extends JFrame implements GUI{
 	
 	private static final long serialVersionUID = 1L;
 
-	private JPanel panel;
+	
 	
 	public GUIaddProveedorToMarca(){
 		initGUI();
@@ -32,15 +32,17 @@ public class GUIaddProveedorToMarca extends JFrame implements GUI{
 	
 	private void initGUI(){
 		setTitle("Add Proveedor to Marca");
-		this.setMinimumSize(new Dimension(500, 500));
-		panel=new JPanel();
+		//this.setMinimumSize(new Dimension(500, 500)); por??
+		JPanel panel=new JPanel();
+		panel.setMinimumSize(new Dimension(500, 500));
+		JPanel texto=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		JLabel idMarca=new JLabel("ID-> Marca");
-		JTextField jTextMarca=new JTextField();
+		final JTextField jTextMarca=new JTextField(20);
 		JLabel idProveedor=new JLabel("ID-> Proveedor");
-		JTextField jTextProveedor=new JTextField();
-		
+		final JTextField jTextProveedor=new JTextField(20);
+		JPanel botones=new JPanel();
 		//boton de cerrar
 			JButton cerrar =new JButton("Cerrar");
 			cerrar.addActionListener(new ActionListener()
@@ -61,13 +63,16 @@ public class GUIaddProveedorToMarca extends JFrame implements GUI{
 			});
 			
 		
-		panel.add(idMarca);
-		panel.add(jTextMarca);
-		panel.add(idProveedor);
-		panel.add(jTextProveedor);
-		panel.add(aceptar);
-		panel.add(cerrar);
-		this.add(panel);
+		texto.add(idMarca);
+		texto.add(jTextMarca);
+		texto.add(idProveedor);
+		texto.add(jTextProveedor);
+		botones.add(aceptar);
+		botones.add(cerrar);
+		panel.add(texto);
+		panel.add(botones);
+		this.getContentPane().add(panel);
+		this.pack();
 	}
 	
 	@Override
@@ -83,7 +88,6 @@ public class GUIaddProveedorToMarca extends JFrame implements GUI{
 
 	@Override
 	public void setGUIVisible(boolean b) {
-		Utils.refreshTextFields(panel);
 		setVisible(b);
 		
 	}

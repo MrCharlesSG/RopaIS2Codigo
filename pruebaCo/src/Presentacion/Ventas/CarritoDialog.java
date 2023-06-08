@@ -26,6 +26,7 @@ import javax.swing.table.TableColumn;
 
 import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
+import Negocio.ProductosDeVenta.TProductosDeVenta;
 import Negocio.Ventas.TVenta;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -41,13 +42,16 @@ public class CarritoDialog extends Dialog {
 	private static final long serialVersionUID = 1L;
 	private Map<Integer,Integer> carro;
 	private boolean status;
-	private TVenta venta;
+	private TProductosDeVenta prodDeVenta;
+	
 	public CarritoDialog (Frame parent,Map<Integer,Integer> c){
 		super(parent,true);
 		carro=c;
+		prodDeVenta=new TProductosDeVenta();
 	this.initGUI() ;
 	}
 	private void initGUI() {
+		
 		setTitle("Carrito de de productos");
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -72,6 +76,7 @@ public class CarritoDialog extends Dialog {
 		JButton elim=new JButton("Eliminar");
 		elim.setToolTipText("Elimina n unidades de un producto");
 		JButton aceptar=new JButton("Aceptar");
+		
 		//añado la lista
 				this._dataTableModel = new DefaultTableModel(){
 					@Override
@@ -157,8 +162,8 @@ public class CarritoDialog extends Dialog {
 				status=true;
 				tprod.setText(null);
 				tcant.setText(null);
-				venta.setProductos(carro);
-				Controlador.getInstancia().accion(Evento.CERRAR_VENTA, venta);
+				prodDeVenta.setProductos(carro);
+				Controlador.getInstancia().accion(Evento.CERRAR_VENTA, prodDeVenta);
 			}
 	});
 		
@@ -177,8 +182,8 @@ public class CarritoDialog extends Dialog {
 			}
 		
 	}
-	public boolean  open(TVenta datos) {
-		this.venta=datos;
+	public boolean  open(int datos) {
+		prodDeVenta.setVenta(datos);
 		if (getParent() != null)
 			setLocation(//
 					getParent().getLocation().x + getParent().getWidth() / 2 - getWidth() / 2, //

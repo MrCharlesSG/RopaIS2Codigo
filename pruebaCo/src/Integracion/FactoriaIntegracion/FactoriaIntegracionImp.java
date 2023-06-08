@@ -13,6 +13,8 @@ import Integracion.MarcaProveedores.DAOProveedorMarca;
 import Integracion.MarcaProveedores.DAOProveedorMarcaIMP;
 import Integracion.Producto.DAOProducto;
 import Integracion.Producto.DAOProductoIMP;
+import Integracion.ProductosDeVenta.DAOProductosDeVenta;
+import Integracion.ProductosDeVenta.DAOProductosDeVentaIMP;
 import Integracion.Proveedores.DAOProveedores;
 import Integracion.Proveedores.DAOProveedoresIMP;
 import Integracion.Ventas.DAOVentas;
@@ -55,5 +57,10 @@ public class FactoriaIntegracionImp extends FactoriaIntegracion {
 	@Override
 	public DAOProveedorMarca generaDAOProveedorMarca() {
 		return new DAOProveedorMarcaIMP();
+	}
+
+	@Override
+	public DAOProductosDeVenta generaDAOProductosDeVenta() {
+		return new DAOProductosDeVentaIMP();
 	}
 }

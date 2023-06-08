@@ -14,6 +14,7 @@ import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.SAProducto;
 import Negocio.Producto.TProducto;
+import Negocio.ProductosDeVenta.TProductosDeVenta;
 import Negocio.Proveedor.SAProveedores;
 import Negocio.Proveedor.TProveedor;
 import Negocio.ProveedorMarca.TProveedorMarca;
@@ -379,7 +380,7 @@ public class ControladorIMP extends Controlador {
             	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
             	int res=saVenta.create((TVenta)datos);
             	if(res>0){
-            		gui.update(Evento.RES_ABRIR_VENTA_OK, saVenta.read(res));
+            		gui.update(Evento.RES_ABRIR_VENTA_OK, res);
             	}
             	else{
             		gui.update(Evento.RES_ABRIR_VENTA_KO, null);
@@ -388,7 +389,7 @@ public class ControladorIMP extends Controlador {
             }
             case Evento.CERRAR_VENTA:{
             	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
-            	int res=saVenta.update((TVenta)datos,false);
+            	int res=saVenta.update((TProductosDeVenta)datos,false);
             	if(res>0){
             		gui.update(Evento.RES_CERRAR_VENTA_OK, null);
             	}

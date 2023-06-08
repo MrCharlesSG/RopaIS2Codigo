@@ -12,7 +12,7 @@ public class TVenta {
 	private int id_cliente;
 	private double precio;
 	private int contador_productos;
-	private Map<Integer,Integer> prod_unidades;//producto, nro Unidades
+	
 	private boolean activo;
 	
 	public TVenta(int id, int id_emp, int id_cl, double prec, int cont, boolean activo){
@@ -22,7 +22,6 @@ public class TVenta {
 		this.precio=prec;
 		this.contador_productos=cont;
 		this.activo=activo;
-		this.prod_unidades= new HashMap<Integer,Integer>();
 	}
 	
 	public void set_id(int id){
@@ -53,10 +52,6 @@ public class TVenta {
 		this.contador_productos+=val;
 	}
 	
-	public void aniadir_prod_ud(int id, int ud){
-		this.prod_unidades.put(id, ud);
-	}
-	
 	public void set_activo(boolean es){
 		this.activo=es;
 	}
@@ -81,10 +76,6 @@ public class TVenta {
 		return this.contador_productos;
 	}
 	
-	public Map<Integer,Integer> get_map(){
-		return this.prod_unidades;
-	}
-	
 	public boolean get_activo(){
 		return this.activo;
 	}
@@ -97,11 +88,7 @@ public class TVenta {
 				this.id_empleado == a.get_id_empleado()&&
 				this.precio == a.get_precio()&&
 				this.get_contador() == a.get_contador()&&
-				this.activo == a.get_activo() &&
-				this.prod_unidades.equals(a.get_map())
+				this.activo == a.get_activo()
 				;
-	}
-	public void setProductos(Map<Integer,Integer> aux){
-		prod_unidades.putAll(aux);
 	}
 }
