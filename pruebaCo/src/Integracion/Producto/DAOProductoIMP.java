@@ -47,7 +47,7 @@ public class DAOProductoIMP implements DAOProducto{
 		StringBuilder sb =new StringBuilder();
 		int id=-1;
 		boolean found =false;
-		//When no entries exist simply adds the ne entry
+		//When no entries exist simply adds the new entry
 		if(f.length()==0){
 			sb.append(stringArray[0] + ":" + 1 + ":" + stringArray[2] + ":" 
 			        + stringArray[3] + ":" + stringArray[4] + ":" + stringArray[5] + ":"
@@ -83,7 +83,7 @@ public class DAOProductoIMP implements DAOProducto{
 		    if(!found){
 		    	sb.append(stringArray[0] + ":" + id + ":" + stringArray[2] + ":" 
 				        + stringArray[3] + ":" + stringArray[4] + ":" + stringArray[5] + ":"
-		    			+ splitArray[6] + System.lineSeparator());
+		    			+ stringArray[6] + System.lineSeparator());
 		    }
 			}catch (Exception e) {
 				   return -1;
