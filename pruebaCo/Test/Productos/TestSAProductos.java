@@ -66,7 +66,7 @@ import Negocio.Producto.TProducto;
 			//crear un segunda producto y lo leer por id y por nombre
 			tCami.setIdMarca(marcaID);
 			aux2=saProducto.create(tCami);
-			assertEquals("No se ha podido crear una segunda marca", 2, aux2);
+			assertEquals("No se ha podido crear una segund0 producto", 2, aux2);
 			h= this.saProducto.read(2);
 			assertEquals("No se ha leido correctamente el 2do producto",h.getNombre(), this.tCami.getNombre());
 			assertEquals("No se ha leido correctamente el 2do producto",h.getIdProducto(), this.tCami.getIdProducto());
@@ -75,8 +75,21 @@ import Negocio.Producto.TProducto;
 			assertEquals("No se ha leido correctamente el 2do producto",h.getNombre(), this.tCami.getNombre());
 			assertEquals("No se ha leido correctamente el 2do producto",h.getIdProducto(), this.tCami.getIdProducto());
 			
+			//comprobamos lectura por id de marca
+			
+			marcaID = saMarca.create(new TMarca("Pablo", 1, true));
+			saProducto.create(new TProducto("guantes amarillos", 30, 20, 1, "guantes", 2, 10));
+			saProducto.create(new TProducto("guantes negros", 30, 30, 2, "guantes", 2, 10));
+			
+			Collection<TProducto> expectedResult = new ArrayList<TProducto>();
+			expectedResult.add(new TProducto("guantes amarillos", 30, 20, 1, "guantes", 2, 10));
+			expectedResult.add(new TProducto("guantes negros", 30, 30, 2, "guantes", 2, 10));
+			Collection<TProducto> readByIDMarca = saProducto.productosPorMarca(2);
+			assert(expectedResult.equals(readByIDMarca));
+			
 			//Comprobamos el read all de los dos productos añadidos
 			this.mockCollec.add(tCami);
+			this.mockCollec.addAll(expectedResult);
 			Collection<TProducto> readAllCollec = saProducto.readAll();
 
 			assert(mockCollec.equals(readAllCollec));
@@ -88,7 +101,7 @@ import Negocio.Producto.TProducto;
 			assertEquals("No se ha eliminado correctamente", 2, aux2);
 			
 			//readAll de 0 marcas
-			assertEquals("Read all no funciona para 1 productos", this.saProducto.readAll().size(), 2);
+			assertEquals("Read all no funciona para 1 productos", 4, this.saProducto.readAll().size());
 			
 			//Añadir 5 marcas
 		/*	String nombre= "Manolo";
@@ -117,7 +130,7 @@ import Negocio.Producto.TProducto;
 			
 			//read de un id nulo
 			assertEquals("Se ha leido un id invalido",null, this.saProducto.read(100));
-		//	vaciarBaseDatos();
+		this.vaciarBaseDatos();
 			
 		}
 		

@@ -49,8 +49,8 @@ public class DAOProductosTest {
 			
 			Collection<TProducto> productos=new ArrayList<TProducto>();
 			TProducto prod1= new TProducto("vaqueros", 1, 38, 2, "pantalones", 0, 10);
-			TProducto prod2= new TProducto("chandal", 1, 38, 3, "pantalones", 0, 20);
-			TProducto prod3= new TProducto("cargos", 1, 38, 4, "pantalones", 0, 30);
+			TProducto prod2= new TProducto("chandal", 1, 38, 3, "pantalones", 1, 20);
+			TProducto prod3= new TProducto("cargos", 1, 38, 4, "pantalones", 1, 30);
 			
 			dproducto.create(prod1);
 			dproducto.create(prod2);
@@ -66,10 +66,16 @@ public class DAOProductosTest {
 			
 			assert( aux.equals(productos));
 			
+			productos = dproducto.readByMarca(1);
+			aux.clear();
+			aux.add(prod2);
+			aux.add(prod3);
+			assert(aux.equals(productos));
+			
 			int updatee=dproducto.update(prod3);
 			assertEquals(4, updatee);
 
-		//this.vaciarBaseDatos();
+		this.vaciarBaseDatos();
 			
 
 		}
