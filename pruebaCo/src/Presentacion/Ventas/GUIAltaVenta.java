@@ -96,7 +96,7 @@ public class GUIAltaVenta extends JFrame implements GUI{
 			carrito=new CarritoDialog(this,carro);
 		}
 			
-		boolean status=carrito.open((TVenta)datos);
+		boolean status=carrito.open((int)datos);// si esta aqui es que se ha podido abrir la venta y que se le ha devuelto el id con el que se ha abierto 
 		
 	}
 	if( Evento.RES_CERRAR_VENTA_OK==evento){

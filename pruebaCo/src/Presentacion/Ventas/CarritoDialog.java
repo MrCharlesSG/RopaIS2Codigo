@@ -26,6 +26,7 @@ import javax.swing.table.TableColumn;
 
 import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
+import Negocio.ProductosDeVenta.TCarrito;
 import Negocio.ProductosDeVenta.TProductosDeVenta;
 import Negocio.Ventas.TVenta;
 import Presentacion.Controlador.Controlador;
@@ -42,12 +43,12 @@ public class CarritoDialog extends Dialog {
 	private static final long serialVersionUID = 1L;
 	private Map<Integer,Integer> carro;
 	private boolean status;
-	private TProductosDeVenta prodDeVenta;
+	private TCarrito prodDeVenta;
 	
 	public CarritoDialog (Frame parent,Map<Integer,Integer> c){
 		super(parent,true);
 		carro=c;
-		prodDeVenta=new TProductosDeVenta();
+		prodDeVenta=new TCarrito();
 	this.initGUI() ;
 	}
 	private void initGUI() {
@@ -183,7 +184,7 @@ public class CarritoDialog extends Dialog {
 		
 	}
 	public boolean  open(int datos) {
-		prodDeVenta.setVenta(datos);
+		prodDeVenta.setVenta(datos);//paso el id de la venta
 		if (getParent() != null)
 			setLocation(//
 					getParent().getLocation().x + getParent().getWidth() / 2 - getWidth() / 2, //

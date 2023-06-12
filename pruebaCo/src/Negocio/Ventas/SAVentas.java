@@ -3,6 +3,7 @@ package Negocio.Ventas;
 import java.util.Collection;
 import java.util.List;
 
+import Negocio.ProductosDeVenta.TCarrito;
 import Negocio.ProductosDeVenta.TProductosDeVenta;
 
 public interface SAVentas {
@@ -16,7 +17,7 @@ public interface SAVentas {
 	
 	public Collection<TVenta> readByCliente(int idCliente);
 	
-	public int update(TProductosDeVenta datos,boolean devol);
+	public int update(TCarrito datos,boolean devol);
 
 	public int devolucionVenta(List<Integer> datos);
 }

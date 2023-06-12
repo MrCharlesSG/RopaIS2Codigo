@@ -1,45 +1,42 @@
 package Negocio.ProductosDeVenta;
 
-import java.util.Map;
-import java.util.TreeMap;
-
 public class TProductosDeVenta {
 	private int idVenta;
-	private Map<Integer,Integer> prod_unidades;//producto, nro Unidades
-	private int precio;
-	public TProductosDeVenta(){
-		this.prod_unidades=new TreeMap<Integer,Integer>();
-		precio=0;
+	private int idProducto;
+	private double precio;
+	private int cantidad;
+	
+	public TProductosDeVenta(int idVenta,int idProd,double precio,int cantidad){
+		this.cantidad=cantidad;
+		this.idProducto=idProd;
+		this.precio=precio;
+		this.idVenta=idVenta;
 	}
 	
-	public TProductosDeVenta(int id){
-		this.prod_unidades=new TreeMap<Integer,Integer>();
-	
-		precio=0;
-		this.idVenta=id;
+	public int getProducto() {
+		return this.idProducto;
 	}
-	public void add(int ID,int cantidad,int precio) {
-	this.precio+=cantidad*precio;
-		this.prod_unidades.put(ID,cantidad);
+	public void setProducto(int id) {
+		 this.idProducto=id;
 	}
-	public void remuve(int ID,int cantidad,int precio) {
-		this.precio-=cantidad*precio;
-			//this.prod_unidades.re(ID,cantidad);
-		}
 	public int getVenta() {
 		return this.idVenta;
 	}
 	public void setVenta(int id) {
 		 this.idVenta=id;
 	}
+	public double getPrecio() {
+		return this.precio;
+	}
+	public void setPrecio(double precio) {
+		 this.precio=precio;
+	}
+	public int getCantidad() {
+		return cantidad;
+	}
 
-	public void setProductos(Map<Integer, Integer> carro) {
-		for(Integer i:carro.keySet()) {
-			this.prod_unidades.put(i,carro.get(i));
-		}
-		
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
-	public  Map<Integer,Integer> getProductos(){
-		return this.prod_unidades;
-	}
+	
 }

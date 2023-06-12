@@ -14,6 +14,7 @@ import Negocio.ComprobadorSintactico;
 import Negocio.Clientes.TCliente;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Producto.TProducto;
+import Negocio.ProductosDeVenta.TCarrito;
 import Negocio.ProductosDeVenta.TProductosDeVenta;
 
 
@@ -87,25 +88,20 @@ public class SAVentasIMP implements SAVentas {
 // tengo que crear un update que me añade proctos o me los registra en la base de datos 
 	// se le pasa un id de venta y un mapa con <id_prod,cantidad>
 
-	@Override
+	@Override//lista con id venta 0 id prod 1 cantidad 2
 	public int devolucionVenta(List<Integer> datos) {
 		int id=-1;
-		TVenta venta=read(datos.get(0));
-		Map<Integer, Integer> mapa = venta.get_map();
-		DAOVentas daoVentas;
-		daoVentas=FactoriaIntegracion.getInstance().generaDAOVentas();
-		if(mapa.containsKey(datos.get(1))&&mapa.get(datos.get(1))>=datos.get(2)){
-			mapa.put(datos.get(1),mapa.get(datos.get(1))- datos.get(2));
-			if(mapa.get(datos.get(1))==0)
-				mapa.remove(datos.get(1));
-			venta.setProductos(mapa);
-			this.update(venta,true);
-			id=venta.get_id();
+		DAOProductosDeVenta daoPDV=FactoriaIntegracion.getInstance().generaDAOProductosDeVenta();
+		Collection<TProductosDeVenta>productos=daoPDV.productosVenta(datos.get(0));
+		for(TProductosDeVenta tvp:productos) {
+			if(tvp.getVenta()==datos.get(0)&&tvp.getProducto()==datos.get(1)&&datos.get(2)<=tvp.getCantidad()) {
+				daoPDV.update(new TProductosDeVenta(datos.get(0),datos.get(1),tvp.getPrecio(),datos.get(2)));
+			}
 		}
 		return id;
 	}
 	@Override
-	public int update(TProductosDeVenta datos, boolean devol) {
+	public int update(TCarrito datos, boolean devol) {
 		DAOProducto daoProd;
 		daoProd=FactoriaIntegracion.getInstance().generaDAOProducto();
 		TProducto producto;
@@ -123,12 +119,16 @@ public class SAVentasIMP implements SAVentas {
 					}
 				}
 					if(cerrar) {
+						// si todos lo sproductos son validos se añaden uno a uno
 						DAOProductosDeVenta daoProdVenta;
 						daoProdVenta=FactoriaIntegracion.getInstance().generaDAOProductosDeVenta();
-						id=daoProdVenta.create(datos);
+						TProductosDeVenta Tpv;
+						for(Integer ID: datos.getProductos().keySet()) {
+							producto=daoProd.read(ID);
+							Tpv=new TProductosDeVenta(datos.getVenta(),ID,producto.getPrecio(),datos.getProductos().get(ID));
+							id=daoProdVenta.create(Tpv);
+						}
 					}
-					
-				
 			}
 			
 		}
