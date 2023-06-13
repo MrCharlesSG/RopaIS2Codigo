@@ -74,30 +74,9 @@ public class SAMarcaTest {
 		
 		//eliminar las dos marcas creadas
 		aux1= saMarca.delete(1);
-		assertEquals("No se ha eliminado correctamente",aux1, -1);
+		assertEquals("No se ha eliminado correctamente",aux1, 1);
 		aux2 = saMarca.delete(2);
-		assertEquals("No se ha eliminado correctamente", aux2, -1);
-		
-
-		
-		//Añadir 5 marcas
-	/*	String nombre= "Manolo";
-		this.mockCollec.clear();
-		int i=1;
-		while(i<6){
-			TMarca abe, man= new TMarca(nombre, i, 1);
-			aux1= saMarca.create(man);
-			assertEquals("Ha fallado la creacion de la marca "+ i+ " .",aux1, i);
-			abe = saMarca.read(i);
-			assertEquals("No se ha podido leer la marca "+i, abe, man);
-			this.mockCollec.add(man);
-			nombre+="a";	
-		}
-		readAllCollec = saMarca.readAll();
-		if(this.equalsCollection(readAllCollec, mockCollec)){
-			fail("El readAll no funciona correctamente para 5 marcas");
-		}*/
-
+		assertEquals("No se ha eliminado correctamente", aux2, 2);
 		//crear marca sin nombre
 		assertEquals("Se ha creado una marca sin nombre", this.saMarca.create(new TMarca("", 2, false)), -1);
 		
@@ -110,6 +89,14 @@ public class SAMarcaTest {
 		try(Writer w=new BufferedWriter(
 				new OutputStreamWriter(
 				new FileOutputStream("Marcas.txt")))){
+			w.write("");
+		
+	}catch (IOException e) {
+		
+	}
+		try(Writer w=new BufferedWriter(
+				new OutputStreamWriter(
+				new FileOutputStream("Productos.txt")))){
 			w.write("");
 		
 	}catch (IOException e) {

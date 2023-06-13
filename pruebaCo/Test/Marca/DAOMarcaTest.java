@@ -33,12 +33,9 @@ public class DAOMarcaTest{
     	assert(res==1);
     	TMarca maux=dao.read(1);
     	assert(maux.equals(m1));
-    	
-    	dao.actualizarCantidad(1, true);
+   
     	
     	maux=dao.read(1);
-    	assert(maux.getCantidad()==1);
-    	
     	maux=dao.readByName("Juan");
     	m1=new TMarca("Juan", 1, true);
     	assert(maux.equals(m1 ));

@@ -115,7 +115,7 @@ public class TMarca {
 		TMarca a = (TMarca) anObject;
 		return this.activo==a.getActivo()&&
 				this.IDMarca==a.getID()&&
-				this.Nombre.equals(a.getNombre())
+				this.Nombre.equalsIgnoreCase(a.getNombre())
 				;
 	
 	}
