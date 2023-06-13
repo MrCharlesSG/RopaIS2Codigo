@@ -40,11 +40,9 @@ public class SAVentasIMP implements SAVentas {
 		empleado=daoEmpleado.read(venta.get_id_empleado());
 		
 		if(cliente!=null&&cliente.getActivo()&&empleado!=null&&empleado.isActivo()){
-			
-			TVenta leido=daoVentas.read(venta.get_id());
-			if(leido==null)
+
 				id=daoVentas.create(venta);
-			}
+		}
 		return id;
 	}
 
@@ -98,18 +96,27 @@ public class SAVentasIMP implements SAVentas {
 		int id=-1;
 		DAOProductosDeVenta daoPDV=FactoriaIntegracion.getInstance().generaDAOProductosDeVenta();
 		Collection<TProductosDeVenta>productos=daoPDV.productosVenta(datos.get(0));
+		TVenta venta;
+		DAOVentas daoVentas;
+		daoVentas=FactoriaIntegracion.getInstance().generaDAOVentas();
+		venta=daoVentas.read(datos.get(0));
+		if(venta==null)
+			return -1;
 		for(TProductosDeVenta tvp:productos) {
 			if(tvp.getVenta()==datos.get(0)&&tvp.getProducto()==datos.get(1)&&datos.get(2)<=tvp.getCantidad()) {
-				daoPDV.update(new TProductosDeVenta(datos.get(0),datos.get(1),tvp.getPrecio(),datos.get(2)));
+				daoPDV.update(new TProductosDeVenta(datos.get(0),datos.get(1),tvp.getPrecio(),tvp.getCantidad()-datos.get(2)));
 				//actualizo el precio total de la venta 
 				double preciototal=0;
-				TVenta venta;
-				DAOVentas daoVentas;
-				daoVentas=FactoriaIntegracion.getInstance().generaDAOVentas();
-				venta=daoVentas.read(id);
+				
 				preciototal=venta.get_precio()-datos.get(2)*tvp.getPrecio();
 				venta.set_prec(preciototal);
 				daoVentas.update(venta);
+				//actualizo la cantidad restante de unidades 
+				DAOProducto daoProd=FactoriaIntegracion.getInstance().generaDAOProducto();
+				TProducto producto;
+				producto=daoProd.read(datos.get(1));
+				producto.setCantidad(producto.getCantidad()+datos.get(2));
+				daoProd.update(producto);
 			}
 		}
 		return id;
@@ -120,7 +127,11 @@ public class SAVentasIMP implements SAVentas {
 		daoProd=FactoriaIntegracion.getInstance().generaDAOProducto();
 		TProducto producto;
 		int id=-1;
-		if(ComprobadorSintactico.isPositive(datos.getVenta())){
+		TVenta venta;
+		DAOVentas daoVentas;
+		daoVentas=FactoriaIntegracion.getInstance().generaDAOVentas();
+		venta=daoVentas.read(datos.getVenta());
+		if(ComprobadorSintactico.isPositive(datos.getVenta())&&venta!=null){
 				boolean cerrar=true;
 				double preciototal=0;
 				for(Integer ID: datos.getProductos().keySet()) {
@@ -140,14 +151,12 @@ public class SAVentasIMP implements SAVentas {
 						TProductosDeVenta Tpv;
 						for(Integer ID: datos.getProductos().keySet()) {
 							producto=daoProd.read(ID);
+							producto.setCantidad(producto.getCantidad()-datos.getProductos().get(ID));
+							daoProd.update(producto);
 							Tpv=new TProductosDeVenta(datos.getVenta(),ID,producto.getPrecio(),datos.getProductos().get(ID));
 							id=daoProdVenta.create(Tpv);
 						}
 						//Actualizo el precio total de la compra en la venta
-						TVenta venta;
-						DAOVentas daoVentas;
-						daoVentas=FactoriaIntegracion.getInstance().generaDAOVentas();
-						venta=daoVentas.read(id);
 						venta.set_prec(preciototal);
 						daoVentas.update(venta);
 						

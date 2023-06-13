@@ -178,7 +178,7 @@ public class DAOVentasIMP implements DAOVentas {
 		TVenta venta;
 		venta=new TVenta(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]),
 				Integer.parseInt(datos[2]),Double.parseDouble(datos[3]),
-				Boolean.parseBoolean(datos[5]));
+				Boolean.parseBoolean(datos[4]));
 		return venta;
 		
 	}

@@ -11,7 +11,9 @@ public class TOAVenta {
 	public TOAVenta(TVenta venta,Collection<TProductosDeVenta> productos) {
 		this.venta=venta;
 		this.productos=new ArrayList<TProductosDeVenta>();
-		this.setProductos(productos);
+		for(TProductosDeVenta tpv:productos) {
+			 this.productos.add(tpv);
+		 }
 	}
 	public TVenta getVenta() {
 		return venta;
@@ -23,8 +25,8 @@ public class TOAVenta {
 		return productos;
 	}
 	public void setProductos(Collection<TProductosDeVenta> productos) {
-		 for(TProductosDeVenta tpv:productos) {
-			 productos.add(tpv);
+		for(TProductosDeVenta tpv:productos) {
+			 this.productos.add(tpv);
 		 }
 	}
 }

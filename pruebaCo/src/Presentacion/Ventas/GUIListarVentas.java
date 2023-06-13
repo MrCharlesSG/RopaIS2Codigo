@@ -31,7 +31,7 @@ public class GUIListarVentas extends JFrame implements GUI{
 	public GUIListarVentas() {
 		this.setLocationRelativeTo(null);
 		
-		Controlador.getInstancia().accion(Evento.LISTAR_VENTAS,null);
+		
 	}
 
 	@Override
@@ -100,11 +100,12 @@ public class GUIListarVentas extends JFrame implements GUI{
 		panel.add(cerrar);
 		this.setContentPane(panel);
 		pack();
-		setVisible(false);
+		setVisible(true);
 	}
 	
 	@Override
 	public void setGUIVisible(boolean b) {
-		this.setVisible(b);
+		
+		Controlador.getInstancia().accion(Evento.LISTAR_VENTAS,null);
 	}
 }

@@ -44,7 +44,7 @@ public class IGUIVentas extends JPanel implements GUI{
 			{ 
 			public void actionPerformed(ActionEvent e){		
 					
-				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.CERRAR_VENTA);
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.DEVOLUCION_VENTA);
 				gui.setGUIVisible(true);	
 			}
 		});
@@ -75,7 +75,7 @@ public class IGUIVentas extends JPanel implements GUI{
 		ventasPorCliente.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.VENTA_POR_ID);
+				GUI gui=FactoriaPresentacion.getInstance().generaGUI(Evento.VENTAS_DE_UN_CLIENTE);
 				gui.setGUIVisible(true);
 			}
 		});

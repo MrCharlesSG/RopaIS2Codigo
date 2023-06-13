@@ -114,8 +114,7 @@ public class DAOProductosDeVentaIMP implements DAOProductosDeVenta {
 			
 				if (Integer.parseInt(datos[0])==Tpv.getVenta()&&Integer.parseInt(datos[1])==Tpv.getProducto()) {
 					encontrado=true;
-					buffer.append(Tpv.getVenta()+":"+Tpv.getProducto()+":"+Tpv.getCantidad()+":"+Tpv.getPrecio()).append(System.lineSeparator());
-
+					if(Tpv.getCantidad()>0)buffer.append(Tpv.getVenta()+":"+Tpv.getProducto()+":"+Tpv.getCantidad()+":"+Tpv.getPrecio()).append(System.lineSeparator());
 				}
 				else 
 					buffer.append(datos[0]+":"+datos[1]+":"+datos[2]+":"+datos[3]).append(System.lineSeparator());
