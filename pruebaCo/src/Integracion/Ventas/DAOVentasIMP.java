@@ -36,11 +36,10 @@ public class DAOVentasIMP implements DAOVentas {
 		}
 		else{
 			try(Scanner scanner=new Scanner(file)) {//bufferreader
-				//al dao le deeria de dar igual si esta escribiendo algo mal de eso ya se encargan otros
+				//al dao le deberia de dar igual si esta escribiendo algo mal de eso ya se encargan otros
 				//recojo los antiguos datos
 				while(scanner.hasNext()) {
-					
-				
+
 					datos=scanner.nextLine().split(":");
 					id=Integer.parseInt(datos[0])+1;
 					this.datosABuffer(datos, buffer);
@@ -149,27 +148,17 @@ public class DAOVentasIMP implements DAOVentas {
 		}
 	}
 	
-	private void mapaABuffer(Map<Integer, Integer> map, StringBuilder buffer) {
-		for(Integer i: map.keySet()) {
-			buffer.append(":"+i+"-"+map.get(i));
-		}
-	}
 	
 	private void datosABuffer(String[] datos, StringBuilder buffer) {
 		/*
-		 * int id, int id_emp, int id_cl, double prec, int cont, boolean activo
-		 * 0   1     2      3       4            5      6
-		 * id:emp:cliente:precio:contProductos:activo:idprodi-unidadesi
+		 *
+		 * 0   1     2      3       4           
+		 * id:emp:cliente:precio:activo:
 		 */
 		buffer.append(datos[0]+":"+datos[1]);
 		buffer.append(":"+datos[2]);
 		buffer.append(":"+datos[3]);
 		buffer.append(":"+datos[4]);
-		buffer.append(":"+datos[5]);
-		
-		for(int i=6; i<datos.length; i++) {
-			buffer.append(":"+datos[i]);
-		}
 		
 	}
 	
@@ -177,26 +166,19 @@ public class DAOVentasIMP implements DAOVentas {
 		buffer.append(id+":"+venta.get_id_empleado());
 		buffer.append(":"+venta.get_id_cliente());
 		buffer.append(":"+venta.get_precio());
-		buffer.append(":"+venta.get_contador());
 		buffer.append(":"+venta.get_activo());
-		mapaABuffer(venta.get_map(), buffer);
 	}
 	
 	private TVenta readVenta(String[] datos) {
 		/*
-		 * int id, int id_emp, int id_cl, double prec, int cont, boolean activo
-		 * 0   1     2      3       4            5      6
-		 * id:emp:cliente:precio:contProductos:activo:idprodi-unidadesi
+		 *
+		 * 0   1     2      3       4           
+		 * id:emp:cliente:precio:activo:
 		 */
 		TVenta venta;
-		String[] d;
 		venta=new TVenta(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]),
-				Integer.parseInt(datos[2]),Double.parseDouble(datos[3]), Integer.parseInt(datos[4]),
+				Integer.parseInt(datos[2]),Double.parseDouble(datos[3]),
 				Boolean.parseBoolean(datos[5]));
-		for(int i=6; i<datos.length;i++) {
-			d=datos[i].split("-");
-			venta.aniadir_prod_ud(Integer.parseInt(d[0]), Integer.parseInt(d[1]));
-		}
 		return venta;
 		
 	}

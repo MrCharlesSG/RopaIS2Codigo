@@ -11,13 +11,13 @@ public interface SAVentas {
 	
 	public Collection<TVenta> readAll();
 
-	public TVenta read(int id);
+	public TOAVenta read(int id);
 	
 	public Collection<TVenta> readByEmpleado(int idEmpleado);
 	
 	public Collection<TVenta> readByCliente(int idCliente);
 	
-	public int update(TCarrito datos,boolean devol);
+	public int update(TCarrito datos);
 
 	public int devolucionVenta(List<Integer> datos);
 }

@@ -22,6 +22,8 @@ import javax.swing.table.TableColumn;
 
 import Main.Utils;
 import Negocio.MarcaNegocio.TMarca;
+import Negocio.ProductosDeVenta.TProductosDeVenta;
+import Negocio.Ventas.TOAVenta;
 import Negocio.Ventas.TVenta;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
@@ -34,7 +36,7 @@ public class GUIVentaPorID extends JFrame implements GUI {
 	* <!-- end-UML-doc -->
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	String[] header = { "ID","ID EMPLEADO", "ID CLIENTE", "PRECIO","UNIDADES", "ACTIVO","PRODUCTOS(id: cantidad:)"};
+	String[] header = { "ID->PRODUCTO","CANTIDAD", "PRECIO POR PRODUCTO"};
 	private DefaultTableModel _dataTableModel;
 	
 	public GUIVentaPorID() {
@@ -84,7 +86,7 @@ public class GUIVentaPorID extends JFrame implements GUI {
 	@Override
 	public void update(int evento, Object datos) {
 	if( Evento.RES_VENTA_POR_ID_OK==evento){
-		TVenta v=(TVenta) datos;
+		TOAVenta v=(TOAVenta) datos;
 		
 		mostrar(v);
 
@@ -95,14 +97,18 @@ public class GUIVentaPorID extends JFrame implements GUI {
 
 	}
 	}
-	private void mostrar(TVenta v) {
+	private void mostrar(TOAVenta toav) {
+		TVenta v=toav.getVenta();
+		Collection<TProductosDeVenta>productos=toav.getProductos();
 		setTitle("Mostrar venta");
 		this.setMinimumSize(new Dimension(600, 50));
 		this.setPreferredSize(new Dimension(600,200));
 		JPanel panel=new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
-		
+		JLabel descripcion=new JLabel("La venta con id de venta"+v.get_id()+" con id de empleado "+v.get_id_empleado()+" y con id de cliente"+v.get_id_cliente()+" tiene los siguientes productos");
+		descripcion.setAlignmentX(CENTER_ALIGNMENT);
+		panel.add(descripcion);
 		//añado un boton de cerrar
 		JButton cerrar =new JButton("Cerrar");
 		cerrar.addActionListener(new ActionListener()
@@ -120,22 +126,14 @@ public class GUIVentaPorID extends JFrame implements GUI {
 			}
 		};
 		_dataTableModel.setColumnIdentifiers(header);;
-		_dataTableModel.setNumRows(1);
+		_dataTableModel.setNumRows(productos.size());
 		int i=0;
-		
-			_dataTableModel.setValueAt(v.get_id(), i, 0);
-			_dataTableModel.setValueAt(v.get_id_empleado(), i, 1);
-			_dataTableModel.setValueAt(v.get_id_cliente(), i, 2);
-			_dataTableModel.setValueAt(v.get_precio(), i, 3);
-			_dataTableModel.setValueAt(v.get_contador(), i, 4);
-			_dataTableModel.setValueAt(v.get_activo(), i, 5);
-			Map<Integer,Integer>vm=v.get_map();
-			StringBuilder str=new StringBuilder();
-			for(Integer id : vm.keySet()){
-				str.append("ID:"+id+" CANT:"+vm.get(id)+ " ");
-			}
-			_dataTableModel.setValueAt(str.toString(), i, 6);
-
+		for(TProductosDeVenta tpv:productos) {
+			_dataTableModel.setValueAt(tpv.getProducto(), i, 0);
+			_dataTableModel.setValueAt(tpv.getCantidad(), i, 1);
+			_dataTableModel.setValueAt(tpv.getPrecio(), i, 2);
+			i++;
+		}
 		JTable dataTable = new JTable(_dataTableModel) {
 			private static final long serialVersionUID = 1L;
 
@@ -154,6 +152,9 @@ public class GUIVentaPorID extends JFrame implements GUI {
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(tabelScroll);
 
+		JLabel cierre=new JLabel("El precio total de la venta ha sido"+v.get_precio());
+		cierre.setAlignmentX(CENTER_ALIGNMENT);
+		panel.add(cierre);
 		panel.add(cerrar);
 		this.setContentPane(panel);
 		pack();

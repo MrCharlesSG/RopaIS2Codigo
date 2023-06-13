@@ -63,7 +63,7 @@ public class GUIAltaVenta extends JFrame implements GUI{
 					try{
 						int id_cliente=Integer.parseInt(tID.getText());
 						int id_empleado=Integer.parseInt(tID_PR.getText());
-						TVenta venta=new TVenta(-1,id_empleado,id_cliente,10.0,0,true);
+						TVenta venta=new TVenta(-1,id_empleado,id_cliente,0,true);
 
 						
 						Controlador.getInstancia().accion(Evento.ABRIR_VENTA, venta);

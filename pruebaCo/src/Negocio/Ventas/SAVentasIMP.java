@@ -56,15 +56,20 @@ public class SAVentasIMP implements SAVentas {
 		return daoVentas.readAll();
 	}
 
-	@Override
-	public TVenta read(int id) {
+	@Override// la unica forma de acceder a toda la informacion de unaventa es con este read que devuelve el toa
+	public TOAVenta read(int id) {
 		TVenta venta=null;
+		TOAVenta res=null;
 		if(ComprobadorSintactico.isPositive(id)){
 			DAOVentas daoVentas;
 			daoVentas=FactoriaIntegracion.getInstance().generaDAOVentas();
 			venta=daoVentas.read(id);
+			DAOProductosDeVenta daoPDV=FactoriaIntegracion.getInstance().generaDAOProductosDeVenta();
+			Collection<TProductosDeVenta> productos;
+			productos=daoPDV.productosVenta(id);
+			res=new TOAVenta(venta,productos);
 		}
-		return venta;
+		return res;
 	}
 
 	@Override
@@ -96,20 +101,28 @@ public class SAVentasIMP implements SAVentas {
 		for(TProductosDeVenta tvp:productos) {
 			if(tvp.getVenta()==datos.get(0)&&tvp.getProducto()==datos.get(1)&&datos.get(2)<=tvp.getCantidad()) {
 				daoPDV.update(new TProductosDeVenta(datos.get(0),datos.get(1),tvp.getPrecio(),datos.get(2)));
+				//actualizo el precio total de la venta 
+				double preciototal=0;
+				TVenta venta;
+				DAOVentas daoVentas;
+				daoVentas=FactoriaIntegracion.getInstance().generaDAOVentas();
+				venta=daoVentas.read(id);
+				preciototal=venta.get_precio()-datos.get(2)*tvp.getPrecio();
+				venta.set_prec(preciototal);
+				daoVentas.update(venta);
 			}
 		}
 		return id;
 	}
 	@Override
-	public int update(TCarrito datos, boolean devol) {
+	public int update(TCarrito datos) {
 		DAOProducto daoProd;
 		daoProd=FactoriaIntegracion.getInstance().generaDAOProducto();
 		TProducto producto;
 		int id=-1;
 		if(ComprobadorSintactico.isPositive(datos.getVenta())){
-			if(!devol) {
-				
 				boolean cerrar=true;
+				double preciototal=0;
 				for(Integer ID: datos.getProductos().keySet()) {
 					producto=daoProd.read(ID);
 					if(producto==null||producto.getCantidad()< datos.getProductos().get(ID)) {
@@ -117,9 +130,11 @@ public class SAVentasIMP implements SAVentas {
 						cerrar=false;
 						//no se puede cerrar la venta
 					}
+					preciototal+=producto.getPrecio()* datos.getProductos().get(ID);
 				}
 					if(cerrar) {
 						// si todos lo sproductos son validos se añaden uno a uno
+						
 						DAOProductosDeVenta daoProdVenta;
 						daoProdVenta=FactoriaIntegracion.getInstance().generaDAOProductosDeVenta();
 						TProductosDeVenta Tpv;
@@ -128,10 +143,18 @@ public class SAVentasIMP implements SAVentas {
 							Tpv=new TProductosDeVenta(datos.getVenta(),ID,producto.getPrecio(),datos.getProductos().get(ID));
 							id=daoProdVenta.create(Tpv);
 						}
+						//Actualizo el precio total de la compra en la venta
+						TVenta venta;
+						DAOVentas daoVentas;
+						daoVentas=FactoriaIntegracion.getInstance().generaDAOVentas();
+						venta=daoVentas.read(id);
+						venta.set_prec(preciototal);
+						daoVentas.update(venta);
+						
+						
 					}
 			}
-			
-		}
+
 			return id;
 	}
 

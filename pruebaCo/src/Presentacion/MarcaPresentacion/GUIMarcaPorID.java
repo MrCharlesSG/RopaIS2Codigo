@@ -80,7 +80,7 @@ public class GUIMarcaPorID extends JFrame implements GUI {
 				try{
 					setVisible(false);
 					int id=Integer.parseInt(tID.getText());
-					Controlador.getInstancia().accion(Evento.MARCA_PORID, new Integer(id));
+					Controlador.getInstancia().accion(Evento.MARCA_PORID, id);
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 				}

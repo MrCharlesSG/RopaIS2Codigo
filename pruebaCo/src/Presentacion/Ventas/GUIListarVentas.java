@@ -25,7 +25,7 @@ import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
 
 public class GUIListarVentas extends JFrame implements GUI{
-	String[] header = { "ID","ID EMPLEADO", "ID CLIENTE", "PRECIO","UNIDADES", "ACTIVO","PRODUCTOS(id: cantidad:)"};
+	String[] header = { "ID","ID EMPLEADO", "ID CLIENTE", "PRECIO", "ACTIVO"};
 	private DefaultTableModel _dataTableModel;
 	
 	public GUIListarVentas() {
@@ -75,14 +75,7 @@ public class GUIListarVentas extends JFrame implements GUI{
 			_dataTableModel.setValueAt(v.get_id_empleado(), i, 1);
 			_dataTableModel.setValueAt(v.get_id_cliente(), i, 2);
 			_dataTableModel.setValueAt(v.get_precio(), i, 3);
-			_dataTableModel.setValueAt(v.get_contador(), i, 4);
-			_dataTableModel.setValueAt(v.get_activo(), i, 5);
-			Map<Integer,Integer>vm=v.get_map();
-			StringBuilder str=new StringBuilder();
-			for(Integer id : vm.keySet()){
-				str.append("ID:"+id+" CANT:"+vm.get(id)+ " ");
-			}
-			_dataTableModel.setValueAt(str.toString(), i, 6);
+			_dataTableModel.setValueAt(v.get_activo(), i, 4);
 			i++;
 	
 		}

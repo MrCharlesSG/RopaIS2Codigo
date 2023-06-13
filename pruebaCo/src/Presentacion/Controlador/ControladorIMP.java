@@ -14,11 +14,13 @@ import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.SAProducto;
 import Negocio.Producto.TProducto;
+import Negocio.ProductosDeVenta.TCarrito;
 import Negocio.ProductosDeVenta.TProductosDeVenta;
 import Negocio.Proveedor.SAProveedores;
 import Negocio.Proveedor.TProveedor;
 import Negocio.ProveedorMarca.TProveedorMarca;
 import Negocio.Ventas.SAVentas;
+import Negocio.Ventas.TOAVenta;
 import Negocio.Ventas.TVenta;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 import Presentacion.GUI.GUI;
@@ -389,7 +391,7 @@ public class ControladorIMP extends Controlador {
             }
             case Evento.CERRAR_VENTA:{
             	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
-            	int res=saVenta.update((TProductosDeVenta)datos,false);
+            	int res=saVenta.update((TCarrito)datos);
             	if(res>0){
             		gui.update(Evento.RES_CERRAR_VENTA_OK, null);
             	}
@@ -400,12 +402,12 @@ public class ControladorIMP extends Controlador {
             }
             case Evento.VENTA_POR_ID:{
             	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
-            	TVenta venta=saVenta.read((int)datos);
-				if(venta==null){
+            	TOAVenta toaventa=saVenta.read((int)datos);
+				if(toaventa==null){
 					gui.update(Evento.RES_VENTA_POR_ID_KO, null);
 				}
 				else{
-					gui.update(Evento.RES_VENTA_POR_ID_OK, venta);
+					gui.update(Evento.RES_VENTA_POR_ID_OK, toaventa);
 				}
             	break;
             }

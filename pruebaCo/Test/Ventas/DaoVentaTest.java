@@ -30,7 +30,7 @@ public class DaoVentaTest {
 		
 		assertEquals(res, null);
 		
-		TVenta tventa=new TVenta (1, 1, 1, 10, 2, true);
+		TVenta tventa=new TVenta (1, 1, 1, 10, true);
 		
 		int id=dventa.create(tventa);
 		assertEquals(1, id);
@@ -45,9 +45,9 @@ public class DaoVentaTest {
         
         
         Collection<TVenta> ventas=new ArrayList<TVenta>();
-        TVenta tventa1=new TVenta(2, 1, 2, 40, 5, true);
-        TVenta tventa2=new TVenta (3, 2, 3, 10, 1, true);
-        TVenta tventa3=new TVenta(4, 1, 2, 80, 9, true);
+        TVenta tventa1=new TVenta(2, 1, 2, 40, true);
+        TVenta tventa2=new TVenta (3, 2, 3, 10, true);
+        TVenta tventa3=new TVenta(4, 1, 2, 80, true);
         
         //comprobar el readAll
         dventa.create(tventa1);
