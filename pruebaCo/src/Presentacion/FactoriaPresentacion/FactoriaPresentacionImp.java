@@ -106,7 +106,7 @@ public class FactoriaPresentacionImp extends FactoriaPresentacion {
 			return new GUIaddProveedorToMarca();
 		}
 		case Evento.LISTAR_MARCA_POR_PROVEEDORES:{
-			return new GUIListarProveedoresPorMarca();// esta es asi??
+			return new GUIListarMarcaPorProveedor();// esta es asi??
 	    }
 	              
 	    case Evento.DELETE_PROVEEDOR_OF_MARCA:{

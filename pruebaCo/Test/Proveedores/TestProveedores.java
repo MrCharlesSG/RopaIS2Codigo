@@ -25,12 +25,13 @@ import Negocio.Proveedor.TProveedor;
 public class TestProveedores {
 	
 	private SAProveedores saProveedores=FactoriaNegocioImp.getInstance().generaSAProveedor();
-	private TProveedor tProveedor=new TProveedor("Xyon",1,new ArrayList<Integer>(),false);
-	private TProveedor tProveedor2=new TProveedor("Tiberias",1,new ArrayList<Integer>(),false);
+	private TProveedor tProveedor=new TProveedor("Xyon",1,false);
+	private TProveedor tProveedor2=new TProveedor("Tiberias",1,false);
 	private Collection<TProveedor>proveedorColeccion=new ArrayList<TProveedor>();
 	
 	@Test
 	public void Test(){
+		
 		int test;
 		this.vaciarBaseDatos();
 		/*por ID y nombre*/
@@ -47,7 +48,7 @@ public class TestProveedores {
 		assertEquals("Error al crear un proveedor",TP2.getId(),this.tProveedor.getId());
 		
 		/*con mismo nombre*/
-		TP2=new TProveedor("Xyon", 1, new ArrayList<Integer>(), false);
+		TP2=new TProveedor("Xyon", 1, false);
 		int test2=this.saProveedores.create(TP2);
 		assertEquals("Se ha creado un proveedor con el mismo nombre",test2,-1);
 		
@@ -86,7 +87,7 @@ public class TestProveedores {
 		assertEquals("No funciona para 0 proveedores",this.saProveedores.readAll().size(),0);
 		
 		/*Crear proveedor sin nombre*/
-		assertEquals("Se ha creado un proveedor sin nombre",this.saProveedores.create(new TProveedor("", 1, new ArrayList<Integer>(), false)),-1);
+		assertEquals("Se ha creado un proveedor sin nombre",this.saProveedores.create(new TProveedor("", 1, false)),-1);
 		
 		/*Read de un ID nulo*/
 		assertEquals("Se ha leido un ID invalido",this.saProveedores.read(1000),null);
@@ -96,6 +97,14 @@ public class TestProveedores {
 		try(Writer w=new BufferedWriter(
 				new OutputStreamWriter(
 				new FileOutputStream("Proveedores.txt")))){
+			w.write("");
+		
+	}catch (IOException e) {
+		
+	}
+		try(Writer w=new BufferedWriter(
+				new OutputStreamWriter(
+				new FileOutputStream("ProveedorMarca.txt")))){
 			w.write("");
 		
 	}catch (IOException e) {

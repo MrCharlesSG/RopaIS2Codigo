@@ -37,9 +37,9 @@ public class GUIDeleteProveedorOfMarca extends JFrame implements GUI {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		JLabel idPL = new JLabel("ID-> Prov");
-		JTextField jtP= new JTextField();
+		JTextField jtP= new JTextField(20);
 		JLabel idML = new JLabel("ID-> Marca");
-		JTextField jtM= new JTextField();
+		JTextField jtM= new JTextField(20);
 		
 		//añado un boton de cerrar
 				JButton cerrar =new JButton("Cerrar");

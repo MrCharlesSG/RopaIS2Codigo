@@ -1,4 +1,2 @@
-1:ende:true
-2:Manolo:true
-3:Alberto:true
-4:lucas:false
+1:Xyon:false
+2:Tiberias:false

@@ -16,10 +16,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import Negocio.FactoriaNegocio.FactoriaNegocio;
 import Negocio.FactoriaNegocio.FactoriaNegocioImp;
 import Negocio.MarcaNegocio.SAMarca;
 import Negocio.MarcaNegocio.SAMarcaImp;
 import Negocio.MarcaNegocio.TMarca;
+import Negocio.Producto.SAProducto;
+import Negocio.Producto.TProducto;
 
 @RunWith(JUnit4.class)
 public class SAMarcaTest {
@@ -37,13 +40,12 @@ public class SAMarcaTest {
 		//crear una marca y leerla por id y por nombre
 		aux1=saMarca.create(tMJuli);
 		assertEquals("No se ha creado la marca correctamente",aux1,1);
+		
 		this.mockCollec.add(tMJuli);
 		TMarca h=this.saMarca.read(1);
-		assertEquals("No se ha leido correctamente por id de marca", h.getNombre(), this.tMJuli.getNombre());
-		assertEquals("No se ha leido correctamente por id de marca", h.getID(), this.tMJuli.getID());
+		assert(h.equals(tMJuli));
 		TMarca tMAux = this.saMarca.readByName("Julian");
-		assertEquals("No se ha leido correctamente por id de marca", tMAux.getNombre(), this.tMJuli.getNombre());
-		assertEquals("No se ha leido correctamente por id de marca", tMAux.getID(), this.tMJuli.getID());
+		assert(tMAux.equals(tMJuli));
 		
 		//crear una marca con el mismo nombre
 		tMAux= new TMarca("Julian", 2, true);
@@ -61,7 +63,6 @@ public class SAMarcaTest {
 		assertEquals("No se ha leido correctamente la 2da marca",h.getNombre(), this.tMAlmd.getNombre());
 		assertEquals("No se ha leido correctamente la 2da marca",h.getNombre(), this.tMAlmd.getNombre());
 		
-		//compruebo si el actualizar funciona 
 	
 		h= this.saMarca.readByName("Almendra");
 		assertEquals("No se ha leido correctamente la 2da marca",h.getNombre(), this.tMAlmd.getNombre());
@@ -71,8 +72,18 @@ public class SAMarcaTest {
 		this.mockCollec.add(tMAlmd);
 		Collection<TMarca> readAllCollec = saMarca.readAll();
 		assert(mockCollec.equals(readAllCollec));
+		// comprobar si puedo dar de baja una marca asociada a productos
 		
-		//eliminar las dos marcas creadas
+		 TProducto tPant = new TProducto("Pantalones azules", 30, 1,1,"pantalones",1, 10);
+		 SAProducto saProducto = FactoriaNegocioImp.getInstance().generaSAProducto();
+		 int idp=saProducto.create(tPant);
+		 
+		 aux1= saMarca.delete(1);
+		 assertEquals("Se ha eliminado la marca cuando aun tenia productos asociados",aux1, -1);
+		 saProducto.delete(idp);
+		 
+		 //eliminar las dos marcas creadas que no tienen productos asociados
+		 
 		aux1= saMarca.delete(1);
 		assertEquals("No se ha eliminado correctamente",aux1, 1);
 		aux2 = saMarca.delete(2);
@@ -97,6 +108,14 @@ public class SAMarcaTest {
 		try(Writer w=new BufferedWriter(
 				new OutputStreamWriter(
 				new FileOutputStream("Productos.txt")))){
+			w.write("");
+		
+	}catch (IOException e) {
+		
+	}
+		try(Writer w=new BufferedWriter(
+				new OutputStreamWriter(
+				new FileOutputStream("ProveedorMarca.txt")))){
 			w.write("");
 		
 	}catch (IOException e) {

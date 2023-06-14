@@ -41,6 +41,12 @@ import Negocio.Producto.TProducto;
 			//crear un producto y lo lee por id y por nombre
 			SAMarca saMarca=FactoriaNegocio.getInstance().generaSAMarca();
 			TMarca marca=new TMarca("Santi",0,true);
+			
+			// intento crear un producto sin que exista la marca
+			aux1=saProducto.create(tPant);
+			assertEquals("Se ha creado un producto cuando no existe la marca",-1, aux1);
+			
+			
 			int marcaID=saMarca.create(marca);
 			tPant.setIdMarca(marcaID);
 			aux1=saProducto.create(tPant);
@@ -103,23 +109,6 @@ import Negocio.Producto.TProducto;
 			//readAll de 0 marcas
 			assertEquals("Read all no funciona para 1 productos", 4, this.saProducto.readAll().size());
 			
-			//Añadir 5 marcas
-		/*	String nombre= "Manolo";
-			this.mockCollec.clear();
-			int i=1;
-			while(i<6){
-				TMarca abe, man= new TMarca(nombre, i, 1);
-				aux1= saMarca.create(man);
-				assertEquals("Ha fallado la creacion de la marca "+ i+ " .",aux1, i);
-				abe = saMarca.read(i);
-				assertEquals("No se ha podido leer la marca "+i, abe, man);
-				this.mockCollec.add(man);
-				nombre+="a";	
-			}
-			readAllCollec = saMarca.readAll();
-			if(this.equalsCollection(readAllCollec, mockCollec)){
-				fail("El readAll no funciona correctamente para 5 marcas");
-			}*/
 
 			//crear Producto sin nombre
 			assertEquals("Se ha creado una marca sin nombre", this.saProducto.create(new TProducto("", 2, 1,4,"M",0, 20)), -1);

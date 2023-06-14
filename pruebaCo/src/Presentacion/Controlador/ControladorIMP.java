@@ -108,6 +108,7 @@ public class ControladorIMP extends Controlador {
 				else{
 					gui.update(Evento.KO, res);
 				}
+				break;
 			}
 			case Evento.LISTAR_MARCA_POR_PROVEEDORES:{
             	SAMarca saMarca = FactoriaNegocio.getInstance().generaSAMarca();

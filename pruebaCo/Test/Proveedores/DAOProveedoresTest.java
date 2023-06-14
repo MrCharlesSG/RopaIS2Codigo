@@ -19,8 +19,8 @@ import Negocio.Proveedor.TProveedor;
 public class DAOProveedoresTest {
 
 	private DAOProveedores dao =FactoriaIntegracionImp.getInstance().generaDAOProveedor();
-	private TProveedor tProveedor=new TProveedor("Xyon",1,new ArrayList<Integer>(),true);
-	private TProveedor tProveedor2=new TProveedor("Tiberias",1,new ArrayList<Integer>(),true);
+	private TProveedor tProveedor=new TProveedor("Xyon",1,true);
+	private TProveedor tProveedor2=new TProveedor("Tiberias",1,true);
 	private Collection<TProveedor>proveedorColeccion=new ArrayList<TProveedor>();
 	
 	@Test
