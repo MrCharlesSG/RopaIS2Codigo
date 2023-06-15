@@ -18,11 +18,11 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import Negocio.Clientes.TCliente;
-import Negocio.MarcaNegocio.TMarca;
+
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
-import Presentacion.MarcaPresentacion.GUIListarMarcas;
+
 
 
 public class GUIListarClientes extends JFrame implements GUI {

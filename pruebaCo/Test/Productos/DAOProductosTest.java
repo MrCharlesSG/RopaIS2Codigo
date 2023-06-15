@@ -9,15 +9,14 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 	import java.util.Collection;
-	import java.util.Iterator;
 	
 	import org.junit.Test;
 	import org.junit.runner.RunWith;
 	import org.junit.runners.JUnit4;
 	
-	import Integracion.Producto.DAOProducto;
+
 	import Integracion.Producto.DAOProductoIMP;
-import Negocio.MarcaNegocio.TMarca;
+
 import Negocio.Producto.TProducto;
 	
 	@RunWith(JUnit4.class)

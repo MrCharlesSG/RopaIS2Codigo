@@ -8,7 +8,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.junit.Test;
 

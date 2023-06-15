@@ -1,13 +1,11 @@
 package Negocio.Empleado;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import Integracion.Empleados.DAOEmpleado;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
-import Integracion.Ventas.DAOVentas;
+
 import Negocio.ComprobadorSintactico;
-import Negocio.Ventas.TVenta;
 
 public class SAEmpleadoImp implements SAEmpleado {
 

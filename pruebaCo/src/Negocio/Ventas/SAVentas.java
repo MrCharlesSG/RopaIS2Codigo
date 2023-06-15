@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 
 import Negocio.ProductosDeVenta.TCarrito;
-import Negocio.ProductosDeVenta.TProductosDeVenta;
 
 public interface SAVentas {
 	public int abrir(TVenta venta);

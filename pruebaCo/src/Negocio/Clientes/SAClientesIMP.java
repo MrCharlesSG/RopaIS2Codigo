@@ -3,12 +3,9 @@ package Negocio.Clientes;
 import java.util.Collection;
 
 import Integracion.Clientes.DAOClientes;
-import Integracion.Empleados.DAOEmpleado;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.Ventas.DAOVentas;
 import Negocio.ComprobadorSintactico;
-import Negocio.Empleado.TEmpleado;
-import Negocio.Ventas.TVenta;
 
 
 public class SAClientesIMP implements SAClientes {

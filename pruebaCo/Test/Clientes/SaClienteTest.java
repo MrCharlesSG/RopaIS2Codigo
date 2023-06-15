@@ -1,7 +1,6 @@
 package Clientes;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -10,15 +9,12 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import Negocio.FactoriaNegocio.FactoriaNegocioImp;
 import Negocio.Clientes.SAClientes;
-import Negocio.Clientes.SAClientesIMP;
+
 import Negocio.Clientes.TCliente;
 import Negocio.Clientes.TClienteNormal;
 import Negocio.Clientes.TClientePremium;

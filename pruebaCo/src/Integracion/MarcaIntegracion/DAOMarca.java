@@ -4,9 +4,6 @@
 package Integracion.MarcaIntegracion;
 
 import Negocio.MarcaNegocio.TMarca;
-import Negocio.ProveedorMarca.TProveedorMarca;
-
-import java.util.ArrayList;
 import java.util.Collection;
 
 /** 

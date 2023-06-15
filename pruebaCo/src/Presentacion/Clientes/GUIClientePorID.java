@@ -24,7 +24,6 @@ import Negocio.Clientes.TCliente;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
-import Presentacion.MarcaPresentacion.GUIMarcaPorID;
 
 public class GUIClientePorID extends JFrame implements GUI{
 	/**

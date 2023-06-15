@@ -2,8 +2,6 @@
 package Integracion.MarcaIntegracion;
 
 import Negocio.MarcaNegocio.TMarca;
-import Negocio.Proveedor.TProveedor;
-import Negocio.ProveedorMarca.TProveedorMarca;
 
 import java.io.BufferedWriter;
 import java.io.File;

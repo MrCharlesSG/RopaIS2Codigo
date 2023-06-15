@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
-import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,14 +20,12 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import Main.Utils;
-import Negocio.MarcaNegocio.TMarca;
 import Negocio.ProductosDeVenta.TProductosDeVenta;
 import Negocio.Ventas.TOAVenta;
 import Negocio.Ventas.TVenta;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
-import Presentacion.MarcaPresentacion.GUIMarcaPorID;
 
 public class GUIVentaPorID extends JFrame implements GUI {
 	/** 

@@ -1,7 +1,5 @@
 package Marca;
 
-import static org.junit.Assert.*;
-
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,13 +7,11 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.junit.Test;
 
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.MarcaIntegracion.DAOMarca;
-import Integracion.MarcaIntegracion.DAOMarcaImp;
 import Negocio.MarcaNegocio.TMarca;
 
 public class DAOMarcaTest{

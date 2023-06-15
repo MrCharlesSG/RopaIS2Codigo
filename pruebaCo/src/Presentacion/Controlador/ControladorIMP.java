@@ -3,7 +3,7 @@ package Presentacion.Controlador;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
+
 
 import Negocio.Clientes.SAClientes;
 import Negocio.Clientes.TCliente;
@@ -15,7 +15,7 @@ import Negocio.MarcaNegocio.TMarca;
 import Negocio.Producto.SAProducto;
 import Negocio.Producto.TProducto;
 import Negocio.ProductosDeVenta.TCarrito;
-import Negocio.ProductosDeVenta.TProductosDeVenta;
+
 import Negocio.Proveedor.SAProveedores;
 import Negocio.Proveedor.TProveedor;
 import Negocio.ProveedorMarca.TProveedorMarca;
@@ -92,7 +92,7 @@ public class ControladorIMP extends Controlador {
 				int res=saMarca.update((TMarca) datos);
 				
 				if(res>0)
-					gui.update(Evento.RES_MODIFICAR_MARCA_OK, new Integer(res));
+					gui.update(Evento.RES_MODIFICAR_MARCA_OK, res);
 				else
 					gui.update(Evento.RES_MODIFICAR_MARCA_KO, null);
 			

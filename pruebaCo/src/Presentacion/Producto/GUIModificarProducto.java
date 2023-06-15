@@ -16,12 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.text.NumberFormatter;
 
 import Main.Utils;
-import Negocio.MarcaNegocio.TMarca;
+
 import Negocio.Producto.TProducto;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
-import Presentacion.MarcaPresentacion.GUIAltaMarca;
 
 
 /** 

@@ -2,27 +2,6 @@
  * 
  */
 package Presentacion.FactoriaPresentacion;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import Negocio.Clientes.SAClientes;
-import Negocio.Clientes.TCliente;
-import Negocio.Empleado.SAEmpleado;
-import Negocio.Empleado.TEmpleado;
-import Negocio.FactoriaNegocio.FactoriaNegocio;
-import Negocio.MarcaNegocio.SAMarca;
-import Negocio.MarcaNegocio.TMarca;
-import Negocio.Producto.SAProducto;
-import Negocio.Producto.TProducto;
-import Negocio.Proveedor.SAProveedores;
-import Negocio.Proveedor.TProveedor;
-import Negocio.ProveedorMarca.TProveedorMarca;
-import Negocio.Ventas.SAVentas;
-import Negocio.Ventas.TVenta;
 import Presentacion.Clientes.GUIAltaCliente;
 import Presentacion.Clientes.GUIBajaCliente;
 import Presentacion.Clientes.GUIClientePorID;

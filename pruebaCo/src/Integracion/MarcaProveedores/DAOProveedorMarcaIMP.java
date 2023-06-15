@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
-import Negocio.Proveedor.TProveedor;
 import Negocio.ProveedorMarca.TProveedorMarca;
 //Proveedor: marca: activo
 public class DAOProveedorMarcaIMP implements DAOProveedorMarca {

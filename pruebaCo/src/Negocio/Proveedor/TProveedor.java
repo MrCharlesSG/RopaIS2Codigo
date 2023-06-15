@@ -1,7 +1,5 @@
 package Negocio.Proveedor;
 
-import java.util.ArrayList;
-
 public class TProveedor {
 
 	private boolean activo;

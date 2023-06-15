@@ -10,13 +10,11 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.junit.Test;
 
-import Integracion.Ventas.DAOVentas;
 import Integracion.Ventas.DAOVentasIMP;
-import Negocio.MarcaNegocio.TMarca;
+
 import Negocio.Ventas.TVenta;
 
 public class DaoVentaTest {

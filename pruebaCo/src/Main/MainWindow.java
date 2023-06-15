@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 
 import Presentacion.Controlador.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
-import Presentacion.GUI.GUI;
 
 public class MainWindow extends JPanel{
 	

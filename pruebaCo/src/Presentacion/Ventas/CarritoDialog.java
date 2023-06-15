@@ -6,15 +6,9 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,16 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-
 import Main.Utils;
-import Negocio.MarcaNegocio.TMarca;
 import Negocio.ProductosDeVenta.TCarrito;
-import Negocio.ProductosDeVenta.TProductosDeVenta;
-import Negocio.Ventas.TVenta;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
-import Presentacion.GUI.GUI;
-import Presentacion.MarcaPresentacion.GUIAltaMarca;
 
 public class CarritoDialog extends Dialog {
 	/**

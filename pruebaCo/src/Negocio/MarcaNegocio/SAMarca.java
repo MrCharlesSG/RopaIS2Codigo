@@ -4,8 +4,6 @@
 package Negocio.MarcaNegocio;
 
 import java.util.Collection;
-
-import Negocio.Proveedor.TProveedor;
 import Negocio.ProveedorMarca.TProveedorMarca;
 
 /** 

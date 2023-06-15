@@ -7,7 +7,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import Presentacion.Controlador.Controlador;
+
 import Presentacion.Controlador.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaPresentacion;
 import Presentacion.GUI.GUI;
