@@ -10,7 +10,6 @@ import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.MarcaIntegracion.DAOMarca;
 import Integracion.MarcaProveedores.DAOProveedorMarca;
 import Integracion.Producto.DAOProducto;
-import Integracion.Proveedores.DAOProveedores;
 import Negocio.ComprobadorSintactico;
 import Negocio.FactoriaNegocio.FactoriaNegocio;
 import Negocio.Producto.TProducto;

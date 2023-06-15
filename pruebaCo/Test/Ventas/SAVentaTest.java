@@ -39,13 +39,13 @@ public class SAVentaTest {
 		this.vaciarBaseDatos();
 		//crear marca y leer por id
 	
-		aux1=saVenta.create(venta1);
+		aux1=saVenta.abrir(venta1);
 		assertEquals(aux1, 1);
 		this.mockCollec.add(venta1);
 		TVenta v=this.saVenta.read(1);
 		assertEquals(v, venta1);
 		
-		aux1=saVenta.create(venta2);
+		aux1=saVenta.abrir(venta2);
 		assertEquals(aux1, 2);
 		v=this.saVenta.read(2);
 		assertEquals(v, venta2);
@@ -64,7 +64,7 @@ public class SAVentaTest {
 		
 		
 		//crear una venta existente
-		aux3=saVenta.create(venta1);
+		aux3=saVenta.abrir(venta1);
 		assertEquals(aux3, -1);
 		
 		//comprobar el readAll

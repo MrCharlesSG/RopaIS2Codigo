@@ -16,7 +16,6 @@ import Negocio.ProveedorMarca.TProveedorMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
-import Presentacion.ProveedorPresentacion.GUIDeleteMarcaOfProveedor;
 
 public class GUIDeleteProveedorOfMarca extends JFrame implements GUI {
 	/**

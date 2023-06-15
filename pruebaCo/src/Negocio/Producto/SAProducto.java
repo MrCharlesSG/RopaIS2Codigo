@@ -4,7 +4,6 @@ package Negocio.Producto;
 
 import java.util.Collection;
 
-import Negocio.Producto.TProducto;
 
 public interface SAProducto {
 	public int create(TProducto Tprod);

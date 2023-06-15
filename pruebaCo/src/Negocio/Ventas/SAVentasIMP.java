@@ -24,7 +24,7 @@ public class SAVentasIMP implements SAVentas {
 		
 	}
 	@Override
-	public int create(TVenta venta) {
+	public int abrir(TVenta venta) {
 		// solo da de alta la venta sin donde aun no hay productos
 		DAOVentas daoVentas;
 		DAOClientes daoCliente;
@@ -122,7 +122,7 @@ public class SAVentasIMP implements SAVentas {
 		return id;
 	}
 	@Override
-	public int update(TCarrito datos) {
+	public int cerrar(TCarrito datos) {
 		DAOProducto daoProd;
 		daoProd=FactoriaIntegracion.getInstance().generaDAOProducto();
 		TProducto producto;
@@ -141,7 +141,7 @@ public class SAVentasIMP implements SAVentas {
 						cerrar=false;
 						//no se puede cerrar la venta
 					}
-					preciototal+=producto.getPrecio()* datos.getProductos().get(ID);
+					if(producto !=null)preciototal+=producto.getPrecio()* datos.getProductos().get(ID);
 				}
 					if(cerrar) {
 						// si todos lo sproductos son validos se añaden uno a uno
@@ -161,6 +161,9 @@ public class SAVentasIMP implements SAVentas {
 						daoVentas.update(venta);
 						
 						
+					}
+					else {
+						daoVentas.cancelar(datos.getVenta());
 					}
 			}
 

@@ -217,4 +217,36 @@ public class DAOVentasIMP implements DAOVentas {
 		}
 		return id;
 	}
+	@Override
+	public void cancelar(int iD) {
+		StringBuilder buffer=new StringBuilder();
+		File file=new File(ARCHIVO);
+		String datos[];
+		int id=-1;
+			try(Scanner scanner=new Scanner(file)) {//bufferreader
+				//al dao le deeria de dar igual si esta escribiendo algo mal de eso ya se encargan otros
+				//recojo los antiguos datos
+				while(scanner.hasNext()) {
+					datos=scanner.nextLine().split(":");
+					id=Integer.parseInt(datos[0]);
+					if(id!=iD){
+						this.datosABuffer(datos, buffer);
+						buffer.append(System.lineSeparator());
+					}	
+				}
+			}catch (IOException | NumberFormatException e) {
+				return;
+			}
+		if(id!=-1) {
+			try(Writer w=new BufferedWriter(
+					new OutputStreamWriter(
+					new FileOutputStream(ARCHIVO)))){
+					w.write(buffer.toString());
+
+			}catch (IOException e) {
+				id=-1;
+			}
+		}
+		
+	}
 }

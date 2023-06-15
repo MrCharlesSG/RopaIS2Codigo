@@ -7,7 +7,7 @@ import Negocio.ProductosDeVenta.TCarrito;
 import Negocio.ProductosDeVenta.TProductosDeVenta;
 
 public interface SAVentas {
-	public int create(TVenta venta);
+	public int abrir(TVenta venta);
 	
 	public Collection<TVenta> readAll();
 
@@ -17,7 +17,7 @@ public interface SAVentas {
 	
 	public Collection<TVenta> readByCliente(int idCliente);
 	
-	public int update(TCarrito datos);
+	public int cerrar(TCarrito datos);
 
 	public int devolucionVenta(List<Integer> datos);
 }

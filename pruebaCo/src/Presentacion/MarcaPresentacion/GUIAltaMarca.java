@@ -19,7 +19,6 @@ import Negocio.MarcaNegocio.TMarca;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Evento;
 import Presentacion.GUI.GUI;
-import Presentacion.FactoriaPresentacion.FactoriaPresentacionImp;
 
 /** 
 * <!-- begin-UML-doc -->

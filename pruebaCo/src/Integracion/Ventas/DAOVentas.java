@@ -17,4 +17,6 @@ public interface DAOVentas {
 
 	public int update(TVenta venta);
 	
+	public void cancelar(int iD);
+	
 }

@@ -381,7 +381,7 @@ public class ControladorIMP extends Controlador {
              */
             case Evento.ABRIR_VENTA:{
             	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
-            	int res=saVenta.create((TVenta)datos);
+            	int res=saVenta.abrir(((TVenta)datos));
             	if(res>0){
             		gui.update(Evento.RES_ABRIR_VENTA_OK, res);
             	}
@@ -392,7 +392,10 @@ public class ControladorIMP extends Controlador {
             }
             case Evento.CERRAR_VENTA:{
             	SAVentas saVenta= FactoriaNegocio.getInstance().generaSAVentas();
-            	int res=saVenta.update((TCarrito)datos);
+            	int res=saVenta.cerrar(((TCarrito)datos));
+            			
+            			
+            			
             	if(res>0){
             		gui.update(Evento.RES_CERRAR_VENTA_OK, null);
             	}
