@@ -1,5 +1,7 @@
 package Negocio.ProveedorMarca;
 
+import Negocio.MarcaNegocio.TMarca;
+
 public class TProveedorMarca {
 	private int idMarca;
 	private int idProveedor;
@@ -40,5 +42,15 @@ public class TProveedorMarca {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+	
+	@Override
+	public boolean equals(Object anObject ) {
+		TProveedorMarca a = (TProveedorMarca) anObject;
+		return this.activo==a.isActivo()&&
+				this.idMarca==a.getIdMarca()&&
+				this.idProveedor == a.getIdProveedor()
+				;
+	
 	}
 }

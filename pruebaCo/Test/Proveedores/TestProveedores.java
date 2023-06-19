@@ -91,6 +91,7 @@ public class TestProveedores {
 		
 		/*Read de un ID nulo*/
 		assertEquals("Se ha leido un ID invalido",this.saProveedores.read(1000),null);
+		
 	}
 
 	private void vaciarBaseDatos() {

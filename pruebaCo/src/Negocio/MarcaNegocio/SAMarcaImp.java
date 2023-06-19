@@ -121,7 +121,7 @@ public class SAMarcaImp implements SAMarca {
 				}
 				if(inactivos) {
 					DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
-					Collection<TProveedorMarca> lpm = dpm.readProveedorMarcaPorMarca(id);
+					Collection<TProveedorMarca> lpm = dpm.readProveedorMarcaPorMarca(ID);
 					//Elimino todos los provvedorMarca con dicha marca
 					for(TProveedorMarca pm: lpm) {
 						if(pm.isActivo()) {
@@ -197,7 +197,7 @@ public class SAMarcaImp implements SAMarca {
 		int res=-1;
 		DAOProveedorMarca dpm = FactoriaIntegracion.getInstance().generaDAOProveedorMarca();
 		TProveedorMarca pmaux=dpm.read(pm);
-		if(pmaux!=null && pmaux.isActivo()) {
+		if(pmaux!=null && pmaux.isActivo()) {			
 			res=dpm.delete(pm);
 		}
 		return res;

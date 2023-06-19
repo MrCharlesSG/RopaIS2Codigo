@@ -1,1 +1,2 @@
-sasa:1:true
+Adidas:1:true
+Nike:2:true
