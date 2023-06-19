@@ -74,7 +74,7 @@ public class GUIAddMarcaToProveedor extends JFrame implements GUI {
 	public void update(int evento, Object datos) {
 		setVisible(false);
 		if(evento== Evento.OK) {
-			Utils.showCorrectMsg(datos.toString());
+			Utils.showCorrectMsg("Se ha dado de alta la marca al proveedor");
 		}else {
 			Utils.showErrorMsg("No se ha dado de alta");
 		}
