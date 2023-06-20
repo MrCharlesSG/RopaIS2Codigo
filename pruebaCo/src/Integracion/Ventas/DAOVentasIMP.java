@@ -137,7 +137,7 @@ public class DAOVentasIMP implements DAOVentas {
 			while(scanner.hasNext() && !encontrado) {
 				datos=scanner.nextLine().split(":");
 				venta=this.readVenta(datos);
-				if(venta.get_id_empleado()==idCliente)
+				if(venta.get_id_cliente()==idCliente)
 					lista.add(venta);
 				
 			}

@@ -1,3 +1,0 @@
-1:Juan:true
-2:Mateo:true
-3:Manolo:true

@@ -116,7 +116,7 @@ public class SAVentasIMP implements SAVentas {
 				TProducto producto;
 				producto=daoProd.read(datos.get(1));
 				producto.setCantidad(producto.getCantidad()+datos.get(2));
-				daoProd.update(producto);
+				id= daoProd.update(producto);
 			}
 		}
 		return id;

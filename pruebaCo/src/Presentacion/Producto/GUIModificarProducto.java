@@ -36,29 +36,29 @@ public class GUIModificarProducto extends JFrame implements GUI{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel id;
-	private JFormattedTextField idT;
+	private JTextField idT;
 	
 	private JPanel nombre;
 	private JTextField nombreT;
 	
 	private JPanel cantidad;
-	private JFormattedTextField cantidadT;
+	private JTextField cantidadT;
 	
 	private JPanel talla;
-	private JFormattedTextField tallaT;
+	private JTextField tallaT;
 	
 	private JPanel categoria;
 	private JTextField categoriaT;
 	
 	private JPanel idMarca;
-	private JFormattedTextField idMarcaT;
+	private JTextField idMarcaT;
 	
 	private JPanel but;
 	private JButton aceptar;
 	private JButton cancelar;
 	
 	private JPanel precio;
-	private JFormattedTextField precioT;
+	private JTextField precioT;
 	
 	private JPanel jpanel;
 	
@@ -79,7 +79,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		
 		id = new JPanel();
 		id.add((new JLabel("ID: ")));
-		id.add((idT = new JFormattedTextField(numberFormatter)));
+		id.add((idT = new JTextField()));
 		idT.setMaximumSize(DIM);
 		idT.setMinimumSize(DIM);
 		idT.setPreferredSize(DIM);
@@ -94,7 +94,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		
 		cantidad = new JPanel();
 		cantidad.add((new JLabel("Cantidad: ")));
-		cantidad.add((cantidadT = new JFormattedTextField(numberFormatter)));
+		cantidad.add((cantidadT = new JTextField()));
 		cantidadT.setMaximumSize(DIM);
 		cantidadT.setMinimumSize(DIM);
 		cantidadT.setPreferredSize(DIM);
@@ -102,7 +102,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		
 		talla = new JPanel();
 		talla.add((new JLabel("Talla: ")));
-		talla.add((tallaT = new JFormattedTextField(numberFormatter)));
+		talla.add((tallaT = new JTextField()));
 		tallaT.setMaximumSize(DIM);
 		tallaT.setMinimumSize(DIM);
 		tallaT.setPreferredSize(DIM);
@@ -115,7 +115,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		
 		precio = new JPanel();
 		precio.add((new JLabel("Precio: ")));
-		precio.add((precioT = new JFormattedTextField(numberFormatter)));
+		precio.add((precioT = new JTextField()));
 		precioT.setMaximumSize(DIM);
 		precioT.setMinimumSize(DIM);
 		precioT.setPreferredSize(DIM);
@@ -123,7 +123,7 @@ public class GUIModificarProducto extends JFrame implements GUI{
 		
 		idMarca = new JPanel();
 		idMarca.add((new JLabel("idMarca: ")));
-		idMarca.add((idMarcaT = new JFormattedTextField(numberFormatter)));
+		idMarca.add((idMarcaT = new JTextField()));
 		idMarcaT.setMaximumSize(DIM);
 		idMarcaT.setMinimumSize(DIM);
 		idMarcaT.setPreferredSize(DIM);
@@ -143,11 +143,17 @@ public class GUIModificarProducto extends JFrame implements GUI{
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				try{
-					String prec = precioT.getText();
+					//String nombre, int cantidad, int talla, int idProducto, String categoria, int idMarca, double precio
+					String prec = precioT.getText(), c =cantidadT.getText();
+					int cant =  Integer.parseInt(c);
+					int tall= Integer.parseInt(tallaT.getText());
+					int idp= Integer.parseInt(idT.getText());
+					int idm = Integer.parseInt(idMarcaT.getText());
+					double pr = Double.parseDouble(prec);
+					
 					Controlador.getInstancia().accion(Evento.MODIFICAR_PRODUCTO, new TProducto(
-							nombreT.getText(), Integer.parseInt(cantidadT.getText()), Integer.parseInt(tallaT.getText()),
-							Integer.parseInt(idT.getText()) ,categoriaT.getText(),
-							Integer.parseInt(idMarcaT.getText()), Double.parseDouble(prec)));
+							nombreT.getText(),cant,tall, idp, categoriaT.getText(),
+							idm,pr));
 				}catch(Exception e1){
 					Utils.showErrorMsg("Los parametros introducidos son incorrectos");
 				}

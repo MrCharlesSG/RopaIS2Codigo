@@ -1,2 +1,1 @@
-1:Juan:Lucas:Malaquito:515151:5151Y:true:false:1200:100
-2:Lamban:Joper:Lunin:33:2Y:false:false:20:12
+1:Juan:Lucas:Malaquito:515151:06655387s:true:true:1300:200
