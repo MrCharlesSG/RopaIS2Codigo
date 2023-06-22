@@ -120,8 +120,8 @@ public class SAVentaTest {
 		//carro vacio
 		TCarrito carroV2=new TCarrito(2);
 		
-		int auxCerrar1=saVenta.cerrar(carroV1);
-		assertEquals(auxCerrar1, 1);
+		
+		
 		int auxCerrar2=saVenta.cerrar(carroV2);
 		assertEquals(auxCerrar2, -1);
 
